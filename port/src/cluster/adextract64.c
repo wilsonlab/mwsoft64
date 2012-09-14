@@ -179,7 +179,7 @@ int16_t	alignment;
 	/*
 	** calculate the necessary alignment
 	** In linux, the alignment is to the size of the
-	** data type. e.g. 2 byte short -> 2 byte aligned.
+	** data type. e.g. 2 byte int16_t -> 2 byte aligned.
 	** Under DOS it may be zero.
 	** This will be different dependent on the source
 	** architecture. This info should really be placed in
@@ -194,19 +194,19 @@ int16_t	alignment;
     return(*((unsigned char *)(result->recdata + offset)));
 }
 
-short GetShortField(Result *result,RecordInfo *recinfo,int16_t field)
+int16_t GetShortField(Result *result,RecordInfo *recinfo,int16_t field)
 {
 int16_t	j,k;
 int16_t	offset;
 int16_t	alignment;
-short	tmpval;
+int16_t	tmpval;
 
     offset = 0;
     for(j=0;j<field;j++){
 	/*
 	** calculate the necessary alignment
 	** In linux, the alignment is to the size of the
-	** data type. e.g. 2 byte short -> 2 byte aligned.
+	** data type. e.g. 2 byte int16_t -> 2 byte aligned.
 	** Under DOS it may be zero.
 	** This will be different dependent on the source
 	** architecture. This info should really be placed in
@@ -218,7 +218,7 @@ short	tmpval;
 	    offset += recinfo->field[j].size + alignment;
 	}
     }
-    bcopy(result->recdata + offset,&tmpval,sizeof(short));
+    bcopy(result->recdata + offset,&tmpval,sizeof(int16_t));
     if(convert)
     ConvertField((char *)(&tmpval), &recinfo->field[j]);
     return(tmpval);
@@ -324,7 +324,7 @@ int16_t	i;
 	/*
 	** go back
 	*/
-	fseek(result->fpin,-(long)recinfo->size,SEEK_CUR);
+	fseek(result->fpin,-(int32_t)recinfo->size,SEEK_CUR);
 	nitems  = GetUCharField(result,recinfo,result->nitemsfield);
 	/*
 	** then add the size of the xy coords
@@ -442,7 +442,7 @@ int16_t	alignment;
 	    /*
 	    ** calculate the necessary alignment
 	    ** In linux, the alignment is to the size of the
-	    ** data type. e.g. 2 byte short -> 2 byte aligned.
+	    ** data type. e.g. 2 byte int16_t -> 2 byte aligned.
 	    ** Under DOS it may be zero.
 	    ** This will be different dependent on the source
 	    ** architecture. This info should really be placed in
@@ -496,7 +496,7 @@ RecordInfo	*rectype;
     */
     rectype = &result->rectype[result->nrectypes];
     rectype->id = SPKREC;
-    rectype->size = sizeof(short) + sizeof(unsigned long) + 128*sizeof(short);
+    rectype->size = sizeof(int16_t) + sizeof(int32_t) + 128*sizeof(int16_t);
     rectype->nfields = 3;
     rectype->field = 
 	(FieldInfo *)calloc(rectype->nfields,
@@ -509,15 +509,15 @@ RecordInfo	*rectype;
     */
     rectype->field[0].name = "electrode";
     rectype->field[0].type = SHORT;
-    rectype->field[0].size = sizeof(short);
+    rectype->field[0].size = sizeof(int16_t);
     rectype->field[0].count = 1;
     rectype->field[1].name = "timestamp";
     rectype->field[1].type = ULONG;
-    rectype->field[1].size = sizeof(unsigned long);
+    rectype->field[1].size = sizeof(int32_t);
     rectype->field[1].count = 1;
     rectype->field[2].name = "data";
     rectype->field[2].type = SHORT;
-    rectype->field[2].size = sizeof(short);
+    rectype->field[2].size = sizeof(int16_t);
     rectype->field[2].count = 128;
     /*
     rectype->field[4].name = "id";
@@ -530,7 +530,7 @@ RecordInfo	*rectype;
 
     rectype = &result->rectype[result->nrectypes];
     rectype->id = POSREC;
-    rectype->size = sizeof(unsigned long) + sizeof(short) + 
+    rectype->size = sizeof(int32_t) + sizeof(int16_t) + 
 	3*sizeof(unsigned char);
     rectype->nfields = 5;
     rectype->field = 
@@ -538,7 +538,7 @@ RecordInfo	*rectype;
 	sizeof(FieldInfo));
     rectype->field[2].name = "timestamp";
     rectype->field[2].type = ULONG;
-    rectype->field[2].size = sizeof(unsigned long);
+    rectype->field[2].size = sizeof(int32_t);
     rectype->field[2].count = 1;
     rectype->field[1].name = "frame";
     rectype->field[1].type = CHAR;
@@ -550,7 +550,7 @@ RecordInfo	*rectype;
     rectype->field[0].count = 1;
     rectype->field[3].name = "x coord";
     rectype->field[3].type = SHORT;
-    rectype->field[3].size = sizeof(short);
+    rectype->field[3].size = sizeof(int16_t);
     rectype->field[3].count = 1;
     rectype->field[4].name = "y coord";
     rectype->field[4].type = CHAR;
@@ -560,14 +560,14 @@ RecordInfo	*rectype;
     result->nrectypes++;
     rectype = &result->rectype[result->nrectypes];
     rectype->id = EVENTREC;
-    rectype->size = sizeof(unsigned long) + eventstrlen*sizeof(char);
+    rectype->size = sizeof(int32_t) + eventstrlen*sizeof(char);
     rectype->nfields = 2;
     rectype->field = 
 	(FieldInfo *)calloc(rectype->nfields,
 	sizeof(FieldInfo));
     rectype->field[0].name = "timestamp";
     rectype->field[0].type = ULONG;
-    rectype->field[0].size = sizeof(unsigned long);
+    rectype->field[0].size = sizeof(int32_t);
     rectype->field[0].count = 1;
     rectype->field[1].name = "string";
     rectype->field[1].type = CHAR;
@@ -577,18 +577,18 @@ RecordInfo	*rectype;
 
     rectype = &result->rectype[result->nrectypes];
     rectype->id = CONTREC;
-    rectype->size = sizeof(unsigned long) + result->bufsize*sizeof(short);
+    rectype->size = sizeof(int32_t) + result->bufsize*sizeof(int16_t);
     rectype->nfields = 2;
     rectype->field = 
 	(FieldInfo *)calloc(rectype->nfields,
 	sizeof(FieldInfo));
     rectype->field[0].name = "timestamp";
     rectype->field[0].type = ULONG;
-    rectype->field[0].size = sizeof(unsigned long);
+    rectype->field[0].size = sizeof(int32_t);
     rectype->field[0].count = 1;
     rectype->field[1].name = "cont data";
     rectype->field[1].type = SHORT;
-    rectype->field[1].size = sizeof(short);
+    rectype->field[1].size = sizeof(int16_t);
     rectype->field[1].count = result->bufsize;
     result->nrectypes++;
 }
@@ -675,7 +675,7 @@ char	*fieldstr;
 FieldInfo	fieldinfo;
 int16_t	reccount;
 int16_t	totcount;
-short	probeval;
+int16_t	probeval;
 int16_t	checkprobe;
 char	*fnamein = NULL;
 
