@@ -2,12 +2,11 @@
 
 INPUT='raw.spk';
 
-NAME='extracted';
-ARC='original';
+ARC='orig';
 EXT='.tt';
 
 BIN='adextract_'$ARC;
 
-OUTPUT=$NAME'_'$ARC$EXT;
+OUTPUT=$ARC$EXT;
 
 ./$BIN -eslen80 -t -probe 0 $INPUT -o $OUTPUT
