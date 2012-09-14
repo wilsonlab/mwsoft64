@@ -1,0 +1,643 @@
+TODO LIST FOR MWL-WILSON-SOFTWARE RPM
+
+
+BUGS
+
+### Severity High: analysis accuracy / data integrity
+
+### Severity Medium: program stability
+
+### Severity Medium: interface problems / dead features
+
+-xclust: if you hide a cluster, then change projections, then reshow
+it, the points are redrawn in the co-ordinates of the original
+projection, not the new one. (should scaleandrefresh on unhide)
+
+-UNCONFIRMED: it looks like single electrode parm extraction doesn't
+work. At spikeparms2:1252 the function Write SingleParms is just a
+placeholder, but it is called from 'main' to write data to the
+file. Investigate, then disable feature if necessary, and downgrade
+bug to 'Low'.
+
+### Severity Low: interface problems / dead features
+
+-xclust: in new partialplotload mode (view-spikes) sometimes first
+plot is misdrawn, with lines off into the ether.
+
+-xclust: if you click twice on 'delete this bound', 'delete cluster,
+or 'delete all clusters' you lose your undo. We should test whether
+there's anything to be done before issuing backup command, but this is
+sometimes kind of involved.
+
+-xclust: savedviews shouldn't keep issuing the "saved projections in
+F<n> do not exist in this session" error. Maybe just refuse to load
+them at startup--except that we can add projections later. Or only
+print error to screen, not stderr.
+
+-xclust: if you delete the last bound of a cluster, you don't delete
+the cluster. It's still listed in cluster-info and the bitmap buttons
+for it still exist (present in 1.2-2) (maybe NOTABUG?)
+
+-posextract doesn't do anything with the -switchfb option. I (tjd)
+have commented out the relevant code (CVS v.1.5) , added a note to the
+usage message, and made program halt with an error if the option is
+passed (CVS v.1.6). See comments in code (~line 275) for ideas.
+
+-xclust: clust_menu: calling view spikes/view avg with no tt file still draws
+an empty xplot window. We could test for success of spikeavg before
+calling xclust.
+
+-posextract with the -ignorefb option ignores the -ascii option
+(missing fprintf section).
+
+-spikeanal with -isi and -logtime will only accept integer arguments
+to -tmax, meaning you can only have powers of 10 for tmax. Currently
+it will round with no warning.
+
+-spikeanal with -isi and -logtime has a first bin of at least 1 msec
+(since 10^0 = 1). Should probably be 0.1 msec, as this is the standard
+resolution of our ADCs. Consider that spikes between 0.1 and 0.9 msec
+likely indicate contaminated clusters, and are thus useful to know
+about.
+
+- spikeparms2 segfaults on bad args: try 'spikeparms2 -parms'
+
+### Severity Low: cosmetic
+
+-xclust: use suppresswarnings flag (saved views, randomize projections...)
+
+-xclust: on csi, when additional params are added, the projection selection
+boxes have values inserted into them. (Feature temporarily removed by FK)
+
+- xclust: don't show fforward etc buttons when not in view-spikes
+mode. Related bug: -xclust: the 'reset' button seems to just make all
+the points disappear. Those in clusters can be brought back by
+disabling/enabling the clusters, those in cluster 0 can be brought
+back with a /color 1 command. What does this button do (check
+MenuPartialPlotReset fn). Answer: it is used in partialplotloadmode
+(i.e. view-spikes mode) this row of buttons should be hidden, except
+in this mode. (except flash, which should move)
+
+### Severity Bedeviling: Color stuff
+
+- pass colormaps from xclust2 to xplot on /menu/viewavg (MenuViewAvg in
+X11/xclust2/clust_menu.c), so that new plots appear in the cluster
+color.
+
+- xclust -inverse option (and command from within xclust) doesn't work
+(will sometimes invert labels, but not background.)
+
+WISHLIST:
+
+-xclust: speed up loading (esp movies) by loading all points
+into memory, then filtering, rather than only loading in requested
+points (we all have 1.5GB RAM, after all).
+
+-xclust: integrate findspike code, possibly with optimizations for
+movies (i.e. don't search over whole file if we know we are going
+forward). This speedup could be negligible compared with bringing all
+points into RAM (see prev item).
+
+-xclust: change supercolor on box zoom, middle drag translate, so it looks
+different from starting a box/poly cluster.
+
+-xclust: Hooks for different mouse-button clicks in/on menu buttons. (this
+already exists, since the basic CallMenuItem call (in menu.c?) already
+passes the XEvent as a second argument.) (see also the 'Done' section)
+	-mouse wheel through epochs when over any epoch button
+	-mouse wheel through all clusters (empty and used) when over
+         any cluster button
+	-mouse wheel through cluster 'showonly' when over any 'showonly'
+         button
+	-during flash-select, if in 'showonly' mode, change the
+         current cluster to be the only one shown (could maybe change
+         this in 'selectcluster').
+	-mouse wheel through spikes (just hit the next/prev buttons in
+         the menu) in view-spikes mode (i.e. test source for
+         partialplotloadmode)
+
+-adextract: some kind of 'progress bar' to indicate whether process is
+stalled... possibly only with -verbose?
+
+-xclust: 3d: (listed easy to hard)
+
+  -some easy way to see/toggle the two 3-d projections of tetrode
+   space. (?) e.g. from YA, see YAB and YAX. Maybe a pair of /commands that
+   (1) saves any 4 projection names, and (2) if the current X and Y
+   projections are in the list, toggles the Z projection between the
+   other two available. The (1) command could be issued in the
+   .xclustrc, and the (2) command could be assigned to a mouse button, or
+   key shortcut, or could be chosen by whether you ctrl-left-drag up
+   or down, initially. More easy: command (1) (called /tetset , or
+   something) lists 4 projections. Ctrl-left uses whichever one is
+   selected, Ctrl-Alt left click chooses the alternate, if the XYZ are
+   all in the tetset.
+
+  -make /rotpointsmax test at beginning of each wobble
+   mode. Currently, we set /rotpointfreq based on # of points in whole
+   file, but in partial load or with some clusters hidden, we could be
+   drawing all points.
+
+  -allow clustering in arbitrary planes, rather than just orthogonal
+   ones? keep a list of planes used, allow user to revisit them. (Add
+   a mousewheel fn for scrolling through views that have a defined
+   bounds.) Can use all same code!:IsInPolygon, etc, just have to
+   change the way bounds are stored (add in the various thetas).
+
+  -3D monitor/goggle support? Red/Green? or just use a colormap for z-axis?
+
+  -draw 3d extent of *intersection* of cluster bounds as wireframe
+   around clusters.(Kevin Tom Fabian discussion 12/20/04). Two approaches:
+
+    -construct n-dimensional polyhedron of cluster bounds, then reduce
+     it to 3D. Maybe hard?
+
+    -make a '3D-plus' polyhedron by making a 3d polyhedron based on
+     the 3 projections of 3-space, then use the 1-D extent of bounds from
+     other dimensions that happen to contain one of the viewed
+     dimension as planes to further reduce the 3D polyhedron. Test all
+     points according to all bounds, so that you could still have white
+     'zero-cluster' points within the resulting polyhedron.
+
+      - E.g. if the three axes were x,y, and a, use any 'xy', 'ya',
+  	and 'ab' bounds to create the 3D cluster polyhedron. Then if there
+	were, say, a bound in 'xb', restrict the polyhedron to a range in x
+	corresponding to the maximal x extent of the 'xb' bound. (This would
+	look like 2 parallel planes offset from the 'ya' plane)
+
+      -Then color points within the cluster as usual (either
+       cluster color or white) according to whether they are in the cluster.
+
+  -obscuring of points: points are drawn in the order they appear in
+   file, not in order they appear in depth from viewer, so, e.g. clusters
+   are hidden by the zero cluster to the extent that they are less dense,
+   not on whether they are 'in front of' or 'behind' the zero cluster.
+
+-xclust Saved Views ideas:
+
+  -Add saved views submenu? could add all those cute feeatures without
+   eating up menu space: 
+	-menu button/name for each saved view
+	-Ability to set either axis as autoscaled
+	-KEEPLAST/FROMRC/AUTOSCALE toggle
+
+  -saved views should be stored by projection name, not number. New
+   command called /loadviewbyname
+
+  -Some way to specify whether you want to always reset the scale
+   (scale-type) on loading a saved view. 
+    -Possible scaling options:
+       -from .xclustrc -> FROMRC 
+       -autoscaled -> AUTO
+       -same as last time viewed -> KEEPLAST (FROMRC initially, unless
+ 	range is -1 -1 -1 -1, then AUTO initially)
+
+    -Possible ways of loading a saved-view (load-type). Current xclust
+     scale-type in parentheses:
+       -initial load (fromrc)
+       -Fkey load (fromrc)
+       -Mousewheel load (fromrc)
+       -slash-command (/projection) load (noscale) 
+       -manual load using menu buttons (noscale) 
+    -Probably a good approach is to write a single fn that does projection
+     changes, and that takes a scale-type argument. (use #define'd
+     types).
+    -We could then specify the mapping from load-type to scale-type either
+     for each load-type, or for each saved view (so that, e.g. the
+     pos_x/pos_y plot always reverted to some fixed scale), or for each
+     load-type for each saved-view. Latter is probably overkill. I like the
+     first option. Need some /commands to do this? Could also simplify the
+     cases and add menu buttons somehow.
+ [-saved views should have an optional 'short name' (e.g. xy ya pos
+   maxh) stored in xclustrc. Perhaps set with Esc-<shortname>-<F-key>
+   (Does this conflict with other Esc-commands?). Or set using
+   shortname buttons as dialogs(see next item).]
+ [-button bar with all 11 saved views (could be vertical next to
+   projections/clusters). Can choose a view by clicking on its
+   button. empty views grayed out. Display 'shortnames' here.]
+
+-add compile date/copyright to -version output in all programs (y.c,
+atob.c ...).Helpful when recompiling a lot to know what you're running.
+
+- WHY DO TTFILES SOMETIMES CONTAIN MULTIPLE SPIKES WITH SAME
+TIMESTAMP? (Mattw explains that this is because timestamps have lower
+time resolution than the acq system, so you could bin two spikes in
+the same timestamp.--I think).
+
+- script Xclust:
+  -maybe send SIGUSR, telling xclust2 to read a temp-file (named by
+   pid?) with commands in it? Maybe /tmp/xclust-pid/{commands,datafiles}
+  -open a pipe between processes
+  -shared memory for large data transfers (MW: shmem)
+
+-add /pointfreq command to xclust2 menu, perhaps as a slider, or
+toggle button (like 'hide clusters') or make it a 'keystroke command'
+that doesn't require typing /pointfreq all the time.
+
+- xclust: click on point to make it screen center (using same data scales).
+
+- build src.rpm for platform-independence
+
+-is data conversion no longer supported (as it says in
+X11/xclust2/load.c)?
+
+- add tauto, tprocessall, other scripts (clean versions)
+
+-code cleanup:
+ -declare externally used functions in .h files, not within .c files
+ -make prototypes for all functions
+ -compile all code with -Wall -W/-Wextra
+ -move GlobExpand from X11/xclust2/load.c to iolib.c, use this
+  function for expanding filenames before loading them
+ -use CheckArgs in iolib.c for arg checking.
+ -when using popen/pclose, get (and test) return status of outside
+  program using the macros declared in wait.h (see
+  X11/xclust2/clust_menu.c:RunFindspike for an example
+
+ -error/status messages:
+   -output what function (or at least what program) you are in
+   -in xclust, output 'starting' messages at indent 0, then indented
+    updates as the function proceeds, then a '... done' message.
+   -maybe use a standard error function, rather than just printing to stderr?
+   -maybe write key errors (at least for menu functions) to status bar
+    of xclust.
+   -put warnings to stderr behind test for 'suppresswarnings', a
+   global set to 1 by the -suppresswarnings flag (and used by, e.g. View
+   Spikes)
+
+ -memory leaks:
+   -bitmaps for cluster buttons never freed???
+
+ -performance issues:
+   -why redraw whole graph on SelectCluster?
+   -difference between Refresh functions?
+
+
+DOCUMENTATION:
+
+- describe xclust2 commands in /help command (currently only xplot
+commands are documented)
+- describe mouse options on a little card that people can tape up?
+	Left: cluster
+	shift-left: edit cluster
+	ctrl-left: 3d wobble
+	ctrl-shift-left: poly-line drawing
+	[ctrl-alt-left: 'other' 3d wobble]
+	
+	Middle: end cluster
+	Middle-drag: translate (except if in mid cluster. correct???)
+	Shift-Middle-drag: ???	
+
+	Right: zoom out
+	Right-drag: zoom in box	
+
+- go through menu:
+   -remove unused options
+   -decide on how many: epochs/clusters/projections
+
+********************
+NEEDED BEFORE NEXT RELEASE: (don't duplicate bugs--just point to them)
+ 
+- go over bug list:
+  -hide-changeproj-reshow bug
+  
+- projection selection-button colors = axis colors
+
+- gray out time toggle in epochs when we don't have time info
+
+- maybe don't use shortbuttons? Just have to change one #define. Small
+ones too fiddly? compare with choosing projections in 'old xclust2'
+
+- menu re-org, clear out disabled buttons, partialplotload row.
+
+- I think I changed System(S) to use bash, rather than csh, so that
+calls out to xclust would use the new version. change back? (should be
+fine either way once things are in /usr/bin/ ?)
+
+-TD new features mini to-do (before next beta tag):
+
+  -Saved views: rip out new ugly stuff.(DONE)
+   -make (-1,-1) x or y axis range autoscale (DONE)
+   -menu button to toggle FROMRC/KEEPLAST/AUTO? (no, but it's now graph->scalemode, not in each view) (maybe?)
+     -problem: can't go back to FROMRC after keeplast, as we have
+     overwritten original data. Need a second array of saved-views for
+     'latest' (or need to reload from .xclustrc). If former sol'n, then
+     update 2nd array when saving .xclustrc? (or not, what if they save to
+     global, don't want to have to have 3 arrays of saved views.
+
+*********************
+DONE
+
+
+_____________________
+RELEASE 1.2-1
+
+-CHANGED: renamed config file from .xclustrc to .xclust3rc. In
+xclust/xclust2, /setmenu on new menu items caused segfault, so we want
+to avoid crashing xclust when someone decides to run an old version.
+
+-FIXED -xclust2: /printtofile ~/test.ps causes segfault (feature disabled)
+
+-FIXED xclust: pressing the 'wrong' mouse button at certain times can cause
+problems . E.g. 
+  -when drawing a polygon cluster bound, clicking a mouse
+   button other than Left/Middle, or clicking a menu button, gives weird
+   results. 	
+
+FEATURE: in projection-selection grid, xyz projection buttons are in
+xyz axis colors
+
+FEATURE: in projection-selection grid, selected X-proj is highlighted
+in light gray, to distinguish 'selected' from 'current' projection.
+
+FEATURE: in wobble-mode, show participating cluster-bounds from x-z
+and y-z projections
+
+BUGFIX (present in last releas): a job priority of zero (i.e. a zero
+or an empty string) in the Continuous spike view mode caused a
+segfault.
+
+ADDED: BlockMovie feature, allows for panning through spikes, useful
+for watching clusters drift over time, replaying behaviour. 
+
+CHANGED: more tweaking of /loadview saved views stuff. Now there is a
+load-mode associated with each view. Going to rip it out and have a
+view mode for all views, plus option to autoscale on first load.
+
+BUGFIX: (thought I already fixed it): randomizeprojectionbyname
+commands were being written out to .xclustrc with garbage characters
+due to an uninitialized string. Fixed.
+
+Checkpoint beta 1.1-2.91 (cvs tag: release-1_1-2_91_beta)
+
+BUGFIX: tjd accidentally broke epochs in load.c, fixed again.
+
+Checkpoint: beta 1.1-2.90 (cvs tag: release-1_1-2_90_beta)
+
+BUGFIX: xclust: first waveform of view-spikes mode is not drawn,
+initially.
+
+BUGFIX: (present in last release): xclust in 'view spikes' mode,
+waveforms no longer incorrectly end at 0, but end hi or lo, as
+appropriate.
+
+BUGFIX: (present in last release): xclust: in 'view spikes' mode,
+waveforms are now drawn in the cluster color. (This was in fact a
+deliberate 'feature' not a bug. what do people think about it?)
+
+BUGFIX: (present in last release) xclust: in continous step mode,
+clicking on the other continuous button (i.e., while rewinding,
+hitting fast-forward) doesn't change directions, and both buttons stay
+'lit up'. fixed with use of new 'RADIO button type.
+
+BUGFIX: (present in last release) xclust: While clicking on up or down
+arrow, the icon changes to a default button, rather than being an
+arrow. The second bitmap for the arrow buttons was not an inverted
+version of the regular bitmap.
+
+FIXED: the colorstat window is drawn over the cluster buttons, making
+it hard to choose new colors for several clusters. Should be drawn at
+same location as cluststat window? 
+
+FIXED: xclust: clicking on a button in the Z column of the projection grid
+should immediately change the G->currentprojection[2]. We don't need
+to redraw, so no advantage to delaying until the 'real' projections
+are all chosen.
+
+FIXED: xclust: If you click on a proj name, then a grid button in the X
+column, the proj name should be deselected, and the buttons should
+revert to being p0, rather than p1, selectors.
+
+ADDED: You can now select X and Y projections in the 'old style' by
+clicking on the projection name buttons, in order. When you click X,
+that proj button is selected. When you click Y, both buttons are
+de-selected, and the projections are changed.
+
+ADDED: Cluster scoring. Clusters can be assigned a score from 1-5
+which is written out to the clusterbounds file (cbfile) header, and in
+the header of each cl-file. Buttons 1-5 set the score for the current
+cluster, the 'X' button removes the score for that cluster. Mousewheel
+over score buttons increments and decrements score.
+
+CHANGED: Saved views now include the Z projection. 2-axis (X and Y)
+saved views (as in old .xclustrcs) are still supported by /loadview,
+but we only write out 3-axis saved views.
+
+ADDED/CHANGED: "/rotpointsmax n" chooses a value of rotpointfreq such
+that there are at most n points drawn during interactive 3D
+rotation. Also, new default is /rotpointsmax 100000, rather than
+/rotpointfreq 25.
+
+ADDED: If there are any saved views, the 'first' one will be loaded at
+startup, instead of p0 vs p1 vs p2. (If there are no saved views, the
+defaults are loaded).
+
+ADDED: projection randomization is written out in .xclustrc files as
+/randomizeprojectionbyname commands, and read in at startup.
+
+CHANGED: /randomizeprojection and randomizeprojectionbyname now take
+multiple projections at once (used by .xclustrc), and then only
+redraws graph/buttons once--significantly faster.
+
+FIXED (bug in last release) xclust: using the next-block button (arrow
+buttons on same row as "Load Points") you could next-block out past
+the end of the file, causing xclust to load 0 points. You then
+couldn't use prev-block to back up. Now we stop the user from using
+next-block past the end of the file (although we do load spikes up to
+the end). We also leave the requested end point in the load points
+dialog (even though it's past the end of the file) to preserve the
+block size.
+
+FIXED (bug in last release) xclust: the use of blocks of projection
+buttons is buggy. This has been fixed by the rework of the projection
+selection grid. [The two (x and y) blocks incorrectly share a single
+global variable to describe their state. This manifests itself in a
+number of ways: E.g. after starting xclust, try moving the x block
+down 2 or more 'chunks', then clicking 'up' on the y block. It will go
+to the block below the current location of the x block. Clicking up on
+the x block will then go to one block above the y block.]
+
+ADDED: mousewheel over Copy to Cluster button scrolls through empty
+clusters, starting with whatever value is already there (or first
+empty cluster, if no value given).
+
+FIXED: (bugs in last release) -xclust: Copy Cluster button: you can
+(incorrectly) copy an empty cluster. You can also copy to a cluster #
+higher than MAXCLUSTER. Copying from a cluster to itself deletes the
+cluster. Fixed in MenuCopyCluster, but these checks perhaps should be
+moved to CopyCluster.
+
+FIXED: (bug in last release) -xclust: ^R over any non-cluster button
+with no item->class (e.g. CopyCluster) causes a segfault. Problem is
+in ItemEnterValue, testing for class when none exists. Solved by
+removing functionality, which was broken by switch to RADIOBUTTON-type
+buttons. You can still use ^R over the, and has been replaced by flash
+button and /flash command.
+
+-FIXED: cluster bound editing was broken due to missing var
+initialization on mouse-drag.
+
+-FIXED (bug in last release) On a thinkpad, pressing and releasing the
+'Fn' key (used to call laptop-specific functions like changing screen
+contrast) causes Xclust to segfault. xev shows that this is trapped by
+X on key up. Problem was in keys.c trying to do a strcmp on the result
+of XKeysymToString, which was returning NULL.
+
+ADDED: xclust: related to bug where cluster buttons were dialogs and
+could cause a segfault: created a new class of buttons (called
+RADIOBUTTON, defined as mask of 16 in xclust_defs). These buttons can
+only be unselected (i.e. item->state set to 0) by selecting another
+button of the same class. We use Matt's MenuClassSetState function to
+take care of this. These new buttons are used for cluster selection
+buttons and projection selection buttons.
+
+-BUGFIX: (bug not in last release): xclust: over any menu button,
+button 3 or 5 (mousewheel down) behaves like a left-click, due to
+'&'ing with 1, instead of testing for equality with 1 in
+menu.c:887 and 897
+
+-ADDED: '/randomize' command to set which projections are randomized
+(can be called from .xclustrc). Actual commands are
+/randomizeprojection, which takes the number of the projection, and
+/randomizeprojectionbyname, which takes the name of the
+projection. Both commands take a second, binary argument (0/1) to
+set/unset randomization.
+
+-FIXED: (bug in last release) xclust2: if you change the selected
+cluster while in 'Flash Cluster' mode, the cluster points are left in
+a random color state. All clusters go back to normal once flash is
+turned off, though.
+
+-CHANGED: Projection grid now doesn't use '-' or 'X', just
+highlighting state to indicate whivh projections are selected for
+which axes
+
+-FIXED: (bug in last release) -xclust will crash (segfault) if the
+user gives a cluster a name of more than 3 digits. (several letters
+doesn't seem to have this effect). There is no need for the user to
+change these values, as they are overwritten when we move the blocks
+up and down. (The fix was to make the buttons of type BUTTON, rather
+than DIALOG, so the user can't write to them at all)
+
+-FIXED: correctly draw cluster bitmap buttons on 'ReadBoundsFile'
+
+-FIXED: rework menu.c so we can specify #clusters/projections in one
+spot and have it work, maybe make this a command line option. You can
+now specify number of clusters/projectiiosn in xclust_defs, and the
+menu will draw itself correctly. (Including the colorstat and cluster
+info pop-up windows.
+
+-ADDED: /select{next,prev}[enabled]cluster commands to use with
+mousewheel customization
+
+-ADDED: /flash command to toggle or set flash cluster state.
+
+-ADDED: hooks for Control-mouse-wheel events over main plot. Currently
+used to scroll through clusters.
+
+-ADDED: -xclust: cluster button backgrounds are now black, with the
+bitmaps also in the cluster color. This arguably makes sense because
+cluster colors should be chosen to be visible on black bg, not black
+and light grey bgs.
+
+-FIXED: (bug in last release) xclust: /commands only compare beginning
+of string (so, e.g.  "/epochblah args" is equivalent to "/epoch
+args"). This would be a problem if one command was a longer version of
+another--the one that would be called would be determined by the order
+they are tested in commands.c. This bit me as I tried to add on
+/selectnextcluster... so I fixed it. Now test that command length is
+equal before testing strings.
+
+-FIXED: (bug in last release) xclust: Flash cluster doesn't work if
+you assign a cluster's color using the 'M' menu.
+
+-FIXED (bug in last release) xclust: if you change projections with
+the "/projection" command, then the plot label and the menu button
+states are not updated
+
+-ADDED: kill epoch button next to each epoch
+
+-ADDED: add optional epoch name argument to defepoch command
+
+-ADDED: xclust: add 'epoch file' support:
+  -xclust: print a message when we load an epoch file.
+  -add epoch name to defepoch command
+
+-CHANGED: print out the findspike command, but only if there is an error.
+
+-FIXED: XCLUST: (bug in last release) if you issue the /setmenu command with
+a non-existent menu item, xclust segfaults. This also stops us from
+adding new menu items to the .xclustrc file, as new items will crash
+old xclusts.
+
+-FIXED: spikeparms: (bug in last release) in an ascii header file, the id
+field header has binary information ("id,3,4,1", when it should just
+read "id").
+
+-FIXED: in xclust: (bug in last release) some buttons that take text values
+(e.g. Trange file, autoprocess...) don't have a 'text box' with a
+caret cursor, etc.
+
+-FIXED: Xclust, (bug in last release) if you choose two unassigned parameters
+(say from saved views...) then it goes into a loop looking for the
+second (y) parameter.
+
+-FIXED: xclust now supports 'degenerate' pxyabw files, but doesn't properly
+test for broken degenerate pxyabw files with no 'time' or 'timestamp'
+fields. Also, if no 'time' or 'timestamp' field is present, we should
+lookup spike times (for epochs, etc) from the .tt file.
+
+-FIXED: (bug in last release) xclust. on restoring saved views,
+parameter toggle buttons are not updated.
+
+-FIXED: (bug in last relase) findspike returns undefined values in a
+bunch of cases where it hits file errors (i.e. it returns and prints
+output instead of exiting with an error code)
+
+-FIXED: (bug in last release) findspike -t actually finds the first
+spike that occurred *before* the given time, and not the spike closest
+in time. Is this a bug?
+
+-ADDED: xclust doesn't support 'degenerate' pxyabw files that contain
+a subset of the spikes from a .tt file. So partial loads use the
+pxyabw record index, and not the spike 'id' field. The 'Load Points'
+dialog should still be in pxyabw record indices, though.
+
+-FIXED: (bug in last release) findspike has various problems with bad
+args causing segfaults (like missing arg to -i or -t. also text args
+to -i/-t that are not 'end' give undefined results.
+
+-FIXED: (bug in last release) cl-file headers say they are created by
+"Xclust", not "xclust2"
+
+-ADDED: findspike now will use a pxyabw file with (float)time or
+(double)time or (unsigned long)timestamp fields. Xclust needs to be
+made to call the pxyabw file if no tt file is available.
+
+-FIXED: allow some way to use epochs when we don't have the .tt
+file. Currently can't 'load points' because we call findspike to look
+up the spike index. But this info is in the pxyabw file, so why not
+get it from there? Maybe let findspike take in a pxyabw file? 
+
+_____________________
+RELEASE 1.1-2
+
+-fix voffset defaults in spikeavg and spikeparms2 to reflect that no
+one uses metrobyte cards (leave option to apply offset, if someone
+wants to work with old data.
+
+-have showcmd indicate the version of the software that was used to
+generate the code. (added as standard header field).
+- describe how to install the software on the wiki 
+- replace Tom's instructions about copying and patching matt's source
+with instructions for accessing the cvs repo.
+
+-spikeanal with -isi and -logtime (as called from xclust2). When using
+logtime, the max isi time generated is actually 10^tmax, not tmax.
+
+- binsize/tmax arguments to spikeanal when calculating ISIs using the
+'-logtime' option are not well described. tmax appears to be ignored for
+most values. Also, the xclust2 interface implies that binsize is in
+msec, but this is not accurate for logISI; should be changed.
+
+

@@ -1,0 +1,3 @@
+This directory contains files that may be included in the RPM but
+which are not built from the latest source tree. E.g. an older version
+of a binary, under a different name.

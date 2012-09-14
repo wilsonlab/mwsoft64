@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 30
+/!svn/ver/680/mwsoft/trunk/src
+END
+csi.c
+K 25
+svn:wc:ra_dav:version-url
+V 36
+/!svn/ver/680/mwsoft/trunk/src/csi.c
+END
+carve.c
+K 25
+svn:wc:ra_dav:version-url
+V 38
+/!svn/ver/680/mwsoft/trunk/src/carve.c
+END
+atob.c
+K 25
+svn:wc:ra_dav:version-url
+V 37
+/!svn/ver/680/mwsoft/trunk/src/atob.c
+END
+y.c
+K 25
+svn:wc:ra_dav:version-url
+V 34
+/!svn/ver/680/mwsoft/trunk/src/y.c
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 39
+/!svn/ver/680/mwsoft/trunk/src/Makefile
+END

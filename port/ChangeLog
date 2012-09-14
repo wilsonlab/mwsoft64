@@ -1,0 +1,2450 @@
+2005-02-19  tjd@blakey.mwl.ai.mit.edu  <tjd@blakey>
+
+	* commands.c:
+	-disabled /printtofile command, which was causing a segfault
+
+	* Makefile:
+	 -Added old xclust2 binary from mwsoft/old-bin to rpm build directory
+
+2005-02-18  tjd@blakey.mwl.ai.mit.edu  <tjd@blakey>
+
+	* xclust.h, xclust_defs.h, Makefile, main.c, init.c, event_loop.c, clust_menu.c, arg.c:
+	BUMP FROM XCLUST2 to XCLUST3 (i.e. from xclust2 v3.2 to xclust3 v3.3)
+
+	  -change name of xclust source code folder from xclust2 to xclust
+	  -change all occurrences of xclust2 to xclust3 (title bar, e.g.)
+	  -name of xclust executable set in one place in Makefile
+
+	UPDATE more info reported by '-version' option for all programs
+
+	  -if building an RPM (via 'make rpm' in top-level dir), pass the name
+	   and version of the rpm into all programs as a macro. (Required
+	   changes to all Makefiles)
+
+	  -all programs test for existence of RPM name macro at compile time,
+	   and, if it exists, include a line saying 'From RPM:
+	   mwl-wilson-software-X.X-X' in the version message.
+
+2005-02-18  tjd@blakey.mwl.ai.mit.edu  <tjd@blakey>
+
+	* X11/xclust/xclust.h, X11/xclust/xclust_defs.h, X11/xclust/Makefile, X11/xclust/main.c, X11/xclust/init.c, X11/xclust/event_loop.c, X11/xclust/clust_menu.c, X11/xclust/arg.c:
+	BUMP FROM XCLUST2 to XCLUST3 (i.e. from xclust2 v3.2 to xclust3 v3.3)
+
+	  -change name of xclust source code folder from xclust2 to xclust
+	  -change all occurrences of xclust2 to xclust3 (title bar, e.g.)
+	  -name of xclust executable set in one place in Makefile
+
+	UPDATE more info reported by '-version' option for all programs
+
+	  -if building an RPM (via 'make rpm' in top-level dir), pass the name
+	   and version of the rpm into all programs as a macro. (Required
+	   changes to all Makefiles)
+
+	  -all programs test for existence of RPM name macro at compile time,
+	   and, if it exists, include a line saying 'From RPM:
+	   mwl-wilson-software-X.X-X' in the version message.
+
+	* X11/xview/xview_defs.h, X11/xview/Makefile, X11/xview/arg.c, X11/xplot/xplot_defs.h, X11/xplot/Makefile, X11/xplot/arg.c, src/cluster/popanal/pop_defs.h, src/cluster/popanal/pop_args.c, src/cluster/popanal/Makefile, src/cluster/behav/Makefile, src/cluster/behav/behav_main.c, src/cluster/behav/behav_defs.h, src/cluster/textract.c, src/cluster/spikeparms2.c, src/cluster/spikeavg.c, src/cluster/spikeanal.c, src/cluster/showcmd.c, src/cluster/posextract.c, src/cluster/parmextract.c, src/cluster/Makefile, src/cluster/iolib.h, src/cluster/iolib.c, src/cluster/header.h, src/cluster/header.c, src/cluster/findspike.c, src/cluster/esextract.c, src/cluster/editheader.c, src/cluster/crextract.c, src/cluster/adextract.c, src/y.c, src/Makefile, src/csi.c, src/carve.c, src/atob.c, include/iolib.h, mwl-wilson-software.spec, Makefile:
+	UPDATE more info reported by '-version' option for all programs
+
+	  -if building an RPM (via 'make rpm' in top-level dir), pass the name
+	   and version of the rpm into all programs as a macro. (Required
+	   changes to all Makefiles)
+
+	  -all programs test for existence of RPM name macro at compile time,
+	   and, if it exists, include a line saying 'From RPM:
+	   mwl-wilson-software-X.X-X' in the version message.
+
+	  -all programs now include compile time/date in -version message
+
+
+	VERSION NUMBER BUMP:
+
+	  -all program version numbers bumped to reflect the change in
+	   '-version' message
+
+2005-02-18  tjd@blakey.mwl.ai.mit.edu  <tjd@blakey>
+
+	* X11/xview/xview_defs.h, X11/xview/Makefile, X11/xview/arg.c, X11/xplot/xplot_defs.h, X11/xplot/Makefile, X11/xplot/arg.c, src/cluster/popanal/pop_defs.h, src/cluster/popanal/pop_args.c, src/cluster/popanal/Makefile, src/cluster/behav/Makefile, src/cluster/behav/behav_main.c, src/cluster/behav/behav_defs.h, src/cluster/textract.c, src/cluster/spikeparms2.c, src/cluster/spikeavg.c, src/cluster/spikeanal.c, src/cluster/showcmd.c, src/cluster/posextract.c, src/cluster/parmextract.c, src/cluster/Makefile, src/cluster/iolib.h, src/cluster/iolib.c, src/cluster/header.h, src/cluster/header.c, src/cluster/findspike.c, src/cluster/esextract.c, src/cluster/editheader.c, src/cluster/crextract.c, src/cluster/adextract.c, src/y.c, src/Makefile, src/csi.c, src/carve.c, src/atob.c, include/iolib.h, mwl-wilson-software.spec, Makefile:
+	UPDATE more info reported by '-version' option for all programs
+
+	  -if building an RPM (via 'make rpm' in top-level dir), pass the name
+	   and version of the rpm into all programs as a macro. (Required
+	   changes to all Makefiles)
+
+	  -all programs test for existence of RPM name macro at compile time,
+	   and, if it exists, include a line saying 'From RPM:
+	   mwl-wilson-software-X.X-X' in the version message.
+
+	  -all programs now include compile time/date in -version message
+
+
+	VERSION NUMBER BUMP:
+
+	  -all program version numbers bumped to reflect the change in
+	   '-version' message
+
+2005-02-18  fabian  <fabian@blakey>
+
+	* X11/xclust/color.c:
+	CHANGED default color of axes labels to beige (was purple)
+
+2005-02-16  tjd@blakey.mwl.ai.mit.edu  <tjd@blakey>
+
+	* X11/xclust/clust_menu.c: *** empty log message ***
+
+2005-02-16  fabian  <fabian@blakey>
+
+	* X11/xclust/scale.c:
+	FIXED: autoscale did not work when clusters were hidden -> fixed initialization error in RescalePlot
+
+2005-02-16  tjd@blakey.mwl.ai.mit.edu  <tjd@blakey>
+
+	* X11/xclust/clust_menu.c: *** empty log message ***
+
+2005-02-16  fabian  <fabian@blakey>
+
+	* X11/xclust/scale.c:
+	FIXED: autoscale did not work when clusters were hidden -> fixed initialization error in RescalePlot
+
+2005-02-15  fabian  <fabian@blakey>
+
+	* mwl-wilson-software.spec:
+	ADDED: made rpm relocatable (added Prefix tag to spec file)
+
+	* X11/xclust/load.c:
+	FIXED: when loading plot from source, start and end time are only checked when there is a valid timefile
+
+2005-02-14  tjd@blakey.mwl.ai.mit.edu  <tjd@blakey>
+
+	* X11/xclust/xclust_defs.h, TODO, mwl-wilson-software.spec:
+	*** empty log message ***
+
+	* X11/xclust/load.c:
+	BUGFIX: use of uninitialized fp instead of source->fp caused segfault
+	on partialplot load backwards.
+
+	* X11/xclust/commands.c:
+	commented out help for non-existent savegraph command
+
+	* X11/xclust/menu.c, X11/xclust/clust_menu.c, X11/xclust/clust_io.c:
+	-REMOVED: all code for 'apply to points' button that allowed you to
+	 save cluster files for a whole file, even when only part of the file
+	 was loaded (so now you have to hit 'load all' first). (this was no
+	 longer working, anyway)
+
+	* X11/xclust/xclust_defs.h:
+	-changed xclust2 version number to 3.2.1 for mwl-wilson-software rpm
+	 beta 1.1-2.92
+
+2005-02-14  tjd@blakey.mwl.ai.mit.edu  <tjd@blakey>
+
+	* scale.c:
+	-CHANGE: Autoscale now uses 10%/2% below and above datamax, rather
+	 than %15/%10.
+
+	* keys.c:
+	BUGFIX: (bug in last release). when you loaded a different range of
+	points, the pointstyle reverted to default. Now it stays as it was.
+
+	* commands.c:
+	-switched meaning of 0/1 as an arg to rotorigin. (rotorigin 1 now
+	 means rotate about the origin, 0, the middle of the screen)
+
+	* buttons.c:
+	OOPS: we need to be able to see ctrl-mousewheel during both DATAMODE
+	and FLASHSELECTMODE (error introduced in button cleanup)
+
+	* xclust_struct.h, keys.c, commands.c:
+	-CHANGE: Rip out all savedview mode code (failed experiment by
+	 TD). Now only special case is if the range for a saved view is -1 -1
+	 (either x or y or both), then we autoscale that projection on the
+	 first load of that view (useful for variable length axes like id or
+	 time)
+
+	* buttons.c:
+	-BUGFIX: resolve some problems where we weren't testing for mouse-mode
+	 when processing button presses/releases. (esp buttons 4-7)
+
+	* clust_menu.c: -save cluster-zero color just like other colors
+	-change projection selection buttons to be the color of the x,y, and z axes
+	-rip out 'saved view mode stuff'
+
+	* graph.c:
+	-Draw cluster-zero like other clusters. I.e. allow the color to be
+	 changed with /clustercolor 0 n command.
+
+	* commands.c: -Added /loadview usage message
+
+	* color.c:
+	-Changed zero-cluster color from green to white (debug color left in
+	 by mistake).
+
+2005-02-13  tjd@blakey.mwl.ai.mit.edu  <tjd@blakey>
+
+	* clust_menu.c:
+	REMOVED: removed writing out of colormap using (now obsolete) '/rgb'
+	command
+
+2005-02-12  fabian  <fabian@blakey>
+
+	* buttons.c, event_loop.c, xclust_defs.h:
+	RESTORED: ruler line and drag line functionality (can now be accessed
+	by control + middle button and control + right button respectively)
+
+2005-02-10  fabian  <fabian@blakey>
+
+	* menu.c: REMOVED double lines in control menu to create more space
+
+	* buttons.c:
+	FIXED: when drawing  polyline, right button click does nothing (used to leave polyline in incomplete state)
+
+	* clust_menu.c: FIXED small typo's
+
+	* axis.c, buttons.c, clust_menu.c, color.c, defaults.c, graph.c, init.c, label.c, menu.c, text.c, tick.c, xclust_defs.h:
+	CHANGED color / colormap handling
+	-a local colormap is defined with the first MAXINTERFACECOLORS (=50) entries for the interface
+	 and the remaining entries (MAXCLUSTER) for cluster colors
+	-an extended set of interface colors can be set by the user through ~/.Xdefaults file
+	 (might need merging into RESOURCE_MANAGER with xrdb -merge ~/.Xdefaults)
+	-cluster colors cannot be set in the .Xdefaults file anymore
+	-the colormap can not be changed by commands/command line options anymore
+	-the color menu shows only the cluster colors
+
+	* commands.c: REMOVED commands: cscale, rgb and clusterrgb
+
+	* arg.c:
+	REMOVED: (obsolete/unused) command line options related to colors / colormaps
+
+2005-02-10  tjd@blakey.mwl.ai.mit.edu  <tjd@blakey>
+
+	* clust_menu.c:
+	FEATURE: Added ConvertBlocksizeTo{Points,Time} functions to convert
+	blocksize when units are changed. (uses average ratio over whole file)
+
+	CODE CLEANUP: removed MenuEnter{Tstart,Tend,End,Start} that are no
+	longer used.
+
+	* clust_menu.c:
+	OOPS: In CODE CLEANUP, accidentally deleted a semicolon. it's back.
+
+	* clust_menu.c:
+	CODE CLEANUP: NO code changes -- Only deleted large chunks of commented out code, re-indented a couple functions.
+
+2005-02-09  tjd@blakey.mwl.ai.mit.edu  <tjd@blakey>
+
+	* menu.c:
+	UI CHANGE: put 'copy cluster' button back on top left of cluster menu
+	button grid (I'm used to it there).
+
+	UI CHANGE: made default delay for movie be 1 (fastest).
+
+	* xclust_struct.h, xclust_ext.h, job.c, clust_menu.c:
+	FEATURE: Movie code now works well for time units as well as index
+	units.
+
+	  -major rewrite of MenuMovieFrame. Now use same code for
+	   forward/backward, individual frames/movies, and time/record
+	   units. (clust_menu.c)
+
+	  -Default behaviour of 'nextblock'/'prevblock' buttons approximates
+	   old xclust behaviour (100% stepsize, currently loaded block as
+	   blocksize). (clust_menu.c)
+
+	  -added flag to DataSource struct to indicate whether we were in a
+	   movie 'state' (not very well-defined, but not a big problem if
+	   we're wrong). (xclust_struct.c)
+
+	  -declared job_id globals as externs, so that we can see them from
+	   clust_menu.c (job.c, xclust_ext.h)
+
+2005-02-08  fabian  <fabian@blakey>
+
+	* arg.c, buttons.c, clust_disp.c, clust_main.c, clust_menu.c, graph.c, menu.c, xclust_struct.h:
+	NEW: all cluster bounds defined by the three selected projections are shown in 3D
+	NEW: atrribute showbounds in graph struct + new button for showing/hiding all bounds
+	     this also required a rearrangement of the cluster menu
+	FIXED: at the end of 3D rotation only 3D axes are removed not just all labels
+	FIXED: at the end of 3D rotation axis visibility is restored to pre-rotation state
+	       (instead of always on)
+	FIXED: small bug in projection selection buttons
+	CHANGED: selecting new z-projection now results in a call to ScaleAndRefresh
+
+2005-02-07  fabian  <fabian@blakey>
+
+	* clust_menu.c:
+	RESTORED saving of max/min of projection before actually changing the projection
+
+	* buttons.c, clust_disp.c, clust_main.c, clust_menu.c:
+	FIXED: projection A-B and its mirrot (B-A) are now treated as the same
+	i.e. boundary defined in A-B will show up in B-A. Both are one and the same
+	and can be edited / deleted / recreated in either view
+
+	* clust_menu.c, color.c, commands.c, keys.c, menu.c:
+	IMPROVED projection selection interface
+
+	* clust_menu.c:
+	FIXED load all points now puts correct start/end times in the buttons
+
+	* buttons.c: CHANGED 3D rotation control
+
+	* menu.c: FIXED radio buttons only generate event when state changes
+	(i.e. clicking on active radio button doesn't do a thing)
+
+2005-02-05  fabian  <fabian@blakey>
+
+	* arg.c, buttons.c, clust_io.c, clust_main.c, clust_menu.c, color.c, commands.c, event_loop.c, init.c, job.c, keys.c, label.c, load.c, main.c, menu.c, scale.c, xclust_defs.h, xclust_ext.h, xclust_struct.h:
+	merged menu_remake branch to root
+	CV: ----------------------------------------------------------------------
+
+2005-02-05  tjd@blakey.mwl.ai.mit.edu  <tjd@blakey>
+
+	* event_loop.c:
+	BUGFIX: a job with a priority of zero (i.e. an empty priority field in BlockMovie or Continuous spike-view mode) caused a segfault.
+
+	* xclust_struct.h, load.c, job.c, clust_menu.c:
+	FEATURE: Got BlockMovie mostly working with times as well as IDs. Had
+	to add some fields to DataSource struct (time of first/last
+	spike). Changed BlockMovieJob to call MenuMovieFrame, which now does
+	all the work for movies and single-frame scrolling.
+
+2005-02-05  fabian  <fabian@blakey>
+
+	* scale.c: COMMENTED OUT some fprintf statements used for bug tracking
+
+2005-02-04  fabian  <fabian@blakey>
+
+	* buttons.c:
+	COMMENTED OUT updating of rotation angles while in rotation (wobble) mode,
+	since vector/angle method is used to do rotations and I don't know
+	(haven't really thought about it) how to calculate the x,y,z rotation angles in this case
+
+	* buttons.c:
+	CHANGED rotation code to use new affine transformation functions.
+	Also a small 3D axes is shown
+
+	* xclust_struct.h:
+	ADDED new attribute to Graph struct (rotorigin [0/1]) that defines the center of rotation (i.e. 0,0,0 or middle of screen)
+	Also added command for this attribute
+
+	* scale.c:
+	ADDED new affine transformation functions (rotation, translation, etc)
+
+	* keys.c:
+	CHANGED rotation keys now use new Affine transformation functions
+
+	* commands.c:
+	CHANGED rotation commands now use new Affine Transformation functions
+
+2005-02-04  tjd@blakey.mwl.ai.mit.edu  <tjd@blakey>
+
+	* xclust_struct.h, menu.c, load.c, job.c, clust_menu.c:
+	INTERMEDIATE CHECKIN: for new movie code. All compiles clean, single stepping works, need to fix movie job.
+
+	load.c, xclust_struct: added source->nlines to give total # of spikes in source file (endline gave last *loaded* point)
+
+	* xclust_struct.h:
+	CODE: source->{start,end}timestamp are now long, not int
+
+	* xclust_defs.h, clust_io.c:
+	CLEANUP: move definition of TSCALE, timestamp scale factor, from
+	clust_io to xclust_defs.
+
+2005-02-04  fabian  <fabian@blakey>
+
+	* clust_menu.c: ADDED dynamical sizing clsuter info menu:
+	DrawClustStat now properly updates windowsize according to its changed contents
+
+	* event_loop.c: ADDED buttonpress event for cluster info window,
+	so that one can change to the listed projection
+	in this menu
+
+	* menu.c:
+	CHANGED menuframe collapse function such that it sets menuframe windowsize only, setting expanded attribute should be done elsewhere (so now collapse function can also be used as pure window size update function)
+
+	* init.c:
+	REMOVED definition of menu window background / foreground color from the CreateWindows function (moved to PopulateMenuContainer)
+
+	* scale.c: ADDED dynamical sizing for the cluster info menu
+
+2005-02-03  fabian  <fabian@blakey>
+
+	* xclust_struct.h:
+	ADDED parent attribute to MenuWindow (pointing to MenuFrame struct)
+
+	* commands.c:
+	FIXED: scale is now also preserved when using the /suqarerange command
+
+	* clust_io.c: Commented out references to old start / end time buttons
+	(used here to write these times to cluster files)
+
+	* menu.c: REMOVED old unused buttons from epoch menu
+
+	* clust_menu.c:
+	ADDED: loading points / epochs now automatically stuffs start and
+	end id's/times in the appropriate buttons for loading and movie
+
+	* menu.c: Changing units now converts between time and id's
+
+	* clust_menu.c:
+	ADDED conversion functions to handle change in units from id -> time and time -> id
+
+2005-02-03  tjd@blakey.mwl.ai.mit.edu  <tjd@blakey>
+
+	* menu.c, clust_menu.c: FIX: Fixed loading points in 'time' mode
+	FIX: fixed savedefaults (.xclustrc) local/global test with new buttons
+
+2005-02-02  fabian  <fabian@blakey>
+
+	* clust_menu.c:
+	FIXED:an empty epoch (i.e. no start or end time given) is now correctly handled
+
+	* clust_menu.c:
+	ADDED additional source argument to LookupSpike{ID,Time},
+	if this argument is NULL, then the source of the SelectedPlot will be used
+	All calls to these functions changed accordingly
+
+	FIXED if no epoch name is provided, the status line and the writecluster button
+	will not show <null> anymore
+
+	COMMENTED OUT old status line updating code (now calls are made to UpdateStatus(Time,Epoch}
+
+	* load.c:
+	ADDED OpenSource function (removed code from LoadPlotFromSource)
+	CHANGED LoadPlotFromSource function -> some simplification, removed EEG loading support,
+	retrieve start timestamp and end timestamp and store in source struct
+
+	* menu.c:
+	ADDED: UpdateStatusTime and UpdateStatusEpoch functions that replace SetEpochStatus
+	minor: delete cluster and delete cluster bound buttons switched position
+	minor: changed text color of undo button
+
+	* xclust_struct.h:
+	ADDED starttimestamp / endtimestamp attributes to DataSource struct
+
+	* commands.c: ADDED new squarerange command: make x and y ranges equal
+
+	* color.c: changed collapsible menu color to darkslateblue
+
+2005-02-02  tjd@blakey.mwl.ai.mit.edu  <tjd@blakey>
+
+	* menu.c, clust_menu.c:
+	CLEANUP: Replace MenuClassCallItems with more specific MenuClassDrawItems
+
+	* keys.c, init.c, event_loop.c, buttons.c:
+	-CLEANUP: make sure all references to a plot are to SelectedPlot(G),
+	 and not G->plot.
+
+2005-02-01  tjd@blakey.mwl.ai.mit.edu  <tjd@blakey>
+
+	* clust_menu.c: COMMENT: corrected name of menu item in comments
+
+	* menu.c, clust_menu.c:
+	CLEANUP: commented out unused MenuSpike{Id,Timestamp} functions
+
+	* job.c:
+	CODE FIX: updated continuous jobs to work with new Radio button logic (no longer call MenuClassCallItems, so do all logic in single button function.)
+
+	* keys.c: CLEANUP: removed unused global var
+
+	* job.c: -FIX: removed references to old /menu/
+
+	* menu.c, clust_menu.c:
+	-Changed Radiobutton behaviour: No longer do menuclasscallitems on
+	 every push of any radiobutton. Instead, call MenuClassDrawItems or
+	 MenuClassSetFunc, as appropriate. (Old behaviour resulted in weirdly
+	 overloaded item functions).
+
+2005-02-01  fabian  <fabian@blakey>
+
+	* menu.c:
+	FIXED bug that prevented SetEpochStatus from showing right HMS time
+	changed font in epoch status info
+	reverted to id/time unit selection buttons
+	update epoch status info in InitMenu
+
+	* clust_menu.c:
+	implemented loading points, loading all points and loading epoch for new menu,
+	including updating the status info
+
+	* xclust_defs.h: new fixed width font definitions
+	new color defs
+
+2005-01-31  fabian  <fabian@blakey>
+
+	* clust_menu.c:
+	minor changes as a consequence of menu redesign (renaming of menus)
+	started to implement the new point loading features
+
+	* menu.c: MAJOR redesign of menus
+	rearranged order of menus
+	hide title bar of control menu
+	changed size of color buttons in color menu
+
+	* event_loop.c:
+	uncommented nextsavedview command execution, has been fixed elsewhere
+
+	* color.c: minor changes. now properly using defined color id's
+	from xclust_defs.h, changed some colors
+
+	* arg.c:
+	FIXED bug resulting in wrng initial window size of text menu if -geometry argument was passed on command line
+
+	* clust_main.c, clust_menu.c, color.c, init.c, label.c, menu.c, scale.c, xclust_defs.h:
+	rearranged menus, removing unused buttons, collecting buttons with related functionality in the same button group / menu. still to do: epochmenu
+
+	* clust_menu.c:
+	FIXED: deleted reference to old /menu, changed to /clustermenu
+
+2005-01-30  fabian  <fabian@blakey>
+
+	* commands.c:
+	FIXED: nextsavedview does not enter infinite loop anymore if there are no saved views
+
+	* menu.c: REMOVED references to old menu
+	REPLACED references to frame->colorstat and frame->cluststat with calls to GetMenu
+	cluster color button ('M') disabled
+
+	* init.c:
+	commented out code for mapping / creation of old menu / colorstat / cluststat windows
+	bitmaps are now loaded once only (using menucontainer)
+	MenuWindows now capture ButtonPress events, which do nothing, but just to prevent that the event is captured by the underlying MenuFrame causinf the menu to collapse
+
+	* scale.c: commented out code for mapping old menu
+
+	* event_loop.c:
+	commented out refreshes of old menu (does not exist anymore)
+	temporarily commented out nextsavedview command execution, because it entered an infinite loop (NEEDS FIXING!)
+
+	* main.c:
+	commented out creation of old menu structs (i.e. frame->menu, frame->colorstat and frame->cluststat)
+
+	* clust_menu.c:
+	REMOVED references to old menu and cluststat menu and replaced with new menus (using GetMenu function)
+
+	* xclust_ext.h:
+	CHANGED: including <sys/wait.h> instead of <wait.h> so that it compiles under cygwin
+
+	* color.c: removed references to frame->cluststat and frame->menu
+	cluststat menu is now in menucontainer, frame->menu replaced by frame->menucontainer
+
+	* arg.c:
+	CHANGED: -nomenu argument now acts on menucontainer, rather than single menu
+
+2005-01-29  fabian  <fabian@blakey>
+
+	* buttons.c, clust_io.c, clust_main.c, clust_menu.c, commands.c, event_loop.c, init.c, keys.c, load.c, main.c, menu.c, scale.c, xclust_defs.h, xclust_struct.h:
+	ADDED collapsible menus
+	now a single MenuContainer collects multiple MenuFrames, which each contain one MenuWindow
+	MenuFrames handle the expand/collapse events
+	as a consequence each MenuWindow has its own name (i.e. no single /menu/ anymore, but e.g. /analysismenu and /epochmenu) which required many changes in multiple files that refer to the menu names
+
+2005-01-27  tjd@blakey.mwl.ai.mit.edu  <tjd@blakey>
+
+	* job.c: -hackfix: no longer limit to 200000 points in movie
+
+	* xclust_struct.h, xclust_defs.h, keys.c, commands.c, clust_menu.c:
+	-Ripped out different scale modes for each saved view. Now it's a mode
+	 that applies to all saved views, but there is no way to set it from
+	 the UI or command line (waiting to see how to implement)
+
+2005-01-14  tjd@blakey.mwl.ai.mit.edu  <tjd@blakey>
+
+	* xclust_defs.h, commands.c, clust_menu.c:
+	-CHANGED/ADDED: when loading a saved view, we can specify whether it
+	 will be loaded as: FROMRC (old default: reread from rc file
+	 defaults); AUTOSCALE; or KEEPLAST (scale from last time view was
+	 used).
+
+	 - probably will rip this out, as it's confusing to have different
+	   modes for different views. See TODO for discussion. May have mode
+	   be 'global' for all views.
+
+	 - /loadview command now accepts old-style args, as well as new,
+	   3-axis+loadmode style args.
+
+	* load.c:
+	-TEMPORARY HACK: turn off the tsart and tend fill-in code, while we
+	 get BlockMovie working (too many unnecessary findspike calls.) Need
+	 some test for whether we're currently panning.
+
+	* xclust_struct.h:
+	-ADDED: BlockMovie job allows you to 'pan' through points in time, at
+	 a user-set speed. Useful for watching cluster drift. Panning works
+	 even during dynamic 3-d wobble mode. (changed job struct to be able
+	 to pass integer data)
+
+	-CHANGED/ADDED: when loading a saved view, we can specify whether it
+	 will be loaded as: FROMRC (old default: reread from rc file
+	 defaults); AUTOSCALE; or KEEPLAST (scale from last time view was
+	 used).
+
+	 - probably will rip this out, as it's confusing to have different
+	   modes for different views. See TODO for discussion. May have mode
+	   be 'global' for all views.
+
+	 - /loadview command now accepts old-style args, as well as new,
+	   3-axis+loadmode style args.
+
+	* menu.c, job.c:
+	-ADDED: BlockMovie job allows you to 'pan' through points in time, at
+	 a user-set speed. Useful for watching cluster drift. Panning works
+	 even during dynamic 3-d wobble mode.
+
+	* keys.c:
+	-CHANGED/ADDED: when loading a saved view, we can specify whether it
+	 will be loaded as: FROMRC (old default: reread from rc file
+	 defaults); AUTOSCALE; or KEEPLAST (scale from last time view was
+	 used).
+
+	 - probably will rip this out, as it's confusing to have different
+	   modes for different views. See TODO for discussion. May have mode
+	   be 'global' for all views.
+
+	 - /loadview command now accepts old-style args, as well as new,
+	   3-axis+loadmode style args.
+
+2005-01-11  tjd@blakey.mwl.ai.mit.edu  <tjd@blakey>
+
+	* load.c:
+	-BUGFIX: earlier bugfix (to get rid of epoch warning messages in
+	 partialplotload (aka. view-spikes) mode) broke epochs. Here we fix
+	 that original bug properly.
+
+2005-01-11  tjd@blakey.mwl.ai.mit.edu  <tjd@blakey>
+
+	* TODO: *** empty log message ***
+
+	* src/cluster/spikeavg.c:
+	-REVERTING: to version 1.6. I didn't need to hack up spikeavg--the bug
+	 was in xclust2 and was solvable.
+
+	* X11/xclust2/commands.c, X11/xclust2/clust_menu.c:
+	BUGFIX: When you start view-spikes, the first spike (the average
+	spike) is not plotted. Workaround was to go forward then back one
+	spike. I spent 2 hours trying to figure out the problem at the root,
+	then gave up and made this little hack, which just automates the
+	workaround. (click one fwd, click one back).
+
+	* X11/xclust2/graph.c: -OOPS: fix a compile error
+	-reformat two lines of code for readability
+
+	* X11/xclust2/job.c: fixed copy-paste typo in warning message.
+
+2005-01-10  tjd@blakey.mwl.ai.mit.edu  <tjd@blakey>
+
+	* TODO: *** empty log message ***
+
+	* X11/xclust2/graph.c:
+	-BUGFIX: now in partialplotload mode (aka view-spikes mode), we don't
+	 draw segments which claim to have a negative cluster 3.
+
+	* X11/xclust2/clust_disp.c:
+	-revert this back to the weird (abs) behaviour. Not sure what it's
+	 used for, but I can solve my problem in partialplotload mode without
+	 touching it, so I will put it back the way I found it.
+
+	* X11/xclust2/commands.c:
+	-Added /xnticks and /ynticks commands to mirror those available as
+	 key-commands (and so I could use them to turn off xticks in
+	 view-spikes.)
+
+	* X11/xclust2/clust_menu.c:
+	-CHANGED: View spikes now calls xclust with no x ticks, and with no x
+	 axis to the left of the y-axis (the ticks were in useless units.)
+
+	* X11/xclust2/load.c, X11/xclust2/graph.c, X11/xclust2/clust_disp.c:
+	BUGFIX: Get spike waveforms to draw properly in 'view-spikes' mode
+	(aka partialplotload mode). 2 problems: not always in cluster color,
+	and incorrectly drawing trace back to zero at end of spikes.
+
+	1- commented out line explicitly setting plot color to white
+
+	1- changed lookupclustercolor to return black on a -ve clusterid (was
+	taking the absolute value ???), as this is what spikeavg puts out for
+	the interspike plot points).
+
+	2- changed (fixed???) a problem in graph.c, where for
+	FloatMultipleLines, we were drawing 33, rather than 32 points, and so
+	were drawing the spike back to zero, even when it ended non-zero.
+
+	* X11/xclust2/defaults.c:
+	-minor change to startup messages on reading .xclustrc
+
+	* X11/xclust2/commands.c: -minor warning text change
+
+	* X11/xclust2/xclust_defs.h, X11/xclust2/menu.c, X11/xclust2/job.c:
+	-BUGFIX: in 'view-spikes' mode (aka partialplotload mode) the
+	 continuous buttons now are 'RADIO' buttons--that is, clicking one
+	 deselects the other.
+	   -changed button creation in menu.c
+	   -removed error on deselecting, as this was getting triggered with
+	    every radiobutton click
+
+	-ADDED: menu.c: MenuClassDrawItems function, but don't use it yet. Idea is to
+	 avoid the hackish MenuClassCallItems being used to redraw the
+	 buttons.
+
+	-CHANGE: menu.c, xclust_defs.h: RADIOBUTTON now called RADIO (for consistency with other
+	 button type masks)
+
+	* X11/xclust2/keys.c: -minor warning punctuation change
+
+	* src/cluster/spikeavg.c:
+	-BUGFIX: (sorta) (in last release): this hack allows xclust to draw
+	 spike waveforms without the trace inaccurately returning to zero at
+	 the end of each spike. The problem is that xclust draws the first
+	 segment of a line in the prev cluster's color. This may be better
+	 fixed in xclust, but I didn't want to break anything there. xplot
+	 still draws output fine (it ignores the '/defaultcluster' directive).
+
+	* TODO: *** empty log message ***
+
+2005-01-07  tjd@blakey.mwl.ai.mit.edu  <tjd@blakey>
+
+	* X11/xclust2/load.c:
+	-BUGFIX: In case of PartialLoadPlot mode (i.e. View Spikes), set the
+	 source->timelookupfile mode to INVALIDFILE. This means we don't try
+	 to run findspike or use epochs in this case, which was causing a lot
+	 of spurious error messages.(one for every spike viewed).
+
+	* X11/xclust2/keys.c:
+	-CHANGED: test for existence of projections in LoadViewDefaults, as
+	 well as in ProcessSavedViews, so we don't load in saved views that
+	 correspond to non-existent projections. This gets rid of annoying
+	 error messages on ,e.g. mouse-wheel scrolling when some projections
+	 are missing.
+
+	* X11/xclust2/clust_menu.c: -minor change to error messages
+
+	* X11/xclust2/keys.c:
+	-put warning behind test of 'suppresswarnings' global
+
+	* X11/xclust2/init.c:
+	-changed name of cluststat offset marker variable.
+
+	* X11/xclust2/commands.c:
+	BUGFIX: (new bug) Tom's new 'Match' macro didn't split command properly when
+	it contained a '/n' newline. This broke View Spikes!
+
+	BUGFIX: (new bug) Segfault if issued randomize on non-existent projection fixed.
+
+	CHANGED: Put command 'WARNINGS' behind a test of the 'suppresswarnings' global.
+
+	* X11/xclust2/idnarrow.bitmap, X11/xclust2/iuparrow.bitmap, X11/xclust2/menu.c:
+	-New bitmaps for inverted up and down arrows
+
+	* TODO: *** empty log message ***
+
+	* X11/xclust2/keys.c, X11/xclust2/commands.c:
+	-CHANGED: /loadview command can now handle either 2 or 3-axis saved
+	 views (for compatibility with old .xclustrc files).
+
+	  - Additionally, any axis can be omitted by setting it's projectionid
+	    to -1. Such saved views do not change that axis when they are loaded.
+
+	* X11/xclust2/menu.c:
+	-CODE/BUGFIX: test for existence of bitmap before attempting to draw
+	 it.
+
+	* X11/xclust2/clust_menu.c:
+	-CHANGED: Now we 'disable' projection buttons with no corresponding
+	 projection (instead of just not letting user select them)
+
+	-CHANGED: Set G->currentprojection[2] immediately on Z-axis selection,
+	 rather than waiting for a Y-axis click.
+
+	-BUGFIX: set randomize button states correctly on projection block up/down.
+
+	-BUGFIX: If user clicks pname button, then X-column grid button,
+	 re-initialize pname buttons.
+
+	-added some comments throughout.
+
+	* TODO: *** empty log message ***
+
+2005-01-06  tjd@blakey.mwl.ai.mit.edu  <tjd@blakey>
+
+	* TODO: *** empty log message ***
+
+	* X11/xclust2/clust_menu.c:
+	BUGFIX: reset projection name buttons to selecting X projection when
+	we update the projection grid. This solves problem that if you clicked
+	to select an X-proj, then chagned projections with /loadview, the
+	projection button name state was out of sync with the button function
+	(i.e. it was ready to choose p1).
+
+	* X11/xclust2/menu.c:
+	-Update (mostly in clust_menu.c) to allow choosing projections with
+	 serial clicks of projection name buttons.
+
+	* X11/xclust2/commands.c:
+	-/projection and /zprojection commands now update projection button grid.
+
+	* X11/xclust2/clust_menu.c:
+	-ADDED: You can now choose X and Y projections by clicking on the
+	 projection names in series. Some bugs still: clicking on an
+	 unassigned projection screws up state. Untested for interactions with
+	 loading saved views or issuing /projection commands. Cute hack
+	 involving changing the item->func of the pname class.
+
+2005-01-05  tjd@blakey.mwl.ai.mit.edu  <tjd@blakey>
+
+	* X11/xclust2/clust_menu.c:
+	-BUGFIX: Got mousewheel setting of cluster score working again.
+
+	* X11/xclust2/load.c:
+	-BUGFIX: PartialLoadPlot now refuses to load points if the startline
+	 is greater than the end line (unless either of them is negative,
+	 which is treated as the special start/end marker).
+
+	-put some fprintfs behind an if(debug) because they were annoying me.
+
+	* X11/xclust2/clust_menu.c:
+	-BUGFIX: MenuPrevBlock (for scrolling through points) bottomed out at
+	 zero, now behaves like MenuNextBlock, in that both the blocksize, and
+	 the block alignment are preserved. (so, if you have loaded points 10
+	 through 110, then do a prev-block, you get points 0 through 10
+	 loaded, but the start and end values listed are -90 and
+	 10. Subsequent prev-blocks don't do anything, while a next block
+	 takes you back to 10 through 110.
+
+	* X11/xclust2/clust_io.c:
+	-ADDED: Cluster scores are now read in from cbfiles.
+
+	* X11/xclust2/init.c:
+	-moved colorstat window (to same location as cluststat window) so it
+	 doesn't overlap with cluster buttons.
+
+	* X11/xclust2/xclust_struct.h, X11/xclust2/keys.c, X11/xclust2/commands.c:
+	CHANGED: saved views now have 3 projections, (xyz).
+
+	* X11/xclust2/color.c: -minor color change
+
+	* X11/xclust2/xclust_defs.h, X11/xclust2/menu.c, X11/xclust2/clust_menu.c, X11/xclust2/clust_io.c:
+	-ADDED: Cluster Score buttons now work properly (i.e. are updated when
+	 we change selected cluster), and write out cluster score to headers
+	 of cluster bounds file, and cluster file. Still missing: reading in
+	 scores from cluster-bounds file header.
+
+	* X11/xclust2/clust_menu.c:
+	-CODE: Now free memory when refreshing button bitmaps.
+
+	* TODO: *** empty log message ***
+
+2005-01-05  tjd@blakey.mwl.ai.mit.edu  <tjd@blakey>
+
+	* clust_menu.c:
+	-BUGFIX: Got mousewheel setting of cluster score working again.
+
+	* load.c:
+	-BUGFIX: PartialLoadPlot now refuses to load points if the startline
+	 is greater than the end line (unless either of them is negative,
+	 which is treated as the special start/end marker).
+
+	-put some fprintfs behind an if(debug) because they were annoying me.
+
+	* clust_menu.c:
+	-BUGFIX: MenuPrevBlock (for scrolling through points) bottomed out at
+	 zero, now behaves like MenuNextBlock, in that both the blocksize, and
+	 the block alignment are preserved. (so, if you have loaded points 10
+	 through 110, then do a prev-block, you get points 0 through 10
+	 loaded, but the start and end values listed are -90 and
+	 10. Subsequent prev-blocks don't do anything, while a next block
+	 takes you back to 10 through 110.
+
+	* clust_io.c: -ADDED: Cluster scores are now read in from cbfiles.
+
+	* init.c:
+	-moved colorstat window (to same location as cluststat window) so it
+	 doesn't overlap with cluster buttons.
+
+	* xclust_struct.h, keys.c, commands.c:
+	CHANGED: saved views now have 3 projections, (xyz).
+
+	* color.c: -minor color change
+
+	* xclust_defs.h, menu.c, clust_menu.c, clust_io.c:
+	-ADDED: Cluster Score buttons now work properly (i.e. are updated when
+	 we change selected cluster), and write out cluster score to headers
+	 of cluster bounds file, and cluster file. Still missing: reading in
+	 scores from cluster-bounds file header.
+
+	* clust_menu.c: -CODE: Now free memory when refreshing button bitmaps.
+
+2005-01-05  tjd@blakey.mwl.ai.mit.edu  <tjd@blakey>
+
+	* clust_menu.c:
+	-BUGFIX: Got mousewheel setting of cluster score working again.
+
+	* load.c:
+	-BUGFIX: PartialLoadPlot now refuses to load points if the startline
+	 is greater than the end line (unless either of them is negative,
+	 which is treated as the special start/end marker).
+
+	-put some fprintfs behind an if(debug) because they were annoying me.
+
+	* clust_menu.c:
+	-BUGFIX: MenuPrevBlock (for scrolling through points) bottomed out at
+	 zero, now behaves like MenuNextBlock, in that both the blocksize, and
+	 the block alignment are preserved. (so, if you have loaded points 10
+	 through 110, then do a prev-block, you get points 0 through 10
+	 loaded, but the start and end values listed are -90 and
+	 10. Subsequent prev-blocks don't do anything, while a next block
+	 takes you back to 10 through 110.
+
+	* clust_io.c: -ADDED: Cluster scores are now read in from cbfiles.
+
+	* init.c:
+	-moved colorstat window (to same location as cluststat window) so it
+	 doesn't overlap with cluster buttons.
+
+	* xclust_struct.h, keys.c, commands.c:
+	CHANGED: saved views now have 3 projections, (xyz).
+
+	* color.c: -minor color change
+
+	* xclust_defs.h, menu.c, clust_menu.c, clust_io.c:
+	-ADDED: Cluster Score buttons now work properly (i.e. are updated when
+	 we change selected cluster), and write out cluster score to headers
+	 of cluster bounds file, and cluster file. Still missing: reading in
+	 scores from cluster-bounds file header.
+
+	* clust_menu.c: -CODE: Now free memory when refreshing button bitmaps.
+
+	* buttons.c:
+	-Changed Wobble mode so that it turns off axes, and rotates about the
+	 center (well actually 1/3 screen width from bottom left corner) of
+	 screen. Turns back on at end of wobble mode.
+
+	* init.c, commands.c:
+	-Added /rotpointsmax command, and changed default decimation for
+	 Wobble mode to /rotpointsmax 100000, rather than /rotpointfreq 25.
+
+2005-01-04  tjd@blakey.mwl.ai.mit.edu  <tjd@blakey>
+
+	* clust_menu.c:
+	-ADDED: Save randomization state of projections in .xclustrc file
+
+	-SPEEDUP: On randomizing a projection, only refresh graph if currently selected projection is randomized.
+
+	* xclust_defs.h:
+	-Added POLYGONSTRING and BOXSTRING defines for use in cluster mode
+	 button in menu.c
+
+	* menu.c:
+	-CHANGED: put the order of the menu button blocks back to 'standard'
+
+	-CHANGED: Cluster mode button now reads "MODE: POLYGON", instead of "CLUSTER MODE: poly"
+
+	-CODE: Use POLYGONSTRING and BOXSTRING defined constants instead of strings for cluster mode.
+
+	-CHANGED: button default for .p file (if not set in .xclustrc) is now "../*.p"
+
+	-ADDED: button default for epoch file (if not set in .xclustrc) is now "../*.epoch", default for where to save epoch file is not "../"
+
+	* keys.c:
+	-Use POLYGONSTRING and BOXSTRING defined constants instead of strings.
+
+	* event_loop.c: -reformat some lines for readability
+
+	* commands.c:
+	-BUGFIX (not in last release): Calling /{next,prev}savedview command
+	 with no saved views put you into an infinite loop.
+
+	-ADDED: /randomizeprojection and /randomizeprojectionbyname now accept
+	 multiple projections (used by .xclustrc) to limit the number of
+	 redraws, thus speeding startup. Also, we only trigger a redraw if one
+	 of the currently used projections is randomized.
+
+	* color.c: -get rid of last of 'orange4'
+
+	* buttons.c:
+	-When testing for cluster mode (polygon or box) use defined constants
+	 POLYGONSTRING and BOXSTRING.
+
+2005-01-03  tjd@blakey.mwl.ai.mit.edu  <tjd@blakey>
+
+	* xclust_struct.h: Tom's last NYC checkin:
+
+	-cluster score code: added score member to ClusterList struct, this is
+	 set by score buttons, and can scroll through scores using mouse4/5
+	 (mouswheel). Don't yet update when we change clusters, though.
+
+	* xclust_defs.h: -changed some vals for no good reason
+	-added MAX_CLUST_SCORE (set to 6)
+
+	* menu.c: Tom's last NYC checkin:
+
+	-cluster score code: added score member to ClusterList struct, this is
+	 set by score buttons, and can scroll through scores using mouse4/5
+	 (mouswheel). Don't yet update when we change clusters, though.
+	  -in menu.c: added MenuSetClusterScore to list of functions that can
+	   handle multiple button types.
+	  -in menu.c: changed '6' to MAX_CLUST_SCORE
+
+	-for projection buttons, don't force an int into the *char-typed
+	 item->data member. Instead, use sprintf() and Atoi() throughout.
+
+	* load.c: -minor comment reformatting
+
+	* color.c:
+	-changed background color from pukey orange to light/dark grey. What
+	 do you think?
+
+	* clust_menu.c: Tom's last NYC checkin:
+
+	-RunFindspike: put extra info messages behind (debug) checks, instead
+	 of just commenting out.
+
+	-MenuNextBlock: stop user from 'next'-ing past end of spikes. When
+	 they reach the end of the file, put the last *attempted* end spike #
+	 in the End dialog box (even if it is past the end of the file) to
+	 retain the user's block size.
+
+	-replace GetClusterInfo() with LookupCluster in cases where it's just
+	 being used to check for a cluster's existence.
+
+	-cluster score code: added score member to ClusterList struct, this is
+	 set by score buttons, and can scroll through scores using mouse4/5
+	 (mouswheel). Don't yet update when we change clusters, though.
+
+	-for projection buttons, don't force an int into the *char-typed
+	 item->data member. Instead, use sprintf() and Atoi() throughout.
+
+	-added MAXPROJECTION to xclust_struct, and test for it when scrolling
+	 through projection blocks.
+
+	-in AssignProjectionX, remove code that tries to lookup projections by
+	 name, since the projection grid buttons don't have that info.
+
+2005-01-01  tjd@blakey.mwl.ai.mit.edu  <tjd@blakey>
+
+	* keys.c:
+	-minor cleanup: removed duplicate call to AssignProjectionButtons
+
+2004-12-30  tjd@blakey.mwl.ai.mit.edu  <tjd@blakey>
+
+	* menu.c:
+	-REWRITE: Made CreateMainMenu call subfunctions with 'blocks' of
+	 buttons that can be called in any order (useful for 1024x768 screen,
+	 when I want epochs above analysis, e.g.).
+
+	-also bugfix on passing other mouse buttons (caused segfault for
+	 non-button 1 clicks on items without a name)
+
+	-also a little work done on cluster score buttons
+
+	* clust_menu.c:
+	BUGFIX: in Copy to Cluster, (MenuCopyCluster) no longer allow a
+	cluster to be copied to itself. (Used to delete the selected cluster's
+	bounds).
+
+	* xclust_defs.h: -Added a MIN macro
+
+	(also some unimportant changes to number of projection buttons)
+
+	* menu.c:
+	-FEATURE: MenuCopyCluster in clust_menu.c now accepts button 4+5
+	(mousewheel up and down) inputs. item_event() was changed to pass
+	other button types to menu buttons that can handle it.
+
+	-BUGFIX: Pressing Ctrl-R over a textbox that didn't have an
+	 item->class caused a segfault. This keystroke has been removed, since
+	 it didn't work with the new 'RADIOBUTTON' cluster buttons anyway, and
+	 flash can be turned on and off with the Flash button or /flash
+	 command, or with Ctrl-mousewheel.
+
+	* clust_menu.c:
+	-FEATURE: MenuCopyCluster now accepts button 4+5 (mousewheel up and
+	 down) inputs. On wheel up/down, it generates the prev/next empty
+	 cluster, and puts that value in the button, so you don't have to type
+	 one in.
+
+	-BUGFIX: We now test the value given in the text box in Copy Cluster,
+	 so we can no longer copy empty clusters, or copy to non-existent
+	 clusters.
+
+	* buttons.c:
+	BUGFIX: cb was uninitialized, so bounds editing was broken--gave
+	segfault on shift-left drag of point.
+
+	* xclust_defs.h, keys.c, init.c, event_loop.c, buttons.c:
+	-ADDED: FLASHSELECTMODE, which turns on 'flash' when a ctrl-mousewheel
+	 event occurs, and leaves it on until a ctrl-key is released.
+	   -Added FLASHSELECTMODE to xclust_defs.h
+	   -Added KeyReleaseAction fn to keys.c to reset mode when a Ctrl-key
+	    release is detected
+	   -Added new event masking function WaitForKeyReleaseInputs() to
+	    init.c, which is in effect during FLASHSELECTMODE and traps key
+	    release events. We also trap when the pointer leaves the window or
+	    when the window loses focus (after these events, we never get the
+	    Ctrl-key release, so we need to stop the flash)
+	   -Added KeyReleaseMask to NormalSelectInputs() in init.c, but this
+	    may not be used.
+	   -Add code to ButtonReleaseAction() in buttons.c to test for
+	    Ctrl-clicks, and set mode appropriately.
+	   -Add LeaveNotifyAction() fn to buttons.c to turn off
+	    FLASHSELECTMODE when the pointer leaves the window or when the
+	    window loses focus.
+
+2004-12-27  tjd@blakey.mwl.ai.mit.edu  <tjd@blakey>
+
+	* menu.c, clust_menu.c:
+	-ADDED: new button type RADIOBUTTON for cluster and projection
+	 selection buttons. Moved MenuClassSetState functionality to
+	 buttonrelease code from clust_menu functions.
+
+	-FIX: test whether event->button == 1, not & 1 (before, buttons 3 and
+	 5 were caught by the test for 1)
+
+	* xclust_defs.h:
+	-change some defaults: 16 clusters/projections, 10 epochs...
+
+	* commands.c:
+	-check number of arguments to /randomizeprojection commands
+
+	* keys.c:
+	-BUGFIX: catch weird keystrokes (like blue 'fn' key on ibm thinkpad)
+	 that used to cause segfaults.
+
+2004-12-23  tjd@blakey.mwl.ai.mit.edu  <tjd@blakey>
+
+	* commands.c:
+	-FEATURE: /flash command now takes an optional 0/1 argument to
+	 set/unset the flash state. (To be used in ctrl-mousewheel cluster
+	 selection.)
+
+	-renamed command: selectnextemptycluster to selectemptycluster
+
+	-added some new commands to the help text
+
+	* buttons.c:
+	-command changed name from selectnextemptycluster to selectemptycluster
+
+	* commands.c: -added a couple comments
+
+2004-12-22  tjd@blakey.mwl.ai.mit.edu  <tjd@blakey>
+
+	* commands.c, clust_menu.c:
+	-ADDED: commands to set randomization state of projections (put them
+	 in your .xclustrc!): /randomizeprojection and
+	 /randomizeprojectionbyname
+
+	-code in clust_menu.c:AssignProjetionButtons now also redraws state of
+	 randomization buttons.
+
+	* scale.c, menu.c, commands.c:
+	-More ripping out of old Randomization code (there was lots of crufty
+	 stuff in there)
+
+	-small tweaks to menu layout
+
+	* menu.c:
+	-Changed projection selection buttons, and cluster selection buttons
+	 to 'TOGGLE' from 'BUTTON' or 'DIALOG'. Seems to work well--you can no
+	 longer type into these.
+
+	* defaults.c:
+	-Call RefreshSelectedClusterButton() here after we've loaded in the
+	 .xclustrc so that the bitmaps are the right colors.
+
+	* menu.c:
+	-BUGFIX: cluster buttons are now buttons, and not dialogs, avoiding
+	 the problem where xclust could segfault if the value was changed to
+	 some value above MAXCLUSTER (255);
+
+	-FEATURE: Add the randomization column to the projection grid.
+
+	-disable old RandX and RandY buttons, which have been superseded by
+	 the projection grid rand buttons.
+
+	-Make the horizontal offsets in the projection grid a little more
+	 'automated'
+
+	* xclust_struct.h, scale.c, clust_menu.c: CHANGE:
+	  -Change how projection randomization is handled internally and in user interface
+
+	    -Internally, randomization is a property associated only with
+	     projections. The Graph struct no longer has randx and randy
+	     information. When the plot is redrawn, it directly checks the
+	     projections being plotted.
+
+	    -Randomization is now toggled with the new projections
+	     grid, which also displays which projections are currently
+	     randomized.
+
+	* clust_menu.c:
+	-Change RefreshSelectedClusterButton so that it refreshes all buttons (rename?)
+
+	* commands.c: -minor arg check
+
+	* clust_io.c:
+	-BUGFIX: correctly redraw button bitmaps after load in of cluster-bounds
+
+	* commands.c: -removed duplicate nextsavedview command code
+
+	* xclust_defs.h:
+	-Added macros section, including two macros for cyclical
+	 decrement/increment of saved views.
+
+	* commands.c: -FEATURE: added /flash command to toggle flash cluster
+
+	-Re-wrote /{next,prev}savedview code to be more readable, avoiding all
+	 use of modulo operator.
+
+	* commands.c:
+	Added some new commands, which are called from mouse wheel/button clicks:
+
+	+     if(Match("/selectnextemptycluster")){
+	+     if(Match("/selectnextenabledcluster")){
+	+     if(Match("/selectprevenabledcluster")){
+	+     if(Match("/selectnextcluster")){
+	+     if(Match("/selectprevcluster")){
+
+	* buttons.c:
+	-Now test for state on mouse-button release.
+
+	-Control mouse-wheel scroll defaults to: "select prev/next enabled cluster"
+
+	-Moved 'find next enabled cluster' code from buttons to commands, now call the InterpretCommand from buttons.
+
+	-indented some of FK's code so I could read it.
+
+	* primitives.c, menu.c, defaults.c, clust_menu.c: FEATURE: (?)
+	  - bitmaps for cluster-hide/showonly/show buttons are now drawn in
+	    cluster color on black background.
+
+	    -Slightly-hackish--had to draw them in clust_menu.c every time
+	     cluster color changes.
+	    -added CreateBitmap, which returns a bitmap based on the bits and
+	     color index info
+
+2004-12-21  tjd@blakey.mwl.ai.mit.edu  <tjd@blakey>
+
+	* menu.c, clust_menu.c: BUGFIX:
+
+	 -cluster buttons used to get colors all mixed up while we were
+	  flashing, especially if you changed selected cluster during
+	  flashing. (Used to fix itself after flash was turned off)
+
+	   -solution involved adding extra RefreshGraphs, and
+	    RefreshSelectedClusterButtons and also not redrawing cluster
+	    buttons on mouse-up if we are in flash-cluster mode.
+
+	IMMATURE CODE:
+	 -beginnings of code to change color of bitmap buttons next to
+	  clusters...
+
+	* event_loop.c, clust_menu.c: BUGFIX:
+	 -Flash cluster mode now works when the cluster's color has been changed.
+
+	    -Bug was that flashing (and saving/loading of old color) assumed
+	    that the color index was determined by the cluster number. The
+	    colorstat window actually changes the index of the cluster's
+	    color, so the flashing was done to the wrong color (usually
+	    unused).
+
+	* xclust_struct.h, menu.c, init.c: BUGFIX:
+	 -Draw the cluster info window at a height specified in menu.c, rather
+	  than at a hard-coded location.
+	   -Member clinfovoffset added to MenuWindow struct in
+	   xclust_struct.h, value set in menu.c, window drawn in init.c,
+
+	* menu.c, init.c:
+	-BUGFIX: We now draw the colorstat window (color selection popup) at the actual location of the colorstat button, rather than at a hard-coded location.
+
+	* xclust_defs.h:
+	-changed cluster and projection numbers to 22 and 16, just for kicks. May use that screen real estate for something...
+
+	* primitives.c, menu.c: -CODE REWORK:
+	  -menu drawing now uses BUTTONH and SHORTBUTTONH values (defined in menu.c) for heights of buttons and rows, rather than hard-coded values. Should be able to simply add/remove buttons (by row) without any other changes.
+	  -changed 'row' variable introduced by FK to voffset (to indicate pixels, rather than button rows)
+
+	  -when creating a bitmap using AddBitmap, can now indicate a background and foreground color index.
+
+	-FEATURE?:
+	  -cluster buttons are now black background, so that cluster colors
+	   chosen to be visible on the black plot bg are also visible against
+	   the button bg
+	  -cluster action buttons are black/white, which is ugly. Trying to
+	   change them to be cluster-colored.
+
+2004-12-20  fabian  <fabian@blakey>
+
+	* scale.c: zoffset now correctly offsets the plot along the z axis
+
+2004-12-20  tjd@blakey.mwl.ai.mit.edu  <tjd@blakey>
+
+	* keys.c:
+	-Put info messages about loading saved views behind 'debug' flag
+	 tests. Messages still go to status bar, but not to stderr by default.
+
+2004-12-20  fabian  <fabian@blakey>
+
+	* keys.c: removed double declaration of rotpercent
+
+	* keys.c: forgot to delete some conflict markers
+
+	* xclust_defs.h, xclust_struct.h, buttons.c, clust_menu.c, color.c, commands.c, event_loop.c, graph.c, init.c, keys.c, menu.c, scale.c, text.c:
+	Lots of changes:
+	-Added boundary node editing on current boundary of active cluster(shift-left mouse btn)
+	-Changed menu layout of clusters and projections (now vertically arranged)
+	-added row variable in CreateMainMenu function to keep track of current vertical offset so that adding other menu items becomes easier
+	-Added wobble/rotation mode (ctrl-left mouse button) + skipping of all queued motion events but the last for optimal performance
+	-world-to-screen transformation is now only done for visible clusters and takes into account the pointfreq setting, again for better perforance while in wobble mode
+	-text line at bottom of screen functions now more as a statusbar: commands are displayed (and removed after execution), permanent labels for mouse cursor position (in screen and world coordinates) and rotation angles
+
+2004-12-20  tjd@blakey.mwl.ai.mit.edu  <tjd@blakey>
+
+	* xclust_struct.h, keys.c, commands.c, buttons.c: -INTERNAL CHANGE:
+
+	  -Moved 'view scrolling' on mouse wheel movement to slash-commands
+	   /prevsavedview and /nextsavedview, in preparation for mouse-button
+	   customization
+
+	    -changed lastsavedview from a global to a member of the graph_type
+	     struct
+
+	    -now ProcessSavedView returns 1 on error, 0 on success, so we
+	     don't have to do as much arg checking before calling it.
+
+	* buttons.c:
+	-FIX: on first mouse wheel movement of a session, initialize last saved view to 2.
+
+2004-12-17  tjd@blakey.mwl.ai.mit.edu  <tjd@blakey>
+
+	* commands.c, clust_menu.c, buttons.c: -FEATURES:
+	  -mouse button 6 toggles hide cluster zero
+	  -mouse button 7 selects first empty cluster
+
+	  -mouse wheel movement reversed (pulling goes to next saved view...)
+	-BUGFIX
+
+	  -SelectCluster (called by /cluster and /selectcluster commands, and
+	   by button 7), now tests bounds (avoids segfault on out of bound
+	   clusterid), and now scrolls cluster block up or down to show newly
+	   selected button.
+
+2004-12-16  fabian  <fabian@blakey>
+
+	* keys.c: removed debugging message from GetZoomPercent
+
+	* buttons.c: put messages behind debug flag
+
+	* buttons.c, clust_menu.c, commands.c, init.c, keys.c, load.c, xclust_defs.h:
+	committing the merge with xclust2_mouse_branch
+
+2004-12-16  tjd@blakey.mwl.ai.mit.edu  <tjd@blakey>
+
+	* clust_menu.c:
+	-added MenuClusterGrade function to toggle state of grade class menu items
+
+	* xclust_struct.h:
+	-added char grade and char *comments fields to ClusterList (==cluster) structure.
+
+	* menu.c:
+	-made cluster grade buttons toggles, which call MenuClusterGrade
+
+2004-12-16  fabian  <fabian@blakey>
+
+	* menu.c:
+	FIXED problem that was the result of previous change to only accept left mouse button presses in menu. CallMenuItem now acts like a left button press.
+
+	* buttons.c, keys.c:
+	ADDED mouse button 4 and 5 (mouse scroll wheel) to go forth and back between existing saved views. Only F2-F12, since F1 is has a special meaning (=previous view)
+
+	* menu.c: now only left mouse button presses evoke action in menu
+
+2004-12-16  tjd@blakey.mwl.ai.mit.edu  <tjd@blakey>
+
+	* menu.c: -BEGINNINGS OF A FEATURE:
+	  -added cluster grade buttons, but haven't done anything useful with them, yet.
+
+	* xclust_defs.h:
+	-Changed number of epochs to 20, so they don't run off the bottom of a 1200 pixel-high screen.
+
+	* menu.c, clust_menu.c:
+	-FEATURE: (or is it a bugfix?) RandX and RandY buttons now are toggle
+	 buttons, and are updated to reflect the randomization state of the
+	 selected projections.
+
+	* xclust_defs.h:
+	Changed number of epochs from 16 to 22 (about fills up a 1200 pixel high menu)
+
+	* load.c:
+	-fixed glob expansion. Now use a temporary string for expansion, so we
+	 don't replace the requested string with its expansion.
+
+	* clust_menu.c:
+	-Made findspike tell us what the findspike command was if we get a
+	 findspike error (prevents log pollution with every findspike call.)
+
+2004-12-15  fabian  <fabian@blakey>
+
+	* buttons.c:
+	changed mouse button assignment: left btn is still cluster boundaries, middle btn = stop finish boundary or panning view when dragging, right btn dragging = zoom in box, click = zoom out
+
+	* commands.c:
+	for /projection command now use UpdateProjections(), rather than UpdateProjectionMenu() so that labels are updated as well
+
+	* clust_menu.c, commands.c:
+	FIXED: cluster menu and projection menu are now updated when cluster / projection is changed using a command
+
+	* buttons.c: ok, now interactive zoom works as intended
+
+	* buttons.c:
+	fixed small bug in interactive zooming mode: moving mouse north and /or east now zooms in as was intended
+
+	* buttons.c, commands.c, init.c, keys.c, menu.c, xclust_defs.h:
+	complete overhaul of mouse event handling
+	left mouse button (LB): start new cluster boundary (box or polygon, depending on cluster mode toggle button in menu)
+	middle mouse button (MB): if working on a boundary, finish it, otherwise no effect
+	right mouse button (RB): no action
+	shift+LB: zoom in, either draw box or click
+	shift+MB: zoom in/out by drawing a line (north east = zoom in, south west = zoom out, length of line related to amount of zooming)
+	shift+RB: zoom out, either draw box or click
+	the new /zoompercent command sets the zoom percentage for shift+LB/RB click and for the '<' and '>' keys
+	ctrl+LB or +RB: no action
+	ctrl+MB: pan by drawing a line (the origin of the line is moved to the end point)
+	shift+ctrl+LB: draw polyline
+	shift+ctrl+MB: no action
+	shift+ctrl+RB: draw line
+
+2004-12-14  tjd@blakey.mwl.ai.mit.edu  <tjd@blakey>
+
+	* clust_menu.c: DefineNewEpoch:
+
+	  -BUGFIX: DefineNewEpoch was returning small negative numbers instead
+	   of 0 for out-of-range epoch times. Fixed by avoiding int-to-float
+	   conversion in sprintfs.
+
+	  -added error messages: when user attempts to add an epoch with no
+	   time projection selected, and when the parmfile contains no time
+	   field.
+
+	* load.c:
+	-Broke out File Globbing (shell expansion) into its own function:
+	 GlobExpand (should we move this to iolib?)
+	  -now test to make sure we haven't expanded to a directory name
+
+	-Changed epoch header fields to shorter ep_name ep_start and ep_end
+	 (from epoch_*), since I think in some places the fieldname is assumed
+	 to be 8 characters or less.
+
+2004-12-14  fabian  <fabian@blakey>
+
+	* clust_menu.c:
+	fixed bug that caused segfault when trying to undo before anything was done
+
+	* clust_menu.c, commands.c:
+	DefineNewEpoch now checks both x and y axis for time projection (x axis has preference)
+
+	* clust_menu.c:
+	DefineNewEpoch now takes a epochname argument to set the name of the epoch
+
+	* clust_menu.c, menu.c:
+	added epoch kill button for each epoch definition
+	this will empty the name, start time end end time boxes of the epoch
+
+2004-12-14  tjd@blakey.mwl.ai.mit.edu  <tjd@blakey>
+
+	* clust_menu.c:
+	-Saving the epoch defaults to an .xclustrc file now uses the new
+	 '/epoch' command, rather than a list of /setmenu commands:
+
+	  -we don't write out epochs that have no information
+	  -no testing of whether times are valid.
+	  -Write out empty string if one or two fields of epoch are
+	   empty--commands.c has been changed to allow this as valid.
+
+	* commands.c:
+	-added mismatched quote detection to CommandArgument(N).(aka the macro ARG(N)).
+	  - this means if you have a mimatched quote, the rest of the args
+	    (after the last quote) look like one arg (fair enough), and are
+	    ignored.
+
+	* commands.c: FEATURE:
+	 -the empty string "" can now be passed as an argument to commands
+	BUG FIXES:
+	 -/command argument parser now sets the argerror flag on unmatched
+	  quotes, and prints an error message.
+	   -NextDelimiter leaves the 'quote' flag set to '1' when it can't
+	    find the last quote.
+	   -CommandArgumentCount tests the quote flag before returning the arg
+	    count. Prints error msg, and does not count the last arg.
+
+	 -epoch and loadepoch commands now only call ARGC once, avoiding
+	  duplicate error messages
+
+2004-12-14  fabian  <fabian@blakey>
+
+	* commands.c: added saveepoch command
+	added defepoch command (calls DefineNewEpoch)
+
+	* menu.c:
+	added 'save epoch file' and new epoch definition (+E) menu items
+
+	* load.c:
+	added SaveEpochFile function to write epoch definitions to file
+	completely empty epochs (i.e. no name, no start and no end) are not written to file
+
+	* clust_menu.c:
+	added MenuSaveEpochFile function for handling save epoch file button presses
+	added MenuDefineNewEpoch function for handling epoch def button presses
+	added DefineNewEpoch function which will add a new epoch based on the min/max times in the current graph (only if the current x-axis is time). values < 0 are clamped to zero
+
+2004-12-14  tjd@blakey.mwl.ai.mit.edu  <tjd@blakey>
+
+	* commands.c: -FEATURE: /loadepoch command added
+	 - with no arguments, calls the "Load Epoch File" menu button
+	 - with one argument, loads the specified epoch file.
+
+2004-12-13  tjd@blakey.mwl.ai.mit.edu  <tjd@blakey>
+
+	* clust_menu.c:
+	-BUGFIX: attempting to load an empty epoch file value caused a
+	 segfault. Now test for null pointer
+
+	* commands.c: -FEATURE: added /epoch command.
+	  -syntax is /epoch [#] [name] [tstart] [tend], where # is an int and
+	   the other args are strings to be stuffed into that epoch.
+
+	* clust_menu.c: -removed unnecessary looping code in SetEpochValues
+
+	* commands.c:
+	-BUGFIX: Improved handling of multiple commands on a command line (as
+	 at startup using the -command option)
+
+	   -CommandArgumentCount used to arguments out to the end of the line,
+	   instead of just to the end of the current command. Now we only
+	   count out to the next semicolon
+
+	* load.c: -just changed formatting of a comment
+
+	* keys.c: BUGFIX:
+	  -no longer reuse the command line char array, which led to weird behaviour if bad commands were issued (like /pointreq 10, followed by /setmenu looks like '/setmenu q' to xclust.
+	  -we do this by filling the command line char array with null terminators after executing a command.
+
+	* commands.c:
+	-improve /setmenu command error handling (don't go looking for items when we are passed no args)
+	-added newline to an error message
+
+	* commands.c: -added missing newline to error message
+
+	* clust_menu.c:
+	-FIX: now save as many epochs as specified by globally defined NUM_EPOCHS, using a loop.
+
+	* menu.c (BUGFIX):
+	Test for null pointer in DrawItem. (this was the cause of the bug in the /setmenu command, which has also been fixed upstream).
+
+	* commands.c:
+	BUGFIX: - xclust no longer crashes on invalid '/setmenu' command.
+
+2004-12-12  tjd@blakey.mwl.ai.mit.edu  <tjd@blakey>
+
+	* clust_menu.c:
+	- FEATURE: Automatically load points when clicking on an epoch
+
+	- remove stderr message on every findspike (log pollution control...)
+
+	* load.c: -removed status message
+
+	* xclust_ext.h:
+	-added include <wait.h>. used for macros for interpreting return value of pclose
+
+	* load.c: -fixed a couple bugs:
+	  -we now correctly erase the values of epochs past the end of those specified in the file
+	  -we now catch when we are one parameter short.
+
+	* clust_menu.c: -commented out status message
+
+	* clust_menu.c: -fixed findspike error code handling
+	  -now use macros from <wait.h> to interpret return value of pclose(fp...)
+
+	-on findspike error, return -1, so that if someone has an epoch file
+	 with times outside the range of a parm file, they can still use it.
+
+	* clust_menu.c, load.c, menu.c: INTERMEDIATE CHECKIN:
+	 -wrote SetEpochValue
+	 -set all epochs to be 1-indexed for historical reasons
+
+	* clust_menu.c, load.c, menu.c:
+	-INTERMEDIATE CHECKIN: (I know, I should use a branch...)
+	 -adding load epoch functionality
+	 -reads an epoch file, parses it, and calls SetEpochValues to either
+	clear or set it.
+
+2004-12-11  tjd@blakey.mwl.ai.mit.edu  <tjd@blakey>
+
+	* load.c: -prettify Subset parm file startup status message.
+
+	* load.c:
+	-Added type name as a string to load's initial output message report on field types.
+
+	* clust_menu.c, load.c, menu.c, xclust_defs.h, xclust_ext.h:
+	-INTERMEDIATE CHECKIN: adding 'Load Epoch' functionality;
+	   -added button, no function yet
+	   -rewrote button drawing calls for epoch buttons
+	   -added NUM_EPOCHS define to defs
+	   -added glob.h include so that we can use file globbing on file
+	    arguments
+
+	* menu.c:
+	-Cosmetic fix: added input area boxes to 'trange', 'autoprocess' and 'command' buttons.
+
+	* xclust_struct.h: -added additional fields to source struct:
+	    int		subsetparmfile; /* flag: file contains a subset of spike ids from a spikefile */
+	    int		notimefield;	/* file has no 'time' or 'timestamp' fields */
+	    int		timelookupfile; /* file to use for time lookups */
+
+	 ...to support testing for degenerate parm files, etc.
+
+	* xclust_defs.h:
+	-added defs for source->timelookupfile (PARMFILE, TTFILE...)
+
+	* main.c: -updated text description of xclust2
+
+	* load.c:
+	FEATURE: Determine in LoadPlotFromSource whether this file is suitable
+	for lookups of time<-->spike index. Flag the source object so we can
+	test this flag, e.g. when we want to look up epoch start/end times.
+
+	 - The relevant features are whether the parm file is ASCII or BINARY,
+	   whether it has a field representing spike time, and whether it is
+	   'degenerate' (i.e. whether it is a subset of spikes from a
+	   spikefile). These are represented in the new source struct members:
+	     -source.subsetparmfile (0/1)
+	     -source.notimefield (0/1)
+	     -source.timelookupfile (INVALIDFILE/PARMFILE/TTFILE)
+
+
+	   -the matrix of dependencies is as follows:
+
+	               | BINARY  |  ASCII  |
+	     -------------------------------
+	     full +ts   |1 PARM   |5   TT   |
+	     full -ts   |2  TT    |6   TT   |
+	     subset +ts |3 PARM   |7   -    |
+	     subset -ts |4   -    |8   -    |
+
+	    Conceivably we could eventually work with all these files. For
+	    now, the limitations are:
+
+	     - (7) findspike doesn't work on ASCII files
+
+	     - (4) if we get a spike id range from a time range using
+	       fidnspike on a .TT file, we don't have a way of turning this
+	       into a range of indices into the degenerate parm file. This
+	       would be simple to fix, but even easier is to require people
+	       who want to work with degenerate parm files to have binary
+	       files with a time or timestamp field.
+
+	     - (8) problem 4 and 7
+
+	-now only update /menu/startspike and /menu/endspike if there is a valid timespikefile.
+
+	-added additional startup message about last spike / last record / subsetparmfile
+
+	-removed unused external function definitions (now in iolib.h)
+
+	* clust_menu.c: -FIX: part of handling 'degenerate' pxyabw files:
+	  -Epoch/time lookup handling for different file types revamped:
+	    -now decide whether to use parm or spike file based on a flag (set when the source is loaded in load.c)
+	    -take advantage of findspike error codes to report more useful errors on findspike
+
+	-FIX: propagate times more sensibly from epoch buttons/tstart buttons/loadpoints buttons
+	  -only call findspike if non-empty arg
+	  -only stuff return values into other buttons if non-empty
+
+	-broke out findspike calls into RunFindspike function
+	-added GetCurrentSource() function to get source object of current plot (to get parm file, e.g.)
+
+2004-12-08  tjd@blakey.mwl.ai.mit.edu  <tjd@blakey>
+
+	* keys.c:
+	FIX: Now we update the projection menu buttons when you use Function
+	keys to change views.
+
+	* clust_menu.c:
+	FIX: - you can no longer select unused projections with the mouse. This
+	fixes the bug where if you selected an unused projection, you would
+	get as many error messages as points in the plot complaining about
+	being unable to find the projection.
+
+	* menu.c:
+	- FIX: (part of fix to make unused projections unclickable) Now that
+	  we test for unused projections, we have to wait until the projection
+	  buttons are initialized before 'clicking' on them.
+
+	* keys.c:
+	-FIX: We now refuse to load saved views if the projections they specify do not exist.
+	 - also added some comments to clarify program flow
+	 - send some warning msgs to stderr (as well as status bar at bottom
+	   of xclust window) when there is no saved view stored, or we try to
+	   load non-existent projections
+
+	* clust_menu.c:
+	-FIX: now if you scroll the parm list down, and back up, the numbers
+	 16+ are not appended to named parm names. (e.g., 'id 16' or 't_px
+	 17'...). This was accomplished by uncommenting a line already in the
+	 code. Why was it commented out in the first place???
+
+2004-12-06  tjd@blakey.mwl.ai.mit.edu  <tjd@blakey>
+
+	* clust_menu.c: FIX: in GetParmFile return NULL in case of error
+
+	* load.c:
+	-FIX:On partial load using -1 (e.g. at startup), fill in correct
+	 values for index and time into the menu
+
+	* load.c:
+	-we now refresh the Tstart ( T |< ) and Tend ( T >| ) whenever we load partial plots.
+
+	* clust_menu.c:
+	-now we lookup spike indices (via findspike) using the pxyabw file
+	 only.
+	-FIXED: -use the new -recid flag to findspike to be able to use
+	 degenerate pxyabw files. (this flag makes findspike return an index
+	 into the pxyabw file, instead of the spike's id field.)
+	-added GetParmFilename function to get the name of the pxyabw file.
+
+	* menu.c:
+	-shortened Tstart and Tend to 'japanese characters' T |< and T >| , so
+	 that full timestamp info (including hours) could be returned from
+	 findspike
+
+	* load.c:
+	-FIXED: bug in which if you used a negative number for the start of a MenuLoadPoints, that negative number was subtracted from the end index in the menu.
+
+	* xclust.h:
+	- changed 'standardargv[1]' from Xclust to xclust2 (used in cluster file headers)
+
+2004-12-05  fabian  <fabian@blakey>
+
+	* arg.c, event_loop.c, xclust_struct.h:
+	BRANCH experimental scripting support
+	added -fifo command line option, which will open a fifo file in the home directory
+	will read commands from fifo file in event loop and execute them
+
+2004-12-03  tjd@blakey.mwl.ai.mit.edu  <tjd@blakey>
+
+	* clust_menu.c:
+	-Added code to try passing the pxyabw file to findspike, if the .tt
+	file does not exist. (Findspike > v1.06 now will work with pxyabw
+	files.)
+	-This allows you to cluster without having the tt-files present !
+
+2004-12-02  tjd@blakey.mwl.ai.mit.edu  <tjd@blakey>
+
+	* clust_menu.c:
+	-added fprintf to stderr of findspike command used when looking up a spike index by time (when pressing tend or tstart button on menu).
+
+2004-11-29  Tom Davidson  <tjd@localhost.localdomain>
+
+	* src/cluster/behav/behav_defs.h:
+	changed behav version # to 2.31 for bugfix release (see behav_write changelog)
+
+	* src/cluster/behav/behav_write.c:
+	fixed bug that caused behav to fail (incorrectly) if a rate and position output file wasn't specified (with -ro and -fo options).
+
+2004-11-24  Tom Davidson  <tjd@localhost.localdomain>
+
+	* RELEASE: split release into release and version
+
+2004-11-22  Tom Davidson  <tjd@localhost.localdomain>
+
+	* Makefile, mwl-wilson-software.spec:
+	-Now doc files (RELEASE, ChangeLog) are included in rpm as %docs.
+
+	* RELEASE: updated for v. 1.1-1
+
+	* ChangeLog: *** empty log message ***
+
+	* src/cluster/Makefile: -Now uses -Wall flag
+
+	* src/cluster/Makefile, src/cluster/adextract.c, src/cluster/crextract.c, src/cluster/posextract.c, src/cluster/showcmd.c, src/cluster/spikeanal.c:
+	Compiler cleanup:
+	 -remove unused vars
+	 -declare return values for fns
+	 -added includes
+	 -changed printf codes for long data types
+	 -...
+	 ----------------------------------------------------------------------
+
+	* TODO: *** empty log message ***
+
+	* TODO: -added a couple posextract bugs (dead feature, ignored option)
+
+	* src/cluster/posextract.c:
+	- Added error message if user tries to use (broken) -switchfb option, changed -usage message
+
+	* src/cluster/posextract.c:
+	- BUG FOUND (not solved): the code that handles the -switchfb option
+	  (to switch front and back diodes) doesn't do anything. Tried a quick
+	  fix that doesn't work (see comments), but gave odd results, so I
+	  just commented it out for now (~line 275).
+
+	* src/cluster/posextract.c: Compiler cleanup:
+	 - add includes
+	 - remove unused vars
+	 - declare fn return types
+	 - change format codes to long type
+
+	* src/Makefile, src/atob.c, src/carve.c, src/csi.c, src/y.c:
+	Made src/ directory compile -Wall -W (-Wextra) clean.
+	 - removed unused vars
+	 - return type int for main
+	 - long format codes for printfs
+
+2004-11-22  tjd@blakey.mwl.ai.mit.edu  <tjd@blakey>
+
+	* src/cluster/Makefile: -Now uses -Wall flag
+
+	* src/cluster/Makefile, src/cluster/adextract.c, src/cluster/crextract.c, src/cluster/posextract.c, src/cluster/showcmd.c, src/cluster/spikeanal.c:
+	Compiler cleanup:
+	 -remove unused vars
+	 -declare return values for fns
+	 -added includes
+	 -changed printf codes for long data types
+	 -...
+	 ----------------------------------------------------------------------
+
+	* TODO: *** empty log message ***
+
+	* TODO: -added a couple posextract bugs (dead feature, ignored option)
+
+	* src/cluster/posextract.c:
+	- Added error message if user tries to use (broken) -switchfb option, changed -usage message
+
+	* src/cluster/posextract.c:
+	- BUG FOUND (not solved): the code that handles the -switchfb option
+	  (to switch front and back diodes) doesn't do anything. Tried a quick
+	  fix that doesn't work (see comments), but gave odd results, so I
+	  just commented it out for now (~line 275).
+
+	* src/cluster/posextract.c: Compiler cleanup:
+	 - add includes
+	 - remove unused vars
+	 - declare fn return types
+	 - change format codes to long type
+
+	* src/Makefile, src/atob.c, src/carve.c, src/csi.c, src/y.c:
+	Made src/ directory compile -Wall -W (-Wextra) clean.
+	 - removed unused vars
+	 - return type int for main
+	 - long format codes for printfs
+
+2004-11-22  tjd  <tjd@roach>
+
+	* mwl-wilson-software.spec: -no longer build debug-package
+
+2004-11-21  tjd  <tjd@roach>
+
+	* Makefile:
+	header files are back in mwsoft/include. Fixed makefile to reflect this
+
+	* include/iolib.h: copied from src/cluster (updated version)
+
+2004-11-20  tjd  <tjd@roach>
+
+	* src/cluster/header.h:
+	This is now *the* header.h file for code in both the src/ and X11/ side of the trees
+
+	* X11/xview/xview_defs.h: -upped version number
+
+	* X11/xview/xview.h: header update
+
+	* X11/xview/xview_ext.h: -header update
+
+	* X11/xplot/xplot_defs.h: -upped version number
+
+	* X11/xclust2/xclust_defs.h:
+	-upped version number, noted that it's a bug-fix release
+
+	* src/cluster/doc/iolib.doc: -still hopelessly incomplete
+
+	* src/cluster/behav/behav_defs.h: updated comments
+
+	* src/cluster/showcmd.c, src/cluster/parmextract.c:
+	-upped version number
+
+	* src/cluster/editheader.c:
+	-removed redundant function definitions (provided by stdlib...)
+
+	* src/y.c: -just added name 'y' to program comment
+
+	* src/cluster/header.c: -upped version number
+	-included iolib.h, removed definition of ReadHeader
+	-compiler cleanup:
+	 -included string.h, stdlib.h
+	 -fixed long format code in fprintf
+	 -declared return type of int for main
+
+	* src/cluster/findspike.c, src/cluster/esextract.c, src/cluster/crextract.c, src/cluster/adextract.c, src/y.c, src/atob.c:
+	-upped version number
+
+2004-11-19  tjd  <tjd@roach>
+
+	* src/cluster/spikeanal.c:
+	-FIX BUG: if you pass in an empty t-file, in isi mode, you get 500,000
+	 lines of zeros, since we never tested whether there were any spikes
+	 to look at. Now test this.
+
+	* src/cluster/posextract.c, src/cluster/showcmd.c, src/cluster/spikeavg.c:
+	 -changed include lines for MWL headers to <foo> from "foo" so that we
+	don't look in the current working directory by mistake.  CVS:
+
+	* src/cluster/behav/behav_main.c, src/cluster/behav/behav.h, src/cluster/behav/behav_ext.h:
+	-added all shared function prototypes to behav_ext.h.
+	-behav_main now includes behav_ext.h, and defines its globals in
+	behav_main (rather than in behav.c
+	-behav.h is no longer used
+
+	* src/cluster/behav/Makefile:
+	-added -Wall flag to gcc, since code is now almost clean
+
+	* src/cluster/behav/behav_bounds.c:
+	-removed unused result parameter from isinpolygon (only called
+	 locally) also changed (commented out) declaration of function in
+	 behav_ext.h.
+
+	* src/cluster/behav/behav_ext.h: -minor prettifying, no code change
+
+	* src/cluster/behav/behav_defs.h:
+	-added inf and verbose defaults, which used to be set in behav.h (now deleted)
+
+	* src/cluster/behav/behav_main.c:
+	-changed include from behav.h to behav_ext.h, since the files were
+	identical except for two defaults that were set in behav.h (verbose =0
+	and inf =0) These are both now set in behav_ext.h, like the other
+	default globals)
+	-this coincides with removing behav.h from the folder.
+
+	* src/cluster/behav/behav.h:
+	-removed extern fn declarations present in iolib.h
+	-made header.h iolib.h not relative paths
+
+	* src/cluster/behav/behav_write.c:
+	initialized this pointer to NULL, just to satisfy grumpy compiler
+
+	* src/cluster/behav/behav_write.c:
+	-BUG FIX ? : missing format code in fprintf would have caused a
+	 segfault if you tried to pass in an angular range file. I couldn't
+	 find any documentation of what this is, or what it would be used for,
+	 so I couldn't test it, but I fixed it. (I think!)
+
+	* src/cluster/behav/behav_write.c:
+	-changed WritePositionFile and WriteRateFile to void, and caused write
+	 errors to trigger an exit(-1). This was done because the calling
+	 functions never tested the return value of these fns, and a failure
+	 to write to the file seemed like it should cause the analysis to
+	 exit.
+
+	* src/cluster/behav/behav_write.c: -compiler cleanup:
+	 -declared return types for functions
+	 -removed unused vars
+
+	* src/cluster/behav/behav_stat.c: -compiler cleanup:
+	 -initialize some values unnecessarily
+
+	* src/cluster/behav/behav_stat.c: compiler cleanup:
+	 -removed unused vars
+	 -declared return type of fn
+
+	commented out unused/empty function TestGridSignificance
+
+	* src/cluster/behav/behav_read.c: compiler cleanup:
+
+	 -declared return types for functions (removed (0) return value from
+	  one fn -- return value not used in calling fns)
+	 -removed unused vars
+	 -corrected format codes to long
+	 -removed ReadHeader declaration provided by iolib.h
+
+	* src/cluster/behav/behav_main.c: -declared return type of int for main
+
+	* src/cluster/behav/behav_occ.c: -declared return type for function
+	-removed unused vars
+
+	* src/cluster/behav/behav_func.c:
+	declared return types for functions (void instead of int)
+
+	* src/cluster/behav/behav_bounds.c:
+	-declared return values for functions. In one case, removed return value (O) from what looked like a void function.
+
+	* src/cluster/behav/behav_corr.c: compiler cleanup:
+	 -declared return type of functions
+	 -fixed format codes (%u -> %lu, %g -> %lu)
+	 -removed unused variables
+	 -initialized some vars that compiler complained about (they are OK,
+	  just set using a 'first' flag in the subsequent loop, but this way
+	  --using INT_MIN-- they will return goofy values if something goes
+	  wrong.
+
+	* src/cluster/behav/behav_flip.c: compiler cleanup:
+	 -declared return type to be void of undeclared function
+
+	* src/cluster/behav/behav_ext.h:
+	-added include limits.h so we can get INT_MIN, etc...
+
+	* src/cluster/behav/behav_alloc.c:
+	-declare return type of void (-Wall clean)
+
+	* src/cluster/behav/behav_stat.c:
+	-just removed code that had already been commented out (it was some
+	 unused stat routine that was the last vestiges of numerical recipes
+	 code).
+
+	* src/cluster/behav/behav_ext.h:
+	-sorted out MWL libs, used non-relative paths
+	-removed extern defs of headers in iolib.h
+	-added string.h
+
+	* src/cluster/textract.c:
+	-BUG FIX: (caught by -Wall!) not enough arguments to format caused a segfault in -singlespike mode with an ASCII file-type.
+
+	* src/cluster/textract.c: -compiler clean-up
+	 -removed unused vars
+	 -added return types for void functions
+	 -changed format codes for long types to long codes
+
+	* src/cluster/textract.c:
+	-removed extern calls to headers already included in iolib.h
+
+	* src/cluster/spikeparms2.c: -more compiler cleanup:
+	 -added include string.h, removed declarations of strchr
+	 -declared many functions to return void (default is int)
+	-now -Wall clean
+
+	* src/cluster/spikeparms2.c: -compiler cleanup, mostly:
+	 -added include for iolib (instead of individual externs)
+	 -added include for strings.h (for bzero)
+	 -removed unused variables
+
+	* src/cluster/adextract.c: just removed an unused ifdef
+
+	* Makefile:
+	- made the cp for binaries a cp -f, so that you can make build to
+	  refresh the contents of mwsoft/build. This is useful if you have
+	  added mwsoft/build to your path--you can update the version on your
+	  path with a make build.
+
+	* TODO: *** empty log message ***
+
+	* X11/xclust2/clust_menu.c:
+	- FEATURE CHANGE: the LogISI button now processes the tmax and bin
+	  arguments before passing them to spikeanal, so that they behave more
+	  like you would expect. (See the comments in the code for
+	  implementation details.)
+
+	     -the maximum isi now returned is ~tmax (instead of 10^tmax)
+
+	     -we try to make the middlemost bin of the log plot equal to the
+	      requested binsize.
+
+	- Problem remaining: the tmax argument to spikeanal is an integer, so
+	  the tmax can only be a power of 10.
+
+2004-11-18  tjd  <tjd@roach>
+
+	* TODO, X11/xclust2/clust_menu.c: *** empty log message ***
+
+2004-11-17  tjd  <tjd@roach>
+
+	* src/cluster/adextract.c:
+	-just changed header declarations to be <headher.h> instead of "", so that we don't read the copy from the current working directory
+
+	* Makefile: -removed obsolete comment
+
+	* Makefile:
+	-create the include directory just like the lib, at build time. This means we need to copy over header.h and iolib.h before compiling any apps, so that they can link against them.
+	-also needed to change make clean to deal with this
+
+	* src/cluster/spikeanal.c:
+	-fixed headers for updated iolib.h (made header paths <>, not ""), removed extern declaration of fns in iolib.
+	-replaced MAXBINS with maxbins, which = (long)MAXBINS, so that we compare longs to longs
+	-declared void return type for many functions
+	-fixed long format codes for sprintfs of longs
+	-removed unused variables
+	-deleted empty, uncalled WriteSTA function
+
+	* TODO: *** empty log message ***
+
+	* src/cluster/parmextract.c:
+	-fixed headers for iolib.h v.3.0. Removed redundant extern declarations of headers in iolib; added needed unix headers
+	-compiler cleanup: declared return type of functions, intialized some vars, removed unused variables...
+
+	* src/cluster/findspike.c:
+	-clean up headers: add needed unix headers; add iolib.h; remove (now) redundant extern declarations of fns in iolib; make iolib.h/header.h not taken from current working directory.
+
+	-changed format strings for long ints where appropriate
+
+	-initialize 'index' to 0
+
+	* src/cluster/esextract.c:
+	-added eslen40 and eslen80 command line options for two different
+	 systems (previously only 80). Default is 80
+
+	-fixed headers: added missing Unix headers; made MWL headers not
+	 relative to current working dir; removed redundatn extern
+	 declarations now declared in iolib.h
+
+	-reformatted '-usage' message (modeled on adextract)
+
+	-compiler cleanup stuff: removed unused vars; changed format strings
+	 to long, where appropriate; declared return types for functions
+
+	-gcc -Wall clean
+
+	* src/cluster/adextract.c:
+	-fixed arg parsing bug: there was no -eslen80, just two eslen40's
+
+	* TODO: -NOT A BUG (crextract--late night mistake by Tom)
+
+	* TODO: *** empty log message ***
+
+	* src/cluster/spikeavg.c:
+	-removed duplicate declaration of functions defined in iolib.h
+
+	* src/cluster/spikeavg.c: -compiler warning clean-up, mostly:
+	 -defined return type of many functions
+	 -initialized some vars that were potentially not inited
+	 -removed unused vars
+	 -used long codes in format strings to sprintf
+
+	-some error messages had wrong numeric arguments
+
+	* src/cluster/iolib.h:
+	-updated to include many functions that are in iolib.c
+	-organized functions into rough categories
+
+	* src/cluster/crextract.c:
+	-updated headers: added string.h; made iolib/header.h not in working directory; removed extern function calls that are now provided by updated iolib.h
+	-removed unused vars:  nmatch tstamp
+	-changed func def'ns to have type void or int, as appropriate
+
+	* src/cluster/iolib.c: -replaced 'unsafe' tempnam with mkstemp
+	-added unlinks to make sure we delete the temp file when we're done
+	-added a couple casts to satisfy gcc warnings about comparing signed/unsigned and left-hand operator of comma doing nothing (not sure why value is evaluated there at all...)
+	-removed unused tempnam variable
+
+	* src/cluster/iolib.c:
+	-reverted AppendToHeader to old tmpfile version, cause I can't be bothered to test the new-fangled version
+	-address one compiler whinge about extra parens (it wanted them).
+
+	* src/cluster/iolib.c:
+	-added unistd.h, time.h includes to satisfy compiler
+	-defined return type of some functions as void to satisfy compiler
+	-removed some unused variables
+
+	* src/cluster/editheader.c:
+	-added additional unlink's, so that we clean up our temp files in more (hopefully all!) cases.
+	-minor indenting changes (look ugly on diff, but no code changes)
+
+	* src/cluster/editheader.c:
+	-replaced tempnam with mkstemp, no longer broken
+
+	* src/cluster/editheader.c:
+	-rolled back tempfile naming changes, as they broke the app.
+	-added add'l std unix headers to satisfy -Wall
+	-removed unused variable 'c'
+
+	* X11/xplot/Makefile, X11/xplot/header.h, X11/xplot/keys.c, X11/xplot/xplot_ext.h:
+	-removed the xplot-specific header.h, which was almost identical to the package-wide header.h (now in src/cluster)
+	-SQR, used in keys.c but no other apps, was unique to the header, so was added to keys.c
+	-Makefile now worries about implicit_function_def'ns, of which there are hundreds, since we don't have .h files for every .c file. Going to change this back
+
+	* src/atob.c, src/csi.c, src/y.c:
+	-changed header includes to read from include flags to gcc, rather than working directory(i.e. "foo.h" becomes <foo.h> )
+
+2004-11-16  fabian@localhost.localdomain  <fabian@roach>
+
+	* X11/xclust2/Makefile: rolled back to statically linked iolib
+
+	* Makefile, mwl-wilson-software.spec:
+	-since iolib is statically linked in, there is no need to distribute it separately. thus install code removed from Makefile and spec file
+
+	* src/cluster/popanal/Makefile, src/cluster/behav/Makefile, src/cluster/Makefile, src/Makefile, X11/xview/Makefile, X11/xplot/Makefile, Makefile, mwl-wilson-software.spec:
+	-ROLLBACK to static iolib library
+
+2004-11-16  tjd  <tjd@roach>
+
+	* src/cluster/popanal/pop_defs.h, src/cluster/popanal/pop_io.c, src/cluster/popanal/pop_reconstruct.c, src/cluster/behav/behav_defs.h, src/cluster/behav/behav_write.c, src/cluster/adextract.c, src/cluster/crextract.c, src/cluster/esextract.c, src/cluster/iolib.c, src/cluster/parmextract.c, src/cluster/posextract.c, src/cluster/spikeanal.c, src/cluster/spikeavg.c, src/cluster/spikeparms2.c, src/cluster/textract.c, src/atob.c, src/csi.c, src/y.c, X11/xclust2/clust_io.c, X11/xclust2/clust_menu.c:
+	-updated iolib to add 'VERSION' to the standard headers. (4th argument to BeginStandardHeader). Updated all calls to BeginStandardHeader in all apps.
+
+	* src/cluster/doc/iolib.doc:
+	-finished documentation of BeginStandardHeader (updated sample code)
+
+	* src/cluster/doc/iolib.doc:
+	-changed def'n of BeginStandardHeader to reflect added binaryver argument.
+	-documented existing iolibrevision() call.
+
+	* src/cluster/iolib.c:
+	- Changed BeginStandardHeader to accept a 4th argument: binaryver, which
+	is the version of the program writing the header. This is added to
+	allow for more accurate reconstruction of past analysis, (using the
+	old binaries, if necessary).
+	- Since this change results in an incompatibility with previous
+	versions , the major revision number was changed (per instructions in
+	comments) to 3.0. (The Version was also bumped up to 2.4)
+
+2004-11-16  fabian@localhost.localdomain  <fabian@roach>
+
+	* src/cluster/popanal/Makefile, src/cluster/behav/Makefile, src/cluster/Makefile, src/Makefile, X11/xview/Makefile, X11/xplot/Makefile, X11/xclust2/Makefile, Makefile, mwl-wilson-software.spec:
+	-CHANGED iolib into a shared library (libmwlIO.so). All Makefiles changed to link against shared libmwlIO. Spec file changed to install library in /usr/lib (used to be /usr/lib/mwl)
+
+2004-11-16  tjd  <tjd@roach>
+
+	* TODO: *** empty log message ***
+
+2004-11-15  fabian@localhost.localdomain  <fabian@roach>
+
+	* src/cluster/spikeavg.c, src/cluster/spikeparms2.c:
+	-CHANGED default vertical offset parameter in spikeparams2 and spikeavg to 0 (from 2048)
+
+2004-11-15  tjd  <tjd@roach>
+
+	* TODO: *** empty log message ***
+
+	* X11/xclust2/menu.c: - removed 'if (1)' conditional
+
+	* TODO: *** empty log message ***
+
+2004-11-15  fabian@localhost.localdomain  <fabian@roach>
+
+	* X11/xclust2/menu.c:
+	-FIX: step values for plot browser buttons (e.g. to step through waveforms) now visible. Added third argument 'offset' to ItemText function to make this happen.
+
+2004-11-14  tjd  <tjd@roach>
+
+	* TODO: - old ~/{lib/,include/,src/} directory problems on install
+
+2004-11-13  tjd  <tjd@roach>
+
+	* TODO: *** empty log message ***
+
+	* TODO:
+	-initial todo list, added all the bugs, feature requests, documentation needs I could think of...
+
+	* RELEASE: -wrapped long lines, minor text changes
+
+	* RELEASE: -minor text edits
+
+2004-11-13  fabian@localhost.localdomain  <fabian@roach>
+
+	* RELEASE: updated release notes
+
+	* mwl-wilson-software.spec: bumped up rpm version to 1.1 (release 1)
+
+	* RELEASE: added release notes
+
+	* src/cluster/popanal/pop_defs.h: changed version number to 2.80b.A
+
+	* src/cluster/behav/behav_defs.h: changed version number to 2.2.9d.A
+
+	* src/cluster/iolib.c: changed version number to 2.3.A
+
+	* src/cluster/editheader.c, src/csi.c: changed version number to 1.02.A
+
+	* X11/xview/xview_defs.h: changed version number to 2.2.A
+
+	* X11/xplot/xplot_defs.h: changed version number to 2.30.B
+
+	* X11/xclust2/xclust_defs.h: -changed version number to 3.1.B
+
+	* X11/xview/arg.c, X11/xview/primitives.c, X11/xview/signal.c, X11/xplot/event_loop.c, X11/xplot/init.c, X11/xplot/keys.c, X11/xplot/main.c, X11/xplot/menu.c, X11/xplot/text.c:
+	-resolved compile warnings
+
+	* X11/xclust2/primitives.c:
+	-resolved compile warning (comparison between pointer and integer when checking Font ID)
+
+	* X11/xclust2/menu.c:
+	-resolved compile warnings (passing incomaptible pointer type into XSaveContext) and comparison between pointer and integer (Font ID checking against NULL instead of BadName constant)
+
+	* X11/xclust2/label.c:
+	-resolved compile warning about comparison between pointer and integwer when getting Font ID (XLoadFont). Checked against NULL, now against BadName constant
+
+2004-11-12  fabian@localhost.localdomain  <fabian@roach>
+
+	* X11/xclust2/init.c:
+	-resolved compile warning about passing incompatible pointer type to XSaveContext
+
+	* X11/xclust2/event_loop.c:
+	- resolved compile warning about passing incompatible pointer type to XFindContext
+
+	* src/cluster/popanal/pop_struct.h:
+	-resolved compile warning about incomaptible pointer type assignmeent: result.spikearray is now unsigned long ** (instead of long **)
+
+	* src/cluster/editheader.c:
+	- resolved compile warning about tempnam function, replaced with tmpfile() function
+
+	* src/cluster/iolib.c: *** empty log message ***
+
+	* src/cluster/iolib.c:
+	- resolved warning during compiling about tempnam() function being obsolete, now use tmpfile()
+
+2004-11-12  tjd  <tjd@roach>
+
+	* Makefile:
+	-actually removed all refs to diglib (missed a couple last time)
+
+	* Makefile:
+	-removed rule to build diglib.a, as no longer needed by xclust2 (also, digitizer code no longer exists)
+
+	* src/digitizer/input.c, src/digitizer/main.c, src/digitizer/misc.c, src/digitizer/output.c, src/digitizer/scope.h, src/digitizer/scope_defs.h, src/digitizer/scope_ext.h, src/digitizer/scope_struct.h, src/digitizer/setup.c, src/digitizer/util.c, src/digitizer/Makefile, src/digitizer/command.c:
+	-removed digitizer pad input code, as no longer needed by xclust2
+
+	* X11/xclust2/commands.c, X11/xclust2/digitize.c, X11/xclust2/main.c, X11/xclust2/xclust_struct.h, X11/xclust2/event_loop.c:
+	-removed code for digitizing pad input
+
+	* X11/xclust2/Makefile:
+	-removed digitizer.c, diglib.a (code for digitizing pad input)
+
+	* X11/xclust2/menu.c: -removed code for digitizing pad input
+
+2004-11-12  fabian@localhost.localdomain  <fabian@roach>
+
+	* mwl-wilson-software.spec: - got rid of Provides: tags (to please tjd)
+
+	* mwl-wilson-software.spec: - added comment to filelist creation script
+
+	* mwl-wilson-software.spec:
+	- figured out how Obsolete: tag works (only when Upgrading rpm, not when installing rpm). Changed Conflicts: tags to Obsoletes tags and added Provides: tags, so that mwl-wilson-{libs, utils, extract, xclust} will be deleted if mwl-wilson-software is installed
+
+	* Makefile:
+	- install iolib.a and diglib.a in build/lib/mwl, instead of build/lib
+
+	* mwl-wilson-software.spec:
+	- install iolib.a and diglib.a in /usr/lib/mwl, instead of /usr/lib
+
+	* mwl-wilson-software.spec:
+	- changed Obsoletes tags into Conflicts tags, sice obsoletes apparently didn't work (using rpm version 4.2.3)
+
+	* Makefile:
+	- target 'clean': removed awkward copying of spec file to $(RPMBASE)/SPECS
+
+	* Makefile:
+	- target 'clean' now rempves lib directory and rpm files as well
+	- target 'rpm' now copies spec file into $(RPMBASE)/SPECS, before cd into $(BUILD_DIR)
+
+	* mwl-wilson-software.spec:
+	-in the %prep section a filelist is created of all the files in $RPM_BUILD_DIR/mwl-wilson-software, which is used in the %files section during install
+
+	* Makefile:
+	fixed small bug when creating lib directory (created in wrong place)
+
+	* Makefile:
+	-create lib directory when building/installing libs (when exporting from cvs it does not export empty directories, so i'll remove the lib dir from cvs and have it created at build time)
+
+2004-11-12  tjd  <tjd@roach>
+
+	* Makefile, mwl-wilson-software.spec: -spec file for generating RPM
+
+2004-11-11  tjd  <tjd@roach>
+
+	* src/cluster/popanal/popanal, scripts/cl2t:
+	- removed accidentally included binary
+
+	* src/Makefile: -changed $(HOME) to relative paths
+	-created make all/clean rules
+
+	* src/gammq.c: -no longer needed (was part of numerical.a)
+
+	* src/digitizer/Makefile: -diglib.a no longer automatically installs
+
+	* src/cluster/Makefile:
+	-made $(ALL) correspond to progs we are packaging
+	-changed $(HOME)/{lib,include} to relative paths
+	-removed numerical.a dependency
+	-removed special $(EXECFLAG) compile instructions for spikeanal, spikeavg
+	-iolib.a no longer automatically installs
+
+	* src/cluster/popanal/Makefile: -removed 'install'
+	-replaced lib/include with relative paths
+	-cleanup
+
+	* src/cluster/behav/Makefile:
+	-changed lib/include dirs to relative paths (not $(HOME)), and removed dependency on numerical.a (after commenting out unused code in behav_stat.c)
+
+	* src/cluster/behav/behav_stat.c:
+	-commented out SpatialBiasStatistics, which was never called, but created a dependency (the only one in all of mwsoft!) on numerical.a
+
+	* X11/xview/Makefile: -oops-left in $
+
+	* X11/xview/Makefile:
+	-changed $(HOME)/{lib,include} to ../../{lib,include}
+
+	* X11/xplot/keys.c:
+	-replaced ^M with \r so that we can compile on modern gcc
+
+	* X11/xplot/Makefile:
+	-changed $(HOME)/{lib,include} to ../../{lib/include}
+
+	* X11/xclust2/Makefile: -removed src/rawextract.o dependency
+
+	* X11/xclust2/commands.c:
+	-commented out simacquire command, so that we can ditch rawextract
+
+	* src/rawextract.c:
+	-rawextract.o was required by xclust2 Makefile, but not actually used. Looks like old extract util??
+
+	* src/digitizer/scope.h, src/digitizer/scope_defs.h, src/digitizer/scope_ext.h, src/digitizer/scope_struct.h:
+	needed scope source to compile diglib
+
+	* src/cluster/Makefile:
+	changed to use ../../lib instead of $HOME/lib (now iolib.a installs there)
+
+	* src/digitizer/Makefile: changed to use ../../lib instead of $HOME
+
+2004-11-11  fabian@localhost.localdomain  <fabian@roach>
+
+	* X11/xclust2/clust_main.c:
+	-some fixes in ComputeClusterIntervals(). comment out unused variable time. changed float variables to double. make int and delh projection doubles, and blen projection integer. use AssignRawDataFromDouble instead of direct assignment. replace atof calls by strtod.
+
+2004-11-11  tjd  <tjd@roach>
+
+	* X11/xclust2/Makefile:
+	-changed to use ../../{lib,include} instead of $HOME
+
+2004-11-11  fabian@localhost.localdomain  <fabian@roach>
+
+	* X11/xclust2/graph.c:
+	-fixed bug in plotcompare function that is used by Sort()
+
+	* src/csi.c:
+	-changed max_interval and min_interval variables to doubles (from floats) for higher precision complex spike index calculation. accordingly, changed atof to strtod.
+
+	* src/csi.c: -added file csi.c
+
+2004-11-11  tjd  <tjd@roach>
+
+	* X11/xclust2/clust_menu.c:
+	- make the spikeavg plot white, instead of black (on black background). Ideally we would pass the cluster color to xplot, but xplot uses a different color map, and the -cmap option to xplot doesn't seem to work as expected.
+
+	* src/digitizer/Makefile, src/digitizer/command.c, src/digitizer/input.c, src/digitizer/main.c, src/digitizer/misc.c, src/digitizer/output.c, src/digitizer/setup.c, src/digitizer/util.c:
+	-added source to recompile diglib (Matt's library for using a digitizing tablet with xclust)
+
+	* X11/xclust2/graph.c:  FIX: CSI causes segfault
+
+	* X11/xclust2/menu.c:
+	-FIX: recent gcc's don't like 'ctrl-M' so we substitute '\r'
+
+	* X11/xclust2/clust_io.c:
+	- (fabian)  FIX: the id field in .pxyabw files could only be INT or FLOAT, changed to accept all data types
+
+	* X11/xclust2/keys.c:
+	-changes CTRL-M to \r so we can compile on modern gcc
+	-fixes reading in of saved view into F12
+
+	* X11/xclust2/clust_menu.c:
+	- fix parsing of argument to xcorr, where couldn't xcorr with cluster 9.
+
+2004-11-11  fabian@localhost.localdomain  <fabian@roach>
+
+	* X11/xclust2/Makefile, X11/xclust2/arg.c, X11/xclust2/axis.c, X11/xclust2/backward.bitmap, X11/xclust2/button.bitmap, X11/xclust2/button2.bitmap, X11/xclust2/buttons.c, X11/xclust2/circle.bitmap, X11/xclust2/clust_disp.c, X11/xclust2/clust_io.c, X11/xclust2/clust_main.c, X11/xclust2/clust_menu.c, X11/xclust2/color.c, X11/xclust2/commands.c, X11/xclust2/defaults.c, X11/xclust2/digitize.c, X11/xclust2/dnarrow.bitmap, X11/xclust2/event_loop.c, X11/xclust2/eye.bitmap, X11/xclust2/eye2.bitmap, X11/xclust2/fbackward.bitmap, X11/xclust2/fcircle.bitmap, X11/xclust2/fforward.bitmap, X11/xclust2/forward.bitmap, X11/xclust2/graph.c, X11/xclust2/ibutton.bitmap, X11/xclust2/ibutton2.bitmap, X11/xclust2/ifbackward.bitmap, X11/xclust2/ifforward.bitmap, X11/xclust2/init.c, X11/xclust2/job.c, X11/xclust2/keys.c, X11/xclust2/label.c, X11/xclust2/larrow.bitmap, X11/xclust2/load.c, X11/xclust2/mag.bitmap, X11/xclust2/main.c, X11/xclust2/menu.c, X11/xclust2/primitives.c, X11/xclust2/psdriver.c, X11/xclust2/rarrow.bitmap, X11/xclust2/save.bitmap, X11/xclust2/scale.c, X11/xclust2/text.c, X11/xclust2/tick.c, X11/xclust2/toggle.bitmap, X11/xclust2/toggle2.bitmap, X11/xclust2/uparrow.bitmap, X11/xclust2/xclust.doc, X11/xclust2/xclust.h, X11/xclust2/xclust.ps, X11/xclust2/xclust_defs.h, X11/xclust2/xclust_ext.h, X11/xclust2/xclust_struct.h, X11/xclust2/xps.c, X11/xclust2/zap.bitmap, X11/xclust2/zoomin.bitmap, X11/xclust2/zoomout.bitmap, X11/xplot/Makefile, X11/xplot/arg.c, X11/xplot/axis.c, X11/xplot/button.bitmap, X11/xplot/button2.bitmap, X11/xplot/buttons.c, X11/xplot/circle.bitmap, X11/xplot/color.c, X11/xplot/commands.c, X11/xplot/event_loop.c, X11/xplot/fcircle.bitmap, X11/xplot/graph.c, X11/xplot/header.h, X11/xplot/init.c, X11/xplot/keys.c, X11/xplot/label.c, X11/xplot/larrow.bitmap, X11/xplot/load.c, X11/xplot/main.c, X11/xplot/menu.c, X11/xplot/ocolor.c, X11/xplot/oldcolor.c, X11/xplot/primitives.c, X11/xplot/psdriver.c, X11/xplot/rarrow.bitmap, X11/xplot/save.bitmap, X11/xplot/save.c, X11/xplot/scale.c, X11/xplot/text.c, X11/xplot/tick.c, X11/xplot/toggle.bitmap, X11/xplot/toggle2.bitmap, X11/xplot/xplot.doc, X11/xplot/xplot.h, X11/xplot/xplot_defs.h, X11/xplot/xplot_ext.h, X11/xplot/xplot_struct.h, X11/xplot/xps.c, X11/xplot/zap.bitmap, X11/xview/Makefile, X11/xview/arg.c, X11/xview/box.c, X11/xview/color.c, X11/xview/colorold.c, X11/xview/command.c, X11/xview/contour.c, X11/xview/display.c, X11/xview/event_handler.c, X11/xview/event_loop.c, X11/xview/init.c, X11/xview/keys.c, X11/xview/legend.c, X11/xview/load.c, X11/xview/main.c, X11/xview/oldcolor.c, X11/xview/opsdriver.c, X11/xview/primitives.c, X11/xview/psdriver.c, X11/xview/scale.c, X11/xview/signal.c, X11/xview/surface.c, X11/xview/transform.c, X11/xview/xps.c, X11/xview/xview.data, X11/xview/xview.doc, X11/xview/xview.h, X11/xview/xview_defs.h, X11/xview/xview_ext.h, X11/xview/xview_struct.h, include/header.h, include/iolib.h, src/Makefile, src/atob.c, src/carve.c, src/cluster/Makefile, src/cluster/adextract.c, src/cluster/behav/Makefile, src/cluster/behav/behav.h, src/cluster/behav/behav_alloc.c, src/cluster/behav/behav_ang.c, src/cluster/behav/behav_bounds.c, src/cluster/behav/behav_corr.c, src/cluster/behav/behav_defs.h, src/cluster/behav/behav_ext.h, src/cluster/behav/behav_flip.c, src/cluster/behav/behav_func.c, src/cluster/behav/behav_main.c, src/cluster/behav/behav_occ.c, src/cluster/behav/behav_read.c, src/cluster/behav/behav_stat.c, src/cluster/behav/behav_struct.h, src/cluster/behav/behav_write.c, src/cluster/crextract.c, src/cluster/doc/behav.doc, src/cluster/doc/cidextract.doc, src/cluster/doc/cmpfiles.doc, src/cluster/doc/editheader.doc, src/cluster/doc/efextract.doc, src/cluster/doc/examples.doc, src/cluster/doc/header.doc, src/cluster/doc/iolib.doc, src/cluster/doc/isi.doc, src/cluster/doc/list, src/cluster/doc/spikeavg.doc, src/cluster/doc/uffextract.doc, src/cluster/editheader.c, src/cluster/esextract.c, src/cluster/findspike.c, src/cluster/header.c, src/cluster/iolib.c, src/cluster/iolib.h, src/cluster/parmextract.c, src/cluster/popanal/Makefile, src/cluster/popanal/pop.h, src/cluster/popanal/pop_args.c, src/cluster/popanal/pop_bayes.c, src/cluster/popanal/pop_corr.c, src/cluster/popanal/pop_defs.h, src/cluster/popanal/pop_ext.h, src/cluster/popanal/pop_func.c, src/cluster/popanal/pop_io.c, src/cluster/popanal/pop_main.c, src/cluster/popanal/pop_range.c, src/cluster/popanal/pop_reconstruct.c, src/cluster/popanal/pop_replay.c, src/cluster/popanal/pop_spiketrain.c, src/cluster/popanal/pop_struct.h, src/cluster/popanal/pop_tree.c, src/cluster/popanal/popanal, src/cluster/popanal/popanal.err, src/cluster/posextract.c, src/cluster/showcmd.c, src/cluster/spikeanal.c, src/cluster/spikeavg.c, src/cluster/spikeparms2.c, src/cluster/textract.c, src/gammq.c, src/rawextract.c, src/y.c:
+	New file.
+
+	* X11/xclust2/Makefile, X11/xclust2/arg.c, X11/xclust2/axis.c, X11/xclust2/backward.bitmap, X11/xclust2/button.bitmap, X11/xclust2/button2.bitmap, X11/xclust2/buttons.c, X11/xclust2/circle.bitmap, X11/xclust2/clust_disp.c, X11/xclust2/clust_io.c, X11/xclust2/clust_main.c, X11/xclust2/clust_menu.c, X11/xclust2/color.c, X11/xclust2/commands.c, X11/xclust2/defaults.c, X11/xclust2/digitize.c, X11/xclust2/dnarrow.bitmap, X11/xclust2/event_loop.c, X11/xclust2/eye.bitmap, X11/xclust2/eye2.bitmap, X11/xclust2/fbackward.bitmap, X11/xclust2/fcircle.bitmap, X11/xclust2/fforward.bitmap, X11/xclust2/forward.bitmap, X11/xclust2/graph.c, X11/xclust2/ibutton.bitmap, X11/xclust2/ibutton2.bitmap, X11/xclust2/ifbackward.bitmap, X11/xclust2/ifforward.bitmap, X11/xclust2/init.c, X11/xclust2/job.c, X11/xclust2/keys.c, X11/xclust2/label.c, X11/xclust2/larrow.bitmap, X11/xclust2/load.c, X11/xclust2/mag.bitmap, X11/xclust2/main.c, X11/xclust2/menu.c, X11/xclust2/primitives.c, X11/xclust2/psdriver.c, X11/xclust2/rarrow.bitmap, X11/xclust2/save.bitmap, X11/xclust2/scale.c, X11/xclust2/text.c, X11/xclust2/tick.c, X11/xclust2/toggle.bitmap, X11/xclust2/toggle2.bitmap, X11/xclust2/uparrow.bitmap, X11/xclust2/xclust.doc, X11/xclust2/xclust.h, X11/xclust2/xclust.ps, X11/xclust2/xclust_defs.h, X11/xclust2/xclust_ext.h, X11/xclust2/xclust_struct.h, X11/xclust2/xps.c, X11/xclust2/zap.bitmap, X11/xclust2/zoomin.bitmap, X11/xclust2/zoomout.bitmap, X11/xplot/Makefile, X11/xplot/arg.c, X11/xplot/axis.c, X11/xplot/button.bitmap, X11/xplot/button2.bitmap, X11/xplot/buttons.c, X11/xplot/circle.bitmap, X11/xplot/color.c, X11/xplot/commands.c, X11/xplot/event_loop.c, X11/xplot/fcircle.bitmap, X11/xplot/graph.c, X11/xplot/header.h, X11/xplot/init.c, X11/xplot/keys.c, X11/xplot/label.c, X11/xplot/larrow.bitmap, X11/xplot/load.c, X11/xplot/main.c, X11/xplot/menu.c, X11/xplot/ocolor.c, X11/xplot/oldcolor.c, X11/xplot/primitives.c, X11/xplot/psdriver.c, X11/xplot/rarrow.bitmap, X11/xplot/save.bitmap, X11/xplot/save.c, X11/xplot/scale.c, X11/xplot/text.c, X11/xplot/tick.c, X11/xplot/toggle.bitmap, X11/xplot/toggle2.bitmap, X11/xplot/xplot.doc, X11/xplot/xplot.h, X11/xplot/xplot_defs.h, X11/xplot/xplot_ext.h, X11/xplot/xplot_struct.h, X11/xplot/xps.c, X11/xplot/zap.bitmap, X11/xview/Makefile, X11/xview/arg.c, X11/xview/box.c, X11/xview/color.c, X11/xview/colorold.c, X11/xview/command.c, X11/xview/contour.c, X11/xview/display.c, X11/xview/event_handler.c, X11/xview/event_loop.c, X11/xview/init.c, X11/xview/keys.c, X11/xview/legend.c, X11/xview/load.c, X11/xview/main.c, X11/xview/oldcolor.c, X11/xview/opsdriver.c, X11/xview/primitives.c, X11/xview/psdriver.c, X11/xview/scale.c, X11/xview/signal.c, X11/xview/surface.c, X11/xview/transform.c, X11/xview/xps.c, X11/xview/xview.data, X11/xview/xview.doc, X11/xview/xview.h, X11/xview/xview_defs.h, X11/xview/xview_ext.h, X11/xview/xview_struct.h, include/header.h, include/iolib.h, src/Makefile, src/atob.c, src/carve.c, src/cluster/Makefile, src/cluster/adextract.c, src/cluster/behav/Makefile, src/cluster/behav/behav.h, src/cluster/behav/behav_alloc.c, src/cluster/behav/behav_ang.c, src/cluster/behav/behav_bounds.c, src/cluster/behav/behav_corr.c, src/cluster/behav/behav_defs.h, src/cluster/behav/behav_ext.h, src/cluster/behav/behav_flip.c, src/cluster/behav/behav_func.c, src/cluster/behav/behav_main.c, src/cluster/behav/behav_occ.c, src/cluster/behav/behav_read.c, src/cluster/behav/behav_stat.c, src/cluster/behav/behav_struct.h, src/cluster/behav/behav_write.c, src/cluster/crextract.c, src/cluster/doc/behav.doc, src/cluster/doc/cidextract.doc, src/cluster/doc/cmpfiles.doc, src/cluster/doc/editheader.doc, src/cluster/doc/efextract.doc, src/cluster/doc/examples.doc, src/cluster/doc/header.doc, src/cluster/doc/iolib.doc, src/cluster/doc/isi.doc, src/cluster/doc/list, src/cluster/doc/spikeavg.doc, src/cluster/doc/uffextract.doc, src/cluster/editheader.c, src/cluster/esextract.c, src/cluster/findspike.c, src/cluster/header.c, src/cluster/iolib.c, src/cluster/iolib.h, src/cluster/parmextract.c, src/cluster/popanal/Makefile, src/cluster/popanal/pop.h, src/cluster/popanal/pop_args.c, src/cluster/popanal/pop_bayes.c, src/cluster/popanal/pop_corr.c, src/cluster/popanal/pop_defs.h, src/cluster/popanal/pop_ext.h, src/cluster/popanal/pop_func.c, src/cluster/popanal/pop_io.c, src/cluster/popanal/pop_main.c, src/cluster/popanal/pop_range.c, src/cluster/popanal/pop_reconstruct.c, src/cluster/popanal/pop_replay.c, src/cluster/popanal/pop_spiketrain.c, src/cluster/popanal/pop_struct.h, src/cluster/popanal/pop_tree.c, src/cluster/popanal/popanal, src/cluster/popanal/popanal.err, src/cluster/posextract.c, src/cluster/showcmd.c, src/cluster/spikeanal.c, src/cluster/spikeavg.c, src/cluster/spikeparms2.c, src/cluster/textract.c, src/gammq.c, src/rawextract.c, src/y.c:
+	initial import of clean sources for MWL utilities, xclust2, xplot and xview. Direcotory structure as in Matt's home directory
+

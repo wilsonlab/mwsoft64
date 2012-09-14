@@ -1,0 +1,271 @@
+RELEASE NOTES FOR MWL-WILSON-SOFTWARE RPM
+
+Tom Davidson and Fabian Kloosterman
+Original code written by Matt Wilson
+
+RPM version minor number changes when features are added. Release number
+changes indicate bug-fix releases.
+
+====================
+Version: 1.2
+Release: 1
+Date:    18 February 2005
+
+ -See Wiki documentation for explanation of new xclust UI stuff. If the
+  answer isn't there, then add it to the Wiki!
+
+ -See TODO for comprehensive list of features and bug-fixes; see
+  ChangeLog for file-by-file changes.
+
+Summary: 
+
+-Release of xclust3 (codename fkloost), which will become the active
+development branch for xclust. Xclust2 is included, but with no
+changes from rpm version 1.1-2 (xclust version 3.2).
+
+-Added support for clustering without access to spike (.tt) files and for
+clustering on parm (.pxyabw) files which only contain a subset of the
+spike records from a spike file. (changes to xclust and findspike)
+
+-Added support for an 'epoch file', so that epoch start/end info
+doesn't have to be stored in the .xclustrc file.
+
+-xclust UI changes and additional visualizations, including
+interactive 3-D rotation of cluster points.
+
+Changes:
+
+findspike (1.07):
+-now accepts parm (.pxyabw) files as well as spike (.tt) files.
+-now returns closest spike to requested time, rather than the next
+ earliest spike
+-only returns special '-1' error result when asked for spike or index
+'-1', not for all out of range requests.
+-returns different error codes for different failure modes
+
+xclust3 (xclust 3.3):
+-supports clustering without access to spike (.tt) files.
+-supports clustering on parm files that contain only a subset of spike
+records from a .tt file ('degenerate' parm files), as long as the parm
+file is BINARY, and contains a 'time' or 'timestamp' field.
+-config file is called .xclust3rc, not .xclustrc .
+-collapsible menus for use on small screens
+-interactive 3-D rotation of cluster points (ctrl-left click)
+-remapping of functions to extra mouse buttons (see Wiki!)
+-'blockmovie' for panning through points; replaying behavior
+-new projection selection/randomization grid (select Z proj)
+-cluster scores (1-5) written out to cbfile and cl-files
+-cluster bound editing
+-file status in menu with time/id of loaded points
+-many bugs/segfaults fixed
+
+
+-minor bugfixes
+  -many...
+
+Across all apps:
+
+  -'-version' message now reports compile time and RPM by which they
+   were provided.
+
+adextract (1.18)
+atob (1.03)
+behav (2.32)
+crextract (1.17)
+csi (1.04)
+editheader (1.04)
+esextract (1.08)
+findspike (1.07)
+header (1.05)
+iolib (2.5)
+parmextract (1.21)
+popanal (2.82)
+posextract (1.23)
+showcmd (1.02)
+spikeanal (1.29)
+spikeavg (1.29)
+spikeparms2 (1.8)
+textract (1.02)
+xplot (2.32)
+xview (2.4)
+y (1.23)
+
+
+====================
+Version: 1.1
+Release: 2
+Date:    29 November 2004
+
+Summary:
+
+The last release (1.1-1) broke behav, including calls from
+xclust2. This release fixes it.
+
+Changes:
+
+behav (2.31)
+
+A bug in behav was introduced by Tom in the last version. The bug
+caused behav to fail when it wasn't called with the -ro and -fo (rate
+and position output file) options. In particular this broke the behav
+calls from xclust2.
+
+
+====================
+Version: 1.1
+Release: 1
+Date:    22 November 2004
+
+Summary:
+
+The original sources have been cleaned and put into a CVS
+repository. From now on, the software will be distributed as a single
+RPM package, instead of multiple packages. There is now a top-level
+Makefile that can compile all code and generate the RPM for
+distribution (just checkout and call 'make rpm'). Several bugs have
+been fixed, many compiler warnings have been solved, and obsolete code
+has been removed.
+
+For a detailed list of changes see ChangeLog.
+
+Major changes:
+
+Across all apps:
+    Headers now include a '% Program Version:' field, which indicates
+    the version of the binary used to generate the file.
+
+    We no longer install any shared libs, since all code was
+    statically linked, anyways.
+
+adextract (1.17)
+
+    FIX: the command line argument -eslen80 now works correctly. By default
+    adextract will extract 80 character long event strings, unless -eslen40 is
+    passed as an argument
+
+csi (1.03)
+
+    FIX: changed max_interval and min_interval variables to doubles
+    (from floats) for higher precision complex spike index
+    calculation.
+
+esextract (1.07)
+
+    ADD: command line arguments -eslen40 and -eslen80 for selection os event string
+    lengths (default = 80)
+
+posextract (1.22)
+
+    FIX: the -switchfb option didn't do anything. Now using this
+    option will cause the program to generate an error and exit
+
+spikeanal (1.28)
+
+    FIX: Empty t-files are now correctly handled in -isi mode
+
+spikeavg (1.28)
+
+    CHANGE: default vertical offset (used if the -spkvoffset argument is not provided)
+    is now 0 (was 2048)
+
+spikeparms2 (1.7)
+
+    default vertical offset (used if the -voffset argument is not provided)
+    is now 0 (was 2048)
+
+textract (1.01)
+
+    FIX: the combination of -singlespike mode and an ASCII input file will no longer segfault
+
+xclust2 (3.2)
+
+    FIX: csi calculation now using higher precision variables
+    (doubles).
+
+    FIX: (partially) fixed invisible spike average plot. now always
+    plotted in white (clust_menu.c)
+
+    FIX: cross correlation with cluster 9 now possible (clust_menu.c)
+
+    REMOVED: simacquire command (commands.c)
+
+    REMOVED: support for digitizing pad input (commands.c, digitize.c,
+    event_loop.c, main.c, menu.c, xclust_struct.h)
+
+    FIX: fixed plotcompare function that is used by Sort(), which is
+    used as part of calculating CSI (graph.c)
+
+    FIX: The step values next to the spike viewer buttons are now visible
+
+    CHANGE: the meaning of the tmax and bin parameters have changed in case
+    of the LogISI function. tmax now specifies the maximal isi in msec (was 10^tmax).
+    The actual max isi is the log(tmax), rounded down to an integer. The bin parameter
+    will now specify the size (in mses) of the middle most bin.
+
+
+Minor Changes: (see Changelog)
+
+atob (1.02)
+behav (2.30)
+carve (1.00)
+crextract (1.16)
+editheader (1.03)
+findspike (1.06)
+header (1.04)
+iolib (2.4)
+parmextract (1.20)
+popanal (2.81)
+showcmd (1.01)
+xplot (2.31)
+xview (2.3)
+y (1.22)
+
+===================
+
+Version: 1.0
+Release: 1
+Date:    12 November 2004
+
+Summary:
+
+This is the first release for the RHEL platform of the utilities
+written by Matt Wilson for extraction, clustering and analysis of
+spike / eeg data. Included in this release are adextract, posextract,
+spikeparms2, xclust2, xplot, etc.
+
+For a detailed list of changes, see ChangeLog
+
+Major changes:
+
+xclust2 (3.1)
+
+    FIX: the id field in .pxyabw files could only be INT or FLOAT,
+    changed to accept all data types (clust_io.c)
+
+    FIX: reading in saved view with F12 works now (keys.c)
+
+adextract (1.16b)
+atob (1.01)
+behav (2.29d)
+carve (1.00)
+crextract (1.15)
+csi (1.02)
+editheader (1.02)
+esextract (1.06)
+findspike (1.05)
+header (1.03)
+iolib (2.3)
+parmextract (1.19)
+popanal (2.80b)
+posextract (1.21)
+showcmd (1.00)
+spikeanal (1.27c)
+spikeavg (1.27)
+spikeparms2 (1.6)
+textract (1.00)
+xplot (2.30)
+xview (2.2)
+y (1.21)
+  
+
+===================
