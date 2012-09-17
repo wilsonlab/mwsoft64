@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SEDARG='/% Program:/,/Ascii/d';
+SEDARG='/% Program:/,/Binary/d';
 
 for F in *.pxyabw
 do
