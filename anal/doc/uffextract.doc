@@ -1,0 +1,208 @@
+
+PROGRAM:
+    uffextract
+
+DESCRIPTION:
+    Extracts data from sun-converted Brainwave(tm) uff files into binary
+    formats used by the suite of UNIX-based unit analysis programs. 
+
+AUTHOR:
+    Written by Matthew Wilson
+    ARL Division of Neural Systems, Memory, and Aging
+    University of Arizona
+    Tucson, AZ 85724
+    wilson@nsma.arizona.edu
+
+DATES:
+    original 5/91
+    program update 9/91
+    documentation update 11/91
+
+
+USAGE:
+    uffextract uff_file [-ufftype #] [-subfield n # # ..]
+	[-s] [-t] [-tq] [-p] [-c] [-se] [-ef] [-header]
+	[-startflag str] [-endflag str] [-startsubflag str] [-endsubflag str] 
+	[-probe #] [-o file] [-v]
+
+OPTIONS:
+    Note that spaces between options and arguments are important.
+    Order of the arguments is not important. All arguments and options
+    must be placed on a single line (no carriage returns).
+
+INPUT FILE OPTIONS:
+    uff_file
+	this is the name of a sun-converted Brainwave(tm) uff file.
+	The conversion from PC format to SUN format must be done
+	with the 'convert' program.
+
+	DEFAULT: none. Required argument.
+
+
+OUTPUT FILE OPTIONS:
+    -o file
+	Specifies the file to which the output will be saved. 
+
+	DEFAULT: output to stdout (the terminal).
+
+EXTRACTION OPTIONS:
+    These options specify the type of extraction to be performed.
+    Each are mutually exclusive.
+
+    -s
+	specifies extraction of 'stereotrode waveform' or 'S' records.  
+	The resulting binary file is contains records consisting of
+	timestamp and waveform fields for all steretrode spikes in the uff file.
+
+	DEFAULT: true
+
+    -t
+	specifies extraction of 'tetrode waveform' or 'U' records.  
+	The resulting binary file is contains records consisting of
+	timestamp and waveform fields for all tetrode spikes in the uff file.
+
+	DEFAULT: false
+
+    -c
+	specifies extraction of 'cluster id' or 'S' records.  
+	The resulting binary file is contains records consisting of
+	timestamp and clusterid fields for all stereotrode spike records
+	in the uff file.
+
+	DEFAULT: false
+
+    -tq
+	specifies extraction of 'tetrode waveform' or 'Q' records. For
+	backward compatibility only.
+
+	DEFAULT: false
+
+    -p
+	specifies extraction of 'dual diode position' or 'P' records.  
+	The resulting binary file is contains records consisting of
+	timestamp and x1 y1 x2 y2 fields for all position samples
+	in the uff file.
+
+	DEFAULT: false
+
+    -se
+	specifies extraction of 'single electrode probe/cluster id' or 
+	'E' records.  The resulting binary file is contains records 
+	consisting of probe#, timestamp and clusterid fields for all 
+	single electrode spikes in the uff file.
+
+	DEFAULT: false
+
+    -ef
+	specifies extraction of 'event flags' or 'B' records.  
+	The resulting binary file is contains records consisting of
+	timestamp and flagvalue fields for all event flags 
+	in the uff file.
+
+	DEFAULT: false
+
+    -ufftype #
+	specifies extraction of record types which match the specified
+	argument. This option must be used in conjunction with the
+	-subfield option.
+
+	DEFAULT: none
+
+    -subfield n # # ...
+	This option is used in conjection with the -ufftype option and
+	specifies the field numbers which will be extracted from the
+	record types defined by the -ufftype option. The 'n' argument
+	indicates the number of fields to be extracted for each record
+	and the subsequent numbers indicate the field numbers within
+	that record to be extracted.
+
+	DEFAULT: none
+	
+
+EXTRACTION MODIFIER OPTIONS:
+    -probe #
+	restricts extraction to those records which contain the appropriate
+	probe number. 
+
+	DEFAULT: all probes
+
+    -startflag str
+	restricts extraction to those records which follow the event flag
+	given by the 'str' argument.
+
+	DEFAULT: none
+
+    -endflag str
+	restricts extraction to those records which precede the event flag
+	given by the 'str' argument. All processing stops after reaching
+	this flag.
+
+	DEFAULT: none
+
+    -startsubflag str
+	restricts extraction to those records which follow the event flag
+	given by the 'str' argument. This allows extraction of nested
+	flags.
+
+	DEFAULT: none
+
+    -endsubflag str
+	restricts extraction to those records which precede the event flag
+	given by the 'str' argument. In contrast to the -endflag option,
+	processing continues after reaching this subflag, allowing 
+	extraction of multiple nested subflags.
+
+	DEFAULT: none
+
+MISCELLANEOUS OPTIONS:
+    -usage
+	displays the list of available options.
+
+    -v
+	this option turns on verbose mode which will display more extensive
+	status information during data processing.
+
+	DEFAULT: not verbose
+
+    -header
+	this option causes the header of the uff file to be displayed
+	without any extraction taking place. If this option is specified
+	all other options will be ignored.
+
+	DEFAULT: false
+
+NOTES:
+    To create a sun-compatible uff file starting with a PC formatted
+    uff file, use the following command
+
+	convert file
+
+    where file is the name of the PC formatted uff file. This will
+    automatically create a file by the same name with the '.sun' extension
+    appended to it. The original is left intact following conversion
+    and can be removed if desired.
+
+    When event flags are used to restrict extraction to certain portions
+    of the data file, it is assumed that the file is is proper timestamp
+    order. Therefore extraction begins and stops based on the file position
+    marked by the event flag and not its timestamp.
+
+EXAMPLES:
+
+    Given the uff file 'data.cut.sun' which contains manually clustered
+    stereotrode spike data, cluster id information which is used by
+    the behavioral and interval analysis programs 'behav' and 'isi' can
+    be extracted with the following command:
+
+	uffextract data.cut.sun -c -o data.cid
+
+    If multiple probes are present in the same file, the extraction can
+    be restricted to data from probe 1 with the command:
+
+	uffextract data.cut.sun -c -probe 1 -o data1.cid
+
+    Event flags can be extracted from the same file using the command:
+
+	uffextract data.cut.sun -ef -o data.ef
+
+
