@@ -297,11 +297,13 @@
 /* Define string for fprintf depending on the architecture */
 
 #if __x86_64__
-  const char * fmt = "%8s,%d,%ld,%d\t"; 
+  const char * fmt1 = "%8s:%s,%d,%ld,%d\t"
+  const char * fmt2 = "%8s,%d,%ld,%d\t"; 
 #elif __i386__
-  const char * fmt = fmt;
+  const char * fmt1 = "%8s:%s,%d,%d,%d\t"
+  const char * fmt2 = "%8s,%d,%d,%d\t";
 #else
-  const char * fmt = fmt;
+  #error Only i386 AND x86_64 are supported
 #endif
 
 /*
@@ -1167,97 +1169,74 @@ int16_t	count;
 Template	*template;
 
     for(i=0;i<nparms;i++){
-	if((parm_list[i] >= TEMPLATE0) && 
-	(parm_list[i] < MAXTEMPLATES + TEMPLATE0)){
-	    count = 0;
-	    for(template=templatelist;template;template=template->next){
-		if(count == (parm_list[i] - TEMPLATE0)) break;
-		count++;
-	    }
-	    if(result->outputformat == BINARY){
-		switch(st[parm_list[i]].type){
-		case ULONG:
-		    fprintf(fp,"%8s:%s,%d,%d,%d\t",
-			st[parm_list[i]].name,
-			template->filename,
-			ULONG,sizeof(unsigned int32_t),1);
-		    break;
-		case DOUBLE:
-		    fprintf(fp,"%8s:%s,%d,%d,%d\t",
-			st[parm_list[i]].name,
-			template->filename,
-			DOUBLE,sizeof(double),1);
-		    break;
-		case INT:
-		    fprintf(fp,"%8s:%s,%d,%d,%d\t",
-			st[parm_list[i]].name,
-			template->filename,
-			INT,sizeof(int16_t),1);
-		    break;
-		case SHORT:
-		    fprintf(fp,"%8s:%s,%d,%d,%d\t",
-			st[parm_list[i]].name,
-			template->filename,
-			SHORT,sizeof(int16_t),1);
-		    break;
-		case CHAR:
-		    fprintf(fp,"%8s:%s,%d,%d,%d\t",
-			st[parm_list[i]].name,
-			template->filename,
-			CHAR,sizeof(char),1);
-		    break;
-		default:
-		    fprintf(fp,"%8s:%s,%d,%d,%d\t",
-			st[parm_list[i]].name,
-			template->filename,
-			FLOAT,sizeof(float),1);
-		    break;
-		}
-	    } else {
-		fprintf(fp,"%8s:%s\t",
-		    st[parm_list[i]].name,
-		    template->filename);
-	    }
-	} else {
-	    if(result->outputformat == BINARY){
-		switch(st[parm_list[i]].type){
-		case ULONG:
-		    fprintf(fp,fmt,
-			st[parm_list[i]].name,
-			ULONG,sizeof(unsigned int32_t),1);
-		    break;
-		case DOUBLE:
-		    fprintf(fp,fmt,
-			st[parm_list[i]].name,
-			DOUBLE,sizeof(double),1);
-		    break;
-		case INT:
-		    fprintf(fp,fmt,
-			st[parm_list[i]].name,
-			INT,sizeof(int16_t),1);
-		    break;
-		case SHORT:
-		    fprintf(fp,fmt,
-			st[parm_list[i]].name,
-			SHORT,sizeof(int16_t),1);
-		    break;
-		case CHAR:
-		    fprintf(fp,fmt,
-			st[parm_list[i]].name,
-			CHAR,sizeof(char),1);
-		    break;
-		default:
-		    fprintf(fp,fmt,
-			st[parm_list[i]].name,
-			FLOAT,sizeof(float),1);
-		    break;
-		}
-	    }else {
-		fprintf(fp,"%8s\t",
-		st[parm_list[i]].name);
-	    }
-	}
+    	if((parm_list[i] >= TEMPLATE0) && (parm_list[i] < MAXTEMPLATES + TEMPLATE0))
+      {
+    	    count = 0;
+    	    
+          for(template=templatelist;template;template=template->next)
+          {
+    		    if(count == (parm_list[i] - TEMPLATE0)) break;
+    		    count++;
+    	    }
+      	if(result->outputformat == BINARY){
+      		switch(st[parm_list[i]].type){
+      		case ULONG:
+      		    fprintf(fp,fmt1, st[parm_list[i]].name, template->filename, ULONG,sizeof(unsigned int32_t), 1);
+      		    break;
+      		case DOUBLE:
+      		    fprintf(fp, fmt1, st[parm_list[i]].name, template->filename, DOUBLE,sizeof(double), 1);
+      		    break;
+      		case INT:
+      		    fprintf(fp,"%8s:%s,%d,%d,%d\t", st[parm_list[i]].name, template->filename, INT,sizeof(int16_t), 1);
+      		    break;
+      		case SHORT:
+      		    fprintf(fp,"%8s:%s,%d,%d,%d\t", st[parm_list[i]].name, template->filename, SHORT,sizeof(int16_t), 1);
+      		    break;
+      		case CHAR:
+      		    fprintf(fp,"%8s:%s,%d,%d,%d\t", st[parm_list[i]].name, template->filename, CHAR,sizeof(char), 1);
+      		    break;
+      		default:
+      		    fprintf(fp, fmt1, st[parm_list[i]].name, template->filename, FLOAT,sizeof(float), 1);
+      		    break;
+      		}
+      	} 
+        else 
+        {
+    		  fprintf(fp,"%8s:%s\t",
+    		      st[parm_list[i]].name,
+    		      template->filename);
+    	  }
+      } 
+    else {
+      if(result->outputformat == BINARY){
+    		switch(st[parm_list[i]].type){
+      		case ULONG:
+      		    fprintf(fp, fmt2, st[parm_list[i]].name, ULONG,sizeof(unsigned int32_t),1);
+              break;
+      		case DOUBLE:
+      		    fprintf(fp, fmt2,	st[parm_list[i]].name, DOUBLE,sizeof(double),1);
+      		    break;
+      		case INT:
+      		    fprintf(fp, "%8s,%d,%d,%d\t", st[parm_list[i]].name, INT,sizeof(int16_t),1);
+      		    break;
+      		case SHORT:
+      		    fprintf(fp, "%8s,%d,%d,%d\t", st[parm_list[i]].name, SHORT,sizeof(int16_t),1);
+      		    break;
+      		case CHAR:
+      		    fprintf(fp, "%8s,%d,%d,%d\t", st[parm_list[i]].name, CHAR,sizeof(char),1);
+      		    break;
+      		default:
+      		    fprintf(fp, fmt2, st[parm_list[i]].name,
+      			FLOAT,sizeof(float),1);
+      		    break;
+    		}
+    	 }
+      else {
+    		fprintf(fp,"%8s\t",
+    		st[parm_list[i]].name);
+    	}
     }
+  }
     fprintf(fp,"\n");
 }
 
