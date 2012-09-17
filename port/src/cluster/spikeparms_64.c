@@ -301,7 +301,7 @@
  *********************************************************
  */
  typedef struct {
-  unsigned long timestamp;
+  uint32_t timestamp;
   unsigned char x1;
   unsigned char y1;
   unsigned char x2;
@@ -309,36 +309,36 @@
 } OldPosRecord;
 
 typedef struct {
-  unsigned long timestamp;
-  short   x1;
-  short   y1;
-  short   x2;
-  short   y2;
+  uint32_t timestamp;
+  int16_t   x1;
+  int16_t   y1;
+  int16_t   x2;
+  int16_t   y2;
 } PosRecord;
 
 typedef struct spike_channel_type {
-  /*  int   data[MAX_SPIKE_LEN];*/
-  int           *data;
-  int   len;
+  /*  int32_t   data[MAX_SPIKE_LEN];*/
+  int32_t           *data;
+  int32_t   len;
   FILE    *fp;
   char    *filename;
 } SpikeChannel;
 
 typedef struct trange_type {
-  unsigned long tstart;
-  unsigned long tend;
+  uint32_t tstart;
+  uint32_t tend;
   struct trange_type  *next;
 } TRange;
 
 typedef struct spikeparm_type {
   double  parm;
   char  *name;
-  short type;
+  int16_t type;
   float sum;
   float sumsqr;
-  int   npts;
-  int   *hist;
-  int   nbins;
+  int32_t   npts;
+  int32_t   *hist;
+  int32_t   nbins;
   float min;
   float max;
   float histsum;
@@ -347,43 +347,43 @@ typedef struct spikeparm_type {
 } SpikeParm;
 
 typedef struct single_parameter_type {
-  int   xvalues[N_OFFSET_PTS];
+  int32_t   xvalues[N_OFFSET_PTS];
 } SingleParms;
 
 typedef struct bwsingle_parameter_type {
-  int   peak;
-  int   valley;
-  int   peak_time;
-  int   valley_time;
-  int   spike_height;
-  int   spike_width;
+  int32_t   peak;
+  int32_t   valley;
+  int32_t   peak_time;
+  int32_t   valley_time;
+  int32_t   spike_height;
+  int32_t   spike_width;
 } BWSingleParms;  
 
 typedef struct template_type {
   char      filename[100];
-  int       npts;
+  int32_t       npts;
   double      *value;
-  short     *mask;
+  int16_t     *mask;
   float     magnitude;
-  int       mode;
+  int32_t       mode;
   struct template_type  *next;
 } Template;
 
 typedef struct index_type {
-  int   *index;
-  int   n;
+  int32_t   *index;
+  int32_t   n;
 } Index;
 
 typedef struct result_type {
   FILE  *fpout;
   FILE  *fptrange;
   char  *trangefname;
-  int   electrode;
-  int   inputformat;
-  int   outputformat;
+  int32_t   electrode;
+  int32_t   inputformat;
+  int32_t   outputformat;
   TRange  *trange;
-  int   oldpos;
-  int   rate;
+  int32_t   oldpos;
+  int32_t   rate;
   float   velspan;
 } Result;
 
@@ -393,17 +393,17 @@ typedef struct result_type {
  **              GLOBALS
  *********************************************************
  */
- int   verbose;
- int nparms;
- int   parm_list[NPARMS];
- int trigger_pt;
+ int32_t   verbose;
+ int32_t nparms;
+ int32_t   parm_list[NPARMS];
+ int32_t trigger_pt;
  FILE  *position_file;
- int xoffset;
- int spkvoffset;
- int     spikelen;
- int     backdiode;
+ int32_t xoffset;
+ int32_t spkvoffset;
+ int32_t     spikelen;
+ int32_t     backdiode;
 
- int   nwaveforms;
+ int32_t   nwaveforms;
 
  Template  *templatelist;
 
@@ -413,14 +413,14 @@ typedef struct result_type {
  *********************************************************
  */
 
- int intcompare(i1,i2)
- int  *i1,*i2;
+ int32_t intcompare(i1,i2)
+ int32_t  *i1,*i2;
  {
   return(*i1 - *i2);
 }
 
-int CheckTimestampRange(timestamp,result)
-unsigned long  timestamp;
+int32_t CheckTimestampRange(timestamp,result)
+uint32_t  timestamp;
 Result   *result;
 {
   TRange  *trange;
@@ -444,9 +444,9 @@ Result   *result;
  FILE *fp;
  Index  *idx;
  {
-  int count;
+  int32_t count;
   char  line[1000];
-  int ival;
+  int32_t ival;
   
   count = 0;
   while(!feof(fp)){
@@ -469,7 +469,7 @@ Result   *result;
 void ShowParmNames(st)
 SpikeParm  *st;
 {
-  int i;
+  int32_t i;
   
   for(i=0;i<NPARMS;i++){
     if(st[i].name){
@@ -702,11 +702,11 @@ SpikeParm  *st;
 return(s);
 }
 
-int GetParm(st,s)
+int32_t GetParm(st,s)
 SpikeParm *st;
 char  *s;
 {
-  int i;
+  int32_t i;
 
   if(s == NULL) return(-1);
   for(i=0;i<NPARMS;i++){
@@ -724,8 +724,8 @@ SpikeParm *st;
 char  *argstr;
 {
   char  *eptr;
-  int done = 0;
-  int parmindex;
+  int32_t done = 0;
+  int32_t parmindex;
   char  line[1000];
   char  *maskstr;
 
@@ -757,23 +757,23 @@ char  *argstr;
 **              INPUT ROUTINES
 *********************************************************
 */
-int BinaryDualGetSpike(result,data1,data2,fp,timestamp)
+int32_t BinaryDualGetSpike(result,data1,data2,fp,timestamp)
 Result    *result;
-int   *data1;
-int   *data2;
+int32_t   *data1;
+int32_t   *data2;
 FILE  *fp;
-unsigned long *timestamp;
+uint32_t *timestamp;
 {
-  short rec[ST_REC_SIZE];
-  int   i;
+  int16_t rec[ST_REC_SIZE];
+  int32_t   i;
 
     /*
     ** read in the data
     */
-    if(fread(timestamp,sizeof(unsigned long),1,fp) != 1){
+    if(fread(timestamp,sizeof(uint32_t),1,fp) != 1){
       return(0);
     }
-    if(fread(rec,sizeof(short),ST_REC_SIZE,fp) != ST_REC_SIZE){
+    if(fread(rec,sizeof(int16_t),ST_REC_SIZE,fp) != ST_REC_SIZE){
       return(0);
     }
     /*
@@ -792,22 +792,22 @@ unsigned long *timestamp;
     return(ST_REC_SIZE/2);
   }
 
-  int BinaryTetGetSpike(result,data1,data2,data3,data4,fp,timestamp)
+  int32_t BinaryTetGetSpike(result,data1,data2,data3,data4,fp,timestamp)
   Result    *result;
-  int   *data1;
-  int   *data2;
-  int   *data3;
-  int   *data4;
+  int32_t   *data1;
+  int32_t   *data2;
+  int32_t   *data3;
+  int32_t   *data4;
   FILE  *fp;
-  unsigned long *timestamp;
+  uint32_t *timestamp;
   {
-    short rec[TT_REC_SIZE];
-    int   i;
+    int16_t rec[TT_REC_SIZE];
+    int32_t   i;
 
-    if(fread(timestamp,sizeof(unsigned long),1,fp) != 1){
+    if(fread(timestamp,sizeof(uint32_t),1,fp) != 1){
       return(0);
     }
-    if(fread(rec,sizeof(short),TT_REC_SIZE,fp) != TT_REC_SIZE){
+    if(fread(rec,sizeof(int16_t),TT_REC_SIZE,fp) != TT_REC_SIZE){
       return(0);
     }
     /*
@@ -828,15 +828,15 @@ unsigned long *timestamp;
     return(TT_REC_SIZE/4);
   }
 
-  int DualGetSpike(data1,data2,fp)
-  int   *data1;
-  int   *data2;
+  int32_t DualGetSpike(data1,data2,fp)
+  int32_t   *data1;
+  int32_t   *data2;
   FILE  *fp;
   {
-    int   npts;
+    int32_t   npts;
     char  line[MAXLINE];
-    int   nargs;
-    int   done;
+    int32_t   nargs;
+    int32_t   done;
     char    *ptr;
     char    *eptr;
 
@@ -888,17 +888,17 @@ unsigned long *timestamp;
 return(npts);
 }
 
-int TetGetSpike(data1,data2,data3,data4,fp)
-int   *data1;
-int   *data2;
-int   *data3;
-int   *data4;
+int32_t TetGetSpike(data1,data2,data3,data4,fp)
+int32_t   *data1;
+int32_t   *data2;
+int32_t   *data3;
+int32_t   *data4;
 FILE  *fp;
 {
-  int   npts;
+  int32_t   npts;
   char  line[MAXLINE];
-  int   nargs;
-  int   done;
+  int32_t   nargs;
+  int32_t   done;
   char    *ptr;
   char    *eptr;
 
@@ -963,14 +963,14 @@ FILE  *fp;
 return(npts);
 }
 
-int AsciiGetSpike(data,fp)
-int   *data;
+int32_t AsciiGetSpike(data,fp)
+int32_t   *data;
 FILE  *fp;
 {
-  int   npts;
+  int32_t   npts;
   char  line[MAXLINE];
-  int   ival[2];
-  int   nargs;
+  int32_t   ival[2];
+  int32_t   nargs;
 
   npts = 0;
     /*
@@ -1010,17 +1010,17 @@ Template *AddTemplate(template,fp,filename,mode)
 Template  *template;
 FILE    *fp;
 char    *filename;
-int   mode;
+int32_t   mode;
 {
   Template  *newtemplate;
   Template  *t;
   double    fval;
   char    line[100];
-  int   nargs;
+  int32_t   nargs;
   double    tmpdata[MAXTEMPLATESIZE];
-  short   tmpmask[MAXTEMPLATESIZE];
-  int   npts;
-  int   j;
+  int16_t   tmpmask[MAXTEMPLATESIZE];
+  int32_t   npts;
+  int32_t   j;
 
     /*
     ** allocate and initialize the template
@@ -1061,9 +1061,9 @@ int   mode;
 }
 newtemplate->npts = npts;
 newtemplate->value = (double *)malloc(npts*sizeof(double));
-newtemplate->mask = (short *)malloc(npts*sizeof(short));
+newtemplate->mask = (int16_t *)malloc(npts*sizeof(int16_t));
 bcopy(tmpdata,newtemplate->value,npts*sizeof(double));
-bcopy(tmpmask,newtemplate->mask,npts*sizeof(short));
+bcopy(tmpmask,newtemplate->mask,npts*sizeof(int16_t));
 newtemplate->magnitude = 0;
 for(j=0;j<newtemplate->npts;j++){
   newtemplate->magnitude += newtemplate->value[j]*newtemplate->value[j]
@@ -1089,25 +1089,25 @@ for(j=0;j<newtemplate->npts;j++){
 *********************************************************
 */
 void WriteSpikeParms(n,st,fp,format)
-int   n;
+int32_t   n;
 SpikeParm *st;
 FILE    *fp;
-int   format;
+int32_t   format;
 {
-  int   i;
+  int32_t   i;
   float fval;
   double  dval;
-  int ival;
-  short sval;
+  int32_t ival;
+  int16_t sval;
   char  cval;
-  unsigned long uval;
+  uint32_t uval;
 
   if(nparms == 0) return;
   if(format == BINARY){
   /*
   ** spike id
   */
-  fwrite(&n,sizeof(int),1,fp);
+  fwrite(&n,sizeof(int32_t),1,fp);
   /*
   ** spike parameters
   */
@@ -1115,7 +1115,7 @@ int   format;
     switch(st[parm_list[i]].type){
       case ULONG:
       uval = st[parm_list[i]].parm;
-      fwrite(&uval,sizeof(unsigned long),1,fp);
+      fwrite(&uval,sizeof(uint32_t),1,fp);
       break;
       case DOUBLE:
       dval = st[parm_list[i]].parm;
@@ -1123,11 +1123,11 @@ int   format;
       break;
       case SHORT:
       sval = st[parm_list[i]].parm;
-      fwrite(&sval,sizeof(short),1,fp);
+      fwrite(&sval,sizeof(int16_t),1,fp);
       break;
       case INT:
       ival = st[parm_list[i]].parm;
-      fwrite(&ival,sizeof(int),1,fp);
+      fwrite(&ival,sizeof(int32_t),1,fp);
       break;
       case CHAR:
       cval = st[parm_list[i]].parm;
@@ -1153,8 +1153,8 @@ Result    *result;
 SpikeParm *st;
 FILE    *fp;
 {
-  int i;
-  int count;
+  int32_t i;
+  int32_t count;
   Template  *template;
 
   for(i=0;i<nparms;i++){
@@ -1175,16 +1175,16 @@ FILE    *fp;
 
       switch(st[parm_list[i]].type){
         case ULONG:
-        fprintf(fp, fmt1, st[parm_list[i]].name, template->filename, ULONG,sizeof(unsigned long),1);
+        fprintf(fp, fmt1, st[parm_list[i]].name, template->filename, ULONG,sizeof(uint32_t),1);
         break;
         case DOUBLE:
         fprintf(fp, fmt1, st[parm_list[i]].name, template->filename, DOUBLE,sizeof(double),1);
         break;
         case INT:
-        fprintf(fp, fmt1, st[parm_list[i]].name, template->filename, INT,sizeof(int), 1);
+        fprintf(fp, fmt1, st[parm_list[i]].name, template->filename, INT,sizeof(int32_t), 1);
         break;
         case SHORT:
-        fprintf(fp, fmt1, st[parm_list[i]].name, template->filename, SHORT,sizeof(short),1);
+        fprintf(fp, fmt1, st[parm_list[i]].name, template->filename, SHORT,sizeof(int16_t),1);
         break;
         case CHAR:
         fprintf(fp, fmt1, st[parm_list[i]].name, template->filename, CHAR,sizeof(char),1);
@@ -1207,16 +1207,16 @@ FILE    *fp;
 
         switch(st[parm_list[i]].type){
           case ULONG:
-          fprintf(fp, fmt2, st[parm_list[i]].name, ULONG,sizeof(unsigned long),1);
+          fprintf(fp, fmt2, st[parm_list[i]].name, ULONG,sizeof(uint32_t),1);
           break;
           case DOUBLE:
           fprintf(fp, fmt2, st[parm_list[i]].name, DOUBLE,sizeof(double),1);
           break;
           case INT:
-          fprintf(fp, fmt2, st[parm_list[i]].name, INT,sizeof(int),1);
+          fprintf(fp, fmt2, st[parm_list[i]].name, INT,sizeof(int32_t),1);
           break;
           case SHORT:
-          fprintf(fp, fmt2, st[parm_list[i]].name,SHORT,sizeof(short),1);
+          fprintf(fp, fmt2, st[parm_list[i]].name,SHORT,sizeof(int16_t),1);
           break;
           case CHAR:
           fprintf(fp, fmt2, st[parm_list[i]].name, CHAR,sizeof(char),1);
@@ -1250,12 +1250,12 @@ FILE    *fp;
     se->spike_width);
 }
 
-int Offset(max,tpeak,offset)
-int max;
-int tpeak;
-int offset;
+int32_t Offset(max,tpeak,offset)
+int32_t max;
+int32_t tpeak;
+int32_t offset;
 {
-  int parmindex;
+  int32_t parmindex;
 
   parmindex = tpeak + offset;
   if(parmindex < 0) parmindex = 0;
@@ -1298,10 +1298,10 @@ double x,r;
 
 float ZIntegralRatio(channel,offset,zcross)
 SpikeChannel  *channel;
-int   offset;
+int32_t   offset;
 float   zcross;
 {
-  int i;
+  int32_t i;
   float mintegral;
   float pintegral;
   float start;
@@ -1340,9 +1340,9 @@ float   zcross;
 
 float Integral(channel,start,end)
 SpikeChannel  *channel;
-int   start,end;
+int32_t   start,end;
 {
-  int i;
+  int32_t i;
   float integral;
 
   integral = 0;
@@ -1364,7 +1364,7 @@ SpikeChannel  *xchannel;
 SpikeChannel  *ychannel;
 Template  *template;
 {
-  int j;
+  int32_t j;
   float diff;
   float diffx,diffy;
 
@@ -1428,7 +1428,7 @@ SpikeChannel  *xchannel;
 SpikeChannel  *ychannel;
 Template  *template;
 {
-  int j;
+  int32_t j;
   float   magy;
   float   magx;
   float corr;
@@ -1518,22 +1518,22 @@ void ExtractStereoParms(xchannel,ychannel,st,analyze)
 SpikeChannel  *xchannel;
 SpikeChannel  *ychannel;
 SpikeParm *st;
-int   analyze;
+int32_t   analyze;
 {
-  int   *data;
-  int   peak;
-  int   tpeak;
-  int   i;
-  int   n;
+  int32_t   *data;
+  int32_t   peak;
+  int32_t   tpeak;
+  int32_t   i;
+  int32_t   n;
   double    ss;
   double    avg;
   float   phs;
-  int   valley;
-  int   tvalley;
+  int32_t   valley;
+  int32_t   tvalley;
   SpikeChannel  *channel;
   float   weight,sw;
   Template  *template;
-  int   tsearch;
+  int32_t   tsearch;
 
     /* 
     ** find the peak over both channels to determine peak time 
@@ -1802,18 +1802,18 @@ SpikeChannel  *ychannel;
 SpikeChannel  *achannel;
 SpikeChannel  *bchannel;
 SpikeParm *tt;
-int   analyze;
+int32_t   analyze;
 {
-  int   i;
-  int   valley;
-  int   peak;
-  int   tvalley;
-  int   tpeak;
+  int32_t   i;
+  int32_t   valley;
+  int32_t   peak;
+  int32_t   tvalley;
+  int32_t   tpeak;
   double    Rxy;
   double    Rxya;
   double    Rxyab;
   SpikeChannel  *maxchannel;
-  int   zcross;
+  int32_t   zcross;
 
     /* 
     ** scan the x channel for peak and valley 
@@ -2092,12 +2092,12 @@ void ExtractBWSingleParms(xchannel,separms)
 SpikeChannel  *xchannel;
 BWSingleParms   *separms;
 {
-  int   *data;
-  int   peak;
-  int   tpeak;
-  int   valley;
-  int   tvalley;
-  int   i;
+  int32_t   *data;
+  int32_t   peak;
+  int32_t   tpeak;
+  int32_t   valley;
+  int32_t   tvalley;
+  int32_t   i;
 
   /* 
   ** scan the x channel for peak and valley 
@@ -2134,35 +2134,35 @@ SpikeChannel *xchannel;
 SpikeChannel *ychannel;
 SpikeChannel *achannel;
 SpikeChannel *bchannel;
-int    start;
-int    end;
-int    analyze;
+int32_t    start;
+int32_t    end;
+int32_t    analyze;
 Index    *idx;
 {
-  int first;
-  int count;
-  int processed_count;
-  unsigned long  timestamp;
-  unsigned long  etimestamp;
-  unsigned long  stimestamp;
-  int   processed;
-  int   i;
-  int   bin;
+  int32_t first;
+  int32_t count;
+  int32_t processed_count;
+  uint32_t  timestamp;
+  uint32_t  etimestamp;
+  uint32_t  stimestamp;
+  int32_t   processed;
+  int32_t   i;
+  int32_t   bin;
   OldPosRecord  oldpos;
   PosRecord pos;
-  int   oldx,oldy;
-  int           posx, posy;
-  unsigned long oldtimestamp;
+  int32_t   oldx,oldy;
+  int32_t           posx, posy;
+  uint32_t oldtimestamp;
   double  *vqueue;
   double  *pxqueue;
   double  *pyqueue;
-  int current,prev;
+  int32_t current,prev;
   double  avgvel;
-  int queuesize;
+  int32_t queuesize;
   double  recentvel;
   double  recentx;
   double  recenty;
-  int   currentidx;
+  int32_t   currentidx;
   
   first = 1;
   processed = 0;
@@ -2252,11 +2252,11 @@ Index    *idx;
         }
       }
       if (backdiode) {
-        posx = (int) oldpos.x2;
-        posy = (int) oldpos.y2;
+        posx = (int32_t) oldpos.x2;
+        posy = (int32_t) oldpos.y2;
       } else {
-        posx = (int) oldpos.x1;
-        posy = (int) oldpos.y1;
+        posx = (int32_t) oldpos.x1;
+        posy = (int32_t) oldpos.y1;
       }
       sparms[POS_X].parm = (float)posx + xoffset;
       sparms[POS_Y].parm = (float)posy;
@@ -2289,7 +2289,7 @@ Index    *idx;
      */
      for(i=0;i<NPARMS;i++){
       if(sparms[i].name){
-        bin = (int)((sparms[i].nbins - 1)*
+        bin = (int32_t)((sparms[i].nbins - 1)*
           (sparms[i].parm - sparms[i].min)/
           (sparms[i].max - sparms[i].min));
         sparms[i].hist[bin]++;
@@ -2442,7 +2442,7 @@ if(result->electrode == TETRODE){
        */
        for(i=0;i<NPARMS;i++){
         if(sparms[i].name){
-          bin = (int)((sparms[i].nbins - 1)*
+          bin = (int32_t)((sparms[i].nbins - 1)*
             (sparms[i].parm - sparms[i].min)/
             (sparms[i].max - sparms[i].min));
           sparms[i].hist[bin]++;
@@ -2485,8 +2485,8 @@ void AnalyzeHistograms(sparms,fp)
 SpikeParm  *sparms;
 FILE   *fp;
 {
-  int i;
-  int j;
+  int32_t i;
+  int32_t j;
   
   /*
    ** compute the histogram variance for each parameter
@@ -2513,10 +2513,10 @@ FILE   *fp;
   }
 }
 
-void AddRange(Result *result,unsigned long tstart,unsigned long tend)
+void AddRange(Result *result,uint32_t tstart,uint32_t tend)
 /* Result *result; */
-/* unsigned long tstart; */
-/* unsigned long tend; */
+/* uint32_t tstart; */
+/* uint32_t tend; */
 {
   TRange  *trange;
 
@@ -2540,16 +2540,16 @@ void AddRange(Result *result,unsigned long tstart,unsigned long tend)
     result->trange = trange;
   }
 
-  int ReadRange(result)
+  int32_t ReadRange(result)
   Result    *result;
   {
-    int headersize;
+    int32_t headersize;
     FILE  *fp;
     char  line[201];
-    unsigned long tstart;
-    unsigned long tend;
-    int count;
-    int binaryformat;
+    uint32_t tstart;
+    uint32_t tend;
+    int32_t count;
+    int32_t binaryformat;
     char  startstr[30];
     char  endstr[30];
     char  ef0[10];
@@ -2590,13 +2590,13 @@ void AddRange(Result *result,unsigned long tstart,unsigned long tend)
       /*
       ** read the starting timestamp
       */
-      if(fread(&tstart,sizeof(unsigned long),1,fp) != 1){
+      if(fread(&tstart,sizeof(uint32_t),1,fp) != 1){
         break;
       }
       /*
       ** read the ending timestamp
       */
-      if(fread(&tend,sizeof(unsigned long),1,fp) != 1){
+      if(fread(&tend,sizeof(uint32_t),1,fp) != 1){
         break;
       }
     } else {
@@ -2627,8 +2627,8 @@ void AddRange(Result *result,unsigned long tstart,unsigned long tend)
  **              MAIN
  *********************************************************
  */
- int main(argc,argv)
- int  argc;
+ int32_t main(argc,argv)
+ int32_t  argc;
  char **argv;
  {
   Index index;
@@ -2637,34 +2637,34 @@ void AddRange(Result *result,unsigned long tstart,unsigned long tend)
   SpikeChannel  achannel;
   SpikeChannel  bchannel;
   SpikeParm *sparms;
-  int   nxtarg;
-  int   bw;
+  int32_t   nxtarg;
+  int32_t   bw;
   FILE    *fpindex;
-  int   i;
-  int   start;
-  int   end;
-  int   count;
-  int   processed;
+  int32_t   i;
+  int32_t   start;
+  int32_t   end;
+  int32_t   count;
+  int32_t   processed;
   FILE    *fpscaleout;
   FILE    *fptemplate;
   FILE    *fpanalout;
   char    *template_fname;
-  int   analyze;
-  int   showparms;
-  long    headersize;
+  int32_t   analyze;
+  int32_t   showparms;
+  int32_t    headersize;
   char    *fname;
   char    *etype;
   char    **header;
   Result  result;
-  unsigned long tstart;
-  unsigned long tend;
+  uint32_t tstart;
+  uint32_t tend;
   
   nxtarg = 0;
   bw = 0;
   spkvoffset = 0;
   spikelen = 0;
   showparms = 0;
-  index.index = (int *)malloc(MAX_VECTORS*sizeof(int));
+  index.index = (int32_t *)malloc(MAX_VECTORS*sizeof(int32_t));
   index.n = 0;
   fpindex = NULL;
   xchannel.fp = NULL;
@@ -3038,7 +3038,7 @@ void AddRange(Result *result,unsigned long tstart,unsigned long tend)
       /*
        ** sort the indices
        */
-       qsort(index.index,index.n,sizeof(int),intcompare);
+       qsort(index.index,index.n,sizeof(int32_t),intcompare);
      }
    }
   /*
@@ -3078,9 +3078,9 @@ void AddRange(Result *result,unsigned long tstart,unsigned long tend)
    */
   if(result.outputformat == BINARY)
     #if __x86_64__
-      fprintf(result.fpout, "%% Fields:\tid,%d,%ld,%d\t" , INT, sizeof(int), 1);
+      fprintf(result.fpout, "%% Fields:\tid,%d,%ld,%d\t" , INT, sizeof(int32_t), 1);
     #elif __i386__
-      fprintf(result.fpout,"%% Fields:\tid,%d,%d,%d\t",INT,sizeof(int),1);
+      fprintf(result.fpout,"%% Fields:\tid,%d,%d,%d\t", INT, sizeof(int32_t),1);
     #endif
   else /* ASCII */
     fprintf(result.fpout,"%% Fields:\tid\t");
@@ -3095,12 +3095,12 @@ void AddRange(Result *result,unsigned long tstart,unsigned long tend)
      ** nparms datatypes
      */
     ival = nparms + 1;    /* index + nparms parameters */
-     fwrite(&ival,sizeof(int),1,result.fpout);
+     fwrite(&ival,sizeof(int32_t),1,result.fpout);
     ival = FLOAT;   /* index data type */
-     fwrite(&ival,sizeof(int),1,result.fpout);
+     fwrite(&ival,sizeof(int32_t),1,result.fpout);
     ival = FLOAT;   /* parameter data types */
      for(i=0;i<nparms;i++){
-      fwrite(&ival,sizeof(int),1,result.fpout);
+      fwrite(&ival,sizeof(int32_t),1,result.fpout);
     }
   }
 #endif
@@ -3108,10 +3108,10 @@ void AddRange(Result *result,unsigned long tstart,unsigned long tend)
    ** process the spikes
    */
 
-   xchannel.data = (int *)malloc(spikelen*sizeof(int));
-   ychannel.data = (int *)malloc(spikelen*sizeof(int));
-   achannel.data = (int *)malloc(spikelen*sizeof(int));
-   bchannel.data = (int *)malloc(spikelen*sizeof(int));
+   xchannel.data = (int32_t *)malloc(spikelen*sizeof(int32_t));
+   ychannel.data = (int32_t *)malloc(spikelen*sizeof(int32_t));
+   achannel.data = (int32_t *)malloc(spikelen*sizeof(int32_t));
+   bchannel.data = (int32_t *)malloc(spikelen*sizeof(int32_t));
    ProcessSpikes(&result,sparms,&xchannel,&ychannel,&achannel,&bchannel,
     start,end,0,&index);
 
@@ -3140,7 +3140,7 @@ void AddRange(Result *result,unsigned long tstart,unsigned long tend)
        */
        if(sparms[i].name){
         sparms[i].nbins = NPARMBINS;
-        sparms[i].hist = (int *)calloc(sparms[i].nbins,sizeof(int));
+        sparms[i].hist = (int32_t *)calloc(sparms[i].nbins,sizeof(int32_t));
       }
     }
     /*
@@ -3164,12 +3164,12 @@ void AddRange(Result *result,unsigned long tstart,unsigned long tend)
        ** nparms datatypes
        */
       ival = nparms + 1;    /* index + nparms parameters */
-       fwrite(&ival,sizeof(int),1,result.fpout);
+       fwrite(&ival,sizeof(int32_t),1,result.fpout);
       ival = FLOAT;   /* index data type */
-       fwrite(&ival,sizeof(int),1,result.fpout);
+       fwrite(&ival,sizeof(int32_t),1,result.fpout);
       ival = FLOAT;   /* parameter data types */
        for(i=0;i<nparms;i++){
-        fwrite(&ival,sizeof(int),1,result.fpout);
+        fwrite(&ival,sizeof(int32_t),1,result.fpout);
       }
     }
 #endif

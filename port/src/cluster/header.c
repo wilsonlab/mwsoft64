@@ -30,20 +30,20 @@ DATES:
 
 #define BUFFERSIZE 1024
 
-int verbose;
+int32_t verbose;
 
-int main(argc,argv)
-int	argc;
+int32_t main(argc,argv)
+int32_t	argc;
 char 	**argv;
 {
-int	nxtarg;
+int32_t	nxtarg;
 FILE	*fpin;
 FILE	*fpout;
 char	**header;
-long 	headersize;
+int32_t 	headersize;
 char	*fname;
-int	strip;
-int	nchars;
+int32_t	strip;
+int32_t	nchars;
 char	buffer[BUFFERSIZE];
 
     verbose = 0;

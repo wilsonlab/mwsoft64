@@ -30,7 +30,7 @@
 #define frandom(l,h)    (((float)random()/MAXLONG)*((h)-(l))+(l))
 
 typedef unsigned char   BYTE;
-typedef int	(*PFI)();
+typedef int16_t	(*PFI)();
 typedef float	(*PFF)();
 
 #define	ARCH_UNKNOWN	0
