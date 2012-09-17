@@ -8,42 +8,42 @@ extern char	*iolibrevision();
 extern char 	**ReadHeader();
 extern void	BeginStandardHeader();
 extern void	EndStandardHeader();
-extern int16_t	AppendToHeader();
+extern int32_t	AppendToHeader();
 extern void	DisplayHeader();
 
 /* Header access */
-extern int16_t	GetFileType();
-extern int16_t	GetFieldCount();
+extern int32_t	GetFileType();
+extern int32_t	GetFieldCount();
 extern char	*GetFieldString();
 extern char	*GetHeaderParameter();
-extern int16_t	GetFieldInfoByNumber();
-extern int16_t	GetFieldInfoByName();
+extern int32_t	GetFieldInfoByNumber();
+extern int32_t	GetFieldInfoByName();
 
 /* Data access */
-extern int16_t	VerifyIdentical();
+extern int32_t	VerifyIdentical();
 
 /* Architecture-specific */
-extern int16_t	GetFileArchitecture();
-extern int16_t	GetLocalArchitecture();
+extern int32_t	GetFileArchitecture();
+extern int32_t	GetLocalArchitecture();
 extern char	*GetFileArchitectureStr();
 extern char	*GetLocalArchitectureStr();
 extern void	ConvertData();
 
 /* Data Format helpers */
-extern uint32_t	ParseTimestamp(char *);
+extern uint32_t	ParseTimestamp();
 extern char	*TimestampToString();
 extern void	FormatTime();
-extern int16_t	*ReadBinaryFormatInfo();
-extern int16_t	*ReadXviewFormatInfo();
-extern int16_t	sgetargs();
+extern int32_t	*ReadBinaryFormatInfo();
+extern int32_t	*ReadXviewFormatInfo();
+extern int32_t	sgetargs();
 
 /* General helpers */
 extern char	*TFstr();
-extern int16_t	IsStringEmpty();
+extern int32_t	IsStringEmpty();
 
 /* System  */
-extern int16_t	BgSystemProcess();
-extern int16_t	System();
+extern int32_t	BgSystemProcess();
+extern int32_t	System();
 extern void	Usleep();
 
 
@@ -73,9 +73,9 @@ extern void	Usleep();
 
 typedef struct field_info_type {
     char	*name;	
-    int16_t		column;	
-    int16_t		type;
-    int16_t		size;
-    int16_t		count;
+    int32_t		column;	
+    int32_t		type;
+    int32_t		size;
+    int32_t		count;
 } FieldInfo;
 
