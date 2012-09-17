@@ -15,7 +15,6 @@ AUTHOR:
 
 DATES:
     original 9/95
-    9/2012 - Made compatible with 32 and 64bit cpu architectures Stuart Layton <slayton@mit.edu>
 
 **************************************************
 */
@@ -25,9 +24,8 @@ DATES:
 #include <strings.h>
 #include <string.h>
 #include <math.h>
+#include <header.h>
 #include <iolib.h>
-
-#include "header.h"
 
 #define VERSION "1.18"
 
@@ -46,14 +44,14 @@ DATES:
 #define CONTREC	'c'
 
 typedef struct subfield_type {
-    int16_t		field;
+    int32_t		field;
     char	*name;
 } Subfield;
 
 typedef struct rec_type {
     unsigned char	id;
-    int16_t			size;
-    int16_t			nfields;
+    int32_t			size;
+    int32_t			nfields;
     FieldInfo		*field;
 } RecordInfo;
 
@@ -65,25 +63,25 @@ typedef struct rec_data {
 typedef struct result_type {
     FILE	*fpout;
     FILE	*fpin;
-    int16_t		nrectypes;
+    int32_t		nrectypes;
     RecordInfo	rectype[MAXRECTYPES];
-    int16_t		file_offset;
+    int32_t		file_offset;
     char	*recdata;
-    int16_t		recoffset;
-    int16_t		nsubfields;
+    int32_t		recoffset;
+    int32_t		nsubfields;
     Subfield	subfield[MAXSUBFIELDS];
     char	requested_recid;
-    int16_t		probenumber;
-    int16_t		probefield;
-    int16_t		nitemsfield;
-    int16_t		buggyad;
-    int16_t		bufsize;
-    int16_t		nchannels;
+    int32_t		probenumber;
+    int32_t		probefield;
+    int32_t		nitemsfield;
+    int32_t		buggyad;
+    int32_t		bufsize;
+    int32_t		nchannels;
 } Result;
 
-int16_t verbose;
-int16_t	convert;
-int16_t	eventstrlen;
+int32_t verbose;
+int32_t	convert;
+int32_t	eventstrlen;
 
 /* Swap the contents of two byte-locations */
 static void swapbyte(char *x,char *y)
@@ -150,7 +148,7 @@ static void ConvertField(char *field,FieldInfo *fieldinfo)
 
 RecordInfo *FindRecordType(Result *result,char rectype)
 {
-int16_t	i;
+int32_t	i;
 RecordInfo	*currenttype;
 
     /*
@@ -169,11 +167,11 @@ RecordInfo	*currenttype;
     return(currenttype);
 }
 
-unsigned char GetUCharField(Result *result,RecordInfo *recinfo,int16_t field)
+unsigned char GetUCharField(Result *result,RecordInfo *recinfo,int32_t field)
 {
-int16_t	j,k;
-int16_t	offset;
-int16_t	alignment;
+int32_t	j,k;
+int32_t	offset;
+int32_t	alignment;
 
     offset = 0;
     for(j=0;j<field;j++){
@@ -195,11 +193,11 @@ int16_t	alignment;
     return(*((unsigned char *)(result->recdata + offset)));
 }
 
-int16_t GetShortField(Result *result,RecordInfo *recinfo,int16_t field)
+int16_t GetShortField(Result *result,RecordInfo *recinfo,int32_t field)
 {
-int16_t	j,k;
-int16_t	offset;
-int16_t	alignment;
+int32_t	j,k;
+int32_t	offset;
+int32_t	alignment;
 int16_t	tmpval;
 
     offset = 0;
@@ -231,8 +229,8 @@ char	tmprecid;
 char	recid;
 char	recid2;
 RecordInfo	*recinfo;
-int16_t	nitems;
-int16_t	i;
+int32_t	nitems;
+int32_t	i;
 
     /*
     ** note that the structure of every record is 
@@ -296,7 +294,7 @@ int16_t	i;
     if((recinfo = FindRecordType(result,recid)) == NULL){
 	fprintf(stderr,
 	"\nunable to find information on record type '%c'(%d) at offset %ld\n",
-	recid,(int16_t)recid,ftell(result->fpin));
+	recid,(int32_t)recid,ftell(result->fpin));
 	return(NULL);
     }
     /*
@@ -420,14 +418,14 @@ int16_t	i;
 
 void WriteRequestedFields(Result *result,RecordInfo *recinfo)
 {
-int16_t	i,j,k;
-int16_t	type;
-int16_t	size;
-int16_t	count;
-int16_t	field;
-int16_t	offset;
-int16_t	foffset;
-int16_t	alignment;
+int32_t	i,j,k;
+int32_t	type;
+int32_t	size;
+int32_t	count;
+int32_t	field;
+int32_t	offset;
+int32_t	foffset;
+int32_t	alignment;
 
     /*
     ** go through each of the subfields and locate the corresponding
@@ -497,7 +495,7 @@ RecordInfo	*rectype;
     */
     rectype = &result->rectype[result->nrectypes];
     rectype->id = SPKREC;
-    rectype->size = sizeof(int16_t) + sizeof(int32_t) + 128*sizeof(int16_t);
+    rectype->size = sizeof(int16_t) + sizeof(uint32_t) + 128*sizeof(int16_t);
     rectype->nfields = 3;
     rectype->field = 
 	(FieldInfo *)calloc(rectype->nfields,
@@ -514,7 +512,7 @@ RecordInfo	*rectype;
     rectype->field[0].count = 1;
     rectype->field[1].name = "timestamp";
     rectype->field[1].type = ULONG;
-    rectype->field[1].size = sizeof(int32_t);
+    rectype->field[1].size = sizeof(uint32_t);
     rectype->field[1].count = 1;
     rectype->field[2].name = "data";
     rectype->field[2].type = SHORT;
@@ -531,7 +529,7 @@ RecordInfo	*rectype;
 
     rectype = &result->rectype[result->nrectypes];
     rectype->id = POSREC;
-    rectype->size = sizeof(int32_t) + sizeof(int16_t) + 
+    rectype->size = sizeof(uint32_t) + sizeof(int16_t) + 
 	3*sizeof(unsigned char);
     rectype->nfields = 5;
     rectype->field = 
@@ -539,7 +537,7 @@ RecordInfo	*rectype;
 	sizeof(FieldInfo));
     rectype->field[2].name = "timestamp";
     rectype->field[2].type = ULONG;
-    rectype->field[2].size = sizeof(int32_t);
+    rectype->field[2].size = sizeof(uint32_t);
     rectype->field[2].count = 1;
     rectype->field[1].name = "frame";
     rectype->field[1].type = CHAR;
@@ -561,14 +559,14 @@ RecordInfo	*rectype;
     result->nrectypes++;
     rectype = &result->rectype[result->nrectypes];
     rectype->id = EVENTREC;
-    rectype->size = sizeof(int32_t) + eventstrlen*sizeof(char);
+    rectype->size = sizeof(uint32_t) + eventstrlen*sizeof(char);
     rectype->nfields = 2;
     rectype->field = 
 	(FieldInfo *)calloc(rectype->nfields,
 	sizeof(FieldInfo));
     rectype->field[0].name = "timestamp";
     rectype->field[0].type = ULONG;
-    rectype->field[0].size = sizeof(int32_t);
+    rectype->field[0].size = sizeof(uint32_t);
     rectype->field[0].count = 1;
     rectype->field[1].name = "string";
     rectype->field[1].type = CHAR;
@@ -578,14 +576,14 @@ RecordInfo	*rectype;
 
     rectype = &result->rectype[result->nrectypes];
     rectype->id = CONTREC;
-    rectype->size = sizeof(int32_t) + result->bufsize*sizeof(int16_t);
+    rectype->size = sizeof(uint32_t) + result->bufsize*sizeof(int16_t);
     rectype->nfields = 2;
     rectype->field = 
 	(FieldInfo *)calloc(rectype->nfields,
 	sizeof(FieldInfo));
     rectype->field[0].name = "timestamp";
     rectype->field[0].type = ULONG;
-    rectype->field[0].size = sizeof(int32_t);
+    rectype->field[0].size = sizeof(uint32_t);
     rectype->field[0].count = 1;
     rectype->field[1].name = "cont data";
     rectype->field[1].type = SHORT;
@@ -596,10 +594,10 @@ RecordInfo	*rectype;
 
 void ProcessPositionRecord(Result *result,RecordInfo *recinfo)
 {
-int16_t	i;
-int16_t	size;
-int16_t	offset;
-int16_t	nitems;
+int32_t	i;
+int32_t	size;
+int32_t	offset;
+int32_t	nitems;
 
     /*
     ** go through each of the subfields and locate the corresponding
@@ -658,26 +656,25 @@ int16_t	nitems;
     }
 }
 
-int main(argc,argv)
-int16_t	argc;
+int32_t main(argc,argv)
+int32_t	argc;
 char 	**argv;
-
 {
-int16_t	nxtarg;
+int32_t	nxtarg;
 char	**header;
-int16_t	headersize;
+int32_t	headersize;
 RecordInfo	*recinfo;
 char	tmpstr[80];
-int16_t	i,j;
+int32_t	i,j;
 Result	result;
 char	*extracttype = NULL;
 char	*recstr;
 char	*fieldstr;
 FieldInfo	fieldinfo;
-int16_t	reccount;
-int16_t	totcount;
+int32_t	reccount;
+int32_t	totcount;
 int16_t	probeval;
-int16_t	checkprobe;
+int32_t	checkprobe;
 char	*fnamein = NULL;
 
     verbose = 0;
@@ -976,7 +973,7 @@ char	*fnamein = NULL;
 	totcount++;
 	if(verbose){
 	    fprintf(stderr, "%7d/%7d\t%c(%3d)\t%7d\t%10d\t%10o\n",
-	    reccount,totcount,recinfo->id,(int16_t)recinfo->id,
+	    reccount,totcount,recinfo->id,(int32_t)recinfo->id,
 	    recinfo->size,result.recoffset,result.recoffset);
 	}
 	/*
