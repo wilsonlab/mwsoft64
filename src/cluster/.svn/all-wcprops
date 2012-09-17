@@ -1,0 +1,107 @@
+K 25
+svn:wc:ra_dav:version-url
+V 38
+/!svn/ver/680/mwsoft/trunk/src/cluster
+END
+iolib.c
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/!svn/ver/680/mwsoft/trunk/src/cluster/iolib.c
+END
+editheader.c
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/!svn/ver/680/mwsoft/trunk/src/cluster/editheader.c
+END
+textract.c
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/!svn/ver/680/mwsoft/trunk/src/cluster/textract.c
+END
+crextract.c
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/!svn/ver/680/mwsoft/trunk/src/cluster/crextract.c
+END
+spikeparms2.c
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/!svn/ver/680/mwsoft/trunk/src/cluster/spikeparms2.c
+END
+esextract.c
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/!svn/ver/680/mwsoft/trunk/src/cluster/esextract.c
+END
+iolib.h
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/!svn/ver/680/mwsoft/trunk/src/cluster/iolib.h
+END
+showcmd.c
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/!svn/ver/680/mwsoft/trunk/src/cluster/showcmd.c
+END
+spikeanal.c
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/!svn/ver/680/mwsoft/trunk/src/cluster/spikeanal.c
+END
+spikeavg.c
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/!svn/ver/680/mwsoft/trunk/src/cluster/spikeavg.c
+END
+findspike.c
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/!svn/ver/680/mwsoft/trunk/src/cluster/findspike.c
+END
+adextract.c
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/!svn/ver/680/mwsoft/trunk/src/cluster/adextract.c
+END
+header.c
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/!svn/ver/680/mwsoft/trunk/src/cluster/header.c
+END
+parmextract.c
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/!svn/ver/680/mwsoft/trunk/src/cluster/parmextract.c
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/!svn/ver/680/mwsoft/trunk/src/cluster/Makefile
+END
+posextract.c
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/!svn/ver/680/mwsoft/trunk/src/cluster/posextract.c
+END
+header.h
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/!svn/ver/680/mwsoft/trunk/src/cluster/header.h
+END

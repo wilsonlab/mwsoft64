@@ -1,0 +1,68 @@
+
+PROGRAM:
+    editheader
+
+DESCRIPTION:
+    Allows a user to edit the header information in a data file
+    using their favorite text editor.
+
+AUTHOR:
+    Written by Matthew Wilson
+    ARL Division of Neural Systems, Memory, and Aging
+    University of Arizona
+    Tucson, AZ 85724
+    wilson@nsma.arizona.edu
+
+DATES:
+    original 11/91
+    documentation update 11/91
+
+USAGE:
+    editheader file [-o file] [-v]
+
+OPTIONS:
+    Note that spaces between options and arguments are important.
+    Order of the arguments is not important. All arguments and options
+    must be placed on a single line (no carriage returns).
+
+INPUT FILE OPTIONS:
+    file
+	this is the name of the data file whose header will be edited. 
+	The contents of the file beyond the header will remain unchanged.
+
+	DEFAULT: none. Required argument.
+
+OUTPUT FILE OPTIONS:
+    -o file
+	Specifies the file to which the edited original will be saved.
+	If not specified, the original input file will be replaced
+	following a final user prompt for verification.
+
+	DEFAULT: input file
+
+MISCELLANEOUS OPTIONS:
+    -usage
+	displays the list of available options.
+
+    -version
+	displays the version number of the program
+
+    -v
+	this option turns on verbose mode which will display more extensive
+	status information during data processing.
+
+	DEFAULT: not verbose
+
+NOTES:
+    The editor used for editing the header can be specified by setting the
+    EDITOR environment variable. If this variable is not set then the 'vi'
+    editor is used by default.
+    If a file which does not have a header is edited, the user will be prompted
+    for verification.
+    If the temporary file containing the header being edited is not changed
+    the editing session will be aborted and no output will be generated.
+    The temporary files used to hold copies of the original data file
+    are made in the /tmp area. Large data files may exceed the capacity of
+    /tmp. If this occurs the TMPDIR environment can be set to the path 
+    of a directory used to hold these temporary files.
+

@@ -1,0 +1,52 @@
+
+PROGRAM:
+    cmpfiles
+
+DESCRIPTION:
+    Verifies that two files are identical beyond their file headers.
+
+AUTHOR:
+    Written by Matthew Wilson
+    ARL Division of Neural Systems, Memory, and Aging
+    University of Arizona
+    Tucson, AZ 85724
+    wilson@nsma.arizona.edu
+
+DATES:
+    original 11/91
+    documentation update 11/91
+
+USAGE:
+    cmpfiles file1 file2 [-v]
+
+OPTIONS:
+    Note that spaces between options and arguments are important.
+    Order of the arguments is not important. All arguments and options
+    must be placed on a single line (no carriage returns).
+
+INPUT FILE OPTIONS:
+    file1,file2
+	these are the names of the data files to be compared. If the
+	files contain file headers, the header information will be
+	skipped during comparison and only the data sections of the
+	files will be checked.
+
+	DEFAULT: none. Required arguments.
+
+MISCELLANEOUS OPTIONS:
+    -usage
+	displays the list of available options.
+
+    -version
+	displays the version number of the program
+
+    -v
+	this option turns on verbose mode which will display more extensive
+	status information during data processing.
+
+	DEFAULT: not verbose
+
+NOTES:
+    The exit status of the program will be 0 if the files matched and 1 
+    otherwise.
+
