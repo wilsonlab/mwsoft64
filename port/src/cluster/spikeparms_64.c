@@ -1169,7 +1169,7 @@ FILE    *fp;
       
       /* Define string for fprintf depending on the architecture */
       #if __x86_64__
-        const char * fmt1 = "%8s:%s,%d,%ld,%d\t";
+        const char * fmt1 = "%8s:%s,%d,%ld,%ld\t";
       #elif __i386__
         const char * fmt1 = "%8s:%s,%d,%d,%d\t";
       #endif
@@ -1201,7 +1201,7 @@ FILE    *fp;
       if(result->outputformat == BINARY){
         /* Define fprintf format string depending on the architecture */
         #if __x86_64__
-          const char * fmt2 = "%8s,%d,%ld,%d\t";
+          const char * fmt2 = "%8s,%d,%ld,%ld\t";
         #elif __i386__
           const char * fmt2 = "%8s,%d,%d,%d\t";
         #endif
