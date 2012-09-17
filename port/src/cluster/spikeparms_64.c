@@ -89,7 +89,6 @@
 #define N_OFFSET_PTS 7
 
 #define NPARMS 135
-
 /*
  ** --------------------------------------
  ** standard Brainwave(tm) parameters
@@ -294,6 +293,16 @@
 #define T_H4    		134
 
 #define BW_ATAN_FACTOR	3.61
+
+/* Define string for fprintf depending on the architecture */
+
+#if __x86_64__
+  const char * fmt = "%8s,%d,%ld,%d\t"; 
+#elif __i386__
+  const char * fmt = fmt;
+#else
+  const char * fmt = fmt;
+#endif
 
 /*
  *********************************************************
@@ -1168,7 +1177,7 @@ Template	*template;
 	    if(result->outputformat == BINARY){
 		switch(st[parm_list[i]].type){
 		case ULONG:
-		    fprintf(fp,"%8s:%s,%d,%ld,%d\t",
+		    fprintf(fp,"%8s:%s,%d,%d,%d\t",
 			st[parm_list[i]].name,
 			template->filename,
 			ULONG,sizeof(unsigned int32_t),1);
@@ -1213,32 +1222,32 @@ Template	*template;
 	    if(result->outputformat == BINARY){
 		switch(st[parm_list[i]].type){
 		case ULONG:
-		    fprintf(fp,"%8s,%d,%ld,%d\t",
+		    fprintf(fp,fmt,
 			st[parm_list[i]].name,
 			ULONG,sizeof(unsigned int32_t),1);
 		    break;
 		case DOUBLE:
-		    fprintf(fp,"%8s,%d,%ld,%d\t",
+		    fprintf(fp,fmt,
 			st[parm_list[i]].name,
 			DOUBLE,sizeof(double),1);
 		    break;
 		case INT:
-		    fprintf(fp,"%8s,%d,%d,%d\t",
+		    fprintf(fp,fmt,
 			st[parm_list[i]].name,
 			INT,sizeof(int16_t),1);
 		    break;
 		case SHORT:
-		    fprintf(fp,"%8s,%d,%d,%d\t",
+		    fprintf(fp,fmt,
 			st[parm_list[i]].name,
 			SHORT,sizeof(int16_t),1);
 		    break;
 		case CHAR:
-		    fprintf(fp,"%8s,%d,%d,%d\t",
+		    fprintf(fp,fmt,
 			st[parm_list[i]].name,
 			CHAR,sizeof(char),1);
 		    break;
 		default:
-		    fprintf(fp,"%8s,%d,%d,%d\t",
+		    fprintf(fp,fmt,
 			st[parm_list[i]].name,
 			FLOAT,sizeof(float),1);
 		    break;
