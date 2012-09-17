@@ -1,3 +1,0 @@
-#!/bin/csh
-
-y $1 -ncol time | atob -double -output ulong -scale 10000 -fieldname timestamp -o $2
