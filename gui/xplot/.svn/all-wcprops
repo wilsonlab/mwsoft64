@@ -1,0 +1,233 @@
+K 25
+svn:wc:ra_dav:version-url
+V 36
+/!svn/ver/680/mwsoft/trunk/X11/xplot
+END
+psdriver.c
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/!svn/ver/680/mwsoft/trunk/X11/xplot/psdriver.c
+END
+buttons.c
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/!svn/ver/680/mwsoft/trunk/X11/xplot/buttons.c
+END
+commands.c
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/!svn/ver/680/mwsoft/trunk/X11/xplot/commands.c
+END
+fcircle.bitmap
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/!svn/ver/680/mwsoft/trunk/X11/xplot/fcircle.bitmap
+END
+init.c
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/!svn/ver/680/mwsoft/trunk/X11/xplot/init.c
+END
+axis.c
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/!svn/ver/680/mwsoft/trunk/X11/xplot/axis.c
+END
+button.bitmap
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/!svn/ver/680/mwsoft/trunk/X11/xplot/button.bitmap
+END
+arg.c
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/!svn/ver/680/mwsoft/trunk/X11/xplot/arg.c
+END
+keys.c
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/!svn/ver/680/mwsoft/trunk/X11/xplot/keys.c
+END
+xplot_defs.h
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/!svn/ver/680/mwsoft/trunk/X11/xplot/xplot_defs.h
+END
+oldcolor.c
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/!svn/ver/680/mwsoft/trunk/X11/xplot/oldcolor.c
+END
+load.c
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/!svn/ver/680/mwsoft/trunk/X11/xplot/load.c
+END
+label.c
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/!svn/ver/680/mwsoft/trunk/X11/xplot/label.c
+END
+xplot_struct.h
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/!svn/ver/680/mwsoft/trunk/X11/xplot/xplot_struct.h
+END
+text.c
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/!svn/ver/680/mwsoft/trunk/X11/xplot/text.c
+END
+zap.bitmap
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/!svn/ver/680/mwsoft/trunk/X11/xplot/zap.bitmap
+END
+xplot.doc
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/!svn/ver/680/mwsoft/trunk/X11/xplot/xplot.doc
+END
+tick.c
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/!svn/ver/680/mwsoft/trunk/X11/xplot/tick.c
+END
+primitives.c
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/!svn/ver/680/mwsoft/trunk/X11/xplot/primitives.c
+END
+circle.bitmap
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/!svn/ver/680/mwsoft/trunk/X11/xplot/circle.bitmap
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/!svn/ver/680/mwsoft/trunk/X11/xplot/Makefile
+END
+toggle2.bitmap
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/!svn/ver/680/mwsoft/trunk/X11/xplot/toggle2.bitmap
+END
+save.c
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/!svn/ver/680/mwsoft/trunk/X11/xplot/save.c
+END
+larrow.bitmap
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/!svn/ver/680/mwsoft/trunk/X11/xplot/larrow.bitmap
+END
+graph.c
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/!svn/ver/680/mwsoft/trunk/X11/xplot/graph.c
+END
+menu.c
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/!svn/ver/680/mwsoft/trunk/X11/xplot/menu.c
+END
+rarrow.bitmap
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/!svn/ver/680/mwsoft/trunk/X11/xplot/rarrow.bitmap
+END
+event_loop.c
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/!svn/ver/680/mwsoft/trunk/X11/xplot/event_loop.c
+END
+xps.c
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/!svn/ver/680/mwsoft/trunk/X11/xplot/xps.c
+END
+toggle.bitmap
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/!svn/ver/680/mwsoft/trunk/X11/xplot/toggle.bitmap
+END
+xplot.h
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/!svn/ver/680/mwsoft/trunk/X11/xplot/xplot.h
+END
+color.c
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/!svn/ver/680/mwsoft/trunk/X11/xplot/color.c
+END
+main.c
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/!svn/ver/680/mwsoft/trunk/X11/xplot/main.c
+END
+scale.c
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/!svn/ver/680/mwsoft/trunk/X11/xplot/scale.c
+END
+button2.bitmap
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/!svn/ver/680/mwsoft/trunk/X11/xplot/button2.bitmap
+END
+save.bitmap
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/!svn/ver/680/mwsoft/trunk/X11/xplot/save.bitmap
+END
+xplot_ext.h
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/!svn/ver/680/mwsoft/trunk/X11/xplot/xplot_ext.h
+END
+ocolor.c
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/!svn/ver/680/mwsoft/trunk/X11/xplot/ocolor.c
+END
