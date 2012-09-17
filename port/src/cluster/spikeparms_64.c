@@ -3076,10 +3076,14 @@ void AddRange(Result *result,unsigned long tstart,unsigned long tend)
   /*
    ** list the parameter identifiers
    */
-   if(result.outputformat == BINARY)
-    fprintf(result.fpout,"%% Fields:\tid,%d,%d,%d\t",INT,sizeof(int),1);
+  if(result.outputformat == BINARY)
+    #if __x86_64__
+      fprintf(result.fpout, "%% Fields:\tid,%d,%ld,%d\t" , INT, sizeof(int), 1);
+    #elif __i386__
+      fprintf(result.fpout,"%% Fields:\tid,%d,%d,%d\t",INT,sizeof(int),1);
+    #endif
   else /* ASCII */
-  fprintf(result.fpout,"%% Fields:\tid\t");
+    fprintf(result.fpout,"%% Fields:\tid\t");
 
   WriteStereoIdentifiers(&result,sparms,result.fpout);
   fprintf(result.fpout,"%%\n");
