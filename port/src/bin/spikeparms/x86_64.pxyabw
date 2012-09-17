@@ -1,4 +1,21 @@
 %%BEGINHEADER
+% Program: 	./sp2_x86_64
+% Program Version: 	1.8
+% Argc: 	7
+% Argv[1] :	orig.tt
+% Argv[2] :	-tetrode
+% Argv[3] :	-parms
+% Argv[4] :	t_px,t_py,t_pa,t_pb,t_maxwd,t_maxht,time,t_h1,t_h2,t_h3,t_h4
+% Argv[5] :	-o
+% Argv[6] :	x86_64.pxyabw
+% Date: 	Mon Sep 17 16:08:38 2012
+% Directory: 	/home/slayton/src/mwsoft64/port/src/bin/spikeparms
+% Hostname: 	slayton-VirtualBox
+% Architecture: 	x86_64
+% User: 	slayton ()
+%
+%%XYDATAFILE orig.tt
+% File type: 	Ascii
 % Electrode type: 	Tetrode
 % Fields:	id	    t_px	    t_py	    t_pa	    t_pb	 t_maxwd	 t_maxht	    time	    t_h1	    t_h2	    t_h3	    t_h4	
 %
