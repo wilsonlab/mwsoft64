@@ -1,5 +1,5 @@
-#ifndef MWL_SOFT_IOLIB
-#define MWL_SOFT_IOLIB
+#include <stdint.h>
+#include <inttypes.h>
 
 extern char	*iolibversion();
 extern char	*iolibrevision();
@@ -8,42 +8,42 @@ extern char	*iolibrevision();
 extern char 	**ReadHeader();
 extern void	BeginStandardHeader();
 extern void	EndStandardHeader();
-extern int	AppendToHeader();
+extern int16_t	AppendToHeader();
 extern void	DisplayHeader();
 
 /* Header access */
-extern int	GetFileType();
-extern int	GetFieldCount();
+extern int16_t	GetFileType();
+extern int16_t	GetFieldCount();
 extern char	*GetFieldString();
 extern char	*GetHeaderParameter();
-extern int	GetFieldInfoByNumber();
-extern int	GetFieldInfoByName();
+extern int16_t	GetFieldInfoByNumber();
+extern int16_t	GetFieldInfoByName();
 
 /* Data access */
-extern int	VerifyIdentical();
+extern int16_t	VerifyIdentical();
 
 /* Architecture-specific */
-extern int	GetFileArchitecture();
-extern int	GetLocalArchitecture();
+extern int16_t	GetFileArchitecture();
+extern int16_t	GetLocalArchitecture();
 extern char	*GetFileArchitectureStr();
 extern char	*GetLocalArchitectureStr();
 extern void	ConvertData();
 
 /* Data Format helpers */
-extern unsigned long	ParseTimestamp();
+extern uint32_t	ParseTimestamp(char *);
 extern char	*TimestampToString();
 extern void	FormatTime();
-extern int	*ReadBinaryFormatInfo();
-extern int	*ReadXviewFormatInfo();
-extern int	sgetargs();
+extern int16_t	*ReadBinaryFormatInfo();
+extern int16_t	*ReadXviewFormatInfo();
+extern int16_t	sgetargs();
 
 /* General helpers */
 extern char	*TFstr();
-extern int	IsStringEmpty();
+extern int16_t	IsStringEmpty();
 
 /* System  */
-extern int	BgSystemProcess();
-extern int	System();
+extern int16_t	BgSystemProcess();
+extern int16_t	System();
 extern void	Usleep();
 
 
@@ -73,10 +73,9 @@ extern void	Usleep();
 
 typedef struct field_info_type {
     char	*name;	
-    int		column;	
-    int		type;
-    int		size;
-    int		count;
+    int16_t		column;	
+    int16_t		type;
+    int16_t		size;
+    int16_t		count;
 } FieldInfo;
 
-#endif
