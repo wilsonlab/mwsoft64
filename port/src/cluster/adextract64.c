@@ -15,6 +15,7 @@ AUTHOR:
 
 DATES:
     original 9/95
+    9/2012 - Made compatible with 32 and 64bit cpu architectures Stuart Layton <slayton@mit.edu>
 
 **************************************************
 */
