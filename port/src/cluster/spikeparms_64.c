@@ -1166,7 +1166,6 @@ FILE    *fp;
       count++;
     }
     if(result->outputformat == BINARY){
-      
       /* Define string for fprintf depending on the architecture */
       #if __x86_64__
         const char * fmt1 = "%8s:%s,%d,%ld,%ld\t";
@@ -1176,6 +1175,7 @@ FILE    *fp;
 
       switch(st[parm_list[i]].type){
         case ULONG:
+        #warning "GOT HERE!"
         fprintf(fp, fmt1, st[parm_list[i]].name, template->filename, ULONG,sizeof(unsigned long),1);
         break;
         case DOUBLE:
