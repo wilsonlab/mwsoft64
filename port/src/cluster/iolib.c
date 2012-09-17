@@ -96,7 +96,7 @@ static void convert8byte(char *x)
 /*
 ** convert data from one architecture to another
 */	
-void ConvertData(char *data, int32_t size)
+void ConvertData(char *data,int32_t size)
 {
 
     switch(size){
@@ -114,7 +114,7 @@ void ConvertData(char *data, int32_t size)
     }
 }
 
-int16_t EvalArchitectureStr(char *name)
+int32_t EvalArchitectureStr(char *name)
 {
     if(name == NULL) return(ARCH_UNKNOWN);
     if(strcmp(name,"i386") == 0){
@@ -180,7 +180,7 @@ char	*type;
     return(type);
 }
 
-int16_t GetFileArchitecture(header)
+int32_t GetFileArchitecture(header)
 char	**header;
 {
     if(header == NULL) return(ARCH_UNKNOWN);
@@ -198,7 +198,7 @@ static char	newstr[80];
     return(newstr);
 }
 
-int16_t GetLocalArchitecture(void)
+int32_t GetLocalArchitecture(void)
 {
     return(EvalArchitectureStr(GetLocalArchitectureStr()));
 }
@@ -218,14 +218,14 @@ char	*newstr;
 }
 
 char	*FieldTypeToString(type)
-int16_t	type;
+int32_t	type;
 {
     switch(type){
     case SHORT:
 	return("int16_t");
 	break;
     case INT:
-	return("int16_t");
+	return("int32_t");
 	break;
     case FLOAT:
 	return("float");
@@ -246,12 +246,12 @@ int16_t	type;
     return("unknown");
 }
 
-int16_t GetLine(char *line,int16_t maxline,FILE *fp)
+int32_t GetLine(char *line,int32_t maxline,FILE *fp)
 {
-int16_t	eoh_offset;
+int32_t	eoh_offset;
 char	eoh_str[80];
 char	c;
-int16_t	i,j;
+int32_t	i,j;
 
     /*
     ** read in a line, checking for the magic end-of-header string
@@ -266,7 +266,7 @@ int16_t	i,j;
 	    ** bump to the next char
 	    */
 	    eoh_offset++;
-	    if(eoh_offset == (int16_t)strlen(eoh_str)){
+	    if(eoh_offset == (int32_t)strlen(eoh_str)){
 		/*
 		** found the magic string
 		*/
@@ -305,16 +305,16 @@ int16_t	i,j;
 
 char **ReadHeader(fp,headersize)
 FILE	*fp;
-int16_t	*headersize;
+int32_t	*headersize;
 {
-int16_t	hasheader;
+int32_t	hasheader;
 char	line[MAXLINE];
 int32_t	start;
 char	**header_contents;
 char	**new_header_contents;
-int16_t	nheaderlines;
-int16_t	done;
-int16_t	status;
+int32_t	nheaderlines;
+int32_t	done;
+int32_t	status;
 
     if(fp == NULL) return(NULL);
     if(headersize == NULL) return(NULL);
@@ -469,15 +469,15 @@ int16_t	status;
 ** where the amount of white space between arguments is irrelevant.
 */
 
-int16_t sgetargs(line,nmax,vector)
+int32_t sgetargs(line,nmax,vector)
 char	*line;
-int16_t	nmax;
+int32_t	nmax;
 double	*vector;
 {
-int16_t	n;
+int32_t	n;
 char	*ptr;
 char	*eptr;
-int16_t	done;
+int32_t	done;
 
     if(line == NULL) return(0);
     ptr = line;
@@ -531,7 +531,7 @@ FILE	*fp;
 char	**header;
 int32_t	headersize;
 {
-int16_t	i;
+int32_t	i;
 
     if(fp == NULL) return;
     if(header != NULL){
@@ -551,7 +551,7 @@ char *GetHeaderParameter(header,parm)
 char	**header;
 char	*parm;
 {
-int16_t	i;
+int32_t	i;
 char	*value;
 
     value = NULL;
@@ -592,7 +592,7 @@ char	*value;
 }
 
 char *TFstr(val)
-int16_t	val;
+int32_t	val;
 {
     if(val == 0){
 	return("FALSE");
@@ -603,18 +603,18 @@ int16_t	val;
 
 void BeginStandardHeader(fpout, argc, argv, binaryver)
 FILE	*fpout;
-int16_t	argc;
+int32_t	argc;
 char	**argv; 
 char	*binaryver;
 
 {
-time_t	clock;
+time_t  clock;
 char	*username;
 char	*realname;
 char	*getenv();
 char	pathname[MAXPATHLEN];
 char	hostname[MAXPATHLEN];
-int16_t	i;
+int32_t	i;
 
 
     if(fpout == NULL) return;
@@ -630,11 +630,7 @@ int16_t	i;
 	    fprintf(fpout,"%% Argv[%d] :\t%s\n",i,argv[i]);
 	}
     }
-
-    //time_t tmp = (time_t) clock;
     time(&clock);
-    //clock = (uint32_t) tmp;
-
     fprintf(fpout,"%% Date: \t%s",ctime(&clock));
     getcwd(pathname,MAXPATHLEN); 
     gethostname(hostname,MAXPATHLEN);
@@ -670,7 +666,7 @@ char *iolibrevision()
 
 #define VERIFYBLOCKSIZE	1024
 
-int16_t VerifyIdentical(fname1,fname2)
+int32_t VerifyIdentical(fname1,fname2)
 char	*fname1;
 char	*fname2;
 {
@@ -680,8 +676,8 @@ char	buffer1[VERIFYBLOCKSIZE];
 char	buffer2[VERIFYBLOCKSIZE];
 int32_t	headersize1;
 int32_t	headersize2;
-int16_t	nread1;
-int16_t	nread2;
+int32_t	nread1;
+int32_t	nread2;
 
     /*
     ** open the files
@@ -756,24 +752,24 @@ int16_t	nread2;
 
 #define BLOCKSIZE 1024
 
-int16_t AppendToHeader(fname,newline)
+int32_t AppendToHeader(fname,newline)
 char	*fname;
 char	*newline;
 {
 FILE	*fpout;
 FILE	*fpin;
 char	tmpfile[10] = "eh-XXXXXX";
-int16_t	fd;
-int16_t	i;
-int16_t	done;
+int32_t	fd;
+int32_t	i;
+int32_t	done;
 char	**header;
 int32_t	headersize;
 char	comstr[200];
-int16_t	nread;
-int16_t	nwrite;
+int32_t	nread;
+int32_t	nwrite;
 char	buffer[BLOCKSIZE];
 char	*getenv();
-int16_t	status;
+int32_t	status;
 
     /*
     ** open the file
@@ -856,11 +852,11 @@ int16_t	status;
 }
 
 
-int16_t strcount(s,c)
+int32_t strcount(s,c)
 char	*s;
 char	c;
 {
-int16_t	count;
+int32_t	count;
 
     if(s == NULL) return(0);
     count = 0;
@@ -882,7 +878,7 @@ uint32_t hour;
 uint32_t min;
 uint32_t sec;
 float fracsec;
-int16_t	ncolons;
+int32_t	ncolons;
 char	*fracptr;
 char	timestr[100];	
 
@@ -975,7 +971,7 @@ char	timestr[100];
     return(time);
 }
 
-int16_t IsStringEmpty(str)
+int32_t IsStringEmpty(str)
 char	*str;
 {
     if(str == NULL) return(1);
@@ -1001,53 +997,53 @@ char	*str;
 char *TimestampToString(timestamp)
 uint32_t timestamp;
 {
-int16_t	hour;
-int16_t	min;
-int16_t	sec;
+int32_t	hour;
+int32_t	min;
+int32_t	sec;
 static char string[20];
 double	fracsec;
 
-    hour = (int16_t)((timestamp/1e4)/3600);
-    min = (int16_t)((timestamp/1e4)/60 - 60*hour);
-    sec = (int16_t)(timestamp/1e4 - 60*min - 3600*hour);
-    fracsec = ((double)timestamp/1.0e4 - (int16_t)(timestamp/1e4))*1e4 + 0.5;
+    hour = (int32_t)((timestamp/1e4)/3600);
+    min = (int32_t)((timestamp/1e4)/60 - 60*hour);
+    sec = (int32_t)(timestamp/1e4 - 60*min - 3600*hour);
+    fracsec = ((double)timestamp/1.0e4 - (int32_t)(timestamp/1e4))*1e4 + 0.5;
     if(hour > 0){
-	sprintf(string,"%d:%02d:%02d.%04d",hour,min,sec,(int16_t)fracsec);
+	sprintf(string,"%d:%02d:%02d.%04d",hour,min,sec,(int32_t)fracsec);
     } else {
-	sprintf(string,"%02d:%02d.%04d",min,sec,(int16_t)fracsec);
+	sprintf(string,"%02d:%02d.%04d",min,sec,(int32_t)fracsec);
     }
     return(string);
 }
 
 void FormatTime(timestamp,min,sec)
 uint32_t timestamp;
-int16_t	*min;
-int16_t	*sec;
+int32_t	*min;
+int32_t	*sec;
 {
-    *min = (int16_t)((timestamp/1e4)/60);
-    *sec = (int16_t)(timestamp/1e4 - 60*(int16_t)((timestamp/1e4)/60));
+    *min = (int32_t)((timestamp/1e4)/60);
+    *sec = (int32_t)(timestamp/1e4 - 60*(int32_t)((timestamp/1e4)/60));
 }
 
-int16_t *ReadBinaryFormatInfo(fp,vectorsize)
+int32_t *ReadBinaryFormatInfo(fp,vectorsize)
 FILE	*fp;
-int16_t	*vectorsize;
+int32_t	*vectorsize;
 {
-int16_t	*vectorformat;
+int32_t	*vectorformat;
 
     if(vectorsize == NULL){
 	return(NULL);
     }
-    if(fread(vectorsize,sizeof(int16_t),1,fp) != 1){
+    if(fread(vectorsize,sizeof(int32_t),1,fp) != 1){
 	fprintf(stderr,
 	"ERROR: unable to read binary vector size information\n");
 	return(NULL);
     }
-    if((vectorformat = (int16_t *)malloc((*vectorsize)*sizeof(int16_t))) == NULL){
+    if((vectorformat = (int32_t *)malloc((*vectorsize)*sizeof(int32_t))) == NULL){
 	fprintf(stderr,
 	"MEMORY ERROR: unable to allocate binary format vector\n");
 	return(NULL);
     }
-    if(fread(vectorformat,sizeof(int16_t),(*vectorsize),fp) != *vectorsize){
+    if(fread(vectorformat,sizeof(int32_t),(*vectorsize),fp) != *vectorsize){
 	fprintf(stderr,
 	"ERROR: unable to read binary vector format information\n");
 	return(NULL);
@@ -1055,20 +1051,20 @@ int16_t	*vectorformat;
     return(vectorformat);
 }
 
-int16_t	*ReadXviewFormatInfo(fp,xsize,ysize)
+int32_t	*ReadXviewFormatInfo(fp,xsize,ysize)
 FILE	*fp;
-int16_t	*xsize;
-int16_t	*ysize;
+int32_t	*xsize;
+int32_t	*ysize;
 {
-int16_t	*vectorformat;
+int32_t	*vectorformat;
 float	dt;
 
-    if(fread(xsize,sizeof(int16_t),1,fp) != 1){
+    if(fread(xsize,sizeof(int32_t),1,fp) != 1){
 	fprintf(stderr,
 	"ERROR: unable to read xview xsize information\n");
 	return(NULL);
     }
-    if(fread(ysize,sizeof(int16_t),1,fp) != 1){
+    if(fread(ysize,sizeof(int32_t),1,fp) != 1){
 	fprintf(stderr,
 	"ERROR: unable to read xview ysize information\n");
 	return(NULL);
@@ -1078,12 +1074,12 @@ float	dt;
 	"ERROR: unable to read xview dt information\n");
 	return(NULL);
     }
-    if((vectorformat = (int16_t *)malloc(1*sizeof(int16_t))) == NULL){
+    if((vectorformat = (int32_t *)malloc(1*sizeof(int32_t))) == NULL){
 	fprintf(stderr,
 	"MEMORY ERROR: unable to allocate binary format vector\n");
 	return(NULL);
     }
-    if(fread(vectorformat,sizeof(int16_t),1,fp) != 1){
+    if(fread(vectorformat,sizeof(int32_t),1,fp) != 1){
 	fprintf(stderr,
 	"ERROR: unable to read xview datatype information\n");
 	return(NULL);
@@ -1091,14 +1087,14 @@ float	dt;
     return(vectorformat);
 }
 
-int16_t BgSystemProcess(s)
+int32_t BgSystemProcess(s)
 char	*s;
 {
-int16_t pid;
+int32_t pid;
 char	*argv[200];
 char	tmpstr[200];
 char	*sptr;
-int16_t		cnt;
+int32_t		cnt;
 int16_t	string_on;
 
     strcpy(tmpstr,s);
@@ -1158,13 +1154,13 @@ int16_t	string_on;
 /*
 ** implements the 'system' routine using vfork rather than fork
 */
-int16_t System(s)
+int32_t System(s)
 char	*s;
 {
-int16_t pid;
+int32_t pid;
 union wait status;
 char	*argv[200];
-int16_t	cnt;
+int32_t	cnt;
 
     cnt = 0;
     /*
@@ -1211,7 +1207,7 @@ int16_t	cnt;
 
 
 void Usleep(usec)
-int16_t usec;
+int32_t usec;
 {
 struct timeval  timeout;
 
@@ -1220,11 +1216,11 @@ struct timeval  timeout;
     select(32,NULL,NULL,NULL,&timeout);
 }
 
-int16_t GetFileType(header)
+int32_t GetFileType(header)
 char	**header;
 {
 char	*filetype;
-int16_t	type;
+int32_t	type;
 
     if(header == NULL) return(INVALID_TYPE);
     /*
@@ -1262,10 +1258,10 @@ char	*str;
 }
 
 
-int16_t GetFieldCount(fieldstr)
+int32_t GetFieldCount(fieldstr)
 char	*fieldstr;
 {
-int16_t	count;
+int32_t	count;
 
     if(fieldstr == NULL){
 	return(0);
@@ -1304,13 +1300,13 @@ int16_t	count;
     return(count);
 }
 
-int16_t ParseSingleFieldDescriptor(fieldstr,fieldinfo)
+int32_t ParseSingleFieldDescriptor(fieldstr,fieldinfo)
 char	*fieldstr;
 FieldInfo	*fieldinfo;
 {
 char	*sptr;
 char	*eptr;
-int16_t	len;
+int32_t	len;
 char	line[100];
 
     if(fieldstr == NULL || fieldinfo == NULL) return(0);
@@ -1343,7 +1339,7 @@ char	line[100];
 	/*
 	** just take the string up to the comma
 	*/
-	len = (int16_t)(eptr - sptr);
+	len = (int32_t)(eptr - sptr);
 	fieldinfo->name = (char *)malloc(len+1);
 	strncpy(fieldinfo->name,sptr,len);
 	fieldinfo->name[len] = '\0';
@@ -1365,7 +1361,7 @@ char	line[100];
 	/*
 	** just take the string up to the comma
 	*/
-	len = (int16_t)(eptr - sptr);
+	len = (int32_t)(eptr - sptr);
 	strncpy(line,sptr,len);
 	line[len] = '\0';
 	fieldinfo->type = atoi(line);
@@ -1386,7 +1382,7 @@ char	line[100];
 	/*
 	** just take the string up to the comma
 	*/
-	len = (int16_t)(eptr - sptr);
+	len = (int32_t)(eptr - sptr);
 	strncpy(line,sptr,len);
 	line[len] = '\0';
 	fieldinfo->size = atoi(line);
@@ -1404,16 +1400,16 @@ char	line[100];
 }
 
 #define MAXLINE 1000
-int16_t GetFieldInfoByNumber(fieldstr,index,fieldinfo)
+int32_t GetFieldInfoByNumber(fieldstr,index,fieldinfo)
 char	*fieldstr;
-int16_t	index;
+int32_t	index;
 FieldInfo	*fieldinfo;
 {
 char	*eptr;
 char	*sptr;
 char	line[MAXLINE];
-int16_t	len;
-int16_t	count;
+int32_t	len;
+int32_t	count;
 
     if(fieldstr == NULL || fieldinfo == NULL){
 	return(0);
@@ -1453,8 +1449,8 @@ int16_t	count;
 	    /*
 	    ** copy the field descriptor into temporary storage
 	    */
-	    if((len = (int16_t)(eptr - sptr)) >= MAXLINE){
-		fprintf(stderr,"field descriptor too long\n");
+	    if((len = (int32_t)(eptr - sptr)) >= MAXLINE){
+		fprintf(stderr,"field descriptor too int32_t\n");
 		return(0);
 	    }
 	    strncpy(line,sptr,len);
@@ -1487,7 +1483,7 @@ int16_t	count;
 #undef MAXLINE
 
 #define MAXLINE 1000
-int16_t GetFieldInfoByName(fieldstr,name,fieldinfo)
+int32_t GetFieldInfoByName(fieldstr,name,fieldinfo)
 char	*fieldstr;
 char	*name;
 FieldInfo	*fieldinfo;
@@ -1495,8 +1491,8 @@ FieldInfo	*fieldinfo;
 char	*eptr;
 char	*sptr;
 char	line[MAXLINE];
-int16_t	len;
-int16_t	count;
+int32_t	len;
+int32_t	count;
 
     if(fieldstr == NULL || fieldinfo == NULL){
 	return(0);
@@ -1532,8 +1528,8 @@ int16_t	count;
 	/*
 	** copy the field descriptor into temporary storage
 	*/
-	if((len = (int16_t)(eptr - sptr)) >= MAXLINE){
-	    fprintf(stderr,"field descriptor too long\n");
+	if((len = (int32_t)(eptr - sptr)) >= MAXLINE){
+	    fprintf(stderr,"field descriptor too int32_t\n");
 	    return(0);
 	}
 	strncpy(line,sptr,len);
@@ -1568,10 +1564,10 @@ int16_t	count;
     return(0);
 }
 
-int16_t checkArgs(char **argin, int16_t argnum, int16_t tot_argnum, int16_t exptype, int16_t expcount)
+int32_t checkArgs(char **argin, int32_t argnum, int32_t tot_argnum, int32_t exptype, int32_t expcount)
 {
   
-  int16_t i;
+  int32_t i;
   double val;
   char *endptr = NULL;
   struct stat statinfo;

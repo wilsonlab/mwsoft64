@@ -6,17 +6,17 @@ Replace most primitives with declarations from STDINT.H
 
 Identify the variables types that don't convert well between the two architectures:
 
-
-
-
 Direct variable type conversion chart:
 	- short	-> 	int16_t
-	- int 	->	int16_t
+	- int 	->	int32_t
 	- long	->	int32_t
 	
 Other conversions:
 	- sizeof(unsigned long) ->	sizeof(int32_t)  <-- valid  because the two types have the same size in bits
 
+fprintf issues:
+	- fprintf %d cuts off input at 16 bits buts we are using a 32bit type, which causes problems on the 64bit systems,
+		so when appropriate the %d is replaced with %ld, a preprocessor flag is used to determine the architecture and generate the appopriate format string for fprintf
 
 Consulted websites:
 	* Here is a good (lengthy) write up that addresses a lot of the issues realted to porting 32 to 64 bit
