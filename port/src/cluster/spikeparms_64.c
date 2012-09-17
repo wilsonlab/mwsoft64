@@ -1175,20 +1175,19 @@ FILE    *fp;
 
       switch(st[parm_list[i]].type){
         case ULONG:
-        #warning "GOT HERE!"
         fprintf(fp, fmt1, st[parm_list[i]].name, template->filename, ULONG,sizeof(unsigned long),1);
         break;
         case DOUBLE:
         fprintf(fp, fmt1, st[parm_list[i]].name, template->filename, DOUBLE,sizeof(double),1);
         break;
         case INT:
-        fprintf(fp,"%8s:%s,%d,%d,%d\t", st[parm_list[i]].name, template->filename, INT,sizeof(int),1);
+        fprintf(fp, fmt1, st[parm_list[i]].name, template->filename, INT,sizeof(int), 1);
         break;
         case SHORT:
-        fprintf(fp,"%8s:%s,%d,%d,%d\t", st[parm_list[i]].name, template->filename, SHORT,sizeof(short),1);
+        fprintf(fp, fmt1, st[parm_list[i]].name, template->filename, SHORT,sizeof(short),1);
         break;
         case CHAR:
-        fprintf(fp,"%8s:%s,%d,%d,%d\t", st[parm_list[i]].name, template->filename, CHAR,sizeof(char),1);
+        fprintf(fp, fmt1, st[parm_list[i]].name, template->filename, CHAR,sizeof(char),1);
         break;
         default:
         fprintf(fp, fmt1, st[parm_list[i]].name, template->filename, FLOAT,sizeof(float),1);
@@ -1214,13 +1213,13 @@ FILE    *fp;
           fprintf(fp, fmt2, st[parm_list[i]].name, DOUBLE,sizeof(double),1);
           break;
           case INT:
-          fprintf(fp,"%8s,%d,%d,%d\t", st[parm_list[i]].name, INT,sizeof(int),1);
+          fprintf(fp, fmt2, st[parm_list[i]].name, INT,sizeof(int),1);
           break;
           case SHORT:
-          fprintf(fp,"%8s,%d,%d,%d\t", st[parm_list[i]].name,SHORT,sizeof(short),1);
+          fprintf(fp, fmt2, st[parm_list[i]].name,SHORT,sizeof(short),1);
           break;
           case CHAR:
-          fprintf(fp,"%8s,%d,%d,%d\t", st[parm_list[i]].name, CHAR,sizeof(char),1);
+          fprintf(fp, fmt2, st[parm_list[i]].name, CHAR,sizeof(char),1);
           break;
           default:
           fprintf(fp, fmt2, st[parm_list[i]].name, FLOAT,sizeof(float),1);
