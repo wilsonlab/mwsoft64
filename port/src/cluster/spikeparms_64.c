@@ -1168,7 +1168,7 @@ Template	*template;
 	    if(result->outputformat == BINARY){
 		switch(st[parm_list[i]].type){
 		case ULONG:
-		    fprintf(fp,"%8s:%s,%d,%d,%d\t",
+		    fprintf(fp,"%8s:%s,%d,%ld,%d\t",
 			st[parm_list[i]].name,
 			template->filename,
 			ULONG,sizeof(unsigned int32_t),1);
@@ -1213,12 +1213,12 @@ Template	*template;
 	    if(result->outputformat == BINARY){
 		switch(st[parm_list[i]].type){
 		case ULONG:
-		    fprintf(fp,"%8s,%d,%d,%d\t",
+		    fprintf(fp,"%8s,%d,%ld,%d\t",
 			st[parm_list[i]].name,
 			ULONG,sizeof(unsigned int32_t),1);
 		    break;
 		case DOUBLE:
-		    fprintf(fp,"%8s,%d,%d,%d\t",
+		    fprintf(fp,"%8s,%d,%ld,%d\t",
 			st[parm_list[i]].name,
 			DOUBLE,sizeof(double),1);
 		    break;
