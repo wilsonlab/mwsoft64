@@ -29,8 +29,21 @@ popanal: popanal
 	$(MAKE) -C src/popanal
 	mv src/popanal/popanal $(BUILD_DIR)/bin/
 
-xclust: libs
- 	$(MAKE) -C X11/xclust/ xclust
+xclust: lib
+	mkdir -p $(BUILD_DIR)/bin;	
+	$(MAKE) -C src/xclust/ xclust
+	mv src/xclust/xclust3 $(BUILD_DIR)/bin/	
+
+xplot: lib
+	mkdir -p $(BUILD_DIR)/bin;	
+	$(MAKE) -C src/xplot xplot
+	mv src/xplot/xplot $(BUILD_DIR)/bin/
+
+xview: lib
+	mkdir -p $(BUILD_DIR)/bin;	
+	$(MAKE) -C src/xview xview
+	mv src/xview/xview $(BUILD_DIR)/bin/
+
 # 	$(MAKE) -C X11/xplot/ xplot
 # 	$(MAKE) -C X11/xview/ xview
 # 	$(MAKE) -C src csi
@@ -59,6 +72,10 @@ clean:
 	$(MAKE) -C src/ clean
 	$(MAKE) -C src/popanal/ clean
 	$(MAKE) -C src/behav/ clean
+	$(MAKE) -C src/xclust/ clean
+	$(MAKE) -C src/xplot/ clean
+	$(MAKE) -C src/xview/ clean
+
 
 
 

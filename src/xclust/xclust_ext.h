@@ -7,6 +7,9 @@
 #include	<glob.h>
 #include	<sys/wait.h>
 
+#include 	<stdint.h>
+#include 	<inttypes.h>
+
 #include 	"header.h"
 #include 	"iolib.h"
 #include 	"xclust_defs.h"

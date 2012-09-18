@@ -1212,8 +1212,8 @@ int32_t	lastid = 0;
       /* display subset calculations */
       fprintf(stderr,
 	      "\n"
-	      "spikes in file:     %ld\n"
-	      "last spike id:      %ld (0-indexed)\n"
+	      "spikes in file:     %"PRId32"\n"
+	      "last spike id:      %"PRId32" (0-indexed)\n"
 	      "subset parm file?:  %s\n\n",
 	      lastrec,
 	      lastid,

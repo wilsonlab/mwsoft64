@@ -1,3 +1,4 @@
+#include <stdint.h>
 /*
 ** basic window stuctures
 */

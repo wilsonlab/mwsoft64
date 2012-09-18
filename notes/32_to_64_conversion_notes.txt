@@ -1,5 +1,16 @@
-Conversion Notes
+===============================================================================
+								   Problems
+===============================================================================
 
+There are a few places where I'm getting warnings like:
+	format ‘%ld’ expects argument of type ‘long int’, but argument 3 has type ‘int32_t’
+
+This _WILL_ be a problem for 64 bit architectures 
+
+
+===============================================================================
+								Conversion Notes
+===============================================================================
 General Idea:
 
 Replace most primitives with declarations from STDINT.H
@@ -11,21 +22,30 @@ Direct variable type conversion chart:
 	- int 	->	int32_t
 	- long	->	int32_t
 	
+
+
 Other conversions:
 	- sizeof(unsigned long) ->	sizeof(int32_t)  <-- valid  because the two types have the same size in bits
+
+
 
 fprintf issues:
 	- fprintf %d cuts off input at 16 bits buts we are using a 32bit type, which causes problems on the 64bit systems,
 		so when appropriate the %d is replaced with %ld, a preprocessor flag is used to determine the architecture and generate the appopriate format string for fprintf
 	- uint32_t doesn't work with %ld so use macros from <inttypes.h>
 
-Consulted websites:
-	* Here is a good (lengthy) write up that addresses a lot of the issues realted to porting 32 to 64 bit
+===============================================================================
+								Resources
+===============================================================================	* Here is a good (lengthy) write up that addresses a lot of the issues realted to porting 32 to 64 bit
 		-http://www.ibm.com/developerworks/library/l-port64/index.html
 
 	* Good Stackoverflow Question:
 		-http://stackoverflow.com/questions/411798/converting-32-bit-application-into-64-bit-application-in-c
 
+
+===============================================================================
+								Misc Notes
+===============================================================================
 Variable sizes determined with a call to:  sizeof(TYPE). Compiled with G++ under Ubuntu 12.04 i686 and AMD_64
 
 ___32 bit___|___64 bit___

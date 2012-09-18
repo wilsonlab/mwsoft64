@@ -1,8 +1,4 @@
 #  Xplot : the program : written by Matt Wilson 
-#  Copyright 1990-1994
-
-### MWL Makefile includes
-
 # needed by include files
 TOPDIR = ../../
 

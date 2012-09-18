@@ -14,16 +14,12 @@ CFLAGS += -g3
 # uncomment next line for max compiler optimization
 CFLAGS += -O3
 
-
 ###
-
 #name of xclust executable to be built
 XCLUST = xclust3
 
 # defining DEBUG macro causes X events to be synchronized with errors
 #CFLAGS  +=	 -DDEBUG
-
-
 
 OBJ =	\
 	main.o \
