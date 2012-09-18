@@ -2,9 +2,9 @@
 
 DrawBorder()
 {
-int ymin;
-int ymax;
-int space;
+int32_t ymin;
+int32_t ymax;
+int32_t space;
 
     space = G->fontheight*0.5;
     ymin = G->fontheight*2 + space;
@@ -17,9 +17,9 @@ int space;
 
 DrawColorScale()
 {
-int 	i,x;
-int	xbase,ybase;
-int	maxbase;
+int32_t 	i,x;
+int32_t	xbase,ybase;
+int32_t	maxbase;
     SetColor (G->foreground);
     xbase = G->fontwidth;
     ybase = 2*G->fontheight;
@@ -51,23 +51,23 @@ int	maxbase;
 DrawColorBar()
 {
 float	color_width;
-int 	i,x;
-int	xbase,ybase;
+int32_t 	i,x;
+int32_t	xbase,ybase;
     xbase = G->fontwidth;
     ybase = G->fontheight;
     /*
     ** color bar
     */
     color_width = width/color_scale;
-    for(i=0;i<(int)(color_scale);i++){
-	SetColor((int)(i+color_min));
+    for(i=0;i<(int32_t)(color_scale);i++){
+	SetColor((int32_t)(i+color_min));
 	/*
-	x = xbase + (int)(i*G->fontwidth/5);
+	x = xbase + (int32_t)(i*G->fontwidth/5);
 	*/
 	x = (i*color_width);
 	FilledBox (
 	    x, 0,
-	    (int)(x + color_width + 1),
+	    (int32_t)(x + color_width + 1),
 	    G->fontheight);
     }
 }
@@ -80,7 +80,7 @@ ClearTitle()
 
 legend_background()
 {
-int	i;
+int32_t	i;
 /*
     SetMaxGray(color_scale);
 */

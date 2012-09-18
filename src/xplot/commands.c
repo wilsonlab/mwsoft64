@@ -5,7 +5,7 @@ extern char *strchr();
 static argerror = 0;
 
 char *Itoa(i)
-int i;
+int32_t i;
 {
 char	tmp[100];
 char	*copy;
@@ -37,7 +37,7 @@ char *s;
     return(atof(s));
 }
 
-int Atoi(s)
+int32_t Atoi(s)
 char *s;
 {
     if(s == NULL){
@@ -48,7 +48,7 @@ char *s;
 
 char *NextDelimiter(s,quote)
 char *s;
-int *quote;
+int32_t *quote;
 {
     if(s == NULL) return(NULL);
     /*
@@ -99,11 +99,11 @@ char *newenv;
     }
 }
 
-int CommandArgumentCount(line)
+int32_t CommandArgumentCount(line)
 char 	*line;
 {
-int	i;
-int	quote;
+int32_t	i;
+int32_t	quote;
 
     quote = 0;
     /*
@@ -129,15 +129,15 @@ int	quote;
 */
 char *CommandArgument(line,argnumber)
 char 	*line;
-int 	argnumber;
+int32_t 	argnumber;
 {
-int	i;
-int	count;
+int32_t	i;
+int32_t	count;
 char	*ptr;
 char	*ptr2;
 char	*copy;
 char	tmp[1000];
-int	quote;
+int32_t	quote;
 char	*LookupVariable();
 
     ptr = line;
@@ -213,11 +213,11 @@ Plot **plot;
 char *line;
 {
 Plot	*p;
-int	val;
-int	fval;
-extern int verbose_legend;
-short sx,sy;
-short sx2,sy2;
+int32_t	val;
+int32_t	fval;
+extern int32_t verbose_legend;
+int16_t sx,sy;
+int16_t sx2,sy2;
 float wx,wy,wz;
 float wx2,wy2,wz2;
 char *s;

@@ -13,17 +13,17 @@
 #define MAX_COLORS 256
 
 XColor	color[MAX_COLORS];
-int	pixel[MAX_COLORS];
+int32_t	pixel[MAX_COLORS];
 
-int MakeColormap(G)
+int32_t MakeColormap(G)
 Graph	*G;
 {
-int	planes[30];			/* planes altered by XGCC call */
-int	rval[MAX_COLORS]; 	/* color allocation bit maps */
-int	gval[MAX_COLORS];
-int	bval[MAX_COLORS];
-int	index;	
-int	ncolors;
+int32_t	planes[30];			/* planes altered by XGCC call */
+int32_t	rval[MAX_COLORS]; 	/* color allocation bit maps */
+int32_t	gval[MAX_COLORS];
+int32_t	bval[MAX_COLORS];
+int32_t	index;	
+int32_t	ncolors;
 Colormap	cmap;
 Window		root_window;
 
@@ -31,9 +31,9 @@ Window		root_window;
     **define rgb values:
     */
     for (ncolors = 0; ncolors < MAX_COLORS -63 ; ncolors++) {
-	bval[ncolors] = (int)carc((float)ncolors);
-	gval[ncolors] = (int)carc(ncolors - 63.0);
-	rval[ncolors] = (int)carc(ncolors - 126.0);
+	bval[ncolors] = (int32_t)carc((float)ncolors);
+	gval[ncolors] = (int32_t)carc(ncolors - 63.0);
+	rval[ncolors] = (int32_t)carc(ncolors - 126.0);
     }
     root_window = XRootWindow(G->display,G->screen_number);
     /*

@@ -6,22 +6,22 @@
 char	numstr[NUMSTRLEN+1];
 char	labelstr[200];
 char	tmpstr[200];
-int	plot_select = 0;
-int	command_entry = 0;
-int	first_char = 1;
-int	labelsx,labelsy,labelwx,labelwy;
-short	labelcoord_mode = WINDOW_LBL;
+int32_t	plot_select = 0;
+int32_t	command_entry = 0;
+int32_t	first_char = 1;
+int32_t	labelsx,labelsy,labelwx,labelwy;
+int16_t	labelcoord_mode = WINDOW_LBL;
 static float plot_scale = 0.75;
-static int box = FALSE;
-static int header = TRUE;
-int line_width = 1;
+static int32_t box = FALSE;
+static int32_t header = TRUE;
+int32_t line_width = 1;
 static escape_mode = 0;
 static axis_mode = XMODE;
 static global_operation=0;
 static float shiftpercent = 0.05;
 static float zoompercent = 0.1;
 float rotpercent = 0.05;
-int	rotatecolor = 0;
+int32_t	rotatecolor = 0;
 
 /* extern void SetRotationMatrix(double***, float, float, float); */
 extern void AffineRotationMatrixEuler(double ***, float , float , float );
@@ -32,7 +32,7 @@ extern Label *rotlabel;
 #define FORALLPLOTS for(plot=graph->plot;plot;plot=plot->next)
 
 SetHeader(mode)
-int mode;
+int32_t mode;
 {
     header = mode;
 }
@@ -41,7 +41,7 @@ AutoBarWidth(plot,percent)
 Plot	*plot;
 float	percent;
 {
-int	p0;
+int32_t	p0;
 ProjectionInfo	*pinfo;
 double	p0val1;
 double	p0val0;
@@ -100,7 +100,7 @@ float	val;
 }
 
 SetAxisMode(mode)
-int mode;
+int32_t mode;
 {
     axis_mode = mode;
 }
@@ -314,7 +314,7 @@ ToggleZapmode()
 
 SetTextEntryMode(graph,mode)
 Graph	*graph;
-int	mode;
+int32_t	mode;
 {
     labelcoord_mode = mode;	
     TextCursor(F);
@@ -420,7 +420,7 @@ Graph *graph;
 }
 
 SetBox(mode)
-int mode;
+int32_t mode;
 {
     box = mode;
 }
@@ -447,9 +447,9 @@ Plot	*p;
 
 SelectPlotByNumber(graph,ival)
 Graph *graph;
-int ival;
+int32_t ival;
 {
-int	cnt;
+int32_t	cnt;
 Plot	*plot;
 
     /*
@@ -495,15 +495,15 @@ Plot	*plot;
 
 OffsetPlotGraphically(graph,cx,cy,val)
 Graph *graph;
-int	cx,cy;
+int32_t	cx,cy;
 float	val;
 {
 Plot	*plot;
-int	closest;
+int32_t	closest;
 float	distance;
-int	i;
+int32_t	i;
 float	d;
-int	p1;
+int32_t	p1;
 ProjectionInfo	*pinfo;
 double	p1val;
 
@@ -538,13 +538,13 @@ double	p1val;
 
 SelectPlotGraphically(graph,cx,cy)
 Graph *graph;
-int	cx,cy;
+int32_t	cx,cy;
 {
-int	cnt;
+int32_t	cnt;
 Plot	*plot;
 Plot	*closest;
 float	distance;
-int	i;
+int32_t	i;
 float	d;
 
     /*
@@ -625,7 +625,7 @@ SetGlobalOperation()
     global_operation = 1;
 }
 
-long	fsize(name)
+int32_t	fsize(name)
 char	*name;
 {
 struct stat stbuf;
@@ -693,10 +693,10 @@ float	val;
 
 #define SV graph->savedview[index]
 
-int ProcessSavedView(graph, savemode, index)
+int32_t ProcessSavedView(graph, savemode, index)
 Graph	*graph;
-int	savemode;
-int	index;
+int32_t	savemode;
+int32_t	index;
 {
 ProjectionInfo	*pinfo;
 char	tmpstr[80];
@@ -872,8 +872,8 @@ char	tmpstr[80];
 
 LoadViewDefaults(graph,index,p0,p1,p2,wxmin,wymin,wxmax,wymax)
 Graph	*graph;
-int	index;
-int	p0,p1,p2;
+int32_t	index;
+int32_t	p0,p1,p2;
 float	wxmin,wymin,wxmax,wymax;
 {
 
@@ -908,7 +908,7 @@ SaveViewDefaults(graph,fp)
 Graph	*graph;
 FILE	*fp;
 {
-int	index;
+int32_t	index;
 char	*s;
 
     for(index=2;index<=12;index++){
@@ -933,17 +933,17 @@ Graph		*graph;
 XKeyEvent	*event;
 {
 char	buffer[100];
-int	nbytes;
+int32_t	nbytes;
 char	c;
 KeySym	key;
 float	time;
 float	val;
-int	ival;
-int	cnt;
+int32_t	ival;
+int32_t	cnt;
 Plot	*plot;
 float	wx,wy;
 Label	*label;
-int	i;
+int32_t	i;
 
     buffer[0] = '\0';
     /* 
@@ -1805,9 +1805,9 @@ int	i;
 		break;
 	    }
 	    sprintf(rotlabel->u.string.line, "tx: %5d  ty: %5d  tz: %5d",
-	    (int)(360*graph->thetax/(2*M_PI))%360,
-	    (int)(360*graph->thetay/(2*M_PI))%360,
-	    (int)(360*graph->thetaz/(2*M_PI))%360);
+	    (int32_t)(360*graph->thetax/(2*M_PI))%360,
+	    (int32_t)(360*graph->thetay/(2*M_PI))%360,
+	    (int32_t)(360*graph->thetaz/(2*M_PI))%360);
 	    RefreshText(graph->frame->text);
 	    /*Text(graph->frame->text,0,graph->frame->text->fontheight,tmpstr);*/
 /* 	    SetRotationMatrix(&graph->matrix, graph->thetax, graph->thetay, graph->thetaz); */
@@ -1836,9 +1836,9 @@ int	i;
 		break;
 	    }
 	    sprintf(rotlabel->u.string.line, "tx: %5d  ty: %5d  tz: %5d",
-	    (int)(360*graph->thetax/(2*M_PI))%360,
-	    (int)(360*graph->thetay/(2*M_PI))%360,
-	    (int)(360*graph->thetaz/(2*M_PI))%360);
+	    (int32_t)(360*graph->thetax/(2*M_PI))%360,
+	    (int32_t)(360*graph->thetay/(2*M_PI))%360,
+	    (int32_t)(360*graph->thetaz/(2*M_PI))%360);
 	    RefreshText(graph->frame->text);
 	    /*Text(graph->frame->text,0,graph->frame->text->fontheight,tmpstr);*/
 /* 	    SetRotationMatrix(&graph->matrix, graph->thetax, graph->thetay, graph->thetaz); */

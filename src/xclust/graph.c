@@ -1,20 +1,20 @@
 #include "xclust_ext.h"
 
-static int showclusters=1;
-extern int rotatecolor;
+static int32_t showclusters=1;
+extern int32_t rotatecolor;
 
 SetShowClusters(state)
-int	state;
+int32_t	state;
 {
     showclusters=state;
 }
 
 AssignColors(graph,start,increment)
 Graph	*graph;
-int	start;
-int	increment;
+int32_t	start;
+int32_t	increment;
 {
-int	color;
+int32_t	color;
 Plot	*plot;
     
     color = start;
@@ -26,17 +26,17 @@ Plot	*plot;
 
 static ProjectionInfo	*xpinfo;
 
-int plotcompare(f1,f2)
+int32_t plotcompare(f1,f2)
 DataCoord	*f1,*f2;
 {
-    return((int)(GetDoubleFromRawData(f1->data,xpinfo) - GetDoubleFromRawData(f2->data,xpinfo)));
+    return((int32_t)(GetDoubleFromRawData(f1->data,xpinfo) - GetDoubleFromRawData(f2->data,xpinfo)));
 }
 
 Sort(graph)
 Graph 	*graph;
 {
 Plot	*plot;
-int	xproject;
+int32_t	xproject;
 
     xproject = graph->currentprojection[0];
     xpinfo = GetProjectionInfo(graph,xproject);
@@ -77,7 +77,7 @@ DrawGraph(graph)
 Graph	*graph;
 {
 Plot	*plot;
-int	cnt;
+int32_t	cnt;
 
     CalculateAxisParameters(graph);
     DrawAxes(graph);
@@ -111,7 +111,7 @@ StepForward(graph)
 Graph	*graph;
 {
 Plot	*plot;
-int	savecolor;
+int32_t	savecolor;
 
     if(graph->stepthrough){
 	/*
@@ -143,7 +143,7 @@ StepBackward(graph)
 Graph	*graph;
 {
 Plot	*plot;
-int	savecolor;
+int32_t	savecolor;
 
     if(graph->stepthrough){
 	/*
@@ -175,12 +175,12 @@ int	savecolor;
 
 DrawPointIcon(plot,x,y)
 Plot *plot;
-int x,y;
+int32_t x,y;
 {
 Pixmap	bitmap;
-short	w,h;
+int16_t	w,h;
 float	scale;
-int	ival;
+int32_t	ival;
 
     scale = plot->pointscale;
     if(scale == 0) scale = 1;
@@ -197,31 +197,31 @@ int	ival;
 	** place a solid 5x5 pixel box around each point
 	*/
 	ival = 3*scale;
-	FilledBox(x-ival,y-ival,(int)(x+2*scale),y+ival);
+	FilledBox(x-ival,y-ival,(int32_t)(x+2*scale),y+ival);
 	break;
     case CIRCLE_PT:
 	/*
 	** place a 5 pixel circle around each point
 	*/
-	Circle(x,y,(int)(5*scale));
+	Circle(x,y,(int32_t)(5*scale));
 	break;
     case FCIRCLE_PT:
 	/*
 	** place a solid 5 pixel circle around each point
 	*/
-	FilledCircle(x,y,(int)(7*scale));
+	FilledCircle(x,y,(int32_t)(7*scale));
 	break;
     case TRIANGLE_PT:
 	/*
 	** place a 5 pixel triangle around each point
 	*/
-	Triangle(x,y,(int)(5*scale));
+	Triangle(x,y,(int32_t)(5*scale));
 	break;
     case FTRIANGLE_PT:
 	/*
 	** place a solid 5 pixel triangle around each point
 	*/
-	FilledTriangle(x,y,(int)(7*scale));
+	FilledTriangle(x,y,(int32_t)(7*scale));
 	break;
     case X_PT:
 	/*
@@ -276,12 +276,12 @@ int	ival;
 DrawPoints(plot)
 Plot	*plot;
 {
-int	i;
-int	j;
-int	start = 0;
-int	prevcolor;
-int	color;
-int	delay;
+int32_t	i;
+int32_t	j;
+int32_t	start = 0;
+int32_t	prevcolor;
+int32_t	color;
+int32_t	delay;
 
     /*
     ** draw an icon for each point
@@ -363,7 +363,7 @@ int	delay;
 DrawSteps(plot)
 Plot	*plot;
 {
-int	i;
+int32_t	i;
 
     /*
     ** draw an step between each point
@@ -384,7 +384,7 @@ int	i;
 DrawBars(plot)
 Plot	*plot;
 {
-int	i;
+int32_t	i;
 float	width;
 float	sx1,sx2;
 float	sy,sy2;
@@ -414,15 +414,15 @@ float	sy,sy2;
 	if(plot->fcoord[i].x < -10 || plot->fcoord[i].x > plot->graph->wwidth
 	+10) continue;
 	if(plot->bar_filled){
-	    FilledBox((int)(plot->fcoord[i].x -width/2.0 +.5),
-	    (int)plot->fcoord[i].y,
-	    (int)(plot->fcoord[i].x+width/2.0 +.5),
-	    (int)sy);
+	    FilledBox((int32_t)(plot->fcoord[i].x -width/2.0 +.5),
+	    (int32_t)plot->fcoord[i].y,
+	    (int32_t)(plot->fcoord[i].x+width/2.0 +.5),
+	    (int32_t)sy);
 	} else {
-	    Box((int)(plot->fcoord[i].x-width/2.0 +.5),
-	    (int)plot->fcoord[i].y,
-	    (int)(plot->fcoord[i].x+width/2.0 +.5),
-	    (int)sy);
+	    Box((int32_t)(plot->fcoord[i].x-width/2.0 +.5),
+	    (int32_t)plot->fcoord[i].y,
+	    (int32_t)(plot->fcoord[i].x+width/2.0 +.5),
+	    (int32_t)sy);
 	}
     }
 }
@@ -430,14 +430,14 @@ float	sy,sy2;
 DrawErrorBars(plot)
 Plot	*plot;
 {
-int	i;
-int	sx;
-int	tmp;
-int	sy;
-int	sx1,sx2,sy1,sy2;
+int32_t	i;
+int32_t	sx;
+int32_t	tmp;
+int32_t	sy;
+int32_t	sx1,sx2,sy1,sy2;
 float	wx,wy,wz;
 double	nx,ny,nz;
-int	p2;
+int32_t	p2;
 ProjectionInfo	*pinfo;
 double	p2val;
 
@@ -508,7 +508,7 @@ double	p2val;
                     wy + plot->escale*p2val,
                     &sx2,&sy2);
                 if((sx1 == sx2) && (sy1 == sy2)) break;
-		SetColor((int)(plot->cscale*p2val) +
+		SetColor((int32_t)(plot->cscale*p2val) +
 		    plot->coffset);
                 Box(sx1,sy1,sx2,sy2);
                 break;
@@ -522,7 +522,7 @@ double	p2val;
                     wy + plot->escale*p2val,
                     &sx2,&sy2);
                 if((sx1 == sx2) && (sy1 == sy2)) break;
-		SetColor((int)(plot->cscale*p2val) +
+		SetColor((int32_t)(plot->cscale*p2val) +
 		    plot->coffset);
                 FilledBox(sx1,sy1,sx2,sy2);
                 break;
@@ -563,7 +563,7 @@ double	p2val;
                     wy + plot->escale,
                     &sx2,&sy2);
                 if((sx1 == sx2) && (sy1 == sy2)) break;
-		SetColor((int)(plot->cscale*p2val) +
+		SetColor((int32_t)(plot->cscale*p2val) +
 		    plot->coffset);
                 FilledBox(sx1,sy1,sx2,sy2);
                 break;
@@ -590,13 +590,13 @@ double	p2val;
 DrawPlot(plot)
 Plot	*plot;
 {
-int minus_x;
-int minus_y;
-int plus_x;
-int plus_y;
-int i;
-int	blockstart;
-int	previd;
+int32_t minus_x;
+int32_t minus_y;
+int32_t plus_x;
+int32_t plus_y;
+int32_t i;
+int32_t	blockstart;
+int32_t	previd;
 
     if(plot->graph->optimize){
 	minus_x = 1;
@@ -742,7 +742,7 @@ MenuItem	*item;
 FreePlot(plot)
 Plot *plot;
 {
-int	i;
+int32_t	i;
 
     if(plot == NULL) return;
     if(plot->coord){

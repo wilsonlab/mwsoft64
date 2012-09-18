@@ -3,7 +3,7 @@
 WorldTransform(coord,tcoord,ncoords)
 Coord	*coord;
 Coord	*tcoord;
-int	ncoords;
+int32_t	ncoords;
 {
 }
 

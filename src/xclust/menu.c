@@ -26,96 +26,96 @@
 #include "backward.bitmap"
 #include "ifbackward.bitmap"
 
-extern int MenuEvalOverlap();
-extern int MenuSetShowClusters();
-extern int MenuContinuousForward();
-extern int MenuContinuousBackward();
-extern int MenuZoomIn();
-extern int MenuZoomOut();
-extern int MenuAutoscale();
-extern int MenuFlashCluster();
-extern int MenuClusterBlockUp();
-extern int MenuClusterBlockDown();
-extern int MenuProjectionBlockUp();
-extern int MenuProjectionBlockDown();
-extern int MenuUndoClusterChange();
-extern int MenuForwardXhilo();
-extern int MenuBackwardXhilo();
-extern int MenuAutoprocess();
-extern int MenuSaveDefaults();
-extern int MenuEpochName();
-extern int MenuEpochKill();
-extern int MenuLabelClusters();
-extern int MenuButtonShowOnlyCluster();
-extern int MenuButtonHideCluster();
-extern int MenuShowClustStat();
-extern int MenuEnterStart();
-extern int MenuEnterEnd();
-extern int MenuEnterTstart();
-extern int MenuEnterTend();
-/* extern int MenuSpikeTimestamp(); */
-/* extern int MenuSpikeId(); */
-extern int MenuLoadPoints();
-extern int MenuLoadAllPoints();
-extern int MenuLoadEpochFile();
-extern int MenuSaveEpochFile();
-extern int MenuDefineNewEpoch();
-extern int MenuChangeUnits();
-extern int MenuMovieFrame();
-extern int MenuSetOverlay();
-extern int MenuGrab();
-extern int MenuViewAvg();
-extern int MenuViewDir();
-extern int MenuViewRate();
-extern int MenuViewBehav();
-extern int MenuViewSpot();
-extern int MenuViewAcorr();
-extern int MenuViewXcorr();
-extern int MenuViewISI();
-extern int MenuViewSpikes();
-extern int MenuHideCluster();
-extern int MenuHideAllBounds();
-extern int MenuEnableCluster();
-extern int MenuWriteClusterIndices();
-extern int MenuCopyCluster();
-extern int MenuWorldTextEntry();
-extern int MenuPartialPlotLoad();
-extern int MenuPartialPlotRead();
-extern int MenuPartialPlotReset();
-extern int MenuDeletePlot();
-extern int MenuWriteClusterBounds();
-extern int MenuReadClusterBounds();
-extern int MenuDeleteCluster();
-extern int MenuDeleteAllClusters();
-extern int MenuDeleteClusterBounds();
-extern int MenuWriteClusters();
-extern int MenuSetCluster();
-extern int MenuSetDrawmode();
-extern int MenuSetZapmode();
-extern int MenuSetPinchMode();
-extern int MenuSetPolyLineMode();
-extern int MenuSetClusterBoxMode();
-extern int MenuSetClusterPolyLineMode();
-extern int MenuSetClusterMode();
-extern int MenuSetProjection0();
-extern int MenuSetProjection1();
-extern int MenuSetProjection2();
-extern int MenuSetClusterScore();
-extern int MenuSetClusterColor();
-extern int MenuToggleXAutoscale();
-extern int MenuUnsetClusterScore();
-extern int MenuRandomizeProjection();
-extern int MenuSetProjectionNext();
-extern int MenuBlockMovie();
-extern int Quit();
-extern int RightShift();
-extern int LeftShift();
+extern int32_t MenuEvalOverlap();
+extern int32_t MenuSetShowClusters();
+extern int32_t MenuContinuousForward();
+extern int32_t MenuContinuousBackward();
+extern int32_t MenuZoomIn();
+extern int32_t MenuZoomOut();
+extern int32_t MenuAutoscale();
+extern int32_t MenuFlashCluster();
+extern int32_t MenuClusterBlockUp();
+extern int32_t MenuClusterBlockDown();
+extern int32_t MenuProjectionBlockUp();
+extern int32_t MenuProjectionBlockDown();
+extern int32_t MenuUndoClusterChange();
+extern int32_t MenuForwardXhilo();
+extern int32_t MenuBackwardXhilo();
+extern int32_t MenuAutoprocess();
+extern int32_t MenuSaveDefaults();
+extern int32_t MenuEpochName();
+extern int32_t MenuEpochKill();
+extern int32_t MenuLabelClusters();
+extern int32_t MenuButtonShowOnlyCluster();
+extern int32_t MenuButtonHideCluster();
+extern int32_t MenuShowClustStat();
+extern int32_t MenuEnterStart();
+extern int32_t MenuEnterEnd();
+extern int32_t MenuEnterTstart();
+extern int32_t MenuEnterTend();
+/* extern int32_t MenuSpikeTimestamp(); */
+/* extern int32_t MenuSpikeId(); */
+extern int32_t MenuLoadPoints();
+extern int32_t MenuLoadAllPoints();
+extern int32_t MenuLoadEpochFile();
+extern int32_t MenuSaveEpochFile();
+extern int32_t MenuDefineNewEpoch();
+extern int32_t MenuChangeUnits();
+extern int32_t MenuMovieFrame();
+extern int32_t MenuSetOverlay();
+extern int32_t MenuGrab();
+extern int32_t MenuViewAvg();
+extern int32_t MenuViewDir();
+extern int32_t MenuViewRate();
+extern int32_t MenuViewBehav();
+extern int32_t MenuViewSpot();
+extern int32_t MenuViewAcorr();
+extern int32_t MenuViewXcorr();
+extern int32_t MenuViewISI();
+extern int32_t MenuViewSpikes();
+extern int32_t MenuHideCluster();
+extern int32_t MenuHideAllBounds();
+extern int32_t MenuEnableCluster();
+extern int32_t MenuWriteClusterIndices();
+extern int32_t MenuCopyCluster();
+extern int32_t MenuWorldTextEntry();
+extern int32_t MenuPartialPlotLoad();
+extern int32_t MenuPartialPlotRead();
+extern int32_t MenuPartialPlotReset();
+extern int32_t MenuDeletePlot();
+extern int32_t MenuWriteClusterBounds();
+extern int32_t MenuReadClusterBounds();
+extern int32_t MenuDeleteCluster();
+extern int32_t MenuDeleteAllClusters();
+extern int32_t MenuDeleteClusterBounds();
+extern int32_t MenuWriteClusters();
+extern int32_t MenuSetCluster();
+extern int32_t MenuSetDrawmode();
+extern int32_t MenuSetZapmode();
+extern int32_t MenuSetPinchMode();
+extern int32_t MenuSetPolyLineMode();
+extern int32_t MenuSetClusterBoxMode();
+extern int32_t MenuSetClusterPolyLineMode();
+extern int32_t MenuSetClusterMode();
+extern int32_t MenuSetProjection0();
+extern int32_t MenuSetProjection1();
+extern int32_t MenuSetProjection2();
+extern int32_t MenuSetClusterScore();
+extern int32_t MenuSetClusterColor();
+extern int32_t MenuToggleXAutoscale();
+extern int32_t MenuUnsetClusterScore();
+extern int32_t MenuRandomizeProjection();
+extern int32_t MenuSetProjectionNext();
+extern int32_t MenuBlockMovie();
+extern int32_t Quit();
+extern int32_t RightShift();
+extern int32_t LeftShift();
 
 static MenuItem	*debugitem;
 
 /* #ifdef OLD */
 /* Usleep(usec) */
-/* int usec; */
+/* int32_t usec; */
 /* { */
 /* struct timeval  timeout; */
 
@@ -142,7 +142,7 @@ CollapseMenu(menuframe)
   MenuContainer *menucontainer;
   MenuFrame *nextframe;
   XWindowAttributes window_attr;
-  int hdiff = 0, height = 0, reqheight = 0;
+  int32_t hdiff = 0, height = 0, reqheight = 0;
 
 
   menucontainer = menuframe->container;
@@ -170,9 +170,9 @@ CollapseMenu(menuframe)
 
 MenuFrame *AddMenuFrame(menucontainer, collapsible, expanded, showtitle, title)
      MenuContainer *menucontainer;
-     int collapsible;
-     int expanded;
-     int showtitle;
+     int32_t collapsible;
+     int32_t expanded;
+     int32_t showtitle;
      char *title;
 {
 
@@ -331,12 +331,12 @@ MenuWindow	*GetMenu(name)
 
 
 MoveMenuWindow(y)
-int	y;
+int32_t	y;
 {
 /* MenuWindow	*menu; */
 /* char	*menuname; */
   MenuContainer *menucontainer;
-  int	height;
+  int32_t	height;
 
   menucontainer = F->menucontainer;  
 
@@ -466,7 +466,7 @@ MenuItem	*item;
 /* MenuItem	*item; */
 /* char		*bits; */
 /* { */
-/* int	depth = 1; */
+/* int32_t	depth = 1; */
 
 /*     if(bits){ */
 /* 	return( */
@@ -524,14 +524,14 @@ MenuItem	*item;
 {
 char	line[200];
 char	*valuestr;
-int	maxlen;
-int	trim;
-int	th;
-int	strsize;
-int	valuesize;
-int	linesize;
-int	i;
-int     stroffset = 0;
+int32_t	maxlen;
+int32_t	trim;
+int32_t	th;
+int32_t	strsize;
+int32_t	valuesize;
+int32_t	linesize;
+int32_t	i;
+int32_t     stroffset = 0;
 
     if(item == NULL) return;
     if(!item->mapped) return;
@@ -741,15 +741,15 @@ MenuItem	*item;
 
 MenuItem *CreateMenuItem(menu,x,y,w,h,name,string,invert,string2,invert2,fontname,func,type,bitname,bitname2,value,class,data,redrawfunc)
 MenuWindow	*menu;
-int x,y,w,h;
+int32_t x,y,w,h;
 char	*name;
 char	*string;
-int	invert;
+int32_t	invert;
 char	*string2;
-int	invert2;
+int32_t	invert2;
 char		*fontname;
 PFI		func;
-int		type;
+int32_t		type;
 char		*bitname;
 char		*bitname2;
 char		*value;
@@ -758,11 +758,11 @@ char            *data;
 PFI		redrawfunc;
 {
 MenuItem	*item;
-int	borderwidth = 1;
-int	border;
-int	background;
+int32_t	borderwidth = 1;
+int32_t	border;
+int32_t	background;
 WindowData		*windowdata;
-extern	int	item_event();
+extern	int32_t	item_event();
 
     /*
     ** 			ITEM WINDOW
@@ -840,13 +840,13 @@ extern	int	item_event();
 
 MenuItem *AddMenuItem(menu,x,y,w,h,name,string,invert,string2,invert2,fontname,func,type,bits,bits2,value,class,data)
 MenuWindow	*menu;
-int 		x,y,w,h;
+int32_t 		x,y,w,h;
 char		*name;
 char		*string;
 char		*string2;
 char		*fontname;
 PFI		func;
-int		type;
+int32_t		type;
 char		*bits;
 char		*bits2;
 char		*value;
@@ -879,7 +879,7 @@ char		*fontname;
 ItemText(item,s, offset)
 MenuItem	*item;
 char		*s;
-int              offset;
+int32_t              offset;
 {
     if(s == NULL) return;
     XPSDrawText(item->display,item->window,item->context,
@@ -924,7 +924,7 @@ MenuClassSetState(protecteditem,menu,class,state)
 MenuItem		*protecteditem;
 MenuWindow	*menu;
 char	*class;
-int	state;
+int32_t	state;
 {
 MenuItem	*item;
 
@@ -990,7 +990,7 @@ char	buffer[100];
 char	c;
 KeySym	key;
 char	tmpstr[500];
-int	strend;
+int32_t	strend;
 
     buffer[0] = '\0';
     /* 
@@ -1278,13 +1278,13 @@ MenuWindow	*cluststat;
 CreateColorStat(menu)
 MenuWindow	*menu;
 {
-int	i,j;
+int32_t	i,j;
 MenuItem	*item;
- int	count;
- int itemsize_x = 20;
- int itemsize_y = 16;
- int ncol = 16;
- int nrow; /* = 16;*/
+ int32_t	count;
+ int32_t itemsize_x = 20;
+ int32_t itemsize_y = 16;
+ int32_t ncol = 16;
+ int32_t nrow; /* = 16;*/
  nrow = ceil(MAXCLUSTER / ncol);
 
     count=0;
@@ -1341,7 +1341,7 @@ CreateMenus(menucontainer)
 CreateMainMenu(menu)
 MenuWindow	*menu;
 {
-int voffset;
+int32_t voffset;
 
 /* start buttons at top of menu frame */
  voffset = 0;
@@ -1376,13 +1376,13 @@ int voffset;
 
 MainMenuControlBlock(menu,voffset)
 MenuWindow	*menu;
-int		voffset;
+int32_t		voffset;
 {
-  int i;
+  int32_t i;
   char* istr;
-  int hoffset;
+  int32_t hoffset;
   char *newstr;
-  int  width;
+  int32_t  width;
   char tempstr[256];
 
     AddMenuItem(menu,0,voffset,40,BUTTONH,NULL,
@@ -1574,10 +1574,10 @@ int		voffset;
 
 MainMenuClusterBlock(menu,voffset)
 MenuWindow	*menu;
-int		voffset;
+int32_t		voffset;
 {
-  int i;
-  int hoffset;
+  int32_t i;
+  int32_t hoffset;
   char* gradestr;
   char *newstr;
   char tempstr[256];
@@ -1727,7 +1727,7 @@ int		voffset;
 
 MainMenuAnalysisBlock(menu,voffset)
 MenuWindow	*menu;
-int		voffset;
+int32_t		voffset;
 {
 
   MenuItem *item;
@@ -1868,7 +1868,7 @@ UpdateStatusTime()
   MenuWindow *menu;
   Label *label;
   char str_start[20], str_end[20];
-  int s,e;
+  int32_t s,e;
 
   plot = SelectedPlot(F->graph);
   if (plot == NULL)
@@ -1924,10 +1924,10 @@ UpdateStatusEpoch(epoch)
 /* SetEpochStatus(menu, epochname, pointstart, pointend, timestampstart, timestampend) */
 /*      MenuWindow *menu; */
 /*      char *epochname; */
-/*      int pointstart; */
-/*      int pointend; */
-/*      int timestampstart; */
-/*      int timestampend; */
+/*      int32_t pointstart; */
+/*      int32_t pointend; */
+/*      int32_t timestampstart; */
+/*      int32_t timestampend; */
 /* { */
 /*   Label *label; */
 /*   char str_start[20], str_end[20]; */
@@ -1947,10 +1947,10 @@ UpdateStatusEpoch(epoch)
 
 MainMenuEpochBlock(menu,voffset)
 MenuWindow	*menu;
-int		voffset;
+int32_t		voffset;
 {
-  int i;
-  int hoffset;
+  int32_t i;
+  int32_t hoffset;
   Label *label;
 
     label = AddLabelString(menu, "",
@@ -2139,12 +2139,12 @@ int		voffset;
 
 
 
-static int menupos = -1;
+static int32_t menupos = -1;
 
 MenuScrollUp(item)
 MenuItem	*item;
 {
-int	scrollsize;
+int32_t	scrollsize;
 
     if(item->value){
 	scrollsize = atoi(item->value);
@@ -2156,7 +2156,7 @@ int	scrollsize;
 MenuScrollDown(item)
 MenuItem	*item;
 {
-int	scrollsize;
+int32_t	scrollsize;
 
     if(item->value){
 	scrollsize = atoi(item->value);
@@ -2183,7 +2183,7 @@ MenuWindow	*menu;
 
 SetItemEnable(itemname,enable)
 char	*itemname;
-int	enable;
+int32_t	enable;
 {
 MenuItem	*item;
 
@@ -2196,16 +2196,16 @@ MenuItem	*item;
 
 AddMenuCluster(menu,clusternum,x,y)
 MenuWindow	*menu;
-int	clusternum;
-int	x;
-int	y;
+int32_t	clusternum;
+int32_t	x;
+int32_t	y;
 {
 char	line[100];
 char	*name;
 char	*cnum;
 MenuItem	*item;
 
-extern int MenuSetCluster();
+extern int32_t MenuSetCluster();
 
     sprintf(line,"%d",clusternum);
     cnum = (char *)malloc(strlen(line) + 1);
@@ -2268,8 +2268,8 @@ extern int MenuSetCluster();
 
 AddMenuEpoch(menu,epochnum,y)
 MenuWindow	*menu;
-int	epochnum;
-int	y;
+int32_t	epochnum;
+int32_t	y;
 {
 char	*epochname;
 
@@ -2298,7 +2298,7 @@ char	*epochname;
 	NULL,(DIALOG | INPUTAREA),NULL,NULL,NULL,"etime", NULL);
 }
 
-int CallMenuItem(itemname)
+int32_t CallMenuItem(itemname)
 char	*itemname;
 {
 MenuItem	*item;
@@ -2322,7 +2322,7 @@ XButtonPressedEvent	event;
 }
 
 
-int PutItemValue(itemname,value)
+int32_t PutItemValue(itemname,value)
 char	*itemname;
 char	*value;
 {
@@ -2353,7 +2353,7 @@ MenuItem	*item;
     return(item->value);
 }
 
-int GetItemState(itemname)
+int32_t GetItemState(itemname)
 char	*itemname;
 {
 MenuItem	*item;
@@ -2373,12 +2373,12 @@ MenuContainer	*menucontainer;
 MenuItem	*item;
 ProjectionInfo	*pinfo;
 char		itemname[100];
-int		i;
+int32_t		i;
  MenuWindow *menu;
  char startid[100], endid[100];
  Plot *p;
- int s, e;
- int start, end;
+ int32_t s, e;
+ int32_t start, end;
 
     /*
     ** attempt to initialize the projection button names

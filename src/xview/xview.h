@@ -9,26 +9,26 @@
 #include 	"xview_defs.h"
 #include 	"xview_struct.h"
 
-int	ncontours = 10;
+int32_t	ncontours = 10;
 
-short	cumulative;
+int16_t	cumulative;
 char    fname[80],
 		ch[80],
 		valstr[20],
 		timestr[20];
 char	*commandfile;
-int	commandsource;
+int32_t	commandsource;
 char	*display;
 Image	*image;
 Image	*imageptr;
 float	ys,lscale,xs,dscale;
-short manual_xsize,manual_ysize;
-short report_autoscale;
+int16_t manual_xsize,manual_ysize;
+int16_t report_autoscale;
 float
 		xsize,
 		ysize,
 		zsize;
-int     display_mode,
+int32_t     display_mode,
 		legend_base,
 		xbase_size,
 		ybase_size,
@@ -60,22 +60,22 @@ float   	count,
 	   *curdata,
 	   *data;
 FILE	*fp;
-int		debug;
-int		backup;
+int32_t		debug;
+int32_t		backup;
 
-short	representation;
-short	title_mode;
+int16_t	representation;
+int16_t	title_mode;
 char	title[MAXTITLES][100];
-short	ntitles;
-short	orient;
-short	speed;
-short	posneg;
+int16_t	ntitles;
+int16_t	orient;
+int16_t	speed;
+int16_t	posneg;
 char *geometry;
-short header;
-int signal_step;
-int got_signal;
-short color_mode;
-short no_lines;
+int16_t header;
+int32_t signal_step;
+int32_t got_signal;
+int16_t color_mode;
+int16_t no_lines;
 
 GlobalContext	*G;
 ViewContext	*V;

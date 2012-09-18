@@ -6,10 +6,10 @@
 #include 	"xclust_defs.h"
 #include 	"xclust_struct.h"
 
-int		debug;
+int32_t		debug;
 Graph		*G;
 Frame		*F;
 
 char	*standardargv[1] = {"xclust3"};
-int	standardargc = 1;
-int	suppresswarnings;
+int32_t	standardargc = 1;
+int32_t	suppresswarnings;

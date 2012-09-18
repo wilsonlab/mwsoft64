@@ -14,10 +14,10 @@
 #define MIN_COLOR 20
 
 XColor	color[MAX_COLORS];
-unsigned long	cells[MAX_COLORS];
-static int	color_scale;
-static int	color_max;
-static int	color_min;
+uint32_t	cells[MAX_COLORS];
+static int32_t	color_scale;
+static int32_t	color_max;
+static int32_t	color_min;
 
 #define MINDIST 10
 #define MINAMP 40
@@ -26,8 +26,8 @@ ReadColorMap(file)
 char	*file;
 {
 FILE	*fp;
-int	i;
-int	r,g,b;
+int32_t	i;
+int32_t	r,g,b;
 char	line[1000];
 
     color_min = MIN_COLOR;
@@ -62,9 +62,9 @@ WriteColorMap(file)
 char	*file;
 {
 FILE	*fp;
-int	i,j;
-int	done;
-long	seed;
+int32_t	i,j;
+int32_t	done;
+int32_t	seed;
 
     color_min = MIN_COLOR;
     color_max = MAXCOLORS -1;
@@ -77,9 +77,9 @@ long	seed;
     for (i = color_min; i <= color_max; i++) {
 	done = 0;
 	while(!done){
-	    color[i].red = (int)(frandom(0,254));
-	    color[i].green = (int)(frandom(0,254));
-	    color[i].blue = (int)(frandom(0,254));
+	    color[i].red = (int32_t)(frandom(0,254));
+	    color[i].green = (int32_t)(frandom(0,254));
+	    color[i].blue = (int32_t)(frandom(0,254));
 	    if((color[i].red < MINAMP) && 
 	    (color[i].green < MINAMP) &&
 	    (color[i].blue < MINAMP))
@@ -104,15 +104,15 @@ long	seed;
 }
 
 
-int MakeColormap(G)
+int32_t MakeColormap(G)
 Graph	*G;
 {
-int	planes[30];			/* planes altered by XGCC call */
+int32_t	planes[30];			/* planes altered by XGCC call */
 Colormap	cmap;
-int	i;
+int32_t	i;
 float	scale;
-int	j;
-int	done;
+int32_t	j;
+int32_t	done;
 
     color_min = MIN_COLOR;
     color_max = MAXCOLORS -1;
@@ -151,9 +151,9 @@ int	done;
 	    */
 	    done = 0;
 	    while(!done){
-		color[i].red = (int)(frandom(0,254)) ;
-		color[i].green = (int)(frandom(0,254)) ;
-		color[i].blue = (int)(frandom(0,254)) ;
+		color[i].red = (int32_t)(frandom(0,254)) ;
+		color[i].green = (int32_t)(frandom(0,254)) ;
+		color[i].blue = (int32_t)(frandom(0,254)) ;
 		if((color[i].red < MINAMP) && 
 		(color[i].green < MINAMP) &&
 		(color[i].blue < MINAMP))
@@ -170,19 +170,19 @@ int	done;
 	    }
 	    break;
 	case SPECTRALSCALE:
-	    color[i].red = (int)(carc(i  -color_min- 2*scale/3.5)) ;
-	    color[i].green = (int)(carc(i  -color_min- scale/3.5)) ;
-	    color[i].blue = (int)(carc((float)i)) ;
+	    color[i].red = (int32_t)(carc(i  -color_min- 2*scale/3.5)) ;
+	    color[i].green = (int32_t)(carc(i  -color_min- scale/3.5)) ;
+	    color[i].blue = (int32_t)(carc((float)i)) ;
 	    break;
 	case GRAYSCALE:
-	    color[i].red = (int)((i-color_min)*(255-50)/scale +50);
-	    color[i].green = (int)((i-color_min)*(255-50)/scale +50);
-	    color[i].blue = (int)((i-color_min)*(255-50)/scale +50);
+	    color[i].red = (int32_t)((i-color_min)*(255-50)/scale +50);
+	    color[i].green = (int32_t)((i-color_min)*(255-50)/scale +50);
+	    color[i].blue = (int32_t)((i-color_min)*(255-50)/scale +50);
 	    break;
 	case RGRAYSCALE:
-	    color[i].red = (int)((color_max-i)*(255-50)/scale +50);
-	    color[i].green = (int)((color_max-i)*(255-50)/scale +50);
-	    color[i].blue = (int)((color_max-i)*(255-50)/scale +50);
+	    color[i].red = (int32_t)((color_max-i)*(255-50)/scale +50);
+	    color[i].green = (int32_t)((color_max-i)*(255-50)/scale +50);
+	    color[i].blue = (int32_t)((color_max-i)*(255-50)/scale +50);
 	    break;
 	case FILESCALE:
 	    /*
@@ -203,11 +203,11 @@ int	done;
     return(color_max);
 }
 
-int ColorMap(i)
-int i;
+int32_t ColorMap(i)
+int32_t i;
 {
-extern int PSStatus();
-int val;
+extern int32_t PSStatus();
+int32_t val;
 
     if(PSStatus() == 1) {
 	val = (225*(i-color_min+2))/(color_scale);

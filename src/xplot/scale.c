@@ -54,7 +54,7 @@ double val;
 
 SetPlotVisibility(plot,val)
 Plot	*plot;
-int	val;
+int32_t	val;
 {
     if(plot == NULL) return;
     plot->visible = val;
@@ -68,7 +68,7 @@ Frame	*frame;
 {
 XWindowAttributes	winfo;
 Plot			*plot;
-int			w,h;
+int32_t			w,h;
 
     if(!frame->mapped){
 	return;
@@ -105,8 +105,8 @@ Frame	*frame;
 TextWindow		*text;
 MenuWindow		*menu;
 Graph			*graph;
-int			text_height;
-int			menu_width;
+int32_t			text_height;
+int32_t			menu_width;
 
     graph = frame->graph;
     text = frame->text;
@@ -164,7 +164,7 @@ Graph	*graph;
 {
 double	Sx,Sy,Sz;
 double	Cx,Cy,Cz;
-int	i;
+int32_t	i;
 
     /*
     ** check for the matrix
@@ -227,7 +227,7 @@ double	**m;
 GetDataPoint(plot,wx,wy,wz,index)
 Plot	*plot;
 float	*wx,*wy,*wz;
-int	index;
+int32_t	index;
 {
 FCoord	*data;
 double	x,y,z;
@@ -275,7 +275,7 @@ double	x,y,z;
 GetTransformedDataPoint(plot,wx,wy,wz,index)
 Plot	*plot;
 float	*wx,*wy,*wz;
-int	index;
+int32_t	index;
 {
 double	nx,ny,nz;
 
@@ -299,14 +299,14 @@ double	nx,ny,nz;
 RescalePlot(plot)
 Plot	*plot;
 {
-int 	i;
+int32_t 	i;
 float	sx,sy;
 float	wx,wy,wz;
 FCoord	*data;
 Coord	*coord;
 FCoord	*fcoord;
-int	randomizex;
-int	randomizey;
+int32_t	randomizex;
+int32_t	randomizey;
 
     /*
     ** transform each data coordinate into a screen coordinate
@@ -359,7 +359,7 @@ int	randomizey;
 RandomizeX(plot)
 Plot	*plot;
 {
-int 	i;
+int32_t 	i;
 float	sx,sy;
 float	wx,wy,wz;
 Coord	*coord;
@@ -401,7 +401,7 @@ FCoord	*fcoord;
 RandomizeY(plot)
 Plot	*plot;
 {
-int 	i;
+int32_t 	i;
 float	sx,sy;
 float	wx,wy,wz;
 Coord	*coord;
@@ -447,7 +447,7 @@ FCoord	*fcoord;
 ScreenTransform(graph,wx,wy,sx,sy)
 Graph	*graph;
 float	wx,wy;
-int	*sx,*sy;
+int32_t	*sx,*sy;
 {
 
 
@@ -494,7 +494,7 @@ float	*sx,*sy;
 */
 WorldTransform(graph,sx,sy,wx,wy)
 Graph *graph;
-int sx,sy;
+int32_t sx,sy;
 float *wx,*wy;
 {
     if((graph->wxscale == 0) || (graph->wyscale == 0)){
@@ -513,9 +513,9 @@ float *wx,*wy;
 
 AutoScale(graph,autoscale_x,autoscale_y)
 Graph *graph;
-int autoscale_x,autoscale_y;
+int32_t autoscale_x,autoscale_y;
 {
-int	cnt;
+int32_t	cnt;
 float	val;
 Plot	*plot;
 
@@ -578,11 +578,11 @@ Plot	*plot;
 AutoOrigin(graph)
 Graph *graph;
 {
-int sw,sh;
-int tw,th;
+int32_t sw,sh;
+int32_t tw,th;
 float ww,wh;
 char label[80];
-int i;
+int32_t i;
 
     /*
     ** autolocate the origin within the current window
@@ -604,11 +604,11 @@ int i;
 AutoXOrigin(graph)
 Graph *graph;
 {
-int sw,sh;
-int tw,th;
+int32_t sw,sh;
+int32_t tw,th;
 float ww,wh;
 char label[80];
-int i;
+int32_t i;
 
     /*
     ** autolocate the origin within the current window
@@ -629,11 +629,11 @@ int i;
 AutoYOrigin(graph)
 Graph *graph;
 {
-int sw,sh;
-int tw,th;
+int32_t sw,sh;
+int32_t tw,th;
 float ww,wh;
 char label[80];
-int i;
+int32_t i;
 
     /*
     ** autolocate the origin within the current window

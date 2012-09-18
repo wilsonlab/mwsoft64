@@ -9,7 +9,7 @@
 #define TEXT		1
 #define DEFAULTMIN	-80
 #define DEFAULTMAX	20
-#define HEADER_SIZE	(3 * sizeof (int) + sizeof (float))
+#define HEADER_SIZE	(3 * sizeof (int32_t) + sizeof (float))
 #define STATOFS 		140
 #define FILLEDBOX		0
 #define BOX			1

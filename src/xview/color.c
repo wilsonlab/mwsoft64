@@ -19,11 +19,11 @@
 #define MIN_COLOR 25
 
 XColor	color[MAX_COLORS];
-int	pixel[MAX_COLORS];
+int32_t	pixel[MAX_COLORS];
 Colormap	cmap;
 ColorTable	idx[MAX_COLORS];
 
-void alloc_color(int i, int r, int g, int b)
+void alloc_color(int32_t i, int32_t r, int32_t g, int32_t b)
 {
     XColor col;
 
@@ -61,10 +61,10 @@ ReadColorMap(file)
 char	*file;
 {
 FILE	*fp;
-int	i;
-int	r,g,b;
+int32_t	i;
+int32_t	r,g,b;
 char	line[1000];
-int	color_max;
+int32_t	color_max;
 
     color_max = MAX_COLORS -1;
     if((fp = fopen(file,"r")) == NULL){
@@ -101,9 +101,9 @@ WriteColorMap(file)
 char	*file;
 {
 FILE	*fp;
-int	i,j;
-int	done;
-long	seed;
+int32_t	i,j;
+int32_t	done;
+int32_t	seed;
 
     if((fp = fopen(file,"w")) == NULL){
 	fprintf(stderr,"unable to write cmap file '%s'\n",file);
@@ -120,20 +120,20 @@ long	seed;
 }
 
 
-int MakeColormap()
+int32_t MakeColormap()
 {
-int	i;
+int32_t	i;
 float	scale;
-int	powr;
-int	ncells;
-int	ncolors;
-int	colormaptype = PRIVATE;
+int32_t	powr;
+int32_t	ncells;
+int32_t	ncolors;
+int32_t	colormaptype = PRIVATE;
 /*
-int	colormaptype = SHARED;
+int32_t	colormaptype = SHARED;
 */
-int	status;
-int	val;
-int	depth;
+int32_t	status;
+int32_t	val;
+int32_t	depth;
 
     color_min = MIN_COLOR;
     ncolors = 0;
@@ -165,40 +165,40 @@ int	depth;
 		idx[i].g = 0;
 		idx[i].b = 0;
 	} else {
-		idx[i].r = (int)((255 - color_min)*((float)i/ncolors) + 
+		idx[i].r = (int32_t)((255 - color_min)*((float)i/ncolors) + 
 		    color_min) << 8;
-		idx[i].g = (int)(0.3*((255 - color_min)*(1 -(float)i/ncolors) + 
+		idx[i].g = (int32_t)(0.3*((255 - color_min)*(1 -(float)i/ncolors) + 
 		    color_min)) << 8;
-		idx[i].b = (int)((255 - color_min)*(1 -(float)i/ncolors) + 
+		idx[i].b = (int32_t)((255 - color_min)*(1 -(float)i/ncolors) + 
 		    color_min) << 8;
 	    }
 	    break;
 	case SPECTRALSCALE:
-	    if((val = (int)(carc(i  -color_min- 2*scale/3.5)) << 8) >=
+	    if((val = (int32_t)(carc(i  -color_min- 2*scale/3.5)) << 8) >=
 	    1<<16){
 		val = 1<<16 -1;
 	    }
 	    idx[i].r = val;
-	    if((val = (int)(carc(i  -color_min- scale/3.5)) << 8) >=
+	    if((val = (int32_t)(carc(i  -color_min- scale/3.5)) << 8) >=
 	    1<<16){
 		val = 1<<16 -1;
 	    }
 	    idx[i].g =  val;
-	    if((val = (int)(carc((float)i -color_min)) << 8) >= 
+	    if((val = (int32_t)(carc((float)i -color_min)) << 8) >= 
 	    1<<16){
 		val = 1<<16 -1;
 	    }
 	    idx[i].b =  val;
 	    break;
 	case GRAYSCALE:
-	    idx[i].r = (int)((i-color_min)*(255-50)/scale +50) << 8;
-	    idx[i].g = (int)((i-color_min)*(255-50)/scale +50) << 8;
-	    idx[i].b = (int)((i-color_min)*(255-50)/scale +50) << 8;
+	    idx[i].r = (int32_t)((i-color_min)*(255-50)/scale +50) << 8;
+	    idx[i].g = (int32_t)((i-color_min)*(255-50)/scale +50) << 8;
+	    idx[i].b = (int32_t)((i-color_min)*(255-50)/scale +50) << 8;
 	    break;
 	case RGRAYSCALE:
-	    idx[i].r = (int)((ncolors-i)*(255-50)/scale +50) << 8;
-	    idx[i].g = (int)((ncolors-i)*(255-50)/scale +50) << 8;
-	    idx[i].b = (int)((ncolors-i)*(255-50)/scale +50) << 8;
+	    idx[i].r = (int32_t)((ncolors-i)*(255-50)/scale +50) << 8;
+	    idx[i].g = (int32_t)((ncolors-i)*(255-50)/scale +50) << 8;
+	    idx[i].b = (int32_t)((ncolors-i)*(255-50)/scale +50) << 8;
 	    break;
 	case FILESCALE:
 	    /*
@@ -213,11 +213,11 @@ int	depth;
     return(ncolors);
 }
 
-int ColorMap(i)
-int i;
+int32_t ColorMap(i)
+int32_t i;
 {
-extern int PSStatus();
-int val;
+extern int32_t PSStatus();
+int32_t val;
 
     if(i >= MAX_COLORS){
 	i = MAX_COLORS -1;

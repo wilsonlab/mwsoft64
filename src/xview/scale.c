@@ -75,14 +75,14 @@ do_autoscale(fp)
 FILE *fp;
 {
 float *dataptr;
-int	i;
-int	firsttime;
+int32_t	i;
+int32_t	firsttime;
 
     firsttime = 1;
     /* 
     * calculate autoscale parameters 
     */
-    fseek (fp, (long) (V->headersize), 0);
+    fseek (fp, (int32_t) (V->headersize), 0);
     while(!feof(fp)){
 	GetaRecord();
 	dataptr = data;
@@ -102,7 +102,7 @@ int	firsttime;
     /* 
     * go back to the beginning of the file 
     */
-    fseek (fp, (long) (V->headersize), 0);
+    fseek (fp, (int32_t) (V->headersize), 0);
     /* 
     * clear the data 
     */

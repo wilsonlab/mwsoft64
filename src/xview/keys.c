@@ -4,11 +4,11 @@
 
 char	numstr[20];
 static float plot_scale = 0.7;
-static int psheader = 1;
-int line_width = 1;
+static int32_t psheader = 1;
+int32_t line_width = 1;
 
 SetPSHeader(val)
-int	val;
+int32_t	val;
 {
     psheader = val;
 }
@@ -50,7 +50,7 @@ ForwardStep()
     DisplayView();
 }
 
-long	fsize(name)
+int32_t	fsize(name)
 char	*name;
 {
 struct stat stbuf;
@@ -66,9 +66,9 @@ struct stat stbuf;
     return(stbuf.st_size);
 }
 
-int LocateCell(x,y,cx,cy,cn)
-int	x,y;
-int	*cx,*cy,*cn;
+int32_t LocateCell(x,y,cx,cy,cn)
+int32_t	x,y;
+int32_t	*cx,*cy,*cn;
 {
     *cx = (x/(float)width)*(V->xmax+1);	
     *cy = ((yb + height - y)/(float)(height)) *(V->ymax+1);	
@@ -80,11 +80,11 @@ int	*cx,*cy,*cn;
 }
 
 GraphCell(x,y)
-int	x,y;
+int32_t	x,y;
 {
-int	cell_x;
-int	cell_y;
-int	cell_n;
+int32_t	cell_x;
+int32_t	cell_y;
+int32_t	cell_n;
 char	comstr[200];
 
     /*
@@ -105,11 +105,11 @@ char	comstr[200];
 }
 
 DisplayLocation(x,y)
-int	x,y;
+int32_t	x,y;
 {
-int	cell_x;
-int	cell_y;
-int	cell_n;
+int32_t	cell_x;
+int32_t	cell_y;
+int32_t	cell_n;
 char	comstr[200];
 
     /*
@@ -139,7 +139,7 @@ KeyAction(event)
 XKeyEvent	*event;
 {
 char	buffer[100];
-int	nbytes;
+int32_t	nbytes;
 char	c;
 KeySym	key;
 float	time;
@@ -283,8 +283,8 @@ float	time;
 	    /*
 	    ** output view time as a timestamp (100 usec units)
 	    */
-	    fprintf(stdout,"%d\n",(int)(V->view_time*10));
-	    fprintf(stderr,"%d\n",(int)(V->view_time*10));
+	    fprintf(stdout,"%d\n",(int32_t)(V->view_time*10));
+	    fprintf(stderr,"%d\n",(int32_t)(V->view_time*10));
 	    break;
 	case 'w':
 	    /*
@@ -415,15 +415,15 @@ float	time;
 }
 
 PlotData(x,y,n)
-int x,y;
-int n;
+int32_t x,y;
+int32_t n;
 {
-int	dnum;
+int32_t	dnum;
 float	fval;
 float	val;
 double	dval;
-int	ival;
-short	sval;
+int32_t	ival;
+int16_t	sval;
 FILE	*tfp;
 float	time;
 char	comstr[100];
@@ -467,7 +467,7 @@ char	template[20];
 	if(dnum <= 0) break;
 	time += V->dt;
 	fprintf(tfp,"%g %g\n",time,val);
-	fseek (fp, (long)( (V->cellnum-1)*V->datasize), 1); 
+	fseek (fp, (int32_t)( (V->cellnum-1)*V->datasize), 1); 
     }
     fclose(tfp);
     sprintf(comstr,"xplot %s &",tmpname);
@@ -476,9 +476,9 @@ char	template[20];
 
 DumpData()
 {
-int	i;
+int32_t	i;
 FILE	*fp;
-int	x,y;
+int32_t	x,y;
 
     if((fp = fopen("xview.data","w")) == NULL){
 	fprintf(stderr,"unable to open file xview.data\n");
@@ -494,20 +494,20 @@ int	x,y;
 
 DumpXviewData()
 {
-int	i;
+int32_t	i;
 FILE	*fp;
-int	ival;
+int32_t	ival;
 
     if((fp = fopen("xview.data","w")) == NULL){
 	fprintf(stderr,"unable to open file xview.data\n");
 	return;
     }
     ival = V->xmax;
-    fwrite (&ival, sizeof (int),1,fp);
+    fwrite (&ival, sizeof (int32_t),1,fp);
     ival = V->ymax;
-    fwrite (&ival, sizeof (int),1,fp);
+    fwrite (&ival, sizeof (int32_t),1,fp);
     fwrite (&V->dt, sizeof (float),1,fp);
-    fwrite (&V->datatype, sizeof (int),1,fp);
+    fwrite (&V->datatype, sizeof (int32_t),1,fp);
 
     fwrite(data,sizeof(float),V->cellnum,fp);
     fclose(fp);

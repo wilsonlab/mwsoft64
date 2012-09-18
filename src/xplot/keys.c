@@ -6,21 +6,21 @@
 char	numstr[200];
 char	labelstr[200];
 char	tmpstr[200];
-int	plot_select = 0;
-int	command_entry = 0;
-int	first_char = 1;
-int	labelsx,labelsy,labelwx,labelwy;
-short	labelcoord_mode = WINDOW_LBL;
+int32_t	plot_select = 0;
+int32_t	command_entry = 0;
+int32_t	first_char = 1;
+int32_t	labelsx,labelsy,labelwx,labelwy;
+int16_t	labelcoord_mode = WINDOW_LBL;
 static float plot_scale = 0.75;
-static int box = FALSE;
-static int header = TRUE;
-int line_width = 1;
+static int32_t box = FALSE;
+static int32_t header = TRUE;
+int32_t line_width = 1;
 static escape_mode = 0;
 static axis_mode = XMODE;
 static global_operation=0;
 static float shiftpercent = 0.05;
 static float rotpercent = 0.05;
-int shift_signal;
+int32_t shift_signal;
 
 
 #define FORALLPLOTS for(plot=graph->plot;plot;plot=plot->next)
@@ -28,7 +28,7 @@ int shift_signal;
 
 void
 sigshift(sig)
-int sig;
+int32_t sig;
 {
    /* shift_signal = 1;*/
 	RightShift();
@@ -37,7 +37,7 @@ int sig;
 }
 
 SetHeader(mode)
-int mode;
+int32_t mode;
 {
     header = mode;
 }
@@ -92,7 +92,7 @@ float	val;
 }
 
 SetAxisMode(mode)
-int mode;
+int32_t mode;
 {
     axis_mode = mode;
 }
@@ -220,16 +220,16 @@ Graph *graph;
 }
 
 SetBox(mode)
-int mode;
+int32_t mode;
 {
     box = mode;
 }
 
 SelectPlot(graph,ival)
 Graph *graph;
-int ival;
+int32_t ival;
 {
-int	cnt;
+int32_t	cnt;
 Plot	*plot;
 
     /*
@@ -273,13 +273,13 @@ Plot	*plot;
 
 OffsetPlotGraphically(graph,cx,cy,val)
 Graph *graph;
-int	cx,cy;
+int32_t	cx,cy;
 float	val;
 {
 Plot	*plot;
-int	closest;
+int32_t	closest;
 float	distance;
-int	i;
+int32_t	i;
 float	d;
 
     /*
@@ -305,13 +305,13 @@ float	d;
 
 SelectPlotGraphically(graph,cx,cy)
 Graph *graph;
-int	cx,cy;
+int32_t	cx,cy;
 {
-int	cnt;
+int32_t	cnt;
 Plot	*plot;
 Plot	*closest;
 float	distance;
-int	i;
+int32_t	i;
 float	d;
 
     /*
@@ -390,7 +390,7 @@ SetGlobalOperation()
     global_operation = 1;
 }
 
-long	fsize(name)
+int32_t	fsize(name)
 char	*name;
 {
 struct stat stbuf;
@@ -408,8 +408,8 @@ struct stat stbuf;
 
 ProcessSavedView(graph, mode, index)
 Graph	*graph;
-int	mode;
-int	index;
+int32_t	mode;
+int32_t	index;
 {
 char	tmpstr[80];
 
@@ -454,17 +454,17 @@ Graph		*graph;
 XKeyEvent	*event;
 {
 char	buffer[100];
-int	nbytes;
+int32_t	nbytes;
 char	c;
 KeySym	key;
 float	time;
 float	val;
-int	ival;
-int	cnt;
+int32_t	ival;
+int32_t	cnt;
 Plot	*plot;
 float	wx,wy;
 Label	*label;
-int	i;
+int32_t	i;
 
     buffer[0] = '\0';
     /* 
@@ -1292,9 +1292,9 @@ int	i;
 		break;
 	    }
 	    sprintf(tmpstr,"tx = %4d ty = %4d tz = %4d",
-	    (int)(360*graph->thetax/(2*M_PI))%360,
-	    (int)(360*graph->thetay/(2*M_PI))%360,
-	    (int)(360*graph->thetaz/(2*M_PI))%360);
+	    (int32_t)(360*graph->thetax/(2*M_PI))%360,
+	    (int32_t)(360*graph->thetay/(2*M_PI))%360,
+	    (int32_t)(360*graph->thetaz/(2*M_PI))%360);
 	    Text(graph->frame->text,0,graph->frame->text->fontheight,tmpstr);
 	    UpdateRotationMatrix(graph);
 	    ScaleAndRefreshGraph(graph);
@@ -1321,9 +1321,9 @@ int	i;
 		break;
 	    }
 	    sprintf(tmpstr,"tx = %4d ty = %4d tz = %4d",
-	    (int)(360*graph->thetax/(2*M_PI))%360,
-	    (int)(360*graph->thetay/(2*M_PI))%360,
-	    (int)(360*graph->thetaz/(2*M_PI))%360);
+	    (int32_t)(360*graph->thetax/(2*M_PI))%360,
+	    (int32_t)(360*graph->thetay/(2*M_PI))%360,
+	    (int32_t)(360*graph->thetaz/(2*M_PI))%360);
 	    Text(graph->frame->text,0,graph->frame->text->fontheight,tmpstr);
 	    UpdateRotationMatrix(graph);
 	    ScaleAndRefreshGraph(graph);

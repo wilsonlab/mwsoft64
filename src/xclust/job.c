@@ -1,14 +1,14 @@
 #include 	"xclust_ext.h"
 
-int current_job_id = 1;
-int continuous_step_job_id = 0;
-int blockmovie_job_id = 0;
-int intermittent_save_job_id = 0;
+int32_t current_job_id = 1;
+int32_t continuous_step_job_id = 0;
+int32_t blockmovie_job_id = 0;
+int32_t intermittent_save_job_id = 0;
 
-int AddJob(job)
+int32_t AddJob(job)
 Job	*job;
 {
-int	id;
+int32_t	id;
 
     /*
     ** add the job to the list
@@ -25,7 +25,7 @@ int	id;
 }
 
 Job *GetJob(id)
-int	id;
+int32_t	id;
 {
 Job	*job;
 
@@ -38,7 +38,7 @@ Job	*job;
 }
 
 DeleteJob(id)
-int	id;
+int32_t	id;
 {
 Job	*job;
 Job	*prevjob;
@@ -145,7 +145,7 @@ MenuBlockMovie(item)
 MenuItem	*item;
 {
 Job	*newjob;
-int	priority;
+int32_t	priority;
 char	data[20]; 
 
  priority = Atoi(GetItemValue("/epochmenu/delay")); /* how many job
@@ -200,7 +200,7 @@ Graph	*graph;
 }
 
 ChangeIntermittentSaveDelay(delay)
-int	delay;
+int32_t	delay;
 {
 Job	*job;
 
@@ -219,7 +219,7 @@ Job	*job;
 
 
 ActivateIntermittentSave(delay)
-int	delay;
+int32_t	delay;
 {
 Job	*newjob;
     
@@ -230,7 +230,7 @@ Job	*newjob;
     if(intermittent_save_job_id == 0){
 	newjob = (Job *)calloc(1,sizeof(Job));
 	newjob->func = IntermittentSaveJob;
-	newjob->data = "cbfile.int";
+	newjob->data = "cbfile.int32_t";
 	newjob->description = "intermittent save";
 	newjob->priority = delay;
 	intermittent_save_job_id = AddJob(newjob);

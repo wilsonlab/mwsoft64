@@ -39,7 +39,7 @@ Pixmap CreateItemPixmap(item,bits)
 MenuItem	*item;
 char		*bits;
 {
-int	depth = 1;
+int32_t	depth = 1;
 
     if(bits){
 	return(
@@ -121,22 +121,22 @@ MenuItem	*item;
 
 MenuItem *CreateMenuItem(menu,x,y,w,h,string,invert,string2,invert2,fontname,func,type,bits)
 MenuWindow	*menu;
-int x,y,w,h;
+int32_t x,y,w,h;
 char	*string;
-int	invert;
+int32_t	invert;
 char	*string2;
-int	invert2;
+int32_t	invert2;
 char		*fontname;
 PFI		func;
-int		type;
+int32_t		type;
 char		*bits;
 {
 MenuItem	*item;
-int	borderwidth = 1;
-int	border;
-int	background;
+int32_t	borderwidth = 1;
+int32_t	border;
+int32_t	background;
 WindowData		*windowdata;
-extern	int	item_event();
+extern	int32_t	item_event();
 
     /*
     ** 			ITEM WINDOW
@@ -180,12 +180,12 @@ extern	int	item_event();
 
 AddMenuItem(menu,x,y,w,h,string,invert,string2,invert2,fontname,func,type,bits)
 MenuWindow	*menu;
-int 		x,y,w,h;
+int32_t 		x,y,w,h;
 char		*string;
 char		*string2;
 char		*fontname;
 PFI		func;
-int		type;
+int32_t		type;
 char		*bits;
 {
 MenuItem	*item;
@@ -311,7 +311,7 @@ DoPrintOut()
 
 RandomShift()
 {
-int j,i;
+int32_t j,i;
 Plot	*plot;
 
     for(j=0;j<50;j++){
@@ -334,13 +334,13 @@ Plot	*plot;
 
 SampleMenu(menu)
 {
-extern int ToggleDrawmode();
-extern int ToggleZapmode();
-extern int TogglePinchmode();
-extern int TogglePolyLineMode();
-extern int Quit();
-extern int RightShift();
-extern int LeftShift();
+extern int32_t ToggleDrawmode();
+extern int32_t ToggleZapmode();
+extern int32_t TogglePinchmode();
+extern int32_t TogglePolyLineMode();
+extern int32_t Quit();
+extern int32_t RightShift();
+extern int32_t LeftShift();
 
     AddMenuItem(menu,0,0,40,20,"XAXIS",0,"YAXIS",0,"fixed",
 	ToggleAxis,TOGGLE,NULL);

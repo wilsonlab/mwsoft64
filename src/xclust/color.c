@@ -20,10 +20,10 @@
 ColorTable idx[MAXCOLORS];
 
 /* XColor	color[MAXCOLORS]; */
-/* unsigned long	pixel[MAXCOLORS]; */
-/* unsigned long	planemask[MAXCOLORS]; */
-/* static int	color_scale; */
-/* static int	color_max; */
+/* uint32_t	pixel[MAXCOLORS]; */
+/* uint32_t	planemask[MAXCOLORS]; */
+/* static int32_t	color_scale; */
+/* static int32_t	color_max; */
 
 static Display	*display;	
 static Colormap	cmap;
@@ -37,8 +37,8 @@ ReadColorMap(file)
      char	*file;
 {
 /*   FILE	*fp; */
-/*   int	i; */
-/*   int	r,g,b; */
+/*   int32_t	i; */
+/*   int32_t	r,g,b; */
 /*   char	line[1000]; */
   
 /*   color_max = MAXCOLORS - MINCOLOR; */
@@ -72,9 +72,9 @@ WriteColorMap(file)
      char	*file;
 {
 /*   FILE	*fp; */
-/*   int	i,j; */
-/*   int	done; */
-/*   long	seed; */
+/*   int32_t	i,j; */
+/*   int32_t	done; */
+/*   int32_t	seed; */
   
 /*   color_max = MAXCOLORS - MINCOLOR; */
 /*   if((fp = fopen(file,"w")) == NULL){ */
@@ -86,9 +86,9 @@ WriteColorMap(file)
 /*   for (i = 0; i <= color_max; i++) { */
 /*     done = 0; */
 /*     while(!done){ */
-/*       color[i].red = (int)(frandom(0,65535)); */
-/*       color[i].green = (int)(frandom(0,65535)); */
-/*       color[i].blue = (int)(frandom(0,65535)); */
+/*       color[i].red = (int32_t)(frandom(0,65535)); */
+/*       color[i].green = (int32_t)(frandom(0,65535)); */
+/*       color[i].blue = (int32_t)(frandom(0,65535)); */
 /*       if((color[i].red < MINAMP) &&  */
 /* 	 (color[i].green < MINAMP) && */
 /* 	 (color[i].blue < MINAMP)) */
@@ -116,7 +116,7 @@ void SetFrameColormap()
 	XSetWindowColormap(F->display, F->window, cmap);
 }
 
-void alloc_color(int i, int r, int g, int b)
+void alloc_color(int32_t i, int32_t r, int32_t g, int32_t b)
 {
     XColor col;
 
@@ -145,7 +145,7 @@ void alloc_color(int i, int r, int g, int b)
     }
 }
 
-void alloc_named_color(int i, char *s)
+void alloc_named_color(int32_t i, char *s)
 {
     XColor screencol;
     XColor exactcol;
@@ -173,15 +173,15 @@ void alloc_named_color(int i, char *s)
 
 void private_colormap()
 {
-int h, i, j, k;
-/*int r, g, b;*/
-int count = 0;
+int32_t h, i, j, k;
+/*int32_t r, g, b;*/
+int32_t count = 0;
 char	*str;
 char	optstr[30];
  MenuWindow* menu;
 float	spectral_scale;
-unsigned short r,g,b;
- int maxint, nr, ng, nb;
+int16_t r,g,b;
+ int32_t maxint, nr, ng, nb;
  float intensity;
 
  /* reset map */
@@ -349,15 +349,15 @@ unsigned short r,g,b;
  for(h=0; h<maxint; h++) {
    intensity = (float) (maxint - h)/maxint ;
    for(i=1; i<=nb; i++) {
-     b = (int) ((float) intensity * (nb - i) * 65535 / (nb-1) );
+     b = (int32_t) ((float) intensity * (nb - i) * 65535 / (nb-1) );
      for(j=1; j<=ng; j++) {
-       g = (int) ((float) intensity * (ng - j) * 65535 / (ng-1) );
+       g = (int32_t) ((float) intensity * (ng - j) * 65535 / (ng-1) );
        for(k=1; k<=nr; k++) {
 
 	 if (count>=MAXCOLORS)
 	   break;
  
-	 r = (int) ((float) intensity * (nr - k) * 65535 / (nr-1) );
+	 r = (int32_t) ((float) intensity * (nr - k) * 65535 / (nr-1) );
 
 	 SetPixelRGB(count,r,g,b);
 	 count++;
@@ -372,9 +372,9 @@ unsigned short r,g,b;
 /*  spectral_scale = 2*(MAXCLUSTER + 1); */
  
 /*  for(i=0; i<MAXCLUSTER; i++){ */
-/*    r = (int)((carc(2*i- 2*spectral_scale/16)))<< 8 ; */
-/*    g = (int)((carc(2*i- 1*spectral_scale/16)))<< 8 ; */
-/*    b = (int)((carc((float)2*i)))<< 8 ; */
+/*    r = (int32_t)((carc(2*i- 2*spectral_scale/16)))<< 8 ; */
+/*    g = (int32_t)((carc(2*i- 1*spectral_scale/16)))<< 8 ; */
+/*    b = (int32_t)((carc((float)2*i)))<< 8 ; */
 /*    SetPixelRGB(MAXINTERFACECOLORS+i,r,g,b); */
 /*   } */
  
@@ -428,9 +428,9 @@ unsigned short r,g,b;
 /*     } */
 }
 
-int get_color(char *col)
+int32_t get_color(char *col)
 {
-int i, cindx;
+int32_t i, cindx;
 double rd, gd, bd, dist, mindist;
 XColor color;
 XColor def_colrs[256];
@@ -461,7 +461,7 @@ XColor def_colrs[256];
 void MakeColormap(frame)
      Frame	*frame;
 {
-int	i, j, k;
+int32_t	i, j, k;
 
     display = frame->display;
 /*     color_max = MAXCOLORS - 1; */
@@ -478,109 +478,109 @@ int	i, j, k;
 
 #define RANGE1	100
 
-int SmoothRange(count)
-int	count;
+int32_t SmoothRange(count)
+int32_t	count;
 {
-int	i;
+int32_t	i;
 float	spectral_scale;
-unsigned short r,g,b;
-int	smoothrange;
+int16_t r,g,b;
+int32_t	smoothrange;
 
     spectral_scale = 2*(RANGE1 + 1);
     /*
     ** create a smooth spectral scale at the upper end of the map
     */
   for(i=0; i<RANGE1; i++){
-	r = (int)((carc(2*i- 2*spectral_scale/16)))<< 8 ;
-	g = (int)((carc(2*i- 1*spectral_scale/16)))<< 8 ;
-	b = (int)((carc((float)2*i)))<< 8 ;
+	r = (int32_t)((carc(2*i- 2*spectral_scale/16)))<< 8 ;
+	g = (int32_t)((carc(2*i- 1*spectral_scale/16)))<< 8 ;
+	b = (int32_t)((carc((float)2*i)))<< 8 ;
 	SetPixelRGB(count++,r,g,b);
 	if(i> 9) break;
     }
     return(count);
 }
 
-int SmoothRange2(count)
-int	count;
+int32_t SmoothRange2(count)
+int32_t	count;
 {
-int	i;
+int32_t	i;
 float	spectral_scale;
-unsigned short r,g,b;
-int	smoothrange;
+int16_t r,g,b;
+int32_t	smoothrange;
 
     spectral_scale = 2*(RANGE1 + 1);
     /*
     ** create a smooth spectral scale at the upper end of the map
     */
   for(i=0; i<RANGE1; i++){
-	g = (int)((carc(2*i- 2*spectral_scale/16)))<< 8 ;
-	b = (int)((carc(2*i- 1*spectral_scale/16)))<< 8 ;
-	r = (int)((carc((float)2*i)))<< 8 ;
+	g = (int32_t)((carc(2*i- 2*spectral_scale/16)))<< 8 ;
+	b = (int32_t)((carc(2*i- 1*spectral_scale/16)))<< 8 ;
+	r = (int32_t)((carc((float)2*i)))<< 8 ;
 	SetPixelRGB(count++,r,g,b);
 	if(i> 20) break;
     }
     return(count);
 }
 
-int SmoothRange3(count)
-int	count;
+int32_t SmoothRange3(count)
+int32_t	count;
 {
-int	i;
+int32_t	i;
 float	spectral_scale;
-unsigned short r,g,b;
-int	smoothrange;
+int16_t r,g,b;
+int32_t	smoothrange;
 
     spectral_scale = 2*(RANGE1 + 1);
     /*
     ** create a smooth spectral scale at the upper end of the map
     */
   for(i=0; i<RANGE1; i++){
-	b = (int)((carc(2*i- 2*spectral_scale/16)))<< 8 ;
-	g = (int)((carc(2*i- 1*spectral_scale/16)))<< 8 ;
-	r = (int)((carc((float)2*i)))<< 8 ;
+	b = (int32_t)((carc(2*i- 2*spectral_scale/16)))<< 8 ;
+	g = (int32_t)((carc(2*i- 1*spectral_scale/16)))<< 8 ;
+	r = (int32_t)((carc((float)2*i)))<< 8 ;
 	SetPixelRGB(count++,r,g,b);
 	if(i> 20) break;
     }
     return(count);
 }
 
-int SmoothRange4(count)
-int	count;
+int32_t SmoothRange4(count)
+int32_t	count;
 {
-int	i;
+int32_t	i;
 float	spectral_scale;
-unsigned short r,g,b;
-int	smoothrange;
+int16_t r,g,b;
+int32_t	smoothrange;
 
     spectral_scale = 201;
     /*
     ** create a smooth spectral scale at the upper end of the map
     */
   for(i=0; i<200; i+=5){
-	r = (int)((carc2(1*(i- 2*spectral_scale/3.5))))<< 8 ;
-	g = (int)((carc2(1*(i- 1*spectral_scale/3.5))))<< 8 ;
-	b = (int)((carc2(1*(float)i)))<< 8 ;
+	r = (int32_t)((carc2(1*(i- 2*spectral_scale/3.5))))<< 8 ;
+	g = (int32_t)((carc2(1*(i- 1*spectral_scale/3.5))))<< 8 ;
+	b = (int32_t)((carc2(1*(float)i)))<< 8 ;
 	SetPixelRGB(count++,r,g,b);
     }
     return(count);
 }
 
-int SmoothRange5(count)
-int	count;
+int32_t SmoothRange5(count)
+int32_t	count;
 {
-int	i;
+int32_t	i;
 float	spectral_scale;
-unsigned short r,g,b;
-int	smoothrange;
+int16_t r,g,b;
+int32_t	smoothrange;
 
     spectral_scale = 201;
     /*
     ** create a smooth spectral scale at the upper end of the map
     */
   for(i=0; i<200; i+=5){
-	g = (int)((carc2(1*(i- 2*spectral_scale/3.5))))<< 8 ;
-	r = (int)((carc2(1*(i- 1*spectral_scale/3.5))))<< 8 ;
-	b = (int)((carc2(1*(float)i)))<< 8 ;
+	g = (int32_t)((carc2(1*(i- 2*spectral_scale/3.5))))<< 8 ;
+	r = (int32_t)((carc2(1*(i- 1*spectral_scale/3.5))))<< 8 ;
+	b = (int32_t)((carc2(1*(float)i)))<< 8 ;
 	SetPixelRGB(count++,r,g,b);
     }
     return(count);
@@ -589,7 +589,7 @@ int	smoothrange;
 
 AssignColor(cname, pixval)
      char	*cname;
-     int	pixval;
+     int32_t	pixval;
 {
     alloc_named_color(pixval, cname);
 }
@@ -597,11 +597,11 @@ AssignColor(cname, pixval)
 
 /* ColorMap function not used anymore */
 
-/* int ColorMap(i) */
-/* int i; */
+/* int32_t ColorMap(i) */
+/* int32_t i; */
 /* { */
-/* extern int PSStatus(); */
-/* int val; */
+/* extern int32_t PSStatus(); */
+/* int32_t val; */
 
 /*     if(i >= MAXCOLORS){ */
 /* 	i = MAXCOLORS -1; */
@@ -625,14 +625,14 @@ AssignColor(cname, pixval)
 
 
 ChangeColor(pixel)
-int	pixel;
+int32_t	pixel;
 {
 XColor	color;
 
-    color.red = (int)(frandom(0,65535));
-    color.green = (int)(frandom(0,65535));
-    color.blue = (int)(frandom(0,65535));
-    color.flags = (int)(DoRed|DoGreen|DoBlue);
+    color.red = (int32_t)(frandom(0,65535));
+    color.green = (int32_t)(frandom(0,65535));
+    color.blue = (int32_t)(frandom(0,65535));
+    color.flags = (int32_t)(DoRed|DoGreen|DoBlue);
     color.pixel = pixel;
     /*
     if(F->colormaptype == DEFAULT || F->colormaptype == PRIVATE){
@@ -643,16 +643,16 @@ XColor	color;
 }
 
 SetPixelRGB(pixel,r,g,b)
-int	pixel;
-unsigned short	r,g,b;
+int32_t	pixel;
+int16_t	r,g,b;
 {
 XColor	color;
-unsigned short red,green,blue;
+int16_t red,green,blue;
 
     color.red = r;
     color.green = g;
     color.blue = b;
-    color.flags = (int)(DoRed|DoGreen|DoBlue);
+    color.flags = (int32_t)(DoRed|DoGreen|DoBlue);
     color.pixel = pixel;
     /*
     if(F->colormaptype == DEFAULT || F->colormaptype == PRIVATE){
@@ -663,15 +663,15 @@ unsigned short red,green,blue;
     GetPixelRGB(pixel,&red,&green,&blue);
 }
 
-unsigned long GetPixel(arrayid)
-int	arrayid;
+uint32_t GetPixel(arrayid)
+int32_t	arrayid;
 {
 	return(idx[arrayid].pixel);
 }
 
 GetPixelRGB(pixel,r,g,b)
-int	pixel;
-unsigned short	*r,*g,*b;
+int32_t	pixel;
+int16_t	*r,*g,*b;
 {
 XColor	color;
 
@@ -686,8 +686,8 @@ XColor	color;
 /* TJD, 12-30-04 */
 
 /* CyclePixel(pixel,rmask,gmask,bmask,rinc,ginc,binc) */
-/* int	pixel; */
-/* int	rinc,ginc,binc; */
+/* int32_t	pixel; */
+/* int32_t	rinc,ginc,binc; */
 /* { */
 /* XColor	color; */
 /* XColor	newcolor; */
@@ -709,7 +709,7 @@ XColor	color;
 /*     } else { */
 /* 	newcolor.blue = 0; */
 /*     } */
-/*     newcolor.flags = (int)(DoRed|DoGreen|DoBlue); */
+/*     newcolor.flags = (int32_t)(DoRed|DoGreen|DoBlue); */
 /*     newcolor.pixel = pixel; */
 /*     /\* */
 /*     if(F->colormaptype == DEFAULT || F->colormaptype == PRIVATE){ */

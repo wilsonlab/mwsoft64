@@ -1,6 +1,6 @@
 #include "xclust_ext.h"
 
-int verbose_legend = 1;
+int32_t verbose_legend = 1;
 
 Label *GetNamedLabel(basic,name)
 BasicWindow	*basic;
@@ -38,8 +38,8 @@ char *label;
 DrawGraphTitle(graph)
 Graph	*graph;
 {
-int	center;
-int	tw,th;
+int32_t	center;
+int32_t	tw,th;
 
     if(graph->title){
 	SetColor (graph->foreground);
@@ -51,12 +51,12 @@ int	tw,th;
 
 DrawPlotLegend(plot,count)
 Plot *plot;
-int count;
+int32_t count;
 {
-int sx,sy;
+int32_t sx,sy;
 char legend[200];
 char tmp[80];
-int	tw,th;
+int32_t	tw,th;
 
 
     if(plot->visible){
@@ -154,8 +154,8 @@ Graph	*graph;
 {
 char	label[80];
 char	tmp[80];
-int	tw,th;
-int	sx,sy;
+int32_t	tw,th;
+int32_t	sx,sy;
 
     SetColor(MININTERFACECOLOR + AXESLABELS);
     ScreenTransform(graph,graph->wxmax,graph->xaxis.yintcpt,&sx,&sy);
@@ -213,8 +213,8 @@ Graph *graph;
 {
 char	label[80];
 char	tmp[80];
-int	tw,th;
-int sx,sy;
+int32_t	tw,th;
+int32_t sx,sy;
 
     SetColor(MININTERFACECOLOR + AXESLABELS);
     ScreenTransform(graph,graph->yaxis.xintcpt,graph->wymin,&sx,&sy);
@@ -271,8 +271,8 @@ DisplayPlotLabels(plot)
 Plot		*plot;
 {
 BasicWindow	*basic;
-int sx,sy,sr;
-int sx2,sy2;
+int32_t sx,sy,sr;
+int32_t sx2,sy2;
 double	wx,wy,wz;
 Label	*label;
 
@@ -418,8 +418,8 @@ Label	*label;
 DisplayLabels(basic)
 BasicWindow	*basic;
 {
-int sx,sy,sr;
-int sx2,sy2;
+int32_t sx,sy,sr;
+int32_t sx2,sy2;
 double	wx,wy,wz;
 Label	*label;
 
@@ -560,10 +560,10 @@ Label	*label;
 Label *AddLabelString(basic,s,sx,sy,wx,wy,coord_mode,priority,fontname)
 BasicWindow	*basic;
 char		*s;
-short		sx,sy;
+int16_t		sx,sy;
 float		wx,wy;
-short		coord_mode;
-short		priority;
+int16_t		coord_mode;
+int16_t		priority;
 char		*fontname;
 {
 Label	*newlabel;
@@ -628,10 +628,10 @@ Label	*newlabel;
 Label *AddPlotLabelString(plot,s,sx,sy,wx,wy,coord_mode,priority,fontname)
 Plot		*plot;
 char		*s;
-short		sx,sy;
+int16_t		sx,sy;
 float		wx,wy;
-short		coord_mode;
-short		priority;
+int16_t		coord_mode;
+int16_t		priority;
 char		*fontname;
 {
 BasicWindow	*basic;
@@ -742,12 +742,12 @@ Label	*prev;
 */
 Label *AddPlotLabelLine(plot,sx,sy,sy2,sx2,wx,wy,wz,wx2,wy2,wz2,coord_mode,priority)
 Plot		*plot;
-short		sx,sy;
-short		sx2,sy2;
+int16_t		sx,sy;
+int16_t		sx2,sy2;
 float		wx,wy,wz;
 float		wx2,wy2,wz2;
-short		coord_mode;
-short		priority;
+int16_t		coord_mode;
+int16_t		priority;
 {
 BasicWindow	*basic;
 Label	*newlabel;
@@ -804,12 +804,12 @@ Label	*newlabel;
 */
 Label *AddLabelLine(basic,sx,sy,sy2,sx2,wx,wy,wz,wx2,wy2,wz2,coord_mode,priority)
 BasicWindow	*basic;
-short		sx,sy;
-short		sx2,sy2;
+int16_t		sx,sy;
+int16_t		sx2,sy2;
 float		wx,wy,wz;
 float		wx2,wy2,wz2;
-short		coord_mode;
-short		priority;
+int16_t		coord_mode;
+int16_t		priority;
 {
 Label	*newlabel;
 
@@ -862,10 +862,10 @@ Label	*newlabel;
 */
 Label *AddPlotLabelBox(plot,sx,sy,sr,wx,wy,wr,coord_mode,priority)
 Plot		*plot;
-short		sx,sy,sr;
+int16_t		sx,sy,sr;
 float		wx,wy,wr;
-short		coord_mode;
-short		priority;
+int16_t		coord_mode;
+int16_t		priority;
 {
 BasicWindow	*basic;
 Label	*newlabel;
@@ -915,10 +915,10 @@ Label	*newlabel;
 */
 Label *AddLabelBox(basic,sx,sy,sr,wx,wy,wr,coord_mode,priority)
 BasicWindow	*basic;
-short		sx,sy,sr;
+int16_t		sx,sy,sr;
 float		wx,wy,wr;
-short		coord_mode;
-short		priority;
+int16_t		coord_mode;
+int16_t		priority;
 {
 Label	*newlabel;
 
@@ -965,11 +965,11 @@ Label	*newlabel;
 Label *AddLabelBitmap(basic,bitmap,sx,sy,wx,wy,w,h,coord_mode,priority)
 BasicWindow	*basic;
 Pixmap		bitmap;
-short		sx,sy;
+int16_t		sx,sy;
 float		wx,wy;
-int		w,h;
-short		coord_mode;
-short		priority;
+int32_t		w,h;
+int16_t		coord_mode;
+int16_t		priority;
 {
 Label	*newlabel;
 
@@ -1012,13 +1012,13 @@ Label	*newlabel;
 
 Label *FindLabel(basic,cx,cy)
 BasicWindow	*basic;
-short	cx,cy;
+int16_t	cx,cy;
 {
 Label	*label;
 Label	*current;
-int	distance = -1;
-int	ds;
-int	sx,sy,sr;
+int32_t	distance = -1;
+int32_t	ds;
+int32_t	sx,sy,sr;
 
     current = NULL;
     for(label=basic->label;label;label=label->next){

@@ -4,12 +4,12 @@ DrawColorBox(image,xsize,ysize,xmax,ymax)
 Image	*image;
 float	xsize;
 float	ysize;
-int	xmax;
-int	ymax;
+int32_t	xmax;
+int32_t	ymax;
 {
 Image	*imageptr;
-int	i,j;
-int	x,y;
+int32_t	i,j;
+int32_t	x,y;
 
     imageptr = image + (xmax+1)*(ymax+1) - 1;
     for (j = 0; j <= ymax; j++){
@@ -24,20 +24,20 @@ int	x,y;
 		continue;
 	    }
 	    if(
-	    (int) (color_scale * (imageptr->value) + color_min)
+	    (int32_t) (color_scale * (imageptr->value) + color_min)
 	    < color_min){
 		fprintf(stderr,"error in color %d\n",
-		(int) (color_scale * (imageptr->value) + color_min));
+		(int32_t) (color_scale * (imageptr->value) + color_min));
 	    }
-	    SetColor ((int) (color_scale * (imageptr->value) + color_min));
+	    SetColor ((int32_t) (color_scale * (imageptr->value) + color_min));
 #ifdef GAP
-	    FilledBox((int)x, (int)y, 
-	    (int)(x + xsize - 2 + 0.5),
-	    (int)(y + ysize - 2 + 0.5));
+	    FilledBox((int32_t)x, (int32_t)y, 
+	    (int32_t)(x + xsize - 2 + 0.5),
+	    (int32_t)(y + ysize - 2 + 0.5));
 #endif
-	    FilledBox((int)x, (int)y,
-	    (int)(x + xsize + 1),
-	    (int)(y + ysize + 1));
+	    FilledBox((int32_t)x, (int32_t)y,
+	    (int32_t)(x + xsize + 1),
+	    (int32_t)(y + ysize + 1));
 	    imageptr--;
 	}
     }
@@ -47,12 +47,12 @@ DrawFilledBox(image,xsize,ysize,xmax,ymax)
 Image	*image;
 float	xsize;
 float	ysize;
-int	xmax;
-int	ymax;
+int32_t	xmax;
+int32_t	ymax;
 {
 Image	*imageptr;
-int	i,j;
-int	x,y;
+int32_t	i,j;
+int32_t	x,y;
 
     imageptr = image + (xmax+1)*(ymax +1) -1;
     SetColor(G->foreground);
@@ -67,11 +67,11 @@ int	x,y;
 		x, 
 		y, 
 #ifdef OLD
-		x+(int)(val*xsize)+1,
-		y+(int)(val*ysize)+1
+		x+(int32_t)(val*xsize)+1,
+		y+(int32_t)(val*ysize)+1
 #else
-		x+(int)(val*xsize),
-		y+(int)(val*ysize)
+		x+(int32_t)(val*xsize),
+		y+(int32_t)(val*ysize)
 #endif
 		);
 		imageptr--;
@@ -86,25 +86,25 @@ int	x,y;
 #ifdef ORIENT
 		if(orient == 0){
 		    FilledBox (
-		    (int)(xsize*(i+0.5)), 
+		    (int32_t)(xsize*(i+0.5)), 
 		    y, 
-		    1+(int)(xsize*(i+0.5)), 
-		    y+(int)((imageptr->value)*ysize)
+		    1+(int32_t)(xsize*(i+0.5)), 
+		    y+(int32_t)((imageptr->value)*ysize)
 		    );
 		} else{
 		    FilledBox (
 		    x, 
-		    (int)(ysize*(j+0.5))+yb, 
-		    x+(int)((imageptr->value)*xsize),
-		    1+(int)(ysize*(j+0.5))+yb
+		    (int32_t)(ysize*(j+0.5))+yb, 
+		    x+(int32_t)((imageptr->value)*xsize),
+		    1+(int32_t)(ysize*(j+0.5))+yb
 		    );
 		}
 #else
 		FilledBox (
 		x, 
 		y, 
-		x+(int)((imageptr->value)*xsize),
-		y+(int)((imageptr->value)*ysize)
+		x+(int32_t)((imageptr->value)*xsize),
+		y+(int32_t)((imageptr->value)*ysize)
 		);
 #endif
 		imageptr--;
@@ -118,12 +118,12 @@ DrawBox(image,xsize,ysize,xmax,ymax)
 Image	*image;
 float	xsize;
 float	ysize;
-int	xmax;
-int	ymax;
+int32_t	xmax;
+int32_t	ymax;
 {
 Image	*imageptr;
-int	i,j;
-int	x,y;
+int32_t	i,j;
+int32_t	x,y;
 
     imageptr = image + (xmax+1)*(ymax +1) -1;
     SetColor(G->foreground);
@@ -139,15 +139,15 @@ int	x,y;
 			FilledBox (
 			x, 
 			y, 
-			x+(int)(val*xsize),
-			y+(int)(val*ysize)
+			x+(int32_t)(val*xsize),
+			y+(int32_t)(val*ysize)
 			);
 		    } else
 		    Box (
 		    x, 
 		    y, 
-		    x+(int)(val*xsize),
-		    y+(int)(val*ysize)
+		    x+(int32_t)(val*xsize),
+		    y+(int32_t)(val*ysize)
 		    );
 		}
 		imageptr--;
@@ -165,15 +165,15 @@ int	x,y;
 			FilledBox (
 			x, 
 			y, 
-			x+(int)(val*xsize),
-			y+(int)(val*ysize)
+			x+(int32_t)(val*xsize),
+			y+(int32_t)(val*ysize)
 			    );
 		    } else {
 			Box (
 			x, 
 			y, 
-			x+(int)(val*xsize),
-			y+(int)(val*ysize)
+			x+(int32_t)(val*xsize),
+			y+(int32_t)(val*ysize)
 			);
 		    }
 		}
@@ -188,16 +188,16 @@ DrawNumberBox(image,xsize,ysize,xmax,ymax)
 Image	*image;
 float	xsize;
 float	ysize;
-int	xmax;
-int	ymax;
+int32_t	xmax;
+int32_t	ymax;
 {
 Image	*imageptr;
-int	i,j;
-int	x,y;
+int32_t	i,j;
+int32_t	x,y;
 char	str[100];
 char	comstr[10];
-int	n;
-int	w;
+int32_t	n;
+int32_t	w;
 
     SetColor(G->foreground);
     if((w = (xsize-4)/G->fontwidth) < 4) w = 4;
@@ -207,9 +207,9 @@ int	w;
 	    x= xsize*i;
 	    y= yb + ysize*j;
 	    n = (ymax - j)*(xmax+1)+i;
-	    Box ( x, y, x+(int)xsize, y+(int)ysize);
+	    Box ( x, y, x+(int32_t)xsize, y+(int32_t)ysize);
 	    sprintf(str,comstr,data[n]);
-	    Text(x+4,y+(int)(ysize/2),str);
+	    Text(x+4,y+(int32_t)(ysize/2),str);
 	}
     }
 }
@@ -218,12 +218,12 @@ DrawPoint(image,xsize,ysize,xmax,ymax)
 Image	*image;
 float	xsize;
 float	ysize;
-int	xmax;
-int	ymax;
+int32_t	xmax;
+int32_t	ymax;
 {
 Image	*imageptr;
-int	i,j;
-int	x,y;
+int32_t	i,j;
+int32_t	x,y;
 
     imageptr = image + (xmax+1)*(ymax +1) -1;
     SetColor(G->foreground);

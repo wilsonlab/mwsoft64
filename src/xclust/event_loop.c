@@ -5,12 +5,12 @@
 extern Label *commandlabel;
 extern Label *coordlabel;
 extern Label *rotlabel;
-extern int skipevent;
-extern int rotatecolor;
-long	clockval;
-long	lastexposed=0;
-int	needsrefresh=0;
-int	nexpose=0;
+extern int32_t skipevent;
+extern int32_t rotatecolor;
+int32_t	clockval;
+int32_t	lastexposed=0;
+int32_t	needsrefresh=0;
+int32_t	nexpose=0;
 
 
 EventLoop(frame)
@@ -23,13 +23,13 @@ extern char	*restorefile;
 char		versionstr[100];
 char		coordstring[50];
 char		rotstring[50];
-int		r,g,b;
-int		already_processed;
-int		ncycles;
+int32_t		r,g,b;
+int32_t		already_processed;
+int32_t		ncycles;
 Job		*job;
 
 XTimeCoord	*xtc;
-int		nevents;
+int32_t		nevents;
 
 XEvent		motion_event, last_motion_event;
 XEvent		*pme = NULL;
@@ -249,7 +249,7 @@ frame_event(frame,event)
 Frame		*frame;
 XEvent		*event;
 {
-int stat;
+int32_t stat;
  MenuFrame *menuframe;
 
  if(debug){
@@ -422,9 +422,9 @@ XEvent		*event;
 {
 XExposeEvent	*xev;
 XButtonEvent    *bev;
- int pid;
+ int32_t pid;
  ClusterBounds *cb;
- int clusterid=0, nbound=0;
+ int32_t clusterid=0, nbound=0;
  char tmpstr[30];
 
     if(debug){
@@ -514,7 +514,7 @@ EventString(E)
 XEvent	*E;
 {
 XButtonPressedEvent	*B;
-static int count=0;
+static int32_t count=0;
 
     printf("%d ",count);
     switch(E->type){

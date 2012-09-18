@@ -37,9 +37,9 @@ Point	p1,p2,p3;
 float	value;
 {
 Point	endpoint[3];
-int	index;
+int32_t	index;
 float	z1,z2,z3;
-extern int	line_width;
+extern int32_t	line_width;
 
     index = 0;
     z1 = p1.z;
@@ -90,8 +90,8 @@ extern int	line_width;
     if(line_width <= 0) line_width = 1;
     */
 
-    DrawLine((int)endpoint[0].x,(int)endpoint[0].y,
-    (int)endpoint[1].x, (int)endpoint[1].y);
+    DrawLine((int32_t)endpoint[0].x,(int32_t)endpoint[0].y,
+    (int32_t)endpoint[1].x, (int32_t)endpoint[1].y);
 }
 
 /*
@@ -103,7 +103,7 @@ Point	p1,p2,p3;
 ContourList	*contour_list;
 {
 float	cscale;
-int	n;
+int32_t	n;
 float	value;
 float	zmax,zmin;
 
@@ -123,12 +123,12 @@ float	zmax,zmin;
 }
 
 MakeContourList(ncontours,minval,maxval,contour_list)
-int	ncontours;
+int32_t	ncontours;
 float	minval;
 float	maxval;
 ContourList	*contour_list;
 {
-int	n;
+int32_t	n;
 float	cscale;
 
     /*
@@ -151,7 +151,7 @@ ContourList	*contour_list;
 Point	pt[5];
 Image	*imageptr;
 float	x,y;
-int	i,j;
+int32_t	i,j;
 
     SetColor (G->foreground);
     imageptr = image + (xmax +1)*(ymax +1) - 1;

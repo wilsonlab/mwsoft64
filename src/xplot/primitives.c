@@ -5,16 +5,16 @@
 struct bitmaplist_type {
     char	*name;
     Pixmap	bitmap;
-    short	w,h;
+    int16_t	w,h;
 } bitmaplist[MAXBITMAPS];
 
-int	nbitmaps = 0;
+int32_t	nbitmaps = 0;
 
 AddBitmap(basic,name,bits,w,h)
 BasicWindow	*basic;
 char	*name;
 char	*bits;
-int	w,h;
+int32_t	w,h;
 {
 Pixmap	bitmap;
 
@@ -36,9 +36,9 @@ Pixmap	bitmap;
 }
 
 Pixmap GetBitmap(id,w,h)
-int	id;
-short	*w;
-short	*h;
+int32_t	id;
+int16_t	*w;
+int16_t	*h;
 {
     if(id < nbitmaps){
 	*w = bitmaplist[id].w;
@@ -51,7 +51,7 @@ short	*h;
 Pixmap GetPixmapByName(name)
 char	*name;
 {
-int	id;
+int32_t	id;
     for(id=0;id<nbitmaps;id++){
 	if(strcmp(bitmaplist[id].name,name) == 0){
 	    return(bitmaplist[id].bitmap);
@@ -67,8 +67,8 @@ Beep()
 
 DrawSuperLine(basic,sx1,sy1,sx2,sy2,color)
 BasicWindow *basic;
-int sx1,sy1,sx2,sy2;
-unsigned long	color;
+int32_t sx1,sy1,sx2,sy2;
+uint32_t	color;
 {
 	SetColor(color^basic->background);
 	/*
@@ -81,8 +81,8 @@ unsigned long	color;
 
 EraseSuperLine(basic,sx1,sy1,sx2,sy2,color)
 BasicWindow *basic;
-int sx1,sy1,sx2,sy2;
-unsigned long	color;
+int32_t sx1,sy1,sx2,sy2;
+uint32_t	color;
 {
 	SetColor(color^basic->background);
 	/*
@@ -95,8 +95,8 @@ unsigned long	color;
 
 DrawSuperBox(basic,sx1,sy1,sx2,sy2,color)
 BasicWindow *basic;
-int sx1,sy1,sx2,sy2;
-unsigned long	color;
+int32_t sx1,sy1,sx2,sy2;
+uint32_t	color;
 {
     /*
     SetColor(basic->foreground^basic->background);
@@ -109,8 +109,8 @@ unsigned long	color;
 
 EraseSuperBox(basic,sx1,sy1,sx2,sy2,color)
 BasicWindow *basic;
-int sx1,sy1,sx2,sy2;
-unsigned long	color;
+int32_t sx1,sy1,sx2,sy2;
+uint32_t	color;
 {
     /*
     SetColor(basic->foreground^basic->background);
@@ -132,7 +132,7 @@ XEvent	e;
 DrawBitmap(basic,bitmap,x,y,w,h)
 BasicWindow *basic;
 Pixmap	bitmap;
-int	x,y;
+int32_t	x,y;
 {
     XCopyArea(basic->display,bitmap,basic->window,
     basic->context, 0,0,w,h,x,y);
@@ -141,7 +141,7 @@ int	x,y;
 
 DrawMode(basic,mode)
 BasicWindow *basic;
-int mode;
+int32_t mode;
 {
     XSetFunction(basic->display,basic->context,mode);
 }
@@ -163,7 +163,7 @@ char *tmp;
 
 SetLinestyle(basic,style)
 BasicWindow *basic;
-int	style;
+int32_t	style;
 {
 XGCValues	values;
 
@@ -178,10 +178,10 @@ XGCValues	values;
 
 _SetColor(basic,pixel)
 BasicWindow *basic;
-int	pixel;
+int32_t	pixel;
 {
     basic->color = ColorMap(pixel);
-    XSetForeground(basic->display,basic->context,(unsigned long)basic->color);
+    XSetForeground(basic->display,basic->context,(uint32_t)basic->color);
 }
 
 Invert(basic)
@@ -203,11 +203,11 @@ BasicWindow *basic;
 }
 
 SetColor(pixel)
-int	pixel;
+int32_t	pixel;
 {
     G->color = ColorMap(pixel);
     if(G->display){
-	XSetForeground(G->display,G->context,(unsigned long)G->color);
+	XSetForeground(G->display,G->context,(uint32_t)G->color);
 	SetPSDefaultForeground(pixel);
     } else {
 	SetPSDefaultForeground(pixel);
@@ -216,11 +216,11 @@ int	pixel;
 
 SetForeground(basic,pixel)
 BasicWindow *basic;
-int	pixel;
+int32_t	pixel;
 {
     basic->foreground = pixel;
     if(G->display){
-	XSetForeground(G->display,G->context,(unsigned long)ColorMap(pixel));
+	XSetForeground(G->display,G->context,(uint32_t)ColorMap(pixel));
 	SetPSDefaultForeground(pixel);
     } else {
 	SetPSDefaultForeground(pixel);
@@ -230,39 +230,39 @@ int	pixel;
 
 #ifdef OLD
 SetColor(pixel)
-int	pixel;
+int32_t	pixel;
 {
     G->color = pixel;
     if(G->display){
-	XSetForeground(G->display,G->context,(unsigned long)pixel);
+	XSetForeground(G->display,G->context,(uint32_t)pixel);
     }
 }
 
 SetForeground(basic,pixel)
 BasicWindow *basic;
-int	pixel;
+int32_t	pixel;
 {
     basic->foreground = pixel;
     if(basic->display){
-	XSetForeground(basic->display,basic->context,(unsigned long)pixel);
+	XSetForeground(basic->display,basic->context,(uint32_t)pixel);
     }
 }
 #endif
 
 SetBackground(basic,pixel)
 BasicWindow *basic;
-int	pixel;
+int32_t	pixel;
 {
     basic->background = pixel;
     if(basic->display){
-	XSetBackground(basic->display,basic->context,(unsigned long)ColorMap(pixel));
+	XSetBackground(basic->display,basic->context,(uint32_t)ColorMap(pixel));
     }
 }
 
 SetPlaneMask(mask)
-int	mask;
+int32_t	mask;
 {
-    XSetPlaneMask(G->display,G->context,(unsigned long)mask);
+    XSetPlaneMask(G->display,G->context,(uint32_t)mask);
 }
 
 SetFont(frame,name)
@@ -284,7 +284,7 @@ char *name;
 }
 
 SetLineWidth(width)
-int width;
+int32_t width;
 {
 XGCValues	values;
 
@@ -305,12 +305,12 @@ GContext ContextID()
 
 TextExtent(s,width,height)
 char 	*s;
-int	*width;
-int	*height;
+int32_t	*width;
+int32_t	*height;
 {
-int	ascent;
-int	descent;
-int	direction;
+int32_t	ascent;
+int32_t	descent;
+int32_t	direction;
 XCharStruct	overall;
 
     if(s == NULL){
@@ -332,12 +332,12 @@ XCharStruct	overall;
 _TextExtent(basic,s,width,height)
 BasicWindow	*basic;
 char 	*s;
-int	*width;
-int	*height;
+int32_t	*width;
+int32_t	*height;
 {
-int	ascent;
-int	descent;
-int	direction;
+int32_t	ascent;
+int32_t	descent;
+int32_t	direction;
 XCharStruct	overall;
 
     if(!basic->mapped){
@@ -359,7 +359,7 @@ XCharStruct	overall;
 
 Text(basic,x,y,s)
 BasicWindow	*basic;
-int	x,y;
+int32_t	x,y;
 char	*s;
 {
     if((PSStatus() == 0) && (F->mapped == 0)) { return;}
@@ -368,7 +368,7 @@ char	*s;
 
 _FilledBox(basic,xl,yb,xr,yt)
 BasicWindow	*basic;
-int		xl,xr,yb,yt;
+int32_t		xl,xr,yb,yt;
 {
     if((PSStatus() == 0) && (F->mapped == 0)) { return;}
     if(yb > yt){
@@ -379,7 +379,7 @@ int		xl,xr,yb,yt;
 }
 
 FilledBox(xl,yb,xr,yt)
-int		xl,xr,yb,yt;
+int32_t		xl,xr,yb,yt;
 {
     if((PSStatus() == 0) && (F->mapped == 0)) { return;}
     if(yb > yt){
@@ -391,14 +391,14 @@ int		xl,xr,yb,yt;
 
 _Box(basic,xl,yb,xr,yt)
 BasicWindow	*basic;
-int		xl,xr,yb,yt;
+int32_t		xl,xr,yb,yt;
 {
     if((PSStatus() == 0) && (F->mapped == 0)) { return;}
     XPSDrawRectangle(basic->display,basic->drawable,basic->context,xl,yb,xr-xl,yt-yb);
 }
 
 Box(xl,yb,xr,yt)
-int		xl,xr,yb,yt;
+int32_t		xl,xr,yb,yt;
 {
     if((PSStatus() == 0) && (F->mapped == 0)) { return;}
     XPSDrawRectangle(G->display,G->drawable,G->context,xl,yb,xr-xl,yt-yb);
@@ -406,14 +406,14 @@ int		xl,xr,yb,yt;
 
 FilledPoly(coord,ncoords)
 Coord	*coord;
-int	ncoords;
+int32_t	ncoords;
 {
     XPSFillPolygon(G->display,G->drawable,G->context,coord,ncoords,Convex,CoordModeOrigin);
 }
 
 _DrawPoint(b,x1,y1)
 BasicWindow	*b;
-int		x1,y1;
+int32_t		x1,y1;
 {
     if((PSStatus() == 0) && (F->mapped == 0)) { return;}
     XPSDrawPoint(b->display,b->drawable,b->context,x1,y1);
@@ -421,14 +421,14 @@ int		x1,y1;
 
 _DrawLine(b,x1,y1,x2,y2)
 BasicWindow	*b;
-int		x1,y1,x2,y2;
+int32_t		x1,y1,x2,y2;
 {
     if((PSStatus() == 0) && (F->mapped == 0)) { return;}
     XPSDrawLine(b->display,b->drawable,b->context,x1,y1,x2,y2);
 }
 
 DrawLine(x1,y1,x2,y2)
-int		x1,y1,x2,y2;
+int32_t		x1,y1,x2,y2;
 {
     if((PSStatus() == 0) && (F->mapped == 0)) { return;}
     XPSDrawLine(G->display,G->drawable,G->context,x1,y1,x2,y2);
@@ -436,7 +436,7 @@ int		x1,y1,x2,y2;
 
 MultipleLines(coord,ncoords)
 Coord	*coord;
-int	ncoords;
+int32_t	ncoords;
 {
     if((PSStatus() == 0) && (F->mapped == 0)) { return;}
     XPSDrawLines(G->display,G->drawable,G->context,coord,ncoords,CoordModeOrigin);
@@ -444,7 +444,7 @@ int	ncoords;
 
 FloatMultipleLines(coord,ncoords,fcoord)
 Coord	*coord;
-int	ncoords;
+int32_t	ncoords;
 FCoord	*fcoord;
 {
     if((PSStatus() == 0) && (F->mapped == 0)) { return;}
@@ -460,7 +460,7 @@ BasicWindow	*basic;
 }
 
 Bell(vol)
-int	vol;
+int32_t	vol;
 {
     XBell(G->display,0);
 }
@@ -475,7 +475,7 @@ XEvent	E;
 }
 
 Circle(cx,cy,d)
-int	cx,cy,d;
+int32_t	cx,cy,d;
 {
     /*if(PSStatus() == 0 && F->mapped == 0) return;*/
     if(G->display){
@@ -484,7 +484,7 @@ int	cx,cy,d;
 }
 
 FilledCircle(cx,cy,d)
-int	cx,cy,d;
+int32_t	cx,cy,d;
 {
     /*if(PSStatus() == 0 && F->mapped == 0) return;*/
     if(G->display){
@@ -493,10 +493,10 @@ int	cx,cy,d;
 }
 
 Triangle(cx,cy,d)
-int	cx,cy,d;
+int32_t	cx,cy,d;
 {
 Coord	coord[4];
-int	ncoords = 4;
+int32_t	ncoords = 4;
 
     coord[0].x = cx - d/2;
     coord[0].y = cy + d/2;
@@ -511,10 +511,10 @@ int	ncoords = 4;
 }
 
 FilledTriangle(cx,cy,d)
-int	cx,cy,d;
+int32_t	cx,cy,d;
 {
 Coord	coord[4];
-int	ncoords = 4;
+int32_t	ncoords = 4;
 
     coord[0].x = cx - d/2;
     coord[0].y = cy + d/2;

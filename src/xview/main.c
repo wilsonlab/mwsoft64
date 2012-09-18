@@ -12,12 +12,12 @@
 #include 	<X11/Xutil.h>
 
 main(argc, argv,envp)
-int	argc;
+int32_t	argc;
 char	*argv[];
 char	*envp[];
 {
-int	status;
-int	x,y;
+int32_t	status;
+int32_t	x,y;
 
     G = (GlobalContext *)calloc(1,sizeof(GlobalContext));
     V = (ViewContext *)calloc(1,sizeof(ViewContext));

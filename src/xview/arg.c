@@ -21,11 +21,11 @@ error()
 }
 
 ParseArgList(argc,argv)
-int	argc;
+int32_t	argc;
 char	**argv;
 {
-int		nxtarg;
-int		filecnt;
+int32_t		nxtarg;
+int32_t		filecnt;
 extern	void	sigadvance(), sigtoggle();
 char	*type;
 
@@ -172,10 +172,10 @@ char	*type;
 	    if(strcmp(type,"char") == 0){
 		V->datatype = CHAR;
 	    } else
-	    if(strcmp(type,"short") == 0){
+	    if(strcmp(type,"int16_t") == 0){
 		V->datatype = SHORT;
 	    } else
-	    if(strcmp(type,"int") == 0){
+	    if(strcmp(type,"int32_t") == 0){
 		V->datatype = INT;
 	    } else
 	    if(strcmp(type,"double") == 0){

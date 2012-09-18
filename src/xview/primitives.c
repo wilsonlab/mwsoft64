@@ -1,13 +1,13 @@
 #include	"xview_ext.h"
 
 SetColor(pixel)
-int	pixel;
+int32_t	pixel;
 {
-int	color;
+int32_t	color;
     G->color = ColorMap(pixel);
     color = G->color;
     if(G->display){
-	XSetForeground(G->display,G->context,(unsigned long)color);
+	XSetForeground(G->display,G->context,(uint32_t)color);
 	SetPSDefaultForeground(pixel);
     } else {
 	SetPSDefaultForeground(pixel);
@@ -15,13 +15,13 @@ int	color;
 }
 
 SetForeground(pixel)
-int	pixel;
+int32_t	pixel;
 {
-int	color;
+int32_t	color;
     G->foreground = pixel;
     color = ColorMap(pixel);
     if(G->display){
-	XSetForeground(G->display,G->context,(unsigned long)color);
+	XSetForeground(G->display,G->context,(uint32_t)color);
 	SetPSDefaultForeground(pixel);
     } else {
 	SetPSDefaultForeground(pixel);
@@ -29,18 +29,18 @@ int	color;
 }
 
 SetBackground(pixel)
-int	pixel;
+int32_t	pixel;
 {
     G->background = pixel;
     if(G->display){
-	XSetBackground(G->display,G->context,(unsigned long)ColorMap(pixel));
+	XSetBackground(G->display,G->context,(uint32_t)ColorMap(pixel));
     }
 }
 
 SetPlaneMask(mask)
-int	mask;
+int32_t	mask;
 {
-    XSetPlaneMask(G->display,G->context,(unsigned long)mask);
+    XSetPlaneMask(G->display,G->context,(uint32_t)mask);
 }
 
 SetFont(name)
@@ -59,7 +59,7 @@ char *name;
 }
 
 SetLineWidth(width)
-int width;
+int32_t width;
 {
 XGCValues	values;
 
@@ -80,12 +80,12 @@ GContext ContextID()
 
 TextExtent(s,height,width)
 char 	*s;
-int	*height;
-int	*width;
+int32_t	*height;
+int32_t	*width;
 {
-int	ascent;
-int	descent;
-int	direction;
+int32_t	ascent;
+int32_t	descent;
+int32_t	direction;
 XCharStruct	overall;
 
     XTextExtents(G->fontinfo,s,strlen(s),&direction,&ascent,&descent,&overall);
@@ -94,7 +94,7 @@ XCharStruct	overall;
 }
 
 Text(x,y,s)
-int	x,y;
+int32_t	x,y;
 char	*s;
 {
     if((PSStatus() == 0) && (G->mapped == 0)) { return;}
@@ -103,14 +103,14 @@ char	*s;
 
 
 FilledBox(xl,yb,xr,yt)
-int		xl,xr,yb,yt;
+int32_t		xl,xr,yb,yt;
 {
     if((PSStatus() == 0) && (G->mapped == 0)) { return;}
     XPSFillRectangle(G->display,G->drawable,G->context,xl,yb,xr-xl,yt-yb);
 }
 
 Box(xl,yb,xr,yt)
-int		xl,xr,yb,yt;
+int32_t		xl,xr,yb,yt;
 {
     if((PSStatus() == 0) && (G->mapped == 0)) { return;}
     XPSDrawRectangle(G->display,G->drawable,G->context,xl,yb,xr-xl,yt-yb);
@@ -118,14 +118,14 @@ int		xl,xr,yb,yt;
 
 FilledPoly(coord,ncoords)
 Coord	*coord;
-int	ncoords;
+int32_t	ncoords;
 {
     if((PSStatus() == 0) && (G->mapped == 0)) { return;}
     XPSFillPolygon(G->display,G->drawable,G->context,coord,ncoords,Convex,CoordModeOrigin);
 }
 
 DrawLine(x1,y1,x2,y2)
-int		x1,y1,x2,y2;
+int32_t		x1,y1,x2,y2;
 {
     if((PSStatus() == 0) && (G->mapped == 0)) { return;}
     XPSDrawLine(G->display,G->drawable,G->context,x1,y1,x2,y2);
@@ -133,7 +133,7 @@ int		x1,y1,x2,y2;
 
 MultipleLines(coord,ncoords)
 Coord	*coord;
-int	ncoords;
+int32_t	ncoords;
 {
     if((PSStatus() == 0) && (G->mapped == 0)) { return;}
     XPSDrawLines(G->display,G->drawable,G->context,coord,ncoords,CoordModeOrigin);
@@ -148,7 +148,7 @@ ClearWindow()
 }
 
 Bell(vol)
-int	vol;
+int32_t	vol;
 {
     XBell(G->display,0);
 }

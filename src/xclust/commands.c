@@ -3,12 +3,12 @@
 extern char *strchr();
 /* extern void SetRotationMatrix(double***, float, float, float); */
 extern void AffineRotationMatrixEuler(double***, float, float, float);
-int skipevent = 0;
+int32_t skipevent = 0;
 
 static argerror = 0;
 
 char *Itoa(i)
-int i;
+int32_t i;
 {
 char	tmp[100];
 char	*copy;
@@ -40,7 +40,7 @@ char *s;
     return(atof(s));
 }
 
-int Atoi(s)
+int32_t Atoi(s)
 char *s;
 {
     if(s == NULL){
@@ -51,7 +51,7 @@ char *s;
 
 char *NextDelimiter(s,quote)
 char *s;
-int *quote;
+int32_t *quote;
 {
     if(s == NULL) return(NULL);
     /*
@@ -105,11 +105,11 @@ char *newenv;
     return(newenv);
 }
 
-int CommandArgumentCount(line)
+int32_t CommandArgumentCount(line)
 char 	*line;
 {
-int	i;
-int	quote;
+int32_t	i;
+int32_t	quote;
 char    *nxtcommand;
 
     quote = 0;
@@ -148,15 +148,15 @@ char    *nxtcommand;
 */
 char *CommandArgument(line,argnumber)
 char 	*line;
-int 	argnumber;
+int32_t 	argnumber;
 {
-int	i;
-int	count;
+int32_t	i;
+int32_t	count;
 char	*ptr;
 char	*ptr2;
 char	*copy;
 char	tmp[1000];
-int	quote;
+int32_t	quote;
 char	*LookupVariable();
 
     ptr = line;
@@ -250,10 +250,10 @@ char *line;
 {
 Plot	*p;
 ProjectionInfo  *pinfo;
-int	val;
-int	fval;
-extern int verbose_legend;
-short sx,sy,sx2,sy2;
+int32_t	val;
+int32_t	fval;
+extern int32_t verbose_legend;
+int16_t sx,sy,sx2,sy2;
 float wx,wy,wz,wx2,wy2,wz2;
 char *s;
 char	*fontname;
@@ -261,9 +261,9 @@ Plot	*PartialLoadPlot();
 DataSource	*source;
 MenuItem	*item;
 char		tmps[100];
-unsigned short red,green,blue;
-int	sv;
-int	i;
+int16_t red,green,blue;
+int32_t	sv;
+int32_t	i;
 
     if(debug){
 	fprintf(stderr,"%s",line);
@@ -766,15 +766,15 @@ int	i;
       /* we don't allow direct manipulation of the colormap anymore */
 /*     if(Match("/clusterrgb")){ */
 /* 	SetPixelRGB(MINCLUSTER+Atoi(ARG(1)), */
-/* 	(unsigned short)(Atoi(ARG(2)) << 8), */
-/* 	(unsigned short)(Atoi(ARG(3)) << 8), */
-/* 	(unsigned short)(Atoi(ARG(4)) << 8)); */
+/* 	(int16_t)(Atoi(ARG(2)) << 8), */
+/* 	(int16_t)(Atoi(ARG(3)) << 8), */
+/* 	(int16_t)(Atoi(ARG(4)) << 8)); */
 /*     } else */
 /*     if(Match("/rgb")){ */
 /* 	SetPixelRGB(Atoi(ARG(1)), */
-/* 	(unsigned short)(Atoi(ARG(2)) << 8), */
-/* 	(unsigned short)(Atoi(ARG(3)) << 8), */
-/* 	(unsigned short)(Atoi(ARG(4)) << 8)); */
+/* 	(int16_t)(Atoi(ARG(2)) << 8), */
+/* 	(int16_t)(Atoi(ARG(3)) << 8), */
+/* 	(int16_t)(Atoi(ARG(4)) << 8)); */
 /*     } else */
     
     if(Match("/loadview")){
@@ -1144,7 +1144,7 @@ int	i;
 	return(1);
     } else
     if(Match("/autosavedelay")){
-	ChangeIntermittentSaveDelay((int)(60e2*Atof(ARG(1))));
+	ChangeIntermittentSaveDelay((int32_t)(60e2*Atof(ARG(1))));
     } else
     if(Match("/appendtofile")){
 	CG;
@@ -1180,7 +1180,7 @@ int	i;
 	CG;
 	SelectCluster(Atoi(ARG(1)));
     } else
-    if((Match("/int")) ||(Match("/csi"))){
+    if((Match("/int32_t")) ||(Match("/csi"))){
 	CG;
 	MenuCSI();
     } else
@@ -1423,7 +1423,7 @@ HP(s)
 char *s;
 {
 
-  int strlength, nreqcols;
+  int32_t strlength, nreqcols;
   char formatstr[20];
 
   if (s==NULL) {

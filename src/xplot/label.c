@@ -1,6 +1,6 @@
 #include "xplot_ext.h"
 
-int verbose_legend = 1;
+int32_t verbose_legend = 1;
 
 TextWindowLabel(label)
 char *label;
@@ -15,8 +15,8 @@ char *label;
 DrawGraphTitle(graph)
 Graph	*graph;
 {
-int	center;
-int	tw,th;
+int32_t	center;
+int32_t	tw,th;
 
     if(graph->title){
 	SetColor (graph->foreground);
@@ -28,12 +28,12 @@ int	tw,th;
 
 DrawPlotLegend(plot,count)
 Plot *plot;
-int count;
+int32_t count;
 {
-int sx,sy;
+int32_t sx,sy;
 char legend[200];
 char tmp[80];
-int	tw,th;
+int32_t	tw,th;
 
 
     if(plot->visible){
@@ -119,8 +119,8 @@ Graph	*graph;
 {
 char	label[80];
 char	tmp[80];
-int	tw,th;
-int	sx,sy;
+int32_t	tw,th;
+int32_t	sx,sy;
 
     SetColor(graph->foreground);
     ScreenTransform(graph,graph->wxmax,graph->xaxis.yintcpt,&sx,&sy);
@@ -178,8 +178,8 @@ Graph *graph;
 {
 char	label[80];
 char	tmp[80];
-int	tw,th;
-int sx,sy;
+int32_t	tw,th;
+int32_t sx,sy;
 
     SetColor(graph->foreground);
     ScreenTransform(graph,graph->yaxis.xintcpt,graph->wymin,&sx,&sy);

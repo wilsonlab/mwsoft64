@@ -27,7 +27,7 @@ Graph	*graph;
 
 SetGraphDefault(graph,option,value)
 Graph	*graph;
-int	option;
+int32_t	option;
 float	value;
 {
     if(graph == NULL || option < 0 || option >= MAXDEFAULTS){
@@ -38,7 +38,7 @@ float	value;
 
 SetSourceDefault(source,option,value)
 DataSource	*source;
-int	option;
+int32_t	option;
 float	value;
 {
     if(source == NULL || option < 0 || option >= MAXDEFAULTS){

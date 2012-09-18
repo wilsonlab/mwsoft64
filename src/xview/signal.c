@@ -4,7 +4,7 @@
 
 void
 sigadvance(sig)
-int sig;
+int32_t sig;
 {
     got_signal = 1;
     signal(SIGUSR1,sigadvance);
@@ -12,7 +12,7 @@ int sig;
 
 void
 sigtoggle(sig)
-int sig;
+int32_t sig;
 {
     signal_step = !signal_step;
     got_signal = 1;
@@ -27,7 +27,7 @@ int sig;
 
 #ifdef OLD
 Usleep(usec)
-int usec;
+int32_t usec;
 {
 struct timeval  timeout;
 
