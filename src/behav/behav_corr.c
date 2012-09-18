@@ -115,10 +115,10 @@ int32_t		mintheta,maxtheta;
 	    fprintf(stderr,"using all positions\n");
 	} else {
 	    FormatTime(starttime,&min,&sec);
-	    fprintf(stderr,"using positions between timestamp %lu (%d:%d)",
+	    fprintf(stderr,"using positions between timestamp %"PRIu32" (%d:%d)",
 	    starttime,min,sec);
 	    FormatTime(endtime,&min,&sec);
-	    fprintf(stderr,"and %lu (%d:%d)\n",
+	    fprintf(stderr,"and %"PRIu32" (%d:%d)\n",
 	    endtime,min,sec);
 	}
     }
@@ -335,7 +335,7 @@ int32_t		mintheta,maxtheta;
 	} else {
 	    dt = newptimestamp - ptimestamp;
 	    if(dt <= TINYVAL){
-		fprintf(stderr,"ERROR: dt=%lu %lu %lu\n",dt,newptimestamp,
+		fprintf(stderr,"ERROR: dt=%"PRIu32" %"PRIu32" %"PRIu32"\n",dt,newptimestamp,
 		ptimestamp);
 	    }
 	    /*
@@ -419,7 +419,7 @@ int32_t		mintheta,maxtheta;
 		*/
 		dt = newptimestamp - ptimestamp;
 		if(dt <= TINYVAL){
-		    fprintf(stderr,"ERROR: dt=%lu %lu %lu\n",dt,newptimestamp,
+		    fprintf(stderr,"ERROR: dt=%"PRIu32" %"PRIu32" %"PRIu32"\n",dt,newptimestamp,
 		    ptimestamp);
 		}
 		/*
@@ -588,7 +588,7 @@ int32_t		mintheta,maxtheta;
 	*/
 	if(result->fpdir){
 	    fprintf(result->fpdir,
-	    "%lu \t%d \t%d \t%d \t%d \t%d \t%g \t%g \t%d \t%d \t%d\n",
+	    "%"PRIu32" \t%d \t%d \t%d \t%d \t%d \t%g \t%g \t%d \t%d \t%d\n",
 	    newptimestamp,
 	    x,y,x2,y2,
 	    newdirection,
@@ -899,14 +899,14 @@ int32_t		mintheta,maxtheta;
 			if((result->behavmode == ANGVELOCITY) && 
 			(result->savemode == RAW)){
 			    if(angvelocity != INVALIDANGV){
-				fprintf(result->fp,"%lu %d %d %g %g\n",
+				fprintf(result->fp,"%"PRIu32" %d %d %g %g\n",
 				newptimestamp,x,y,angvelocity,corr);
 			    }
 			} else
 			if((result->behavmode == VELOCITY) && 
 			(result->savemode == RAW)){
 			    if(velocitymag != INVALIDMAG){
-				fprintf(result->fp,"%lu %d %d %g %g\n",
+				fprintf(result->fp,"%"PRIu32" %d %d %g %g\n",
 				newptimestamp,x,y,velocitymag,corr);
 			    }
 			} else {
@@ -928,7 +928,7 @@ int32_t		mintheta,maxtheta;
 		if(result->behavmode == VELOCITY){
 		    if(velocitymag > TINYVAL){
 			if(result->savemode == RAW){
-			    fprintf(result->fp,"%lu %d %d %d %d %d %g\n",
+			    fprintf(result->fp,"%"PRIu32" %d %d %d %d %d %g\n",
 			    newptimestamp,x,y,x2,y2,newdirection,velocitymag);
 			} 
 			result->gridtotaln[x][y]++;
@@ -947,7 +947,7 @@ int32_t		mintheta,maxtheta;
 		if(result->behavmode == ANGVELOCITY){
 		    if(angvelocity != INVALIDANGV){
 			if(result->savemode == RAW){
-			    fprintf(result->fp,"%lu %d %d %d %d %d %g\n",
+			    fprintf(result->fp,"%"PRIu32" %d %d %d %d %d %g\n",
 			    newptimestamp,x,y,x2,y2,newdirection,angvelocity);
 			} 
 			result->gridtotaln[x][y]++;

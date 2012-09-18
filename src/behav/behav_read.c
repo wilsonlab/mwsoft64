@@ -531,9 +531,9 @@ uint32_t lasttimestamp;
     if(verbose) {
 	firsttimestamp = plist->positionarray[0].timestamp;
 	lasttimestamp = plist->positionarray[plist->npositions-1].timestamp;
-	fprintf(stderr,"First timestamp in position file: %ld (%s)\n",
+	fprintf(stderr,"First timestamp in position file: %"PRId32" (%s)\n",
 	    firsttimestamp,TimestampToString(firsttimestamp));
-	fprintf(stderr,"Last timestamp in position file: %ld (%s)\n",
+	fprintf(stderr,"Last timestamp in position file: %"PRId32" (%s)\n",
 	    lasttimestamp,TimestampToString(lasttimestamp));
 	fprintf(stderr,"Positions offset by %d,%d\n",
 	result->xoffset,result->yoffset);
@@ -565,10 +565,10 @@ int32_t	i;
 	}
 	if(verbose){
 	    fprintf(stderr,"Read %d spikes\n",spikearray[i].nspikes);
-	    fprintf(stderr,"from timestamp %lu (%s) ",
+	    fprintf(stderr,"from timestamp %"PRIu32" (%s) ",
 		spikearray[i].data[0].timestamp,
 		TimestampToString(spikearray[i].data[0].timestamp));
-	    fprintf(stderr,"to %lu (%s)\n",
+	    fprintf(stderr,"to %"PRIu32" (%s)\n",
 	    spikearray[i].data[spikearray[i].nspikes-1].timestamp,
 	    TimestampToString(spikearray[i].data[spikearray[i].nspikes-1].timestamp));
 
