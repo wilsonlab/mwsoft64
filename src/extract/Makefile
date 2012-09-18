@@ -29,10 +29,10 @@ ALL = 	\
 	showcmd \
 	spikeanal \
 	spikeavg \
-	textract 
+	textract \
 
 all: $(ALL)
-	mv $(ALL) ../../build/extract/
+
 .c:
 	$(CC) $(CFLAGS) $< -o $@ $(INCLUDE) $(LIBS)
 

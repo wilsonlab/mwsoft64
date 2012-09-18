@@ -1,22 +1,33 @@
 
-# directory to create for a 'make build'
-BUILD_DIR = build
-
 # set shell to bash (needed for brace expansion as used in mkdir in build target)
 SHELL=/bin/bash
+BUILD_DIR=build
 
-libs:
-	mkdir -p build/lib;
+
+all: lib  extract util popanal behav 
+
+lib:
+	mkdir -p $(BUILD_DIR)/lib;
 	cd src; \
 	$(MAKE) iolib.a ; \
-	mv -f iolib.a ../build/lib ; \
+	cd ..;
+	mv -f src/iolib.a $(BUILD_DIR)/lib; \
 	cd ..;
 
+util: lib
+	mkdir -p $(BUILD_DIR)/bin;
+	$(MAKE) -C src/util
+	mv src/util/{atob,y} $(BUILD_DIR)/bin/
 
-# utils:
-# 	$(MAKE) -C src atob y
-# 	$(MAKE) -C src/cluster editheader header showcmd
+behav: lib
+	mkdir -p $(BUILD_DIR)/bin;
+	$(MAKE) -C src/behav
+	mv src/behav/behav $(BUILD_DIR)/bin/
 
+popanal: popanal
+	mkdir -p $(BUILD_DIR)/bin;
+	$(MAKE) -C src/popanal
+	mv src/popanal/popanal $(BUILD_DIR)/bin/
 # xclust: libs
 # 	$(MAKE) -C X11/xclust/ xclust
 # 	$(MAKE) -C X11/xplot/ xplot
@@ -28,9 +39,11 @@ libs:
 # 	$(MAKE) -C src/cluster/popanal popanal
 # 	$(MAKE) -C src/cluster/behav behav
 
-extract: libs
-	mkdir -p build/extract;
+extract: lib
+	mkdir -p $(BUILD_DIR)/bin;
 	$(MAKE) -C src/extract 
+	mv src/extract/{spikeparms2,adextract,crextract,editheader,esextract,findspike,parmextract,posextract,showcmd,spikeanal,spikeavg,textract} $(BUILD_DIR)/bin/
+
 						   #adextract \
 	                       #crextract \
 	                       #esextract \
@@ -41,27 +54,14 @@ extract: libs
 
 clean: 
  	#$(MAKE) -C src/ clean; 
-	rm -rf build/lib;
-	rm -rf build/extract;   
-	rm -rf build/xclust;
-	rm -rf build/misc;
-	 
-	$(MAKE) -C src/ clean	
+	rm -rf $(BUILD_DIR)
+	$(MAKE) -C src/ clean
+	$(MAKE) -C src/popanal/ clean
+	$(MAKE) -C src/behav/ clean
 
-# 	$(MAKE) -C X11/xclust clean
-# 	$(MAKE) -C X11/xplot/ clean
-# 	$(MAKE) -C X11/xview/ clean
-# 	$(MAKE) -C src/cluster clean
-# 	$(MAKE) -C src/cluster/popanal clean
-# 	$(MAKE) -C src/cluster/behav clean
-# 	rm -rf build\lib \
-# 	       build\bin \
-	
 
-all: libs  extract 
-#utils xclust
 
-default: all
+default: lib  extract util popanal behav 
 
 # build: all
 # 	mkdir -p $(BUILD_DIR)/$(MWSOFT_RPM_NAME)/bin
