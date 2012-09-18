@@ -7,9 +7,6 @@
 #include	<glob.h>
 #include	<sys/wait.h>
 
-#include 	<stdint.h>
-#include 	<inttypes.h>
-
 #include 	"header.h"
 #include 	"iolib.h"
 #include 	"xclust_defs.h"
@@ -22,19 +19,19 @@
 
 
 /* job id globals */
-extern int32_t current_job_id;
-extern int32_t continuous_step_job_id;
-extern int32_t blockmovie_job_id;
-extern int32_t intermittent_save_job_id;
+extern int current_job_id;
+extern int continuous_step_job_id;
+extern int blockmovie_job_id;
+extern int intermittent_save_job_id;
 
-extern int32_t		debug;
+extern int		debug;
 extern Graph		*G;
 extern Frame		*F;
 extern XContext		datacontext;
 extern char	*standardargv[];
-extern int32_t	standardargc;
-extern int32_t	rotatecolor;
-extern int32_t	suppresswarnings;
+extern int	standardargc;
+extern int	rotatecolor;
+extern int	suppresswarnings;
 
 extern char		*CopyString();
 extern Plot		*AddPlot();
@@ -59,6 +56,6 @@ extern char		*GetItemValue();
 extern char		*strchr();
 extern Pixmap GetPixmapByName();
 extern double GetDoubleFromRawData();
-extern int32_t	WhitePixelIdx();
-extern int32_t	BlackPixelIdx();
-extern	uint32_t GetPixel();
+extern int	WhitePixelIdx();
+extern int	BlackPixelIdx();
+extern	unsigned long GetPixel();

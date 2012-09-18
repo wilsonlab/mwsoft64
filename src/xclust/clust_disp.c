@@ -12,8 +12,8 @@ RescaleClusterBounds(graph)
 Graph	*graph;
 {
 ClusterBounds	*cb;
-int32_t	sx1,sy1;
-int32_t	i;
+int	sx1,sy1;
+int	i;
 double	wx,wy,wz;
 double	nx,ny,nz;
 
@@ -59,12 +59,12 @@ double	nx,ny,nz;
     }
 }
 
-int32_t LookupClusterColor(graph,clusterid)
+int LookupClusterColor(graph,clusterid)
 Graph	*graph;
-int32_t		clusterid;
+int		clusterid;
 {
 ClusterInfo	*cinfo;
-int32_t		color;
+int		color;
 
     /* what is this used for? Who calls this with -ve numbers ??? */
     /* could be for partialplotload mode, but now a cluster # of -1 means
@@ -88,10 +88,10 @@ int32_t		color;
     return(color);
 }
 
-int32_t SetClusterColor(graph,clusterid,color)
+int SetClusterColor(graph,clusterid,color)
 Graph	*graph;
-int32_t		clusterid;
-int32_t		color;
+int		clusterid;
+int		color;
 {
 ClusterInfo	*cinfo;
 
@@ -163,8 +163,8 @@ DrawClusterBounds(graph,cb)
 Graph	*graph;
 ClusterBounds	*cb;
 {
-int32_t	xl,xr,yb,yt;
-int32_t	x1,y1,x2,y2;
+int	xl,xr,yb,yt;
+int	x1,y1,x2,y2;
 
     if(graph == NULL || cb == NULL) return;
     if(cb->type == BOXBOUND){
@@ -201,13 +201,13 @@ int32_t	x1,y1,x2,y2;
 }
 
 SetClusterRGB(clusterid,r,g,b)
-int32_t	clusterid;
-int32_t	r,g,b;
+int	clusterid;
+int	r,g,b;
 {
 
     SetPixelRGB(clusterid+MINCLUSTER,
-    (int16_t)(r << 8),
-    (int16_t)(g << 8),
-    (int16_t)(b << 8));
+    (unsigned short)(r << 8),
+    (unsigned short)(g << 8),
+    (unsigned short)(b << 8));
 }
 

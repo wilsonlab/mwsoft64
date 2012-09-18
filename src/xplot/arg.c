@@ -3,14 +3,14 @@
 #include <X11/Xutil.h>
 
 static char *commandstr;
-static int32_t commandsource;
+static int commandsource;
 
 char *CommandStr()
 {
     return(commandstr);
 }
 
-int32_t CommandSource()
+int CommandSource()
 {
     return(commandsource);
 }
@@ -59,15 +59,15 @@ DataSource	*source;
 
 ParseArgList(frame,argc,argv)
 Frame 	*frame;
-int32_t	argc;
+int	argc;
 char	**argv;
 {
-int32_t	nxtarg;
-int32_t	filecnt;
+int	nxtarg;
+int	filecnt;
 DataSource	*source;
 Graph	*graph;
-int32_t	x,y,width,height;
-int32_t	status;
+int	x,y,width,height;
+int	status;
 
     frame->color_mode = 1;
     frame->fontname = NULL;

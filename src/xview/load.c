@@ -2,16 +2,16 @@
 
 GetaRecord()
 {
-int32_t	i;
+int	i;
 char	*charptr;
-int16_t	*shortptr;
-int32_t	*intptr;
+short	*shortptr;
+int	*intptr;
 float	*floatptr;
 double	*doubleptr;
 unsigned char nitems;
 unsigned char frame;
-uint32_t timestamp;
-int16_t xval;
+unsigned long timestamp;
+short xval;
 unsigned char yval;
 
     if(V->posdata){
@@ -30,7 +30,7 @@ unsigned char yval;
 	/*
 	** read in timestamp
 	*/
-	if(fread (&timestamp, sizeof(uint32_t),1,fp) != 1){
+	if(fread (&timestamp, sizeof(unsigned long),1,fp) != 1){
 	    return(0);
 	}
 	bzero(data,sizeof(float)*V->cellnum);
@@ -38,14 +38,14 @@ unsigned char yval;
 	    /*
 	    ** read in timestamp
 	    */
-	    if(fread (&xval, sizeof(int16_t),1,fp) != 1){
+	    if(fread (&xval, sizeof(short),1,fp) != 1){
 		return(0);
 	    }
 	    if(fread (&yval, sizeof(unsigned char),1,fp) != 1){
 		return(0);
 	    }
 	    if((xval > V->xmax + 1) || (yval > V->ymax + 1)){
-		fprintf(stderr,"invalid coordinate %d %d\n",(int32_t)xval, (int32_t)yval);
+		fprintf(stderr,"invalid coordinate %d %d\n",(int)xval, (int)yval);
 		continue;
 	    }
 	    data[xval + yval*(V->xmax +1)] = 1;
@@ -63,13 +63,13 @@ unsigned char yval;
 	}
 	break;
     case INT :
-	intptr = (int32_t *)tmpdata;
+	intptr = (int *)tmpdata;
 	for(i=0;i<V->cellnum;i++){
 	    curdata[i] = (float)intptr[i];
 	}
 	break;
     case SHORT :
-	shortptr = (int16_t *)tmpdata;
+	shortptr = (short *)tmpdata;
 	for(i=0;i<V->cellnum;i++){
 	    curdata[i] = (float)shortptr[i];
 	}
@@ -110,7 +110,7 @@ NormalizeData()
 {
 float	val;
 float	lower,upper;
-int32_t	i;
+int	i;
 
     imageptr = image;
     for (i = 0; i < V->cellnum; i++) {
@@ -160,10 +160,10 @@ LoadNextFrame(){
     NormalizeData();
 }
 
-int32_t GetFrame(time)
+int GetFrame(time)
 float	time;
 {
-int32_t	record;
+int	record;
 
     if(time < V->start_time){
 	V->singlestep = TRUE;
@@ -174,7 +174,7 @@ int32_t	record;
     */
     record = (time - V->start_time)/V->dt +.5;
     if(!V->posdata){
-	fseek (fp, (int32_t) (V->headersize + V->cellnum*record*V->datasize), 0L);
+	fseek (fp, (long) (V->headersize + V->cellnum*record*V->datasize), 0L);
     }
     /*
     ** read in the record
@@ -191,7 +191,7 @@ int32_t	record;
 }
 
 ReadCommandFile(source,filename)
-int32_t	source;
+int	source;
 char	*filename;
 {
 FILE	*fp;

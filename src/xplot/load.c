@@ -131,8 +131,8 @@ Plot *plot;
 char *line;
 {
 float	x,y,err;
-int32_t	nitems;
-int32_t	have_error;
+int	nitems;
+int	have_error;
 char	*ptr;
 char	*strchr();
 
@@ -290,7 +290,7 @@ char	*filename;
 DataSource *source;
 DataSource *AddSource();
 Plot		*plot;
-int32_t		selected=0;
+int		selected=0;
 
     if(graph == NULL || filename == NULL) return;
     source = AddSource(graph);

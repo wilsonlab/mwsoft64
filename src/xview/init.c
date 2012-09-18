@@ -2,21 +2,21 @@
 #include 	<X11/cursorfont.h>
 #include 	<X11/Xutil.h>
 
-static int32_t typeadjust = 0;
+static int typeadjust = 0;
 extern Colormap	cmap;
 
 adjusttype(x)
-int32_t x;
+int x;
 {
 typeadjust = x;
 }
 
 FileInit()
 {
-int32_t ival;
-int32_t	headersize;
+int ival;
+int	headersize;
 char	*tstring;
-int32_t	haveformat;
+int	haveformat;
 FieldInfo	fieldinfo;
 char	**header;
 
@@ -86,13 +86,13 @@ char	**header;
 	V->ymax = 255;
     }
     if(!V->plain){
-	fread (&ival, sizeof (int32_t),1,fp);
+	fread (&ival, sizeof (int),1,fp);
 	if(V->xmax < 0) V->xmax = ival;
-	fread (&ival, sizeof (int32_t),1,fp);
+	fread (&ival, sizeof (int),1,fp);
 	if(V->ymax < 0) V->ymax = ival;
 	fread (&V->dt, sizeof (float),1,fp);
-	fread (&V->datatype, sizeof (int32_t),1,fp);
-	V->headersize = 3*sizeof(int32_t) + sizeof(float);
+	fread (&V->datatype, sizeof (int),1,fp);
+	V->headersize = 3*sizeof(int) + sizeof(float);
     }
     V->headersize += headersize;
 
@@ -104,8 +104,8 @@ char	**header;
 
     switch(V->datatype){
 	case CHAR : V->datasize = sizeof(char); break;
-	case SHORT : V->datasize = sizeof(int16_t); break;
-	case INT : V->datasize = sizeof(int32_t); break;
+	case SHORT : V->datasize = sizeof(short); break;
+	case INT : V->datasize = sizeof(int); break;
 	case FLOAT : V->datasize = sizeof(float); break;
 	case DOUBLE : V->datasize = sizeof(double); break;
     }
@@ -232,18 +232,18 @@ char	*display_name;
 
 CreateWindows()
 {
-int32_t	width;
-int32_t	height;
-int32_t	x;
-int32_t	y;
-uint32_t 		border;
-uint32_t 		background;
+int	width;
+int	height;
+int	x;
+int	y;
+unsigned long 		border;
+unsigned long 		background;
 XWindowAttributes	winfo;
 Window			root_window;
-int32_t			borderwidth;
+int			borderwidth;
 XSizeHints		hints;
 XSetWindowAttributes	attrib;
-int32_t			status;
+int			status;
 
     /*
     ** get the root window and its attributes

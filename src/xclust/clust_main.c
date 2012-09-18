@@ -10,7 +10,7 @@
 
 AddClusterToList(graph,clusterid)
 Graph	*graph;
-int32_t	clusterid;
+int	clusterid;
 {
 ClusterList	*clist;
 
@@ -46,16 +46,16 @@ ClusterList	*clist;
 
 AssignClusterBounds(graph,clusterid,p0,p1,ncoords,index,wx1,wy1,complete)
 Graph	*graph;
-int32_t	clusterid;
-int32_t	p0,p1;
-int32_t	ncoords;
-int32_t	index;
+int	clusterid;
+int	p0,p1;
+int	ncoords;
+int	index;
 float	wx1,wy1;
-int32_t	complete;
+int	complete;
 {
 ClusterBounds	*cb;
-int32_t	sx1,sx2,sy1,sy2;
-int32_t	deletedbounds;
+int	sx1,sx2,sy1,sy2;
+int	deletedbounds;
 
     if(graph == NULL) return;
     if(index >= ncoords && index != -1 && ncoords != -1){
@@ -190,9 +190,9 @@ AddClusterInfo(graph,clusterid,color)
 {
 }
 
-int32_t CheckClusterModified(graph,clusterid)
+int CheckClusterModified(graph,clusterid)
 Graph	*graph;
-int32_t	clusterid;
+int	clusterid;
 {
 ClusterList	*clist;
 
@@ -210,7 +210,7 @@ ClusterList	*clist;
 ** returns the clusterlist assigned to the cluster
 */
 ClusterList *GetClusterInfo(clusterid)
-int32_t	clusterid;
+int	clusterid;
 {
 Graph	*graph;
 ClusterList	*clist;
@@ -239,13 +239,13 @@ ClusterList	*clist;
 ClusterList *TestAndAssignToCluster(graph,rawdata,vectorsize,clusterid)
 Graph	*graph;
 DataCoord	*rawdata;
-int32_t	vectorsize;
-int32_t	clusterid;
+int	vectorsize;
+int	clusterid;
 {
 ClusterBounds	*cb;
 ClusterList	*clist;
-int32_t	p0,p1;
-int32_t	success;
+int	p0,p1;
+int	success;
 ProjectionInfo	*pinfo;
 double	p0val,p1val;
 
@@ -346,23 +346,23 @@ double	p0val,p1val;
 ** yes, this MAXOVERLAP thing is a hack.
 ** clean it up later
 */
-int32_t EvaluateOverlap(graph)
+int EvaluateOverlap(graph)
 Graph	*graph;
 {
 Plot	*plot;
-int32_t	i,j,k;
-int32_t	overlap[MAXOVERLAP];
-int32_t	noverlap;
-int32_t	overlaplist[MAXOVERLAP][MAXOVERLAP];
-int32_t	haveoverlap;
-int32_t	totaloverlap;
+int	i,j,k;
+int	overlap[MAXOVERLAP];
+int	noverlap;
+int	overlaplist[MAXOVERLAP][MAXOVERLAP];
+int	haveoverlap;
+int	totaloverlap;
 
     if(graph == NULL) return(0);
     fprintf(stderr,"\nEvaluating overlapping cluster points:      ");
     /*
     ** clear the overlap counts
     */
-    bzero(overlaplist,sizeof(int32_t)*MAXOVERLAP*MAXOVERLAP);
+    bzero(overlaplist,sizeof(int)*MAXOVERLAP*MAXOVERLAP);
     haveoverlap=0;
     totaloverlap = 0;
     for(plot=graph->plot;plot;plot=plot->next){
@@ -436,19 +436,19 @@ int32_t	totaloverlap;
 /*
 ** tests points for multiple cluster assignments
 */
-int32_t TestClusterPointOverlap(graph,rawdata,vectorsize,overlap,overlapsize)
+int TestClusterPointOverlap(graph,rawdata,vectorsize,overlap,overlapsize)
 Graph	*graph;
 DataCoord	*rawdata;
-int32_t	vectorsize;
-int32_t	*overlap;
-int32_t	overlapsize;
+int	vectorsize;
+int	*overlap;
+int	overlapsize;
 {
 ClusterBounds	*cb;
 ClusterList	*clist;
-int32_t	p0,p1;
-int32_t	clusterid;
-int32_t	success;
-int32_t	noverlap;
+int	p0,p1;
+int	clusterid;
+int	success;
+int	noverlap;
 double	p0val,p1val;
 ProjectionInfo	*pinfo;
 
@@ -546,14 +546,14 @@ ProjectionInfo	*pinfo;
 ClusterList *AssignClusterPoint(graph,rawdata,vectorsize,requested_clusterid)
 Graph	*graph;
 DataCoord	*rawdata;
-int32_t	vectorsize;
-int32_t	requested_clusterid;
+int	vectorsize;
+int	requested_clusterid;
 {
 ClusterBounds	*cb;
 ClusterList	*clist;
-int32_t	p0,p1;
-int32_t	clusterid;
-int32_t	success;
+int	p0,p1;
+int	clusterid;
+int	success;
 ProjectionInfo	*pinfo;
 double	p0val,p1val;
 
@@ -656,17 +656,17 @@ double	p0val,p1val;
 
 ComputeClusterIntervals(graph,clusterid,individual)
 Graph	*graph;
-int32_t	clusterid;
-int32_t	individual;
+int	clusterid;
+int	individual;
 {
 Plot	*plot;
-int32_t	i,j,k;
+int	i,j,k;
 ClusterList	*clist;
 ProjectionInfo	*pinfo;
-int32_t	ptmp;
+int	ptmp;
 ProjectionInfo	*ptime,*pid,*pht,*pdh,*pint,*pblen;
-int32_t	blen;
-int32_t	maxid;
+int	blen;
+int	maxid;
 /*float	time;*/
 double	minint;
 double	minht;
@@ -676,20 +676,20 @@ double	hprev;
 char	tmpstring[80];
 char	tmpstring2[80];
 MenuItem	*item;
-int16_t	first;
-int32_t	forward_start;
-int32_t	back_start;
-int32_t	found_forward_point;
-int32_t	have_forward_points;
-int32_t	csi_plus;
+short	first;
+int	forward_start;
+int	back_start;
+int	found_forward_point;
+int	have_forward_points;
+int	csi_plus;
 double	csi_minint;
 double	csi_maxint;
 double	bwin;
 double	tprev;
-int32_t	use_dh;
-int32_t	offset;
-int32_t	newoffset;
-int32_t	nfields;
+int	use_dh;
+int	offset;
+int	newoffset;
+int	nfields;
 
     if(graph == NULL) return;
     plot = graph->plot;
@@ -729,7 +729,7 @@ int32_t	nfields;
     /*
     ** add the additional projections
     */
-    if((pinfo = GetProjectionInfoByName(graph,"int32_t")) == NULL){
+    if((pinfo = GetProjectionInfoByName(graph,"int")) == NULL){
 	/*
 	** if it doesnt exist then add it
 	*/
@@ -743,10 +743,10 @@ int32_t	nfields;
 	    }
 	}
 	fprintf(stderr,"adding interval projection %d\n",maxid+1);
-	pinfo = AddProjectionInfo(graph,maxid+1,"int32_t",DOUBLE,sizeof(double));
+	pinfo = AddProjectionInfo(graph,maxid+1,"int",DOUBLE,sizeof(double));
     } else {
 	/*
-	fprintf(stderr,"found int32_t projection %d\n",pinfo->projectionid);
+	fprintf(stderr,"found int projection %d\n",pinfo->projectionid);
 	*/
     }
     /*
@@ -789,7 +789,7 @@ int32_t	nfields;
 	    }
 	}
 	fprintf(stderr,"adding blen projection %d\n",maxid+1);
-	pinfo = AddProjectionInfo(graph,maxid+1,"blen",INT,sizeof(int32_t));
+	pinfo = AddProjectionInfo(graph,maxid+1,"blen",INT,sizeof(int));
     } else {
 	/*
 	fprintf(stderr,"found blen projection %d\n",pinfo->projectionid);
@@ -826,8 +826,8 @@ int32_t	nfields;
 	return;
     }
     pblen = pinfo;
-    if((pinfo = GetProjectionInfoByName(graph,"int32_t")) == NULL){
-	fprintf(stderr,"Unable to find 'int32_t' parameter\n");
+    if((pinfo = GetProjectionInfoByName(graph,"int")) == NULL){
+	fprintf(stderr,"Unable to find 'int' parameter\n");
 	return;
     }
     pint = pinfo;
@@ -1158,10 +1158,10 @@ int32_t	nfields;
 
 ReturnClusterToZero(graph,clusterid)
 Graph	*graph;
-int32_t	clusterid;
+int	clusterid;
 {
 Plot	*plot;
-int32_t	i;
+int	i;
 ClusterList	*clist;
 
     if(graph == NULL) return;
@@ -1199,10 +1199,10 @@ ClusterList	*clist;
 
 AssignClusterFromZero(graph,clusterid)
 Graph	*graph;
-int32_t	clusterid;
+int	clusterid;
 {
 Plot	*plot;
-int32_t	i;
+int	i;
 ClusterList	*clist;
 
     /*
@@ -1252,10 +1252,10 @@ ClusterList	*clist;
 
 AssignClusterPointsToCluster(graph,clusterid)
 Graph	*graph;
-int32_t	clusterid;
+int	clusterid;
 {
 Plot	*plot;
-int32_t	i;
+int	i;
 ClusterList	*clist;
 
     if(graph == NULL) return;
@@ -1354,7 +1354,7 @@ AssignClusterPoints(graph)
 Graph	*graph;
 {
 Plot	*plot;
-int32_t	i;
+int	i;
 ClusterList	*clist;
 
     if(graph == NULL) return;
@@ -1413,13 +1413,13 @@ ClusterList	*clist;
     graph->changed = 1;
 }
 
-int32_t IsInPolygon(wx,wy,fcoord,ncoords)
+int IsInPolygon(wx,wy,fcoord,ncoords)
 double	wx,wy;
 FCoord	*fcoord;
-int32_t	ncoords;
+int	ncoords;
 {
-int32_t	i;
-int32_t	pcross;
+int	i;
+int	pcross;
 double	FY,bx;
     
     if(fcoord == NULL) return(0);
@@ -1495,15 +1495,15 @@ double	FY,bx;
     }
 }
 
-int32_t _IsInPolygon(wx,wy,fcoord,ncoords)
+int _IsInPolygon(wx,wy,fcoord,ncoords)
 double	wx,wy;
 FCoord	*fcoord;
-int32_t	ncoords;
+int	ncoords;
 {
-int32_t	i;
+int	i;
 register double	x1,x2,y1,y2;
 double	cross,pcross;
-int32_t	success;
+int	success;
     
     if(fcoord == NULL) return(0);
     /*
@@ -1590,9 +1590,9 @@ ClusterBounds	*cbnext;
 */
 DeleteClusterBounds(graph,clusterid,p0,p1)
 Graph	*graph;
-int32_t	clusterid;
-int32_t	p0;
-int32_t	p1;
+int	clusterid;
+int	p0;
+int	p1;
 {
 ClusterBounds	*cb;
 ClusterBounds	*lastcb;
@@ -1652,9 +1652,9 @@ ClusterBounds	*lastcb;
 
 }
 
-int32_t DeleteClusterFromList(graph,clusterid)
+int DeleteClusterFromList(graph,clusterid)
 Graph	*graph;
-int32_t	clusterid;
+int	clusterid;
 {
 ClusterList	*clist;
 ClusterList	*lastcl;
@@ -1702,8 +1702,8 @@ ClusterList	*currentcl;
 
 SetClusterModified(graph,clusterid,value)
 Graph	*graph;
-int32_t	clusterid;
-int32_t	value;
+int	clusterid;
+int	value;
 {
 ClusterList	*clist;
     /*
@@ -1772,14 +1772,14 @@ Graph	*g;
 
 CopyClusterBounds(graph,newclusterid)
 Graph	*graph;
-int32_t	newclusterid;
+int	newclusterid;
 {
 ClusterBounds	*cb;
 ClusterBounds	*lastcb;
 ClusterBounds	*currentcb;
-int32_t	p0;
-int32_t	p1;
-int32_t	clusterid;
+int	p0;
+int	p1;
+int	clusterid;
 ClusterBounds	*newcb;
 ClusterBounds	*newclist;
 
@@ -1849,8 +1849,8 @@ ClusterBounds	*newclist;
 
 SetClusterEnable(graph,clusterid,state)
 Graph	*graph;
-int32_t	clusterid;
-int32_t	state;
+int	clusterid;
+int	state;
 {
 ClusterBounds	*cb;
 ClusterList	*clist;
@@ -1877,11 +1877,11 @@ ClusterList	*clist;
 
 HideCluster(graph,clusterid,state)
 Graph	*graph;
-int32_t	clusterid;
-int32_t	state;
+int	clusterid;
+int	state;
 {
 Plot	*plot;
-int32_t	i;
+int	i;
 
     /*
     ** set the hidden flag
@@ -1906,17 +1906,17 @@ int32_t	i;
 
 ProjectionInfo *AddProjectionInfo(graph,id,name,type,size)
 Graph	*graph;
-int32_t	id;
+int	id;
 char	*name;
-int16_t	type;
-int32_t	size;
+short	type;
+int	size;
 {
 ProjectionInfo	*pinfo;
 ProjectionInfo	*newinfo;
 ProjectionInfo	*first, *second, *follow, *prev;
-int32_t	minid;
-int16_t	swap;
-int32_t	offset;
+int	minid;
+short	swap;
+int	offset;
 
     if(graph == NULL) return(NULL);
     newinfo = NULL;
@@ -2062,7 +2062,7 @@ char	*strchr();
 
 ProjectionInfo	*GetProjectionInfo(graph,id)
 Graph	*graph;
-int32_t	id;
+int	id;
 {
 ProjectionInfo	*pinfo;
 
@@ -2087,9 +2087,9 @@ ProjectionInfo	*pinfo;
     return(NULL);
 }
 
-int32_t SetProjectionName(graph,id,name)
+int SetProjectionName(graph,id,name)
 Graph	*graph;
-int32_t	id;
+int	id;
 char	*name;
 {
 ProjectionInfo	*pinfo;

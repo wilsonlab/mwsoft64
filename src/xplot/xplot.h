@@ -6,6 +6,6 @@
 #include 	"xplot_defs.h"
 #include 	"xplot_struct.h"
 
-int32_t		debug;
+int		debug;
 Graph		*G;
 Frame		*F;

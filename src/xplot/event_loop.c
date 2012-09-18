@@ -1,6 +1,6 @@
 #include 	"xplot_ext.h"
 
-extern int32_t shift_signal;
+extern int shift_signal;
 
 EventLoop(frame)
 Frame	*frame;
@@ -107,7 +107,7 @@ frame_event(frame,event)
 Frame		*frame;
 XEvent		*event;
 {
-int32_t stat;
+int stat;
 
     switch (event->type) {
     case ConfigureNotify:
@@ -206,7 +206,7 @@ EventString(E)
 XEvent	*E;
 {
 XButtonPressedEvent	*B;
-static int32_t count=0;
+static int count=0;
 
     printf("%d ",count);
     switch(E->type){

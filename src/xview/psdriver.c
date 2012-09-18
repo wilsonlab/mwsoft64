@@ -47,7 +47,7 @@
 
 /*
 typedef struct {
-    int16_t x,y;
+    short x,y;
 } Coord;
 */
 typedef XPoint Coord;
@@ -57,13 +57,13 @@ typedef struct {
 } FCoord;
 
 struct defaultinfo_type {
-    int32_t		whitepixel;
-    int32_t		blackpixel;
-    int32_t		foreground;
-    int32_t		linewidth;
-    int32_t		font_width;
-    int32_t		font_height;
-    int32_t		font_color;
+    int		whitepixel;
+    int		blackpixel;
+    int		foreground;
+    int		linewidth;
+    int		font_width;
+    int		font_height;
+    int		font_color;
 };
 
 typedef struct color_info {
@@ -104,23 +104,23 @@ struct defaultinfo_type defaultinfo = {
 	DEFAULT_FONT_HEIGHT,
 	DEFAULT_WHITE_PIXEL};
 
-static int32_t	output_flag = XOUT;
+static int	output_flag = XOUT;
 static FILE 	*PSfp;
 static float 	pix_scale;
 static float 	page_scale;
-static int16_t 	file_output = 0;
+static short 	file_output = 0;
 static char 	*ps_filename;
 static char 	*ps_filemode = "w";
-static int32_t 	current_gray = -1;
-static int32_t 	current_line = -1;
-static int32_t 	max_gray = 256;
-static int32_t	inverse = 1;
-static int32_t 	global_window_width;
-static int32_t 	global_window_height;
-static int32_t 	color_mode = 0;
+static int 	current_gray = -1;
+static int 	current_line = -1;
+static int 	max_gray = 256;
+static int	inverse = 1;
+static int 	global_window_width;
+static int 	global_window_height;
+static int 	color_mode = 0;
 static ColorInfo	current_color;
 static Colormap		window_colormap;
-static int32_t		fontselected = 0;
+static int		fontselected = 0;
 static char		currentfont[200];
 
 PSStatus()
@@ -129,14 +129,14 @@ PSStatus()
 }
 
 SetPSColor(state)
-int32_t state;
+int state;
 {
     color_mode = state;
 }
 
 
 SetPSInverse(state)
-int32_t state;
+int state;
 {
     inverse = state;
 }
@@ -148,7 +148,7 @@ char *name;
 }
 
 SetPSDefaultForeground(val)
-int32_t val;
+int val;
 {
     defaultinfo.foreground = val;
 }
@@ -160,32 +160,32 @@ char *mode;
 }
 
 SetPSFileOutput(state)
-int32_t state;
+int state;
 {
     file_output = state;
 }
 
 SetMaxGray(val)
-int32_t	val;
+int	val;
 {
     max_gray = val;
 }
 
 float ComputeGray(pixel)
-int32_t pixel;
+int pixel;
 {
     return(1.0-(float)pixel/max_gray);
 }
 
 PSSetPixel(display,pixel)
 Display *display;
-int32_t pixel;
+int pixel;
 {
 XColor color;
-int32_t intensity;
-int32_t	black_pixel;
-int32_t	white_pixel;
-extern int32_t ColorMap();
+int intensity;
+int	black_pixel;
+int	white_pixel;
+extern int ColorMap();
 
     /*
     ** has the color/grayscale changed from its previous state?
@@ -266,7 +266,7 @@ extern int32_t ColorMap();
 }
 
 PSSetLineWidth(width)
-int32_t width;
+int width;
 {
     if(width == 0) width = 1;
     if(current_line != width){ 
@@ -296,20 +296,20 @@ PSStroke()
 }
 
 PSCircle(x,y,r,arcstart,arcend)
-int32_t x,y;
+int x,y;
 {
     fprintf(PSfp,"%d %d %d %d %d arc\n", x, global_window_height - y,
     r,arcstart,arcend);
 }
 
 PSMoveto(x,y)
-int32_t x,y;
+int x,y;
 {
     fprintf(PSfp,"%d %d M\n", x, global_window_height - y);
 }
 
 PSLineto(x,y)
-int32_t x,y;
+int x,y;
 {
     fprintf(PSfp,"%d %d L\n", x, global_window_height - y);
 }
@@ -341,7 +341,7 @@ char	*name;
 }
 
 PSFont(height)
-int32_t height;
+int height;
 {
     fprintf(PSfp,"%s findfont %d scalefont setfont\n",currentfont,height);
 }
@@ -354,9 +354,9 @@ GC		context;
 }
 
 ManualSetFontInfo(width,height,color)
-int32_t	width;
-int32_t	height;
-int32_t	color;
+int	width;
+int	height;
+int	color;
 {
     defaultinfo.font_width = width;
     defaultinfo.font_height = height;
@@ -367,12 +367,12 @@ XPSDrawText(display,drawable,context,x,y,s)
 Display 	*display;
 Drawable	drawable;
 GC		context;
-int32_t 		x, y;
+int 		x, y;
 char 		*s;
 {
 XFontStruct *finfo;
-int32_t	height;
-int32_t	color;
+int	height;
+int	color;
 
     if(s==NULL) return;
     if(output_flag == XOUT){
@@ -400,13 +400,13 @@ int32_t	color;
 	PSShow(s);
     }
 }
-int32_t PSGetLineWidth(display,context)
+int PSGetLineWidth(display,context)
 Display	*display;
 GC 	context;
 {
 #ifdef GC
     if(display){
-	return((int32_t)context->values.line_width);
+	return((int)context->values.line_width);
     } else {
 	return(defaultinfo.linewidth);
     }
@@ -415,13 +415,13 @@ GC 	context;
 #endif
 }
 
-int32_t PSGetForeground(display,context)
+int PSGetForeground(display,context)
 Display	*display;
 GC 	context;
 {
 #ifdef GC
     if(display){
-	return((int32_t)context->values.foreground);
+	return((int)context->values.foreground);
     } else {
 	return(defaultinfo.foreground);
     }
@@ -434,11 +434,11 @@ XPSDrawArc (display, drawable, context, x, y, xd,yd,arcstart,arcend)
 Display	*display;
 Drawable drawable;
 GC 	context;
-int32_t 	x,y,xd,yd,arcstart,arcend;
+int 	x,y,xd,yd,arcstart,arcend;
 {
-int32_t	pixel;
-int32_t	linewidth;
-int32_t	cx,cy,r;
+int	pixel;
+int	linewidth;
+int	cx,cy,r;
 
     if(output_flag == XOUT){
 	XDrawArc(display,drawable,context,x,y,xd,yd,arcstart,arcend);
@@ -463,11 +463,11 @@ XPSFillArc (display, drawable, context, x, y, xd,yd,arcstart,arcend)
 Display	*display;
 Drawable drawable;
 GC 	context;
-int32_t 	x,y,xd,yd,arcstart,arcend;
+int 	x,y,xd,yd,arcstart,arcend;
 {
-int32_t	pixel;
-int32_t	linewidth;
-int32_t	cx,cy,r;
+int	pixel;
+int	linewidth;
+int	cx,cy,r;
 
     if(output_flag == XOUT){
 	XFillArc(display,drawable,context,x,y,xd,yd,arcstart,arcend);
@@ -492,10 +492,10 @@ XPSDrawPoint (display, drawable, context, x1, y1)
 Display	*display;
 Drawable drawable;
 GC 	context;
-int32_t 	x1,y1;
+int 	x1,y1;
 {
-int32_t	pixel;
-int32_t	linewidth;
+int	pixel;
+int	linewidth;
 
     if(output_flag == XOUT){
 	XDrawPoint (display, drawable, context, x1,y1);
@@ -521,10 +521,10 @@ XPSDrawLine (display, drawable, context, x1, y1, x2, y2)
 Display	*display;
 Drawable drawable;
 GC 	context;
-int32_t 	x1,y1,x2,y2;
+int 	x1,y1,x2,y2;
 {
-int32_t	pixel;
-int32_t	linewidth;
+int	pixel;
+int	linewidth;
 
     if(output_flag == XOUT){
 	XDrawLine (display, drawable, context, x1,y1,x2,y2);
@@ -551,15 +551,15 @@ Display *display;
 Drawable drawable;
 GC context;
 Coord   *coord;
-int32_t     ncoords;
-int32_t     mode;
+int     ncoords;
+int     mode;
 {
-int32_t	i;
-int32_t	pcount;
-int32_t	nchunks;
-int32_t	chunksize;
-int32_t	foreground;
-int32_t	linewidth;
+int	i;
+int	pcount;
+int	nchunks;
+int	chunksize;
+int	foreground;
+int	linewidth;
 
     if(output_flag == XOUT){
 	/*
@@ -616,16 +616,16 @@ Display *display;
 Drawable drawable;
 GC context;
 Coord   *coord;
-int32_t     ncoords;
-int32_t     mode;
+int     ncoords;
+int     mode;
 FCoord   *fcoord;
 {
-int32_t	i;
-int32_t	pcount;
-int32_t	nchunks;
-int32_t	chunksize;
-int32_t	foreground;
-int32_t	linewidth;
+int	i;
+int	pcount;
+int	nchunks;
+int	chunksize;
+int	foreground;
+int	linewidth;
 
     if(output_flag == XOUT){
 	/*
@@ -682,10 +682,10 @@ XPSDrawRectangle(display,drawable,context,x,y,w,h)
 Display *display;
 Drawable drawable;
 GC context;
-int32_t     x,y,w,h;
+int     x,y,w,h;
 {
-int32_t	foreground;
-int32_t	linewidth;
+int	foreground;
+int	linewidth;
     if(output_flag == XOUT){
 	XDrawRectangle(display,drawable,context,x,y,w,h);
     } else {
@@ -707,9 +707,9 @@ XPSFillRectangle(display,drawable,context,x,y,w,h)
 Display *display;
 Drawable drawable;
 GC context;
-int32_t     x,y,w,h;
+int     x,y,w,h;
 {
-int32_t	foreground;
+int	foreground;
     if(output_flag == XOUT){
 	XFillRectangle(display,drawable,context,x,y,w,h);
     } else {
@@ -729,13 +729,13 @@ Display *display;
 Drawable drawable;
 GC context;
 Coord   *coord;
-int32_t     ncoords;
-int32_t     shape;
-int32_t     mode;
+int     ncoords;
+int     shape;
+int     mode;
 {
-int32_t	i;
-int32_t	pcount;
-int32_t	foreground;
+int	i;
+int	pcount;
+int	foreground;
 
     if(output_flag == XOUT){
 	XFillPolygon(display,drawable,context,coord,ncoords,shape,mode);
@@ -766,19 +766,19 @@ int32_t	foreground;
 
 PSHeader(requested_scale,box,header,window_width,window_height)
 float		requested_scale;
-int32_t		box;
-int32_t		header;
-int32_t 	window_width;
-int32_t 	window_height;
+int		box;
+int		header;
+int 	window_width;
+int 	window_height;
 {
 float	scale,scalex,scaley;
-int32_t	clock;
+long	clock;
 char	headerstr[200];
 char	*namestr;
 char	*getenv(),*strchr();
 char	*ptr;
 char	clockstr[100];
-int32_t    tx,ty;
+int    tx,ty;
 
     /*
     ** calculate the scale factors in inches/screenpixel
@@ -824,8 +824,8 @@ int32_t    tx,ty;
     */
     fprintf(PSfp,"%%%%BoundingBox: %d %d %d %d\n",
 	tx,ty,
-	tx + (int32_t)(page_scale*window_width),
-	ty + (int32_t)(page_scale*window_height));
+	tx + (int)(page_scale*window_width),
+	ty + (int)(page_scale*window_height));
     fprintf(PSfp,"%%%%EndComments\n");
 
     if(header){
@@ -887,10 +887,10 @@ PreparePS(display,window,scale,box,header,window_width,window_height)
 Display	*display;
 Window 	window;
 float	scale;
-int32_t	box;
-int32_t	header;
-int32_t	window_width;
-int32_t	window_height;
+int	box;
+int	header;
+int	window_width;
+int	window_height;
 {
 char command[80];
 XWindowAttributes	info;

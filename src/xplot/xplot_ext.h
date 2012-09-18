@@ -8,7 +8,7 @@
 #include 	"xplot_defs.h"
 #include	"xplot_struct.h"
 
-extern int32_t		debug;
+extern int		debug;
 extern Graph		*G;
 extern char		*CopyString();
 extern Plot		*AddPlot();

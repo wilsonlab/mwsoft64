@@ -1,11 +1,11 @@
 #include	"xclust_ext.h"
 
-int32_t snapmode = 1;
-static int32_t buttonmode = DATAMODE;
-static int32_t fastsearch = TRUE;
+int snapmode = 1;
+static int buttonmode = DATAMODE;
+static int fastsearch = TRUE;
 extern float GetZoomPercent();
-extern int32_t lastsavedview;
-extern int32_t ProcessSavedView();
+extern int lastsavedview;
+extern int ProcessSavedView();
 /* extern void UpdateRotationMatrix(double ***, float, float, float); */
 /* extern void SetRotationMatrix(double ***, float, float, float); */
 extern void AffineRotationMatrixEuler(double ***, float, float, float);
@@ -16,21 +16,21 @@ extern double ***AffineRotateUp(double ***, float);
 extern double ***AffineRotateRight(double ***, float);
 static Time lastmotionevent;
 extern float rotpercent;
-extern int32_t skipevent;
+extern int skipevent;
 extern Label *commandlabel;
 extern Label *coordlabel;
 extern Label *rotlabel;
 
 /* temporary offsets during Wobble mode (interactive 3d rotation) */ 
-static int32_t xval,yval,zval;
+static int xval,yval,zval;
 
 static ClusterBounds *currentbound = NULL;
-static int32_t closestpoint = -1;;
+static int closestpoint = -1;;
 /* a bit of a hack to remember the axis show states */
 static old_axis_show_x, old_axis_show_y;
 
 FastSearchMode(i)
-int32_t	i;
+int	i;
 {
     fastsearch = i;
 }
@@ -41,7 +41,7 @@ ButtonMode()
 }
 
 SetButtonMode(mode)
-int32_t mode;
+int mode;
 {
     buttonmode = mode;
 }
@@ -52,7 +52,7 @@ ToggleSnapMode()
 }
 
 SnapMode(mode)
-int32_t mode;
+int mode;
 {
     snapmode = mode;
 }
@@ -62,22 +62,22 @@ int32_t mode;
 ** data point with the closest x screen coordinate
 ** then returns those data values in wx,wy
 */
-int32_t Snap(graph,sx,sy,wx,wy)
+int Snap(graph,sx,sy,wx,wy)
 Graph *graph;
-int32_t sx,sy;
+int sx,sy;
 float *wx,*wy;
 {
 float	x,y;
 float	wz;
 float	wx2,wy2;
-int32_t	i;
-int32_t	npoints;
+int	i;
+int	npoints;
 Plot	*p;
 Plot	*plot;
 float	dist,min_dist;
-int32_t	min_pt;
-int32_t	estimated_start_i;
-int32_t	ecount;
+int	min_pt;
+int	estimated_start_i;
+int	ecount;
 
     /*
     ** get the world coordinates of the cursor
@@ -344,7 +344,7 @@ int32_t	ecount;
 NBShowPoint2(label,x,y,pt)
 Label *label;
 float x,y;
-int32_t	pt;
+int	pt;
 {
 
     sprintf(label->u.string.line,"n=%d x=%-8.4g y=%-8.4g",pt,x,y);
@@ -353,9 +353,9 @@ int32_t	pt;
 
 NBShowPoint(basic,sx,sy,x,y,pt)
 BasicWindow	*basic;
-int32_t sx,sy;
+int sx,sy;
 float x,y;
-int32_t	pt;
+int	pt;
 {
 char label[80];
 
@@ -368,7 +368,7 @@ char label[80];
 
 NBShowCoords(basic,sx,sy,x,y)
 BasicWindow	*basic;
-int32_t sx,sy;
+int sx,sy;
 float x,y;
 {
 char label[80];
@@ -383,7 +383,7 @@ char label[80];
 
 ShowCoords(basic,sx,sy,x,y)
 BasicWindow	*basic;
-int32_t sx,sy;
+int sx,sy;
 float x,y;
 {
 char label[80];
@@ -440,7 +440,7 @@ char label1[200];
 
 ShowSlope(basic,sx,sy,x1,y1,x2,y2)
 BasicWindow	*basic;
-int32_t sx,sy;
+int sx,sy;
 float x1,y1;
 float x2,y2;
 {
@@ -465,7 +465,7 @@ char label[200];
 
 ShowSlopeCoords(basic,sx,sy,x1,y1,x2,y2)
 BasicWindow	*basic;
-int32_t sx,sy;
+int sx,sy;
 float x1,y1;
 float x2,y2;
 {
@@ -492,8 +492,8 @@ char label1[200];
 
 ShowCursorCoords(basic,sx,sy,x,y)
 BasicWindow	*basic;
-int32_t sx,sy;
-int32_t x,y;
+int sx,sy;
+int x,y;
 {
 char label[200];
 
@@ -511,11 +511,11 @@ char label[200];
 /* float	x,y; */
 /* float	x1,y1; */
 /* float	x2,y2; */
-/* int32_t	sx1,sy1; */
-/* int32_t	sx2,sy2; */
-/* int32_t	button; */
-/*  int32_t state; */
-/* int32_t	pt; */
+/* int	sx1,sy1; */
+/* int	sx2,sy2; */
+/* int	button; */
+/*  int state; */
+/* int	pt; */
 /* Plot	*p; */
 /* float	xoffset,yoffset; */
 
@@ -784,11 +784,11 @@ char label[200];
 /* Graph			*graph; */
 /* XButtonReleasedEvent	*buttonevent; */
 /* { */
-/* int32_t	button; */
-/* int32_t	sx2,sy2; */
-/* int32_t	sx1,sy1; */
+/* int	button; */
+/* int	sx2,sy2; */
+/* int	sx1,sy1; */
 /* float	x1,y1,x2,y2; */
-/* int32_t	pt; */
+/* int	pt; */
 /* Plot	*p; */
 /* float	xoffset,yoffset; */
 
@@ -1015,16 +1015,16 @@ char label[200];
 /* Graph			*graph; */
 /* XPointerMovedEvent	*motionevent; */
 /* { */
-/* int32_t	sx2,sy2; */
-/* int32_t	sx1,sy1; */
-/* int32_t	tmpx2,tmpy2; */
-/* int32_t	tmpx1,tmpy1; */
-/* int32_t	button; */
+/* int	sx2,sy2; */
+/* int	sx1,sy1; */
+/* int	tmpx2,tmpy2; */
+/* int	tmpx1,tmpy1; */
+/* int	button; */
 /* float	x1,y1; */
 /* float	x2,y2; */
 /* float	x,y; */
-/* extern int32_t text_entry; */
-/* int32_t	pt; */
+/* extern int text_entry; */
+/* int	pt; */
 /* float	xoffset,yoffset; */
 /* Plot	*p; */
 
@@ -1374,21 +1374,21 @@ char label[200];
 ButtonPressAction(Graph *graph, XButtonPressedEvent *buttonevent)
 {
 
-  int32_t sx1,sy1;
-  int32_t sx2,sy2;
-  int32_t button;
-  int32_t state;
+  int sx1,sy1;
+  int sx2,sy2;
+  int button;
+  int state;
 /*   float xoffset,yoffset; */
   Plot *p;
   float	x,y;
   float	x1,y1;
   float	x2,y2;
   char *clmode;
-  int32_t rotpfreq;
+  int rotpfreq;
   ClusterBounds *cb;
-  int32_t dd, pnt;
+  int dd, pnt;
   Label *label;
-  int32_t pt;
+  int pt;
 
 
   /* screen coordinates of mouse click */
@@ -1921,21 +1921,21 @@ ButtonPressAction(Graph *graph, XButtonPressedEvent *buttonevent)
 ButtonReleaseAction(Graph *graph, XButtonReleasedEvent *buttonevent)
 {
 
-int32_t	button;
- int32_t	state;
-int32_t	sx2,sy2;
-int32_t	sx1,sy1;
+int	button;
+ int	state;
+int	sx2,sy2;
+int	sx1,sy1;
 float	x1,y1,x2,y2;
-int32_t	pt;
+int	pt;
 Plot	*p;
 /* float	xoffset,yoffset; */
  float val;
- int32_t dx, dy;
+ long dx, dy;
  double dist, frac;
  float zoom;
- int32_t sv;
- int32_t rotpfreq;
- int32_t i;
+ int sv;
+ int rotpfreq;
+ int i;
 
     /* button number */
     button = buttonevent->button;
@@ -2239,9 +2239,9 @@ Plot	*p;
       graph->rotpointfreq = p->pointfreq;
       p->pointfreq = rotpfreq;
       sprintf(rotlabel->u.string.line, "tx: %5d  ty: %5d  tz: %5d",
-	      (int32_t)(360*graph->thetax/(2*M_PI))%360,
-	      (int32_t)(360*graph->thetay/(2*M_PI))%360,
-	      (int32_t)(360*graph->thetaz/(2*M_PI))%360);
+	      (int)(360*graph->thetax/(2*M_PI))%360,
+	      (int)(360*graph->thetay/(2*M_PI))%360,
+	      (int)(360*graph->thetaz/(2*M_PI))%360);
       RefreshText(graph->frame->text); 
 /*       SetRotationMatrix(&graph->matrix, 0, 0, 0); */
       AffineRotationMatrixEuler(&graph->matrix, graph->thetax, graph->thetay, graph->thetaz);
@@ -2410,22 +2410,22 @@ Plot	*p;
 
 PointerMotionAction(Graph *graph, XPointerMovedEvent *motionevent)
 {
-int32_t	sx2,sy2;
-int32_t	sx1,sy1;
-int32_t	button;
+int	sx2,sy2;
+int	sx1,sy1;
+int	button;
 float	x1,y1;
 float	x2,y2;
 float	x,y;
-extern int32_t text_entry;
-int32_t	pt;
+extern int text_entry;
+int	pt;
 /* float	xoffset,yoffset; */
 Plot	*p;
  XTimeCoord *xtc;
- int32_t  nevents;
- uint32_t lasttime;
+ int  nevents;
+ unsigned long lasttime;
 
- int32_t dd;
- int32_t pnt;
+ int dd;
+ int pnt;
  ClusterBounds *cb;
  char tmpstr[200];
 
@@ -2595,9 +2595,9 @@ Plot	*p;
       */
  
 /*       sprintf(rotlabel->u.string.line, "tx: %5d  ty: %5d  tz: %5d", */
-/* 	      (int32_t)(360*(graph->thetax+x1)/(2*M_PI))%360, */
-/* 	      (int32_t)(360*(graph->thetay+y1)/(2*M_PI))%360, */
-/* 	      (int32_t)(360*(graph->thetaz)/(2*M_PI))%360); */
+/* 	      (int)(360*(graph->thetax+x1)/(2*M_PI))%360, */
+/* 	      (int)(360*(graph->thetay+y1)/(2*M_PI))%360, */
+/* 	      (int)(360*(graph->thetaz)/(2*M_PI))%360); */
 /*       RefreshText(graph->frame->text);  */
 
 
@@ -2674,10 +2674,10 @@ LeaveNotifyAction(Graph *graph, void *event)
   }
 }
 
-DrawRubberBox(Graph *graph, int32_t sx2, int32_t sy2)
+DrawRubberBox(Graph *graph, int sx2, int sy2)
 {
-int32_t	tmpx2,tmpy2;
-int32_t	tmpx1,tmpy1;
+int	tmpx2,tmpy2;
+int	tmpx1,tmpy1;
 
 
   if(graph->dragx1 != -1){
@@ -2724,7 +2724,7 @@ int32_t	tmpx1,tmpy1;
   }
 }
 
-DrawRubberLine(Graph *graph, int32_t sx2, int32_t sy2)
+DrawRubberLine(Graph *graph, int sx2, int sy2)
 {
   if(graph->dragx1 != -1){
     if(graph->dragx2 != -1){

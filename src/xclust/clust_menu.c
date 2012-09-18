@@ -9,9 +9,9 @@
 #define SYSTEM(S)	System(S)
 
 
-static int32_t menu_block = 0;
-static int32_t menu_cluster_block = 0;
-static int16_t	redsave,bluesave,greensave;
+static int menu_block = 0;
+static int menu_cluster_block = 0;
+static unsigned short	redsave,bluesave,greensave;
 
 
 fswap(f1,f2)
@@ -27,8 +27,8 @@ float	ftmp;
 /* listed here as they are used for reassignment of item->func for
 ** projection selection using projection name buttons */
 
-int32_t MenuSetProjection0();
-int32_t MenuSetProjection1();
+int MenuSetProjection0();
+int MenuSetProjection1();
 
 
 char *GetParmFilename()
@@ -263,17 +263,17 @@ MenuWindow	*colorstat;
 DrawClustStat(cluststat)
 MenuWindow	*cluststat;
 {
-int32_t	clusterid;
+int	clusterid;
 ClusterBounds	*cb;
 ProjectionInfo	*pinfo;
 Graph		*graph;
 char		*name;
-int32_t		row;
-int32_t		npoints;
+int		row;
+int		npoints;
 ClusterList	*clist;
 char		line[100];
-int32_t		width;
-int32_t		height;
+int		width;
+int		height;
 
     if(cluststat == NULL) return;
     /*SetBackground(cluststat,cluststat->background);*/
@@ -610,7 +610,7 @@ MenuItem	*item;
 {
 Graph	*graph;
 Plot	*plot;
-int32_t	block;
+int	block;
 
     /*
     ** go through each plot and increment the xhi/xlo
@@ -631,7 +631,7 @@ MenuItem	*item;
 {
 Graph	*graph;
 Plot	*plot;
-int32_t	block;
+int	block;
 
     /*
     ** go through each plot and increment the xhi/xlo
@@ -786,14 +786,14 @@ MenuItem	*item;
 {
 FILE	*fp;
 MenuItem	*tmpitem;
-int32_t	defaults;
+int	defaults;
 char	*home;
 char	*getenv();
 char	dir[100];
-int16_t	r,g,b;
-int32_t	pixel;
-int32_t	i;
-int32_t	clustercolor;
+unsigned short	r,g,b;
+int	pixel;
+int	i;
+int	clustercolor;
 char    *itemname;
 
 char ename[50];
@@ -968,10 +968,10 @@ char		cname[100];
 char		*ptr;
 char		*tstring;
 char		*cstring;
-int32_t		invalidtime;
+int		invalidtime;
 
  char *start=NULL, *end=NULL, *epochname;
- int32_t pointstart, pointend;
+ int pointstart, pointend;
  char str_start[30], str_end[30];
  char tmpstr[30];
     /*
@@ -1101,7 +1101,7 @@ MenuEpochKill(MenuItem *item)
 {
 char		line[100];
 char		*ptr;
- int32_t i;
+ int i;
 
     /*
     ** load the epoch times into the spiketime dialogs
@@ -1127,7 +1127,7 @@ char		*ptr;
 
 }
 
-SetEpochValues(int32_t epochnum, char *ename, char *estart, char *eend)
+SetEpochValues(int epochnum, char *ename, char *estart, char *eend)
 {
   char *itemstr;
 
@@ -1162,9 +1162,9 @@ DefineNewEpoch(char *epochname)
  char *epoch_name;
  char *epoch_tstart;
  char *epoch_tend;
- int32_t i, j;
+ int i, j;
  char itemstr[100];
- int32_t axis=-1;
+ int axis=-1;
  double wmin[2], wmax[2];
 
  wmin[0] = G->wxmin;
@@ -1234,11 +1234,11 @@ LabelClusters()
 ClusterBounds	*cb;
 Graph	*graph;
 float	wx,wy;
-int32_t	sx,sy;
-int32_t	clusterid;
+int	sx,sy;
+int	clusterid;
 char	name[20];
 ClusterList	*clist;
-int32_t	npoints;
+int	npoints;
 Label	*label;
 char	labelname[100];
 
@@ -1358,11 +1358,11 @@ UpdateClusterLabels()
 ClusterBounds	*cb;
 Graph	*graph;
 float	wx,wy;
-int32_t	sx,sy;
-int32_t	clusterid;
+int	sx,sy;
+int	clusterid;
 char	name[20];
 ClusterList	*clist;
-int32_t	npoints;
+int	npoints;
 Label	*label;
 char	labelname[100];
 
@@ -1461,16 +1461,16 @@ char	labelname[100];
 MenuMovieFrame(item, value)
 MenuItem	*item;
 {
-int32_t	moviestart;
-int32_t	movieend;
-int32_t	loadstart;
-int32_t	loadend;
-int32_t	filestart;
-int32_t	fileend;
-int32_t	blocksize;
-int32_t	stepsize;
+int	moviestart;
+int	movieend;
+int	loadstart;
+int	loadend;
+int	filestart;
+int	fileend;
+int	blocksize;
+int	stepsize;
 
-static int32_t lastframestarttime = -1; /* Only initialized on first pass! */
+static int lastframestarttime = -1; /* Only initialized on first pass! */
 
 char	str[256];
 char    *ptr;
@@ -1759,14 +1759,14 @@ MenuChangeUnits(item)
 }
 
 LoadPointsAndUpdateStatus(start, end, epoch)
-     int32_t start;
-     int32_t end;
+     int start;
+     int end;
      char *epoch;
 {
   MenuWindow *menu;
   char startid[100], endid[100];
   Plot *p;
-  int32_t s, e;
+  int s, e;
 
   menu = GetMenu("/epochmenu");
 
@@ -1809,7 +1809,7 @@ MenuLoadAllPoints(item)
 {
   char tmpstr[30];
   Plot *plot;
-  int32_t tempstart = 0;
+  int tempstart = 0;
   LoadPointsAndUpdateStatus(-1, -1, "");
 
   plot = SelectedPlot(F->graph);
@@ -1855,7 +1855,7 @@ MenuItem	*item;
 /* Graph	*graph; */
 
   char *start=NULL, *end=NULL;
-  int32_t   pointstart, pointend;
+  int   pointstart, pointend;
   MenuWindow *menu;
 
   if(!item) return;
@@ -1904,13 +1904,13 @@ MenuLoadEpochFile(MenuItem *item)
       LoadEpochFile(item->value);
 }
 
-int32_t MenuSaveEpochFile(MenuItem *item)
+int MenuSaveEpochFile(MenuItem *item)
 {
   if(item->value!=NULL && strcmp(item->value,"") !=0)
    SaveEpochFile(item->value);
 }
 
-int32_t MenuDefineNewEpoch(MenuItem *item)
+int MenuDefineNewEpoch(MenuItem *item)
 {
 
   if(!item)
@@ -1945,9 +1945,9 @@ MenuViewAvg(item)
 MenuItem	*item;
 {
 char	*spikefile;
-int32_t	clusterid;
+int	clusterid;
 FILE	*fp;
-int32_t	count;
+int	count;
 char	*tstart;
 char	*tend;
 char	command[200];
@@ -2001,15 +2001,15 @@ MenuViewSpikes(item)
 MenuItem	*item;
 {
 char	*spikefile;
-int32_t	clusterid;
+int	clusterid;
 FILE	*fp;
-int32_t	count;
+int	count;
 char	*tstart;
 char	*tend;
 char	command[200];
 Plot	*plot;
 char	*title;
-int32_t	status;
+int	status;
 
     /*
     ** assume the the name of the spike file is in the menu item
@@ -2076,9 +2076,9 @@ MenuViewISI(item)
 MenuItem	*item;
 {
 char	*spikefile;
-int32_t	clusterid;
+int	clusterid;
 FILE	*fp;
-int32_t	count;
+int	count;
 char	command[200];
 char	*binsize;
 char	*tmax;
@@ -2086,8 +2086,8 @@ char	*tstart;
 char	*tend;
 Plot	*plot;
 char	*title;
-int32_t	status;
-int32_t	gottime;
+int	status;
+int	gottime;
 double	binarg;
 double	tmaxarg;
 
@@ -2187,9 +2187,9 @@ MenuViewAcorr(item)
 MenuItem	*item;
 {
 char	*spikefile;
-int32_t	clusterid;
+int	clusterid;
 FILE	*fp;
-int32_t	count;
+int	count;
 char	command[200];
 char	*binsize;
 char	*tmax;
@@ -2197,8 +2197,8 @@ char	*tstart;
 char	*tend;
 Plot	*plot;
 char	*title;
-int32_t	status;
-int32_t	gottime;
+int	status;
+int	gottime;
 
     /*
     ** assume the the name of the spike file is in the menu item
@@ -2272,10 +2272,10 @@ MenuViewXcorr(item)
 MenuItem	*item;
 {
 char	*spikefile;
-int32_t	clusterid;
-int32_t	clusterid2;
+int	clusterid;
+int	clusterid2;
 FILE	*fp;
-int32_t	count;
+int	count;
 char	command[200];
 char	*binsize;
 char	*tmax;
@@ -2283,8 +2283,8 @@ char	*tstart;
 char	*tend;
 Plot	*plot;
 char	*title;
-int32_t	status;
-int32_t	gottime;
+int	status;
+int	gottime;
 char	*target;
 char	*second;
 char	*epoch;
@@ -2419,9 +2419,9 @@ MenuViewRate(item)
 MenuItem	*item;
 {
 char	*spikefile;
-int32_t	clusterid;
+int	clusterid;
 FILE	*fp;
-int32_t	count;
+int	count;
 char	command[200];
 char	*binsize;
 char	*tmax;
@@ -2429,8 +2429,8 @@ char	*tstart;
 char	*tend;
 Plot	*plot;
 char	*title;
-int32_t	status;
-int32_t	gottime;
+int	status;
+int	gottime;
 
     /*
     ** assume the the name of the spike file is in the menu item
@@ -2512,19 +2512,19 @@ MenuItem	*item;
 {
 char	*positionfile;
 char	*spikefile;
-int32_t	clusterid;
+int	clusterid;
 FILE	*fp;
-int32_t	count;
+int	count;
 char	command[200];
-int32_t	gridsize;
+int	gridsize;
 char	*tstart;
 char	*tend;
 char	*title;
 Plot	*plot;
-int32_t	status;
+int	status;
 char	trangestr[100];
 char	*trangefile;
-int32_t	gottime;
+int	gottime;
 
     /*
     ** assume the the name of the spike file is in the menu item
@@ -2620,19 +2620,19 @@ MenuItem	*item;
 {
 char	*positionfile;
 char	*spikefile;
-int32_t	clusterid;
+int	clusterid;
 FILE	*fp;
-int32_t	count;
+int	count;
 char	command[200];
-int32_t	gridsize;
+int	gridsize;
 char	*tstart;
 char	*tend;
 char	*title;
 Plot	*plot;
-int32_t	status;
+int	status;
 char	*trangefile;
 char	trangestr[100];
-int32_t	gottime;
+int	gottime;
 
     /*
     ** assume the the name of the spike file is in the menu item
@@ -2736,19 +2736,19 @@ MenuItem	*item;
 {
 char	*positionfile;
 char	*spikefile;
-int32_t	clusterid;
+int	clusterid;
 FILE	*fp;
-int32_t	count;
+int	count;
 char	command[200];
 char	*gridsize;
 char	*tstart;
 char	*tend;
 char	*title;
 Plot	*plot;
-int32_t	status;
+int	status;
 char	*trangefile;
 char	trangestr[100];
-int32_t	gottime;
+int	gottime;
 
     /*
     ** assume the the name of the spike file is in the menu item
@@ -2849,7 +2849,7 @@ MenuHideAllBounds(item)
 MenuHideCluster(item)
 MenuItem	*item;
 {
-int32_t	clusterid;
+int	clusterid;
 
     if(item && item->value){
 #ifdef OLD
@@ -2868,7 +2868,7 @@ int32_t	clusterid;
 MenuButtonHideCluster(item)
 MenuItem	*item;
 {
-int32_t	clusterid;
+int	clusterid;
 char	clustname[80];
 
     if(item && item->value){
@@ -2889,14 +2889,14 @@ char	clustname[80];
 MenuButtonShowOnlyCluster(item)
 MenuItem	*item;
 {
-int32_t	clusterid;
+int	clusterid;
 char	clustname[80];
 ClusterList	*clist;
 ClusterBounds	*cb;
 Graph		*graph;
 Plot		*plot;
-int32_t		i;
-int32_t		state;
+int		i;
+int		state;
 MenuItem	*tmpitem;
 
     if(item && item->value){
@@ -2981,7 +2981,7 @@ MenuItem	*tmpitem;
 MenuEnableCluster(item)
 MenuItem	*item;
 {
-int32_t	clusterid;
+int	clusterid;
 char	clustname[80];
 
     if(item && item->value){
@@ -3015,7 +3015,7 @@ MenuCopyCluster(item,event)
 MenuItem	*item;
 XButtonReleasedEvent *event;
 {
-  int32_t	i, newval;
+  int	i, newval;
 
   if (!item)
     return (0);
@@ -3074,7 +3074,7 @@ XButtonReleasedEvent *event;
 {
   ClusterList *cl;
   char s[256];
-  int32_t i;
+  int i;
 
   if (!item ||
       !item->value)
@@ -3140,11 +3140,11 @@ XButtonReleasedEvent *event;
 */
 RefreshClusterScoreButtons()
 {
-  int32_t clusterid;
+  int clusterid;
   char itemstr[100];
   ClusterList *cl;
   MenuItem *item;
-  int32_t score;
+  int score;
   MenuWindow *menu;
 
   clusterid = G->selectedcluster;
@@ -3201,7 +3201,7 @@ MenuDeleteAllClusters()
 MenuWriteClusters(item)
 MenuItem	*item;
 {
-/* int32_t	applyflag; */
+/* int	applyflag; */
 
     if(!item) return;
 /*     /\* */
@@ -3276,7 +3276,7 @@ MenuItem	*item;
     } 
 }
 
-SelectCluster(int32_t clusterid)
+SelectCluster(int clusterid)
 {
 
   MenuItem *item;
@@ -3348,10 +3348,10 @@ SelectCluster(int32_t clusterid)
 
 RefreshSelectedClusterButton()
 {
-int32_t	i;
-int32_t		cid;
-int32_t		cval;
- int32_t		ccol;
+int	i;
+int		cid;
+int		cval;
+ int		ccol;
 char		cname[100];
 MenuItem	*citem;
 
@@ -3414,13 +3414,13 @@ MenuItem	*citem;
 
 AssignClusterButtons()
 {
-int32_t 	i;
+int 	i;
 ProjectionInfo	*pinfo;
 char		cname[100];
 char		*tmpname;
 MenuItem	*citem;
-int32_t		cid;
-int32_t		cval;
+int		cid;
+int		cval;
 Graph		*graph;
 ClusterList	*clist;
 
@@ -3553,12 +3553,12 @@ ClusterList	*clist;
 
 AssignProjectionButtons()
 {
-int32_t 	i;
+int 	i;
 ProjectionInfo	*pinfo;
 char		pname[100];
 char		*tmpname;
 MenuItem	*pitem;
-int32_t		projectionid;
+int		projectionid;
 
 
 /*
@@ -3761,7 +3761,7 @@ MenuItem	*item;
 UpdateProjections()
 {
 ProjectionInfo	*pinfo;
-int32_t	svindex;
+int	svindex;
 char	*pname0;
 char	*pname1;
 char	name[100];
@@ -3963,7 +3963,7 @@ MenuItem	*item;
 }
 
 
-RandomizeProjection(ProjectionInfo *pinfo, int32_t state)
+RandomizeProjection(ProjectionInfo *pinfo, int state)
 {
   if (!pinfo)
     return;
@@ -3983,7 +3983,7 @@ MenuItem	*item;
 {
 
   ProjectionInfo *pinfo;
-  int32_t	*state;
+  int	*state;
   
     if(!item){
 	return;
@@ -4002,7 +4002,7 @@ MenuItem	*item;
 }
 
 LookupCluster(cid)
-int32_t	cid;
+int	cid;
 {
 ClusterList	*clist;
 Graph		*graph;
@@ -4027,9 +4027,9 @@ ClusterList	*clist;
 Graph		*graph;
 MenuItem	*tmpitem;
 char		itemname[100];
-int32_t		i;
-int32_t		done;
-int32_t		cid;
+int		i;
+int		done;
+int		cid;
 
     /*
     ** scan the cluster list and see which clusters are

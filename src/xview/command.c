@@ -11,7 +11,7 @@ char *s;
     return(atof(s));
 }
 
-int32_t Atoi(s)
+int Atoi(s)
 char *s;
 {
     if(s == NULL){
@@ -22,7 +22,7 @@ char *s;
 
 char *NextDelimiter(s,quote)
 char *s;
-int32_t *quote;
+int *quote;
 {
     if(s == NULL) return(NULL);
     *quote = 0;
@@ -68,15 +68,15 @@ char *newenv;
 */
 char *CommandArgument(line,argnumber)
 char *line;
-int32_t argnumber;
+int argnumber;
 {
-int32_t	i;
-int32_t	count;
+int	i;
+int	count;
 char	*ptr;
 char	*ptr2;
 char	*copy;
 char	tmp[1000];
-int32_t	quote;
+int	quote;
 
     ptr = line;
     /*
@@ -125,7 +125,7 @@ int32_t	quote;
 InterpretCommand(line)
 char *line;
 {
-int32_t	val;
+int	val;
     if(Match("/setenv")){
 	Setenv(ARG(1),ARG(2));
     } else

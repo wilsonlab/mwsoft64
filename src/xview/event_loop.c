@@ -7,14 +7,14 @@ float	time;
 
     time = V->view_time + inc;
     if(time < V->start_time) time = V->start_time;
-    V->view_time =  (int32_t)(time/V->dt +.5)*V->dt;
+    V->view_time =  (int)(time/V->dt +.5)*V->dt;
 }
 
 SetViewTime(time)
 float time;
 {
     if(time < V->start_time) time = V->start_time;
-    V->view_time =  (int32_t)(time/V->dt +.5)*V->dt;
+    V->view_time =  (int)(time/V->dt +.5)*V->dt;
 }
 
 DisplayView()
@@ -37,8 +37,8 @@ DisplayView()
 EventLoop()
 {
 XEvent	event; 
-int32_t	i,j;
-extern int32_t signal_step,got_signal;
+int	i,j;
+extern int signal_step,got_signal;
 
     XFlush(G->display);
     /*

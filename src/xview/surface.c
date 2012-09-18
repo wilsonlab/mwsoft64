@@ -20,14 +20,14 @@ DrawSurface(image,xsize,ysize,xmax,ymax)
 Image	*image;
 float	xsize;
 float	ysize;
-int32_t	xmax;
-int32_t	ymax;
+int	xmax;
+int	ymax;
 {
 Image	*imageptr;
-int32_t	i,j;
+int	i,j;
 float	x,y;
 Coord	*coord_ptr;
-int32_t	coord_count;
+int	coord_count;
 
     imageptr = image + (xmax +1)*(ymax+1) -1;
 
@@ -78,11 +78,11 @@ DrawColorSurface(image,xsize,ysize,xmax,ymax)
 Image	*image;
 float	xsize;
 float	ysize;
-int32_t	xmax;
-int32_t	ymax;
+int	xmax;
+int	ymax;
 {
 Image	*imageptr;
-int32_t	i,j;
+int	i,j;
 float	x,y;
 Coord	*coord_ptr;
 
@@ -96,7 +96,7 @@ Coord	*coord_ptr;
 	    j * ysize *0.7 - imageptr->value*zsize;
 	    /* dont connect */
 	if(j > 0){
-	    SetColor ((int32_t) (color_scale * (imageptr->value) + color_min));
+	    SetColor ((int) (color_scale * (imageptr->value) + color_min));
 	    DrawLine(coord_ptr->x,coord_ptr->y,
 	    (coord_ptr - xmax - 1)->x,
 	    (coord_ptr - xmax - 1)->y);
@@ -104,7 +104,7 @@ Coord	*coord_ptr;
 	coord_ptr++;
 	imageptr--;
 	for (i =xmax-1; i >= 0; i--) {
-	    SetColor ((int32_t) (color_scale * (imageptr->value) + color_min));
+	    SetColor ((int) (color_scale * (imageptr->value) + color_min));
 	    coord_ptr->x = xsize * i *0.7 + (ymax-j) * ysize / 3; 
 	    coord_ptr->y =  yb +ysize*SHIFT + 
 		j * ysize *0.7 - imageptr->value*zsize;
@@ -128,11 +128,11 @@ DrawFilledSurface(image,xsize,ysize,xmax,ymax)
 Image	*image;
 float	xsize;
 float	ysize;
-int32_t	xmax;
-int32_t	ymax;
+int	xmax;
+int	ymax;
 {
 Image	*imageptr;
-int32_t	i,j;
+int	i,j;
 float	x,y;
 Coord	*coord_ptr;
 Coord	*start_ptr;
@@ -238,11 +238,11 @@ DrawColorFilledSurface(image,xsize,ysize,xmax,ymax)
 Image	*image;
 float	xsize;
 float	ysize;
-int32_t	xmax;
-int32_t	ymax;
+int	xmax;
+int	ymax;
 {
 Image	*imageptr;
-int32_t	i,j;
+int	i,j;
 float	x,y;
 Coord	*coord_ptr;
 
@@ -282,7 +282,7 @@ Coord	*coord_ptr;
 		coord2[4].x = coord_ptr->x;
 		coord2[4].y = coord_ptr->y;
 
-		SetColor ((int32_t) (color_scale * 
+		SetColor ((int) (color_scale * 
 		    ((imageptr + xmax + 1)->value) + color_min));
 		FilledPoly (coord2, 5);
 
@@ -317,11 +317,11 @@ DrawColorFilledSurface(image,xsize,ysize,xmax,ymax)
 Image	*image;
 float	xsize;
 float	ysize;
-int32_t	xmax;
-int32_t	ymax;
+int	xmax;
+int	ymax;
 {
 Image	*imageptr;
-int32_t	i,j;
+int	i,j;
 float	x,y;
 Coord	*coord_ptr;
 Coord	*start_ptr;
@@ -381,7 +381,7 @@ Coord	*start_ptr;
 		coord2[4].x = coord_ptr->x;
 		coord2[4].y = coord_ptr->y;
 
-		SetColor ((int32_t) (color_scale * 
+		SetColor ((int) (color_scale * 
 		    ((imageptr + xmax + 1)->value) + color_min));
 		FilledPoly (coord2, 5);
 

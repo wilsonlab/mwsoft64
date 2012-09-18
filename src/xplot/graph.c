@@ -2,10 +2,10 @@
 
 AssignColors(graph,start,increment)
 Graph	*graph;
-int32_t	start;
-int32_t	increment;
+int	start;
+int	increment;
 {
-int32_t	color;
+int	color;
 Plot	*plot;
     
     color = start;
@@ -15,10 +15,10 @@ Plot	*plot;
     }
 }
 
-int32_t plotcompare(f1,f2)
+int plotcompare(f1,f2)
 FCoord	*f1,*f2;
 {
-    return((int32_t)(f1->x - f2->x));
+    return((int)(f1->x - f2->x));
 }
 
 Sort(graph)
@@ -50,7 +50,7 @@ DrawGraph(graph)
 Graph	*graph;
 {
 Plot	*plot;
-int32_t	cnt;
+int	cnt;
 
     CalculateAxisParameters(graph);
     DrawAxes(graph);
@@ -84,7 +84,7 @@ StepForward(graph)
 Graph	*graph;
 {
 Plot	*plot;
-int32_t	savecolor;
+int	savecolor;
 
     if(graph->stepthrough){
 	/*
@@ -116,7 +116,7 @@ StepBackward(graph)
 Graph	*graph;
 {
 Plot	*plot;
-int32_t	savecolor;
+int	savecolor;
 
     if(graph->stepthrough){
 	/*
@@ -148,10 +148,10 @@ int32_t	savecolor;
 
 DrawPointIcon(plot,x,y)
 Plot *plot;
-int32_t x,y;
+int x,y;
 {
 Pixmap	bitmap;
-int16_t	w,h;
+short	w,h;
 
     switch(plot->point_symbol){
     case BOX_PT:
@@ -231,9 +231,9 @@ int16_t	w,h;
 DrawPoints(plot)
 Plot	*plot;
 {
-int32_t	i;
-int32_t	j;
-int32_t	start = 0;
+int	i;
+int	j;
+int	start = 0;
 
     /*
     ** draw an icon for each point
@@ -274,7 +274,7 @@ int32_t	start = 0;
 DrawSteps(plot)
 Plot	*plot;
 {
-int32_t	i;
+int	i;
 
     /*
     ** draw an step between each point
@@ -295,7 +295,7 @@ int32_t	i;
 DrawBars(plot)
 Plot	*plot;
 {
-int32_t	i;
+int	i;
 float	width;
 float	sx1,sx2;
 float	sy,sy2;
@@ -325,15 +325,15 @@ float	sy,sy2;
 	*/
 	if((i+1 <= plot->xhi) && (i-1 >=plot->xlo) && (plot->fcoord[i+1].x < -10) || (plot->fcoord[i-1].x > plot->graph->wwidth +10)) continue;
 	if(plot->bar_filled){
-	    FilledBox((int32_t)(plot->fcoord[i].x -width/2.0 +.5),
-	    (int32_t)plot->fcoord[i].y,
-	    (int32_t)(plot->fcoord[i].x+width/2.0 +.5),
-	    (int32_t)sy);
+	    FilledBox((int)(plot->fcoord[i].x -width/2.0 +.5),
+	    (int)plot->fcoord[i].y,
+	    (int)(plot->fcoord[i].x+width/2.0 +.5),
+	    (int)sy);
 	} else {
-	    Box((int32_t)(plot->fcoord[i].x-width/2.0 +.5),
-	    (int32_t)plot->fcoord[i].y,
-	    (int32_t)(plot->fcoord[i].x+width/2.0 +.5),
-	    (int32_t)sy);
+	    Box((int)(plot->fcoord[i].x-width/2.0 +.5),
+	    (int)plot->fcoord[i].y,
+	    (int)(plot->fcoord[i].x+width/2.0 +.5),
+	    (int)sy);
 	}
     }
 }
@@ -341,11 +341,11 @@ float	sy,sy2;
 DrawErrorBars(plot)
 Plot	*plot;
 {
-int32_t	i;
-int32_t	sx;
-int32_t	tmp;
-int32_t	sy;
-int32_t	sx1,sx2,sy1,sy2;
+int	i;
+int	sx;
+int	tmp;
+int	sy;
+int	sx1,sx2,sy1,sy2;
 float	wx,wy,wz;
 
     if(plot->edata == NULL){
@@ -419,11 +419,11 @@ float	wx,wy,wz;
 DrawPlot(plot)
 Plot	*plot;
 {
-int32_t minus_x;
-int32_t minus_y;
-int32_t plus_x;
-int32_t plus_y;
-int32_t i;
+int minus_x;
+int minus_y;
+int plus_x;
+int plus_y;
+int i;
 
     if(plot->graph->optimize){
 	minus_x = 1;

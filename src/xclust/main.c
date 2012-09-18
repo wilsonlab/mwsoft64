@@ -22,11 +22,11 @@
 */
 
 #include	"xclust.h"
-extern int32_t WhitePixelIdx();
-extern int32_t BlackPixelIdx();
+extern int WhitePixelIdx();
+extern int BlackPixelIdx();
 
 main(argc, argv,envp)
-int32_t	argc;
+int	argc;
 char	**argv;
 {
 TextWindow	*T;

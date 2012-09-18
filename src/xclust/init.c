@@ -21,9 +21,9 @@ Graph	*GetGraph(name)
 }
 
 MapMenu(val)
-     int32_t val;
+     int val;
 {
-  int32_t menu_width;
+  int menu_width;
   
   menu_width = 10*F->fontwidth;
   F->menucontainer->mapped = val;
@@ -93,7 +93,7 @@ ChangeGeometry(geometry,frame)
      char    *geometry;
      Frame	*frame;
 {
-  int32_t	status,x,y,width,height;
+  int	status,x,y,width,height;
   XSizeHints hint;
   
   hint.flags = 0;
@@ -132,7 +132,7 @@ ChangeGeometry(geometry,frame)
 
 SetInverse(basic,fore,back)
      BasicWindow *basic;
-     int32_t	fore,back;
+     int	fore,back;
 {
   if(basic->inverse){
     SetPSInverse(0);
@@ -273,7 +273,7 @@ InitX(frame)
   char *XGetDefault();
   char *CopyString();
   XVisualInfo	visual,*visuallist;
-  int32_t	visualsmatched;
+  int	visualsmatched;
   
   /*
    ** open the display
@@ -484,16 +484,16 @@ XSizeHints		hints;
 CreateTopFrame(frame)
      Frame		*frame;
 {
-  int32_t	width;
-  int32_t	height;
-  int32_t	x;
-  int32_t	y;
-  uint32_t 		border;
-  uint32_t 		background;
+  int	width;
+  int	height;
+  int	x;
+  int	y;
+  unsigned long 		border;
+  unsigned long 		background;
   XWindowAttributes	winfo;
   XSetWindowAttributes	attrib;
   Window			root_window;
-  int32_t			borderwidth;
+  int			borderwidth;
   XSizeHints		hints;
   WindowData		*windowdata;
   Graph			*graph;
@@ -501,13 +501,13 @@ CreateTopFrame(frame)
   MenuWindow		*menu;
   MenuWindow		*cluststat;
   MenuWindow		*colorstat;
-  int32_t			status = 0;
-  extern			int32_t frame_event();
-  extern			int32_t graph_event();
-  extern			int32_t text_event();
-  extern			int32_t menu_event();
-  extern			int32_t cluststat_event();
-  extern			int32_t colorstat_event();
+  int			status = 0;
+  extern			int frame_event();
+  extern			int graph_event();
+  extern			int text_event();
+  extern			int menu_event();
+  extern			int cluststat_event();
+  extern			int colorstat_event();
   char			*windowtitle;
   char			*str;
  
@@ -600,16 +600,16 @@ CreateTopFrame(frame)
 CreateWindows(frame)
      Frame		*frame;
 {
-  int32_t	width;
-  int32_t	height;
-  int32_t	x;
-  int32_t	y;
-  uint32_t 		border;
-  uint32_t 		background;
+  int	width;
+  int	height;
+  int	x;
+  int	y;
+  unsigned long 		border;
+  unsigned long 		background;
   XWindowAttributes	winfo;
   XSetWindowAttributes	attrib;
   Window			root_window;
-  int32_t			borderwidth;
+  int			borderwidth;
   XSizeHints		hints;
   WindowData		*windowdata;
   Graph			*graph;
@@ -618,14 +618,14 @@ CreateWindows(frame)
   MenuWindow		*menu;
   MenuWindow		*cluststat;
   MenuWindow		*colorstat;
-  int32_t			status = 0;
-  extern			int32_t frame_event();
-  extern			int32_t graph_event();
-  extern			int32_t text_event();
-  extern			int32_t menucontainer_event();
-  extern			int32_t menu_event();
-  extern			int32_t cluststat_event();
-  extern			int32_t colorstat_event();
+  int			status = 0;
+  extern			int frame_event();
+  extern			int graph_event();
+  extern			int text_event();
+  extern			int menucontainer_event();
+  extern			int menu_event();
+  extern			int cluststat_event();
+  extern			int colorstat_event();
   char			*windowtitle;
   char			*str;
   MenuItem		*item;
@@ -884,15 +884,15 @@ CreateMenuWindows(menucontainer)
   MenuWindow *menu;
   Frame *frame;
   char *str, *tmpstr;
-  int32_t borderwidth;
-  uint32_t border, fg, bg;
-  extern int32_t menucontainer_event();
-  extern int32_t menu_event();
-  extern int32_t menuframe_event();
+  int borderwidth;
+  unsigned long border, fg, bg;
+  extern int menucontainer_event();
+  extern int menu_event();
+  extern int menuframe_event();
 
   WindowData		*windowdata;
-  int32_t index=0;
-  int32_t voffset;
+  int index=0;
+  int voffset;
 
   frame = menucontainer->frame;
 

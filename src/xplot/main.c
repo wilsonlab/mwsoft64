@@ -22,10 +22,10 @@
 #include	"xplot.h"
 #include <signal.h>
 
-extern int32_t shift_signal;
+extern int shift_signal;
 
 main(argc, argv,envp)
-int32_t	argc;
+int	argc;
 char	**argv;
 {
 TextWindow	*T;

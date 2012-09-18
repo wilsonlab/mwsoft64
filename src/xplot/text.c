@@ -10,8 +10,8 @@ TextWindow	*text;
 DisplayLabels(basic)
 BasicWindow	*basic;
 {
-int32_t sx,sy,sr;
-int32_t sx2,sy2;
+int sx,sy,sr;
+int sx2,sy2;
 double	wx,wy,wz;
 Label	*label;
 
@@ -153,10 +153,10 @@ Label	*label;
 AddLabelString(basic,s,sx,sy,wx,wy,coord_mode,priority,fontname)
 BasicWindow	*basic;
 char		*s;
-int16_t		sx,sy;
+short		sx,sy;
 float		wx,wy;
-int16_t		coord_mode;
-int16_t		priority;
+short		coord_mode;
+short		priority;
 char		*fontname;
 {
 Label	*newlabel;
@@ -219,10 +219,10 @@ Label	*newlabel;
 AddPlotLabelString(plot,s,sx,sy,wx,wy,coord_mode,priority,fontname)
 Plot		*plot;
 char		*s;
-int16_t		sx,sy;
+short		sx,sy;
 float		wx,wy;
-int16_t		coord_mode;
-int16_t		priority;
+short		coord_mode;
+short		priority;
 char		*fontname;
 {
 BasicWindow	*basic;
@@ -329,12 +329,12 @@ Label	*prev;
 */
 AddLabelLine(basic,sx,sy,sy2,sx2,wx,wy,wz,wx2,wy2,wz2,coord_mode,priority)
 BasicWindow	*basic;
-int16_t		sx,sy;
-int16_t		sx2,sy2;
+short		sx,sy;
+short		sx2,sy2;
 float		wx,wy,wz;
 float		wx2,wy2,wz2;
-int16_t		coord_mode;
-int16_t		priority;
+short		coord_mode;
+short		priority;
 {
 Label	*newlabel;
 
@@ -385,10 +385,10 @@ Label	*newlabel;
 */
 AddLabelBox(basic,sx,sy,sr,wx,wy,wr,coord_mode,priority)
 BasicWindow	*basic;
-int16_t		sx,sy,sr;
+short		sx,sy,sr;
 float		wx,wy,wr;
-int16_t		coord_mode;
-int16_t		priority;
+short		coord_mode;
+short		priority;
 {
 Label	*newlabel;
 
@@ -433,11 +433,11 @@ Label	*newlabel;
 AddLabelBitmap(basic,bitmap,sx,sy,wx,wy,w,h,coord_mode,priority)
 BasicWindow	*basic;
 Pixmap		bitmap;
-int16_t		sx,sy;
+short		sx,sy;
 float		wx,wy;
-int32_t		w,h;
-int16_t		coord_mode;
-int16_t		priority;
+int		w,h;
+short		coord_mode;
+short		priority;
 {
 Label	*newlabel;
 
@@ -478,13 +478,13 @@ Label	*newlabel;
 
 Label *FindLabel(basic,cx,cy)
 BasicWindow	*basic;
-int16_t	cx,cy;
+short	cx,cy;
 {
 Label	*label;
 Label	*current;
-int32_t	distance = -1;
-int32_t	ds;
-int32_t	sx,sy,sr;
+int	distance = -1;
+int	ds;
+int	sx,sy,sr;
 
     current = NULL;
     for(label=basic->label;label;label=label->next){

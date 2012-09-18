@@ -1,11 +1,11 @@
 #include	"xplot_ext.h"
 
-int32_t snapmode = 1;
-static int32_t buttonmode = DATAMODE;
-static int32_t fastsearch = TRUE;
+int snapmode = 1;
+static int buttonmode = DATAMODE;
+static int fastsearch = TRUE;
 
 FastSearchMode(i)
-int32_t	i;
+int	i;
 {
     fastsearch = i;
 }
@@ -16,7 +16,7 @@ ButtonMode()
 }
 
 SetButtonMode(mode)
-int32_t mode;
+int mode;
 {
     buttonmode = mode;
 }
@@ -27,7 +27,7 @@ ToggleSnapMode()
 }
 
 SnapMode(mode)
-int32_t mode;
+int mode;
 {
     snapmode = mode;
 }
@@ -37,22 +37,22 @@ int32_t mode;
 ** data point with the closest x screen coordinate
 ** then returns those data values in wx,wy
 */
-int32_t Snap(graph,sx,sy,wx,wy)
+int Snap(graph,sx,sy,wx,wy)
 Graph *graph;
-int32_t sx,sy;
+int sx,sy;
 float *wx,*wy;
 {
 float	x,y;
 float	wz;
 float	wx2,wy2;
-int32_t	i;
-int32_t	npoints;
+int	i;
+int	npoints;
 Plot	*p;
 Plot	*plot;
 float	dist,min_dist;
-int32_t	min_pt;
-int32_t	ecount;
-int32_t	estimated_start_i;
+int	min_pt;
+int	ecount;
+int	estimated_start_i;
 
     /*
     ** get the world coordinates of the cursor
@@ -341,9 +341,9 @@ int32_t	estimated_start_i;
 
 NBShowPoint(basic,sx,sy,x,y,pt)
 BasicWindow	*basic;
-int32_t sx,sy;
+int sx,sy;
 float x,y;
-int32_t	pt;
+int	pt;
 {
 char label[80];
 
@@ -356,7 +356,7 @@ char label[80];
 
 NBShowCoords(basic,sx,sy,x,y)
 BasicWindow	*basic;
-int32_t sx,sy;
+int sx,sy;
 float x,y;
 {
 char label[80];
@@ -370,7 +370,7 @@ char label[80];
 
 ShowCoords(basic,sx,sy,x,y)
 BasicWindow	*basic;
-int32_t sx,sy;
+int sx,sy;
 float x,y;
 {
 char label[80];
@@ -385,7 +385,7 @@ char label[80];
 
 ShowSlope(basic,sx,sy,x1,y1,x2,y2)
 BasicWindow	*basic;
-int32_t sx,sy;
+int sx,sy;
 float x1,y1;
 float x2,y2;
 {
@@ -410,7 +410,7 @@ char label[200];
 
 ShowSlopeCoords(basic,sx,sy,x1,y1,x2,y2)
 BasicWindow	*basic;
-int32_t sx,sy;
+int sx,sy;
 float x1,y1;
 float x2,y2;
 {
@@ -437,8 +437,8 @@ char label1[200];
 
 ShowCursorCoords(basic,sx,sy,x,y)
 BasicWindow	*basic;
-int32_t sx,sy;
-int32_t x,y;
+int sx,sy;
+int x,y;
 {
 char label[200];
 
@@ -456,10 +456,10 @@ XButtonPressedEvent	*buttonevent;
 float	x,y;
 float	x1,y1;
 float	x2,y2;
-int32_t	sx1,sy1;
-int32_t	sx2,sy2;
-int32_t	button;
-int32_t	pt;
+int	sx1,sy1;
+int	sx2,sy2;
+int	button;
+int	pt;
 Plot	*p;
 float	xoffset,yoffset;
 
@@ -635,11 +635,11 @@ ButtonReleaseAction(graph,buttonevent)
 Graph			*graph;
 XButtonReleasedEvent	*buttonevent;
 {
-int32_t	button;
-int32_t	sx2,sy2;
-int32_t	sx1,sy1;
+int	button;
+int	sx2,sy2;
+int	sx1,sy1;
 float	x1,y1,x2,y2;
-int32_t	pt;
+int	pt;
 Plot	*p;
 float	xoffset,yoffset;
 
@@ -794,16 +794,16 @@ PointerMotionAction(graph,motionevent)
 Graph			*graph;
 XPointerMovedEvent	*motionevent;
 {
-int32_t	sx2,sy2;
-int32_t	sx1,sy1;
-int32_t	tmpx2,tmpy2;
-int32_t	tmpx1,tmpy1;
-int32_t	button;
+int	sx2,sy2;
+int	sx1,sy1;
+int	tmpx2,tmpy2;
+int	tmpx1,tmpy1;
+int	button;
 float	x1,y1;
 float	x2,y2;
 float	x,y;
-extern int32_t text_entry;
-int32_t	pt;
+extern int text_entry;
+int	pt;
 float	xoffset,yoffset;
 Plot	*p;
 

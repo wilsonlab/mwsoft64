@@ -1,12 +1,10 @@
-#include <stdint.h>
-
 typedef struct {
     float x,y,z;
 } Point;
 
 typedef struct {
-    int32_t	pixel;
-    int32_t	r,g,b;
+    int	pixel;
+    int	r,g,b;
 } ColorTable;
 
 typedef struct {
@@ -18,21 +16,21 @@ typedef struct {
 typedef struct {
     Point	p1,p2;
     float 	a,b,c;
-    int32_t		infinite;
+    int		infinite;
 } Line;
 
 typedef struct	image_type {
     float	value;
-    int16_t	sign;
+    short	sign;
 } Image;
 
 typedef struct {
-    int32_t	ncontours;
+    int	ncontours;
     float value[MAXCONTOURS];
 } ContourList;
 
 typedef struct {
-    int16_t	x,y;
+    short	x,y;
 } Coord;
 
 typedef struct {
@@ -40,38 +38,38 @@ typedef struct {
     GC			context;
     Drawable		drawable;
     Visual		*visual;
-    int32_t			screen_number;
+    int			screen_number;
     Font		font;
     XFontStruct		*fontinfo;
     Window		imagewindow;
-    int32_t			wwidth;
-    int32_t			wheight;
-    int32_t			fontheight;
-    int32_t			fontwidth;
-    int32_t			linewidth;
-    uint32_t	background;
-    uint32_t	foreground;
-    uint32_t	color;
-    int32_t			scale_type;
-    int32_t			mapped;
-    int32_t			inverse;
+    int			wwidth;
+    int			wheight;
+    int			fontheight;
+    int			fontwidth;
+    int			linewidth;
+    unsigned long	background;
+    unsigned long	foreground;
+    unsigned long	color;
+    int			scale_type;
+    int			mapped;
+    int			inverse;
 } GlobalContext;
 
 typedef struct {
     char		*filename;
-    int32_t			headersize;
+    int			headersize;
     float		start_time;
     float		dt;
-    int32_t			xmax;
-    int32_t			ymax;
-    int32_t			cellnum;
-    int32_t			datatype;
-    int32_t			datasize;
+    int			xmax;
+    int			ymax;
+    int			cellnum;
+    int			datatype;
+    int			datasize;
     float		view_time;
     float		view_step;
-    int32_t			display_mode;
-    int32_t			singlestep;
-    int32_t			plain;
-    int32_t			valid_frame;
-    int32_t			posdata;
+    int			display_mode;
+    int			singlestep;
+    int			plain;
+    int			valid_frame;
+    int			posdata;
 } ViewContext;

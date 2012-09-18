@@ -4,10 +4,10 @@
 
 typedef struct field_range_type {
     char	*name;
-    int32_t		index;
-    int32_t		hasstart;
+    int		index;
+    int		hasstart;
     double	start;
-    int32_t		hasend;
+    int		hasend;
     double	end;
 } FieldRange;
 
@@ -218,20 +218,20 @@ DataSource *s;
     }
 }
 
-int32_t AddPoint(plot,line,datavector,ndatafields)
+int AddPoint(plot,line,datavector,ndatafields)
 Plot *plot;
 char *line;
 char	*datavector;
-int32_t	ndatafields;
+int	ndatafields;
 {
 float	x,y,err;
-int32_t	nitems;
-int32_t	have_error;
+int	nitems;
+int	have_error;
 char	*ptr;
 char	*strchr();
 double	vector[100];
-int32_t	i;
-int32_t	shift;
+int	i;
+int	shift;
 double	dval;
 ProjectionInfo	*pinfo;
 char	namestr[80];
@@ -461,11 +461,11 @@ DataSource	*source;
     AssignClusterPoints(graph);
 }
 
-int32_t SavePlotOffset(source,index,byteoffset,lineoffset)
+int SavePlotOffset(source,index,byteoffset,lineoffset)
 DataSource	*source;
-int32_t		index;
-int32_t		byteoffset;
-int32_t		lineoffset;
+int		index;
+long		byteoffset;
+int		lineoffset;
 {
 PlotOffset	*plotoffset;
 PlotOffset	*newpoffset;
@@ -512,7 +512,7 @@ PlotOffset	*newpoffset;
 
 PlotOffset *FindOffset(source,index)
 DataSource	*source;
-int32_t		index;
+int		index;
 {
 PlotOffset	*poffset;
 
@@ -570,43 +570,43 @@ Plot	*oldplot;
 /* FILE	*fp; */
 char	line[1001];
 char	lastline[1001];
-int32_t	headersize;
+int	headersize;
 char	**header;
 char	*filetype;
-int32_t	*vectorformat;
+int	*vectorformat;
 char	vector[1000];
 double  dvector[100]; 
 unsigned char diodeval[4];
-int16_t diodeval2[4];
+short diodeval2[4];
 char	*parmnames;
 char	*sptr;
-int32_t	fieldcount;
-int32_t	bytefileoffset;
-int32_t	linefileoffset;
-int32_t	xsize,ysize;
+int	fieldcount;
+long	bytefileoffset;
+int	linefileoffset;
+int	xsize,ysize;
 PlotOffset	*poffset;
-uint32_t timestamp;
+unsigned long timestamp;
 char		str[30];
-int32_t	i,j;
+int	i,j;
 FieldInfo	fieldinfo;
-int32_t	status;
-int32_t	got_header;
-int16_t	type;
-int16_t	size;
+int	status;
+int	got_header;
+short	type;
+short	size;
 char	channelstr[80];
 char	*nchannelstr;
 char	*ratestr;
 double	time;
-int32_t	startline_temp;
+int	startline_temp;
 
- int32_t	id_column = 0;
- int32_t	id_type = INVALID_TYPE;
- int32_t	id_offset = 0;
+ int	id_column = 0;
+ int	id_type = INVALID_TYPE;
+ int	id_offset = 0;
  float	flastid = 0;
- int32_t	ilastid = 0;
-int32_t	lastrec = 0;
-int32_t	lastid = 0;
- int32_t	firstpass = 0; /* is this our first time through the source file*/
+ int	ilastid = 0;
+long	lastrec = 0;
+long	lastid = 0;
+ int	firstpass = 0; /* is this our first time through the source file*/
  char *tmpstr;
 
 
@@ -667,7 +667,7 @@ int32_t	lastid = 0;
 
 /*       if(source->fileformat == EEG){ */
 /* 	if(SetProjectionName(graph,0,"timestamp") == 0){ */
-/* 	  AddProjectionInfo(graph,0,"timestamp",ULONG,sizeof(uint32_t)); */
+/* 	  AddProjectionInfo(graph,0,"timestamp",ULONG,sizeof(unsigned long)); */
 /* 	} */
 /* 	/\* */
 /* 	** determine the number of channels */
@@ -678,11 +678,11 @@ int32_t	lastid = 0;
 /* 	  for(i=0;i<source->nchannels;i++){ */
 /* 	    sprintf(channelstr,"CH %d",i); */
 /* 	    if(SetProjectionName(graph,i+1,channelstr) == 0){ */
-/* 	      AddProjectionInfo(graph,i+1,channelstr,SHORT,sizeof(int16_t)); */
+/* 	      AddProjectionInfo(graph,i+1,channelstr,SHORT,sizeof(short)); */
 /* 	    } */
 /* 	  } */
 /* 	  source->nsourcefields = source->nchannels +1; */
-/* 	  source->recordsize = sizeof(uint32_t) + source->nchannels*sizeof(int16_t); */
+/* 	  source->recordsize = sizeof(unsigned long) + source->nchannels*sizeof(short); */
 /* 	} */
 /*       } */
 
@@ -831,7 +831,7 @@ int32_t	lastid = 0;
 /* 	case EEG: */
 /* 	  if (debug) fprintf(stderr,"EEG format\n"); */
 /* 	  source->nsourcefields = source->nchannels +1; */
-/* 	  source->recordsize = sizeof(uint32_t) + source->nchannels*sizeof(int16_t); */
+/* 	  source->recordsize = sizeof(unsigned long) + source->nchannels*sizeof(short); */
 /* 	  break; */
 	case ASCII:
 	  if (debug) fprintf(stderr,"ASCII format\n");
@@ -889,7 +889,7 @@ int32_t	lastid = 0;
 /* 	case EEG: */
 /* 	  fprintf(stderr,"EEG format\n"); */
 /* 	  source->nsourcefields = source->nchannels +1; */
-/* 	  source->recordsize = sizeof(uint32_t) + source->nchannels*sizeof(int16_t); */
+/* 	  source->recordsize = sizeof(unsigned long) + source->nchannels*sizeof(short); */
 /* 	  break; */
 	case ASCII:
 	  fprintf(stderr,"ASCII format\n");
@@ -910,7 +910,7 @@ int32_t	lastid = 0;
 /*       case EEG: */
 /* 	fprintf(stderr,"EEG format\n"); */
 /* 	source->nsourcefields = source->nchannels +1; */
-/* 	source->recordsize = sizeof(uint32_t) + source->nchannels*sizeof(int16_t); */
+/* 	source->recordsize = sizeof(unsigned long) + source->nchannels*sizeof(short); */
 /* 	break; */
       case ASCII:
 	fprintf(stderr,"ASCII format\n");
@@ -971,7 +971,7 @@ int32_t	lastid = 0;
 /* 	/\* */
 /* 	** read the timestamp */
 /* 	*\/ */
-/* 	if(fread(&timestamp,sizeof(uint32_t),1,fp) != 1){ */
+/* 	if(fread(&timestamp,sizeof(unsigned long),1,fp) != 1){ */
 /* 	  fprintf(stderr,"ERROR: unable to read timestamp\n"); */
 /* 	  break; */
 /* 	} */
@@ -981,8 +981,8 @@ int32_t	lastid = 0;
 /* 	  /\* */
 /* 	  ** read a multichannel eeg vector and add the points */
 /* 	  *\/ */
-/* 	  bcopy(&timestamp,vector,sizeof(uint32_t)); */
-/* 	  if(fread(vector+sizeof(uint32_t),sizeof(int16_t),source->nchannels,fp) != source->nchannels){ */
+/* 	  bcopy(&timestamp,vector,sizeof(unsigned long)); */
+/* 	  if(fread(vector+sizeof(unsigned long),sizeof(short),source->nchannels,fp) != source->nchannels){ */
 /* 	    fprintf(stderr,"ERROR: unable to read eeg info\n"); */
 /* 	    break; */
 /* 	  } */
@@ -1168,19 +1168,19 @@ int32_t	lastid = 0;
 	    fprintf(stderr,"ERROR: reading last index (float)\n");      
 	    return(NULL);
 	  }
-	  lastid = (int32_t)flastid;
+	  lastid = (long)flastid;
 	  break;
 	    
 	case INT:
-	  if(fread(&ilastid,sizeof(int32_t),1,source->fp) != 1){
-	    fprintf(stderr,"ERROR: reading last index (int32_t)\n");      
+	  if(fread(&ilastid,sizeof(int),1,source->fp) != 1){
+	    fprintf(stderr,"ERROR: reading last index (int)\n");      
 	    return(NULL);
 	  }
-	  lastid = (int32_t)ilastid;
+	  lastid = (long)ilastid;
 	  break;
 
 	default:
-	  fprintf(stderr,"ERROR: getting last index: only int32_t and float type index fields supported");
+	  fprintf(stderr,"ERROR: getting last index: only int and float type index fields supported");
 	  return(NULL);
 	  break;
 	}
@@ -1212,8 +1212,8 @@ int32_t	lastid = 0;
       /* display subset calculations */
       fprintf(stderr,
 	      "\n"
-	      "spikes in file:     %"PRId32"\n"
-	      "last spike id:      %"PRId32" (0-indexed)\n"
+	      "spikes in file:     %ld\n"
+	      "last spike id:      %ld (0-indexed)\n"
 	      "subset parm file?:  %s\n\n",
 	      lastrec,
 	      lastid,
@@ -1309,43 +1309,43 @@ int32_t	lastid = 0;
 /* FILE	*fp; */
 /* char	line[1001]; */
 /* char	lastline[1001]; */
-/* int32_t	headersize; */
+/* int	headersize; */
 /* char	**header; */
 /* char	*filetype; */
-/* int32_t	*vectorformat; */
+/* int	*vectorformat; */
 /* char	vector[1000]; */
 /* double  dvector[100];  */
 /* unsigned char diodeval[4]; */
-/* int16_t diodeval2[4]; */
+/* short diodeval2[4]; */
 /* char	*parmnames; */
 /* char	*sptr; */
-/* int32_t	fieldcount; */
-/* int32_t	bytefileoffset; */
-/* int32_t	linefileoffset; */
-/* int32_t	xsize,ysize; */
+/* int	fieldcount; */
+/* long	bytefileoffset; */
+/* int	linefileoffset; */
+/* int	xsize,ysize; */
 /* PlotOffset	*poffset; */
-/* uint32_t timestamp; */
+/* unsigned long timestamp; */
 /* char		str[30]; */
-/* int32_t	i,j; */
+/* int	i,j; */
 /* FieldInfo	fieldinfo; */
-/* int32_t	status; */
-/* int32_t	got_header; */
-/* int16_t	type; */
-/* int16_t	size; */
+/* int	status; */
+/* int	got_header; */
+/* short	type; */
+/* short	size; */
 /* char	channelstr[80]; */
 /* char	*nchannelstr; */
 /* char	*ratestr; */
 /* double	time; */
-/* int32_t	startline_temp; */
+/* int	startline_temp; */
 
-/*  int32_t	id_column = 0; */
-/*  int32_t	id_type = INVALID_TYPE; */
-/*  int32_t	id_offset = 0; */
+/*  int	id_column = 0; */
+/*  int	id_type = INVALID_TYPE; */
+/*  int	id_offset = 0; */
 /*  float	flastid = 0; */
-/*  int32_t	ilastid = 0; */
-/* int32_t	lastrec = 0; */
-/* int32_t	lastid = 0; */
-/*  int32_t	firstpass = 0; /\* is this our first time through the source file*\/ */
+/*  int	ilastid = 0; */
+/* long	lastrec = 0; */
+/* long	lastid = 0; */
+/*  int	firstpass = 0; /\* is this our first time through the source file*\/ */
 
 /*     oldplot = NULL; */
 /*     plot = NULL; */
@@ -1427,7 +1427,7 @@ int32_t	lastid = 0;
 /*                 } */
 /*                 if(source->fileformat == EEG){ */
 /* 		  if(SetProjectionName(graph,0,"timestamp") == 0){ */
-/* 		    AddProjectionInfo(graph,0,"timestamp",ULONG,sizeof(uint32_t)); */
+/* 		    AddProjectionInfo(graph,0,"timestamp",ULONG,sizeof(unsigned long)); */
 /* 		  } */
 /* 		  /\* */
 /* 		  ** determine the number of channels */
@@ -1438,11 +1438,11 @@ int32_t	lastid = 0;
 /* 		    for(i=0;i<source->nchannels;i++){ */
 /* 		      sprintf(channelstr,"CH %d",i); */
 /* 		      if(SetProjectionName(graph,i+1,channelstr) == 0){ */
-/* 			AddProjectionInfo(graph,i+1,channelstr,SHORT,sizeof(int16_t)); */
+/* 			AddProjectionInfo(graph,i+1,channelstr,SHORT,sizeof(short)); */
 /* 			    } */
 /* 		    } */
 /* 		    source->nsourcefields = source->nchannels +1; */
-/* 		    source->recordsize = sizeof(uint32_t) + source->nchannels*sizeof(int16_t); */
+/* 		    source->recordsize = sizeof(unsigned long) + source->nchannels*sizeof(short); */
 /* 		  } */
 /*                 } else { */
 /* 		  source->fileformat = GetFileType(header); */
@@ -1602,7 +1602,7 @@ int32_t	lastid = 0;
 /*                 case EEG: */
 /*                     if (debug) fprintf(stderr,"EEG format\n"); */
 /*                     source->nsourcefields = source->nchannels +1; */
-/* 		    source->recordsize = sizeof(uint32_t) + source->nchannels*sizeof(int16_t); */
+/* 		    source->recordsize = sizeof(unsigned long) + source->nchannels*sizeof(short); */
 /*                     break; */
 /* 		case ASCII: */
 /* 		    if (debug) fprintf(stderr,"ASCII format\n"); */
@@ -1660,7 +1660,7 @@ int32_t	lastid = 0;
 /*                 case EEG: */
 /*                     fprintf(stderr,"EEG format\n"); */
 /*                     source->nsourcefields = source->nchannels +1; */
-/* 		    source->recordsize = sizeof(uint32_t) + source->nchannels*sizeof(int16_t); */
+/* 		    source->recordsize = sizeof(unsigned long) + source->nchannels*sizeof(short); */
 /*                     break; */
 /* 		case ASCII: */
 /* 		    fprintf(stderr,"ASCII format\n"); */
@@ -1681,7 +1681,7 @@ int32_t	lastid = 0;
 /* 	    case EEG: */
 /* 		fprintf(stderr,"EEG format\n"); */
 /* 		source->nsourcefields = source->nchannels +1; */
-/* 		source->recordsize = sizeof(uint32_t) + source->nchannels*sizeof(int16_t); */
+/* 		source->recordsize = sizeof(unsigned long) + source->nchannels*sizeof(short); */
 /* 		break; */
 /* 	    case ASCII: */
 /* 		fprintf(stderr,"ASCII format\n"); */
@@ -1739,7 +1739,7 @@ int32_t	lastid = 0;
 /*                 /\* */
 /*                 ** read the timestamp */
 /*                 *\/ */
-/*                 if(fread(&timestamp,sizeof(uint32_t),1,fp) != 1){ */
+/*                 if(fread(&timestamp,sizeof(unsigned long),1,fp) != 1){ */
 /*                     fprintf(stderr,"ERROR: unable to read timestamp\n"); */
 /*                     break; */
 /*                 } */
@@ -1749,8 +1749,8 @@ int32_t	lastid = 0;
 /* 		    /\* */
 /* 		    ** read a multichannel eeg vector and add the points */
 /* 		    *\/ */
-/* 		    bcopy(&timestamp,vector,sizeof(uint32_t)); */
-/* 		    if(fread(vector+sizeof(uint32_t),sizeof(int16_t),source->nchannels,fp) != source->nchannels){ */
+/* 		    bcopy(&timestamp,vector,sizeof(unsigned long)); */
+/* 		    if(fread(vector+sizeof(unsigned long),sizeof(short),source->nchannels,fp) != source->nchannels){ */
 /* 			fprintf(stderr,"ERROR: unable to read eeg info\n"); */
 /* 			break; */
 /* 		    } */
@@ -1773,7 +1773,7 @@ int32_t	lastid = 0;
 /* 		    /\* */
 /* 		    fprintf(stderr,"%u: ",timestamp); */
 /* 		    for(j=0;j<source->nchannels;j++){ */
-/* 			fprintf(stderr,"\t%d",*((int16_t *)(vector+sizeof(int32_t)+sizeof(int16_t)*j))); */
+/* 			fprintf(stderr,"\t%d",*((short *)(vector+sizeof(long)+sizeof(short)*j))); */
 /* 		    } */
 /* 		    fprintf(stderr,"\n"); */
 /* 		    *\/ */
@@ -1994,19 +1994,19 @@ int32_t	lastid = 0;
 /* 		fprintf(stderr,"ERROR: reading last index (float)\n");       */
 /* 		return(NULL); */
 /* 	      } */
-/* 	      lastid = (int32_t)flastid; */
+/* 	      lastid = (long)flastid; */
 /* 	      break; */
 	    
 /* 	    case INT: */
-/* 	      if(fread(&ilastid,sizeof(int32_t),1,fp) != 1){ */
-/* 		fprintf(stderr,"ERROR: reading last index (int32_t)\n");       */
+/* 	      if(fread(&ilastid,sizeof(int),1,fp) != 1){ */
+/* 		fprintf(stderr,"ERROR: reading last index (int)\n");       */
 /* 		return(NULL); */
 /* 	      } */
-/* 	      lastid = (int32_t)ilastid; */
+/* 	      lastid = (long)ilastid; */
 /* 	      break; */
 
 /* 	    default: */
-/* 	      fprintf(stderr,"ERROR: getting last index: only int32_t and float type index fields supported"); */
+/* 	      fprintf(stderr,"ERROR: getting last index: only int and float type index fields supported"); */
 /* 	      return(NULL); */
 /* 	      break; */
 /* 	    } */
@@ -2096,7 +2096,7 @@ SetPlotDefaults(graph)
 Graph	*graph;
 {
 Plot		*plot;
-int32_t		selected=0;
+int		selected=0;
 
     /*
     ** make sure there are plots. If not then exit
@@ -2127,11 +2127,11 @@ int32_t		selected=0;
 LoadPlot(graph,filename,loadmode,startline,endline,startplot,endplot)
 Graph *graph;
 char	*filename;
-int32_t	loadmode;
-int32_t	startline;
-int32_t	endline;
-int32_t	startplot;
-int32_t	endplot;
+int	loadmode;
+int	startline;
+int	endline;
+int	startplot;
+int	endplot;
 {
 DataSource *source;
 DataSource *AddSource();
@@ -2157,7 +2157,7 @@ char 	*lineptr;
 {
 char *strchr();
 Plot	*p;
-int32_t	status;
+int	status;
 
     do {
 	/* skip white space */
@@ -2248,10 +2248,10 @@ char	line[1001];
 Plot *PartialLoadPlot(graph,plot,startline,endline,startplot,endplot)
 Graph	*graph;
 Plot	*plot;
-int32_t	startline;
-int32_t	endline;
-int32_t	startplot;
-int32_t	endplot;
+int	startline;
+int	endline;
+int	startplot;
+int	endplot;
 {
 DataSource	*source;
 
@@ -2316,9 +2316,9 @@ MenuItem	*item;
 Plot	*p;
 Plot	*newplot;
 DataSource	*source;
-int32_t	stepsize;
-int32_t	i;
-int32_t	currentcolor;    
+int	stepsize;
+int	i;
+int	currentcolor;    
 
     p = SelectedPlot(G);
     if(p == NULL){
@@ -2443,7 +2443,7 @@ MenuItem	*item;
 ** filename.
 */
 
-int32_t GlobExpand(char *namein, char *nameout)
+int GlobExpand(char *namein, char *nameout)
 {
   glob_t	retglob;
   
@@ -2484,17 +2484,17 @@ LoadEpochFile(char *filename)
   FILE	*fp;
   glob_t	retglob;
   
-  int32_t	i;
+  int	i;
   
   char	line[1001];
   char	**header;
   char	*fieldstring;
-  int32_t	headersize;
+  int	headersize;
   FieldInfo fieldinfo;
 
   /* epoch strings and corresponding columns in the epoch file */
   char  *estr[3];
-  int32_t	ecol[3];
+  int	ecol[3];
   
   /* epoch string and column array indexes */
 #define ENAME	0
@@ -2504,16 +2504,16 @@ LoadEpochFile(char *filename)
   /* line parsing vars */
   char	*ptr;
   char	*eptr;
-  int32_t done = 0;
-  int32_t n = 0;
-  int32_t nmax = 0;
+  int done = 0;
+  int n = 0;
+  int nmax = 0;
   
   /* Hard coded because I don't know how to dynamically allocate memory yet (tjd) */
 #define MAXPARAMS 50
 #define MAXVALUELEN 50
   char params[MAXPARAMS][MAXVALUELEN];
 
-  int32_t	epoch;
+  int	epoch;
 
   fprintf(stderr,"Trying to load epoch file '%s' ... (LoadEpochFile)\n",filename); /* to be continued with a 'done'*/
   
@@ -2565,7 +2565,7 @@ LoadEpochFile(char *filename)
 
   /* calculate nmax (highest field column we will need to read) */
   /* iterate over ecol array */
-  for (i = 0; i < ((sizeof ecol)/sizeof(int32_t)); i++) 
+  for (i = 0; i < ((sizeof ecol)/sizeof(int)); i++) 
     if (ecol[i] > nmax)
       nmax = ecol[i];
   
@@ -2628,7 +2628,7 @@ LoadEpochFile(char *filename)
 	strncpy(params[n], ptr, eptr-ptr);
 	params[n][eptr-ptr] = '\0';
       } else{
-	fprintf(stderr,"ERROR: Epoch string too int32_t: field %d of '%s'\n", n, line );
+	fprintf(stderr,"ERROR: Epoch string too long: field %d of '%s'\n", n, line );
 	fclose(fp);
 	return(1);
       }
@@ -2711,7 +2711,7 @@ SaveEpochFile(char *file)
   char *epoch_tend;
   char itemstr[100];
   char comstr[100];
-  int32_t i;
+  int i;
     /*
     ** backup the previous epoch file
     */

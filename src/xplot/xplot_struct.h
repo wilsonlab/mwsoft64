@@ -1,4 +1,3 @@
-#include <stdint.h>
 /*
 ** basic window stuctures
 */
@@ -10,67 +9,67 @@
     Drawable		drawable; 	\
     Window		window;		\
     Visual		*visual; 	\
-    int32_t			screen_number; 	\
+    int			screen_number; 	\
     Font		font; 		\
     XFontStruct		*fontinfo; 	\
-    int32_t			wwidth,	 	\
+    int			wwidth,	 	\
     			wheight; 	\
     char		*fontname; 	\
-    int32_t			fontwidth, 	\
+    int			fontwidth, 	\
     			fontheight; 	\
-    int32_t			linewidth; 	\
-    uint32_t	background, 	\
+    int			linewidth; 	\
+    unsigned long	background, 	\
     			foreground; 	\
-    uint32_t	color; 		\
-    int32_t			color_mode;	\
-    int32_t			scale_type;	\
+    unsigned long	color; 		\
+    int			color_mode;	\
+    int			scale_type;	\
     double		**matrix;	\
-    int32_t			inverse;	\
-    int32_t			hide_labels;	\
+    int			inverse;	\
+    int			hide_labels;	\
     Label		*label;
 
 #define WINDOW_STRUCT 		\
     SHARED_WINDOW_STRUCT \
-    int32_t			mapped;
+    int			mapped;
 
 struct polypoint_type{
     float		wx,wy,wz;		/* line start */
-    int16_t		sx,sy;
+    short		sx,sy;
     struct polypoint_type	*next;
 };
 
 typedef struct labeltype {
-    int16_t		coord_mode;	/* 0=world coord; 1=screen coord */
-    int16_t		color;
+    short		coord_mode;	/* 0=world coord; 1=screen coord */
+    short		color;
     struct labeltype 	*next;
-    int16_t		priority;	/* 0 = temporary; 1 = permanent */
-    int16_t		type;		/* 0 = string; 1 = box; 2 = line */
+    short		priority;	/* 0 = temporary; 1 = permanent */
+    short		type;		/* 0 = string; 1 = box; 2 = line */
     union {
 	struct stringlabel {
 	    float		wx,wy,wz;		/* text start */
-	    int16_t		sx,sy;
+	    short		sx,sy;
 	    Font		font; 		
 	    char		line[MAX_TEXT_LINE];
 	} string;
 	struct bitmaplabel {
 	    float		wx,wy,wz;		/* bitmap center */
-	    int16_t		sx,sy;
-	    int16_t		w,h;
+	    short		sx,sy;
+	    short		w,h;
 	    Pixmap		bitmap;
 	} bitmap;
 	struct boxlabel {
 	    float		wx,wy,wz,wr;	/* box center/size */
-	    int16_t		sx,sy,sr;
+	    short		sx,sy,sr;
 	} box;
 	struct linelabel {
 	    float		wx,wy,wz;		/* line start */
 	    float		wx2,wy2,wz2;	/* line end */
-	    int16_t		sx,sy;
-	    int16_t		sx2,sy2;
+	    short		sx,sy;
+	    short		sx2,sy2;
 	} line;
 	struct polylinelabel {
 	    struct polypoint_type	*points;
-	    int16_t		closed;
+	    short		closed;
 	} polyline;
     } u;
 } Label;
@@ -84,7 +83,7 @@ typedef struct {
 } BasicWindow;
 
 typedef struct {
-    int16_t	x,y;
+    short	x,y;
 } Coord;
 
 typedef struct {
@@ -97,7 +96,7 @@ typedef struct {
 
 typedef struct source_type {
     char	*filename;
-    int32_t		type;
+    int		type;
     BasicWindow *parent;
     struct source_type *next;
 } DataSource;
@@ -111,51 +110,51 @@ typedef struct worldview_type {
 
 
 typedef struct axis_type {
-    int32_t			autoscale;		/* autoscale flags */
-    int32_t			type;			/* linear/log */
-    int32_t			show;			/* axis display flags */
-    int32_t			exponent;		/* axis label exponent */
-    int32_t			leftdp;			/* axis decimal precision */
-    int32_t			rightdp;		/* axis decimal precision */
+    int			autoscale;		/* autoscale flags */
+    int			type;			/* linear/log */
+    int			show;			/* axis display flags */
+    int			exponent;		/* axis label exponent */
+    int			leftdp;			/* axis decimal precision */
+    int			rightdp;		/* axis decimal precision */
     char		*title;			/* axis labels */
-    int32_t			style;			/* axis style */
+    int			style;			/* axis style */
     float		xintcpt,
 			yintcpt,
 			zintcpt;		/* axis intercepts */
     float		tickmin;		/* tick information */
-    int32_t			nticks;			/* actual number of ticks */
-    int32_t			nsubticks;		/* number of subticks */
-    int32_t			desired_nticks;		/* desired number of ticks */
+    int			nticks;			/* actual number of ticks */
+    int			nsubticks;		/* number of subticks */
+    int			desired_nticks;		/* desired number of ticks */
     float		tickinc;		/* tick spacing */
     float		desired_tickinc;	/* desired tick spacing */
     float		tickstart;		/* starting tick */
-    int32_t			title_offset;
-    int32_t			ticklabel_offset;
-    int32_t			show_labels;		/* flag to show labels */
-    int32_t			show_grid;		
+    int			title_offset;
+    int			ticklabel_offset;
+    int			show_labels;		/* flag to show labels */
+    int			show_grid;		
 } Axis;
 
 typedef struct plot_type {
-    int32_t			datasource;		/* 0=file 1=stdin 2=other */
+    int			datasource;		/* 0=file 1=stdin 2=other */
     char		*filename;		/* data file information */
     char		*title;			/* line title */
-    int32_t			linestyle;		/* line style */
+    int			linestyle;		/* line style */
     float		xmax;			/* scale parameters */
     float		xmin;
     float		ymax;
     float		ymin;
-    int32_t			xhi;			/* data limiting bounds */
-    int32_t			xlo;
-    int32_t			npoints;		/* number of data points */
-    int32_t			arraysize;
+    int			xhi;			/* data limiting bounds */
+    int			xlo;
+    int			npoints;		/* number of data points */
+    int			arraysize;
     FCoord		*data;			/* original data */
     Coord		*coord;			/* plot data */
     FCoord		*fcoord;		/* precise plot data */
     ErrorData		*edata;			/* error bar data */
     struct plot_type *next;
     struct graph_type 	*graph;			/* parent graph */
-    int32_t			selected;		/* flag */
-    int32_t			visible;		/* flag */
+    int			selected;		/* flag */
+    int			visible;		/* flag */
     float		scale;			/* data scale factor */
     float		xscale;			/* x scale factor */
     float		escale;			/* error scale factor */
@@ -165,23 +164,23 @@ typedef struct plot_type {
     float		xoffset;		/* data x offset */
     float		yoffset;		/* data y offset */
     float		zoffset;		/* data y offset */
-    int32_t			plot_type;		/* scatter/bar/normal */
+    int			plot_type;		/* scatter/bar/normal */
     float		bar_width;		/* width in world coords */
-    int32_t			bar_filled;		/* flag to fill the bars */
-    int32_t			show_error;		/* flag to display error bars */
-    int32_t			point_symbol;		/* icon to use to mark points */
-    int32_t			showpoints;		/* flag to show point icons */
-    int32_t			pointfreq;		/* how often to mark points */
+    int			bar_filled;		/* flag to fill the bars */
+    int			show_error;		/* flag to display error bars */
+    int			point_symbol;		/* icon to use to mark points */
+    int			showpoints;		/* flag to show point icons */
+    int			pointfreq;		/* how often to mark points */
     float		auto_x;			/* auto x index */
     float		auto_xstart;		/* start for auto x index */
-    int32_t			xaxis;			/* flag */
-    int32_t			yaxis;			/* flag */
-    int32_t			zaxis;			/* flag */
+    int			xaxis;			/* flag */
+    int			yaxis;			/* flag */
+    int			zaxis;			/* flag */
     Label		*label;
-    int32_t			zmode;			/* 3d display */
-    int32_t			errorbartype;		/* error bar,box, or circle */ 
-    int32_t			randomizex;
-    int32_t			randomizey;
+    int			zmode;			/* 3d display */
+    int			errorbartype;		/* error bar,box, or circle */ 
+    int			randomizex;
+    int			randomizey;
 } Plot;
 
 typedef struct graph_type {
@@ -191,13 +190,13 @@ typedef struct graph_type {
     DataSource		*source;
     struct graph_type 	*next;
     float		dragwx1,dragwy1;
-    int32_t			dragx1,dragy1,dragx2,dragy2;
+    int			dragx1,dragy1,dragx2,dragy2;
     char		*title;			/* plot title */
     Axis		xaxis;
     Axis		yaxis;
     Axis 		zaxis;
 
-    int32_t			ticksize;		/* size of ticks in pixels */
+    int			ticksize;		/* size of ticks in pixels */
     float		wxmin,			/* world screen coordinates */
     			wxmax;
     float		wymin,
@@ -208,16 +207,16 @@ typedef struct graph_type {
     			xmax;
     float		ymin,
     			ymax;
-    int32_t			show_legend;		/* flag to show legend */
-    int32_t			show_title;		/* flag to show title */
-    int32_t			auto_xaxis;		/* flag for auto x axis  */
-    int32_t			auto_yaxis;		/* flag for auto y axis  */
-    int32_t			resolution;		/* postscript resolution 0/1 */
-    int32_t			quadrants;		/* axis quadrants to display */
-    int32_t			gridcolor;		
-    int32_t			xtitlejustify;		/* location of xaxis title */
-    int32_t			optimize;		/* optimize line drawing */ 
-    int32_t			optimizepoints;		/* optimize point drawing */ 
+    int			show_legend;		/* flag to show legend */
+    int			show_title;		/* flag to show title */
+    int			auto_xaxis;		/* flag for auto x axis  */
+    int			auto_yaxis;		/* flag for auto y axis  */
+    int			resolution;		/* postscript resolution 0/1 */
+    int			quadrants;		/* axis quadrants to display */
+    int			gridcolor;		
+    int			xtitlejustify;		/* location of xaxis title */
+    int			optimize;		/* optimize line drawing */ 
+    int			optimizepoints;		/* optimize point drawing */ 
     Plot		*stepthrough;
     float		thetax;			/* rotation about x */
     float		thetay;			/* rotation about y */
@@ -227,7 +226,7 @@ typedef struct graph_type {
 } Graph;
 
 typedef struct {
-    int32_t		id;
+    int		id;
     PFI		func;
     BasicWindow	*parent;
 } WindowData;
@@ -236,14 +235,14 @@ typedef struct {
     WINDOW_STRUCT
     struct _Frame	*frame;
     char	line[MAX_TEXT_LINE];
-    int32_t		index;
+    int		index;
 } TextWindow;
 
 typedef struct {
     WINDOW_STRUCT
     struct _Frame	*frame;
     char	line[80];
-    int32_t		index;
+    int		index;
     struct _MenuItem	*item;
 } MenuWindow;
 
@@ -252,8 +251,8 @@ typedef struct _Frame {
     Graph	*graph;
     TextWindow	*text;
     MenuWindow	*menu;
-    int32_t		x,y;
-    int32_t		width,height;
+    int		x,y;
+    int		width,height;
 } Frame;
 
 typedef struct _MenuItem {
@@ -262,18 +261,18 @@ typedef struct _MenuItem {
     struct _MenuItem	*next;
     char		*string;
     char		*string2;
-    int32_t			invert;
-    int32_t			invert2;
-    int32_t			x,y,w,h;
+    int			invert;
+    int			invert2;
+    int			x,y,w,h;
     PFI			func;
     Pixmap		bitmap1;
     Pixmap		bitmap2;
-    int32_t			state;
-    int32_t			type;
+    int			state;
+    int			type;
 } MenuItem;
 
 typedef struct {
-    int32_t pixel;
-    int32_t r,g,b;
+    int pixel;
+    int r,g,b;
 } ColorTable;
 

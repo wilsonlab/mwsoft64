@@ -56,7 +56,7 @@ double val;
 
 SetPlotVisibility(plot,val)
 Plot	*plot;
-int32_t	val;
+int	val;
 {
     if(plot == NULL) return;
     plot->visible = val;
@@ -70,7 +70,7 @@ Frame	*frame;
 {
 XWindowAttributes	winfo;
 Plot			*plot;
-int32_t			w,h;
+int			w,h;
 
     /*
     ** get the size of the frame
@@ -98,13 +98,13 @@ int32_t			w,h;
     return(0);
 }
 
-int32_t GetMenuWindowHeight(menu)
+int GetMenuWindowHeight(menu)
      MenuWindow *menu;
 {
   MenuItem *item;
-  int32_t height = 0;
+  int height = 0;
   Graph *graph;
-  int32_t clusterid, nbounds=0, nclusters=0;
+  int clusterid, nbounds=0, nclusters=0;
   ClusterBounds *cb;
   ClusterList *clist;
 
@@ -136,10 +136,10 @@ int32_t GetMenuWindowHeight(menu)
   return height;
 }
 
-int32_t GetMenuFrameHeight(menuframe)
+int GetMenuFrameHeight(menuframe)
      MenuFrame *menuframe;
 {
-  int32_t height = 0;
+  int height = 0;
 
   if (menuframe->expanded)
     height = GetMenuWindowHeight(menuframe->menu);
@@ -158,9 +158,9 @@ TextWindow		*text;
 MenuContainer *menucontainer;
 MenuWindow		*menu;
 Graph			*graph;
-int32_t			text_height;
-int32_t			menu_width;
- int32_t voffset;
+int			text_height;
+int			menu_width;
+ int voffset;
  MenuFrame *menuframe;
 
     graph = frame->graph;
@@ -255,9 +255,9 @@ int32_t			menu_width;
 }
 
 
-void FreeMatrix(double **matrix, int32_t matsize)
+void FreeMatrix(double **matrix, int matsize)
 {
-  int32_t i;
+  int i;
 
   if (!(matrix) || matsize<1)
     return;
@@ -272,9 +272,9 @@ void FreeMatrix(double **matrix, int32_t matsize)
 
 }
 
-MultiplyMatrix(double **m1, double **m2, double **retmat, int32_t matsize)
+MultiplyMatrix(double **m1, double **m2, double **retmat, int matsize)
 {
- int32_t i,j,k;
+ int i,j,k;
 
  if (!retmat || !m1 || !m2 || matsize<1)
    fprintf(stderr, "MultiplyMatrix: Null pointers!\n");
@@ -310,7 +310,7 @@ MultiplyMatrix(double **m1, double **m2, double **retmat, int32_t matsize)
 
 void AffineEmptyMatrix(double ***matrix)
 {
-  int32_t i;
+  int i;
 
   FreeMatrix(*matrix, 4);
 
@@ -324,7 +324,7 @@ void AffineEmptyMatrix(double ***matrix)
 
 void AffineIdentityMatrix(double ***matrix)
 {
-  int32_t i;
+  int i;
   AffineEmptyMatrix(matrix);
 
   /* make it an identity affine matrix */
@@ -499,7 +499,7 @@ void SetRotationMatrix(double ***matrix, float thetax, float thetay, float theta
 {
 double	Sx,Sy,Sz;
 double	Cx,Cy,Cz;
-int32_t	i;
+int	i;
  double **tm;
 
  /*fprintf(stderr, "setrotmat: tx: %f, ty: %f, tz: %f\n", thetax, thetay, thetaz);*/
@@ -544,7 +544,7 @@ int32_t	i;
 
 /* void UpdateRotationMatrix(double ***matrix, float thetax, float thetay, float thetaz) */
 /* { */
-/*   int32_t i; */
+/*   int i; */
 /*   double **rotmat; */
 /*   double **tempmat; */
   
@@ -627,11 +627,11 @@ double	*nx,*ny,*nz;
 GetDataPoint(plot,wx,wy,wz,index)
 Plot	*plot;
 float	*wx,*wy,*wz;
-int32_t	index;
+int	index;
 {
 double	x,y,z;
 double	p0val,p1val,p2val;
-int32_t	p0,p1,p2;
+int	p0,p1,p2;
 ProjectionInfo	*pinfo;
 
     /*
@@ -712,7 +712,7 @@ ProjectionInfo	*pinfo;
 GetTransformedDataPoint(plot,wx,wy,wz,index)
 Plot	*plot;
 float	*wx,*wy,*wz;
-int32_t	index;
+int	index;
 {
 double	nx,ny,nz;
 
@@ -736,14 +736,14 @@ double	nx,ny,nz;
 RescalePlot(plot)
 Plot	*plot;
 {
-int32_t 	i;
+int 	i;
 float	sx,sy;
 float	wx,wy,wz;
 Coord	*coord;
 FCoord	*fcoord;
-int32_t	randomizex;
-int32_t	randomizey;
- int32_t count;
+int	randomizex;
+int	randomizey;
+ int count;
 
     if(plot == NULL) return;
     /*
@@ -813,7 +813,7 @@ int32_t	randomizey;
 void ScreenTransform(graph,wx,wy,sx,sy)
 Graph	*graph;
 double	wx,wy;
-int32_t	*sx,*sy;
+int	*sx,*sy;
 {
 
 
@@ -856,7 +856,7 @@ float	*sx,*sy;
 */
 WorldTransform(graph,sx,sy,wx,wy)
 Graph *graph;
-int32_t sx,sy;
+int sx,sy;
 float *wx,*wy;
 {
     if((graph->wxscale == 0) || (graph->wyscale == 0)){
@@ -875,9 +875,9 @@ float *wx,*wy;
 
 AutoScale(graph,autoscale_x,autoscale_y)
 Graph *graph;
-int32_t autoscale_x,autoscale_y;
+int autoscale_x,autoscale_y;
 {
-int32_t	cnt;
+int	cnt;
 float	val;
 Plot	*plot;
 
@@ -940,11 +940,11 @@ Plot	*plot;
 AutoOrigin(graph)
 Graph *graph;
 {
-int32_t sw,sh;
-int32_t tw,th;
+int sw,sh;
+int tw,th;
 float ww,wh;
 char label[80];
-int32_t i;
+int i;
 
     /*
     ** autolocate the origin within the current window

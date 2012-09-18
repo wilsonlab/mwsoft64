@@ -20,16 +20,16 @@ double	dval;
     }
     switch(pinfo->type){
 	case INT:
-	    dval = *((int32_t *)(data + pinfo->offset));
+	    dval = *((int *)(data + pinfo->offset));
 	    break;
 	case FLOAT:
 	    dval = *((float *)(data + pinfo->offset));
 	    break;
 	case SHORT:
-	    dval = *((int16_t *)(data + pinfo->offset));
+	    dval = *((short *)(data + pinfo->offset));
 	    break;
 	case ULONG:
-	    dval = *((uint32_t *)(data + pinfo->offset));
+	    dval = *((unsigned long *)(data + pinfo->offset));
 	    break;
 	case DOUBLE:
 	    dval = *((double *)(data + pinfo->offset));
@@ -56,16 +56,16 @@ double	dval;
     }
     switch(pinfo->type){
 	case INT:
-	    *((int32_t *)(data + pinfo->offset)) = dval;
+	    *((int *)(data + pinfo->offset)) = dval;
 	    break;
 	case FLOAT:
 	    *((float *)(data + pinfo->offset)) = dval;
 	    break;
 	case SHORT:
-	    *((int16_t *)(data + pinfo->offset)) = dval;
+	    *((short *)(data + pinfo->offset)) = dval;
 	    break;
 	case ULONG:
-	    *((uint32_t *)(data + pinfo->offset)) = dval;
+	    *((unsigned long *)(data + pinfo->offset)) = dval;
 	    break;
 	case DOUBLE:
 	    *((double *)(data + pinfo->offset)) = dval;
@@ -87,7 +87,7 @@ Graph		*graph;
 ClusterBounds	*cb;
 FILE		*fp;
 {
-int32_t	i;
+int	i;
 ProjectionInfo	*pinfo;
 
     fprintf(fp,"\n");
@@ -215,7 +215,7 @@ WriteClusterScores(fp,graph)
 AssignClusterScores(char *scores)
 {
   char *ptr; 
-  int32_t clusterid, score;
+  int clusterid, score;
   ClusterList *cl;
 
   ptr = scores;
@@ -252,15 +252,15 @@ Graph	*graph;
 char	*prefix;
 {
 ClusterList	*clist;
-int32_t		clusterid;
+int		clusterid;
 char		fname[100];
 FILE		*fp;
 Plot		*plot;
-int32_t		count;
+int		count;
 char		*tstring;
-int32_t		i;
+int		i;
 ProjectionInfo	*pinfo;
-int32_t		totaloverlap;
+int		totaloverlap;
 
     /*
     ** evaluate cluster overlap
@@ -325,14 +325,14 @@ int32_t		totaloverlap;
 /* char	*prefix; */
 /* { */
 /* ClusterList	*clist; */
-/* int32_t		clusterid; */
+/* int		clusterid; */
 /* char		fname[100]; */
 /* FILE		*fp; */
 /* Plot		*plot; */
-/* int32_t		count; */
-/* int32_t		npoints; */
-/* int32_t		startline; */
-/* int32_t		endline; */
+/* int		count; */
+/* int		npoints; */
+/* int		startline; */
+/* int		endline; */
 /* char		*tstring; */
 
 /*     /\* */
@@ -416,21 +416,21 @@ int32_t		totaloverlap;
 /* char	*prefix; */
 /* { */
 /* ClusterList	*clist; */
-/* int32_t		clusterid; */
+/* int		clusterid; */
 /* char		fname[100]; */
 /* FILE		*fp; */
 /* Plot		*plot; */
-/* int32_t		count; */
-/* int32_t		npoints; */
-/* int32_t		startline; */
-/* int32_t		endline; */
+/* int		count; */
+/* int		npoints; */
+/* int		startline; */
+/* int		endline; */
 /* char		*tstring; */
-/* int32_t		endspike; */
+/* int		endspike; */
 /* char		*endstr; */
-/* int32_t		endcheck; */
-/* int32_t		i; */
+/* int		endcheck; */
+/* int		i; */
 /* ProjectionInfo	*pinfo; */
-/* int32_t		totaloverlap; */
+/* int		totaloverlap; */
 
 /*     /\* */
 /*     ** go through all of the defined clusters */
@@ -573,11 +573,11 @@ Graph	*graph;
 char	*file;
 {
 ClusterList	*clist;
-int32_t		clusterid;
+int		clusterid;
 char		fname[100];
 FILE		*fp;
 Plot		*plot;
-int32_t		count;
+int		count;
 
     /*
     ** go through all of the points
@@ -599,23 +599,23 @@ int32_t		count;
     fprintf(stderr,"done\n");
 }
 
-int32_t WriteClusterIndexPoints(graph,fp)
+int WriteClusterIndexPoints(graph,fp)
 Graph	*graph;
 FILE	*fp;
 {
 ClusterBounds	*cb;
 ClusterList	*clist;
-int32_t	p0,p1;
-int32_t	success;
+int	p0,p1;
+int	success;
 Plot	*plot;
-int32_t	i,j;
-int32_t	count;
-int32_t	npoints;
-int32_t	clusterid;
+int	i,j;
+int	count;
+int	npoints;
+int	clusterid;
 ProjectionInfo	*pinfo;
-int32_t	idoffset;
+int	idoffset;
 double	p0val,p1val;
-int32_t	idtype;
+int	idtype;
 
     npoints = 0;
     /*
@@ -639,12 +639,12 @@ int32_t	idtype;
 	for(i=0;i<plot->npoints;i++){
 	    count = 0;
 	    if(idtype == INT){
-		fprintf(fp,"%d",*((int32_t *)(plot->rawdata[i].data + idoffset)));
+		fprintf(fp,"%d",*((int *)(plot->rawdata[i].data + idoffset)));
 	    } else 
 	    if(idtype == FLOAT){
-		fprintf(fp,"%d",(int32_t)(*((float *)(plot->rawdata[i].data + idoffset))));
+		fprintf(fp,"%d",(int)(*((float *)(plot->rawdata[i].data + idoffset))));
 	    } else {
-		fprintf(stderr,"ERROR: spike id field is not an int32_t or float\n");
+		fprintf(stderr,"ERROR: spike id field is not an int or float\n");
 		return(0);
 	    }
 
@@ -734,21 +734,21 @@ int32_t	idtype;
 /*
 ** write out the timestamps in a single cluster
 */
-int32_t WriteClusterTimestamps(graph,clusterid,fp)
+int WriteClusterTimestamps(graph,clusterid,fp)
 Graph	*graph;
-int32_t	clusterid;
+int	clusterid;
 FILE	*fp;
 {
 ClusterBounds	*cb;
 ProjectionInfo	*pinfo;
 ClusterList	*clist;
-int32_t	p0,p1;
-int32_t	success;
+int	p0,p1;
+int	success;
 Plot	*plot;
-int32_t	i,j;
-int32_t	count;
+int	i,j;
+int	count;
 ProjectionInfo	*timeprojection;
-uint32_t	timestamp;
+unsigned long	timestamp;
 double	p0val,p1val;
 
     count = 0;
@@ -836,7 +836,7 @@ double	p0val,p1val;
 		** so write out the timestamp
 		*/
 		timestamp = TSCALE*GetDoubleFromRawData(plot->rawdata[i].data,timeprojection);
-		fwrite(&timestamp,sizeof(uint32_t),1,fp);
+		fwrite(&timestamp,sizeof(unsigned long),1,fp);
 		count++;
 	    }
 	}
@@ -847,23 +847,23 @@ double	p0val,p1val;
 /*
 ** write out the points in a single cluster
 */
-int32_t WriteClusterPoints(graph,clusterid,fp,indexonly)
+int WriteClusterPoints(graph,clusterid,fp,indexonly)
 Graph	*graph;
-int32_t	clusterid;
+int	clusterid;
 FILE	*fp;
-int32_t	indexonly;
+int	indexonly;
 {
 ClusterBounds	*cb;
 ClusterList	*clist;
-int32_t	p0,p1;
-int32_t	success;
+int	p0,p1;
+int	success;
 Plot	*plot;
-int32_t	i,j;
-int32_t	count;
+int	i,j;
+int	count;
 ProjectionInfo	*pinfo;
 double	p0val,p1val;
-int32_t	idoffset;
-int32_t	idtype;
+int	idoffset;
+int	idtype;
 
     count = 0;
     /*
@@ -959,19 +959,19 @@ int32_t	idtype;
 	    if(indexonly){
 	      switch(idtype){
 	      case INT:
-		fprintf(fp,"%d\n",*((int32_t *)(plot->rawdata[i].data+idoffset)));
+		fprintf(fp,"%d\n",*((int *)(plot->rawdata[i].data+idoffset)));
 		break;
 	      case FLOAT:
-		fprintf(fp,"%d\n",(int32_t)(*((float *)(plot->rawdata[i].data+idoffset))));
+		fprintf(fp,"%d\n",(int)(*((float *)(plot->rawdata[i].data+idoffset))));
 		break;
 	      case SHORT:
-		fprintf(fp,"%d\n",(int32_t)(*((int16_t *)(plot->rawdata[i].data+idoffset))));
+		fprintf(fp,"%d\n",(int)(*((short *)(plot->rawdata[i].data+idoffset))));
 		break;
 	      case ULONG:
-		fprintf(fp,"%d\n",(int32_t)(*((uint32_t *)(plot->rawdata[i].data+idoffset))));
+		fprintf(fp,"%d\n",(int)(*((unsigned long *)(plot->rawdata[i].data+idoffset))));
 		break;
 	      case DOUBLE:
-		fprintf(fp,"%d\n",(int32_t)(*((double *)(plot->rawdata[i].data+idoffset))));
+		fprintf(fp,"%d\n",(int)(*((double *)(plot->rawdata[i].data+idoffset))));
 		break;
 	      default:
 		fprintf(stderr,"ERROR: unrecognized data type %d\n",idtype);
@@ -986,7 +986,7 @@ int32_t	idtype;
 		    switch(pinfo->type){
 		    case INT:
 			fprintf(fp,"%d\t",
-			*((int32_t *)(plot->rawdata[i].data + pinfo->offset)));
+			*((int *)(plot->rawdata[i].data + pinfo->offset)));
 			break;
 		    case FLOAT:
 			fprintf(fp,"%.16g\t",
@@ -994,11 +994,11 @@ int32_t	idtype;
 			break;
 		    case SHORT:
 			fprintf(fp,"%d\t",
-			*((int16_t *)(plot->rawdata[i].data + pinfo->offset)));
+			*((short *)(plot->rawdata[i].data + pinfo->offset)));
 			break;
 		    case ULONG:
 			fprintf(fp,"%u\t",
-			*((uint32_t *)(plot->rawdata[i].data + pinfo->offset)));
+			*((unsigned long *)(plot->rawdata[i].data + pinfo->offset)));
 			break;
 		    case DOUBLE:
 			fprintf(fp,"%.16g\t",
@@ -1024,18 +1024,18 @@ char	*file;
 char	line[200];
 char	pname0[200];
 char	pname1[200];
-int32_t	clusterid;
-int32_t	p0,p1;
+int	clusterid;
+int	p0,p1;
 float	wx1,wy1,wx2,wy2;
 float	f1,f2;
 FILE	*fp;
-int32_t	sp0,sp1;
-int32_t	level;
-int32_t	ncoords;
-int32_t	count;
+int	sp0,sp1;
+int	level;
+int	ncoords;
+int	count;
 ProjectionInfo	*pinfo;
 char	**header;
-int32_t	headersize;
+int	headersize;
     /*
     ** open the file
     */

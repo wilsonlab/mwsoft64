@@ -5,7 +5,7 @@ float 	interval;
 float 	origin;
 float 	wmin,wmax;
 float 	*start;
-int32_t	*nticks;
+int	*nticks;
 {
     /*
     ** find the number of intervals which will fit in wmax-wmin
@@ -17,21 +17,21 @@ int32_t	*nticks;
     ** from the origin that appears after wmin
     */
     if(wmin - origin > 0){
-	*start = origin + (int32_t)(1 + (wmin - origin)/(interval))*(interval);
+	*start = origin + (int)(1 + (wmin - origin)/(interval))*(interval);
     } else {
-	*start = origin + (int32_t)((wmin - origin)/(interval))*(interval);
+	*start = origin + (int)((wmin - origin)/(interval))*(interval);
     }
 }
 
 float CalculateTickInterval(desired_nticks,origin,wmin,wmax)
-int32_t 	desired_nticks;
+int 	desired_nticks;
 float 	origin;
 float 	wmin,wmax;
 {
 float	base_interval;
 float	interval_hint;
-int32_t	total_ticks;
-int32_t	tickscale;
+int	total_ticks;
+int	tickscale;
 float	logscale;
 float	interval;
 
@@ -49,10 +49,10 @@ float	interval;
     */
     if(logscale < 0){
 	/* push it down to the next log interval */
-	base_interval = pow((double)10.0,(double)((int32_t)(logscale - 1)));
+	base_interval = pow((double)10.0,(double)((int)(logscale - 1)));
     } else {
 	/* rounds down to the next log interval */
-	base_interval = pow((double)10.0,(double)((int32_t)logscale));
+	base_interval = pow((double)10.0,(double)((int)logscale));
     }
 
     if(base_interval == 0){
@@ -83,13 +83,13 @@ float	interval;
 
 DrawXTickLabel(graph,sx,sy,val,left,right)
 Graph *graph;
-int32_t sx,sy;
+int sx,sy;
 float val;
-int32_t left,right;
+int left,right;
 {
 char format[80];
 char label[80];
-int32_t 	tw,th;
+int 	tw,th;
 
     SetColor(MININTERFACECOLOR + AXESTICKLABELS);
     if(right < 0){
@@ -100,18 +100,18 @@ int32_t 	tw,th;
     sprintf(label,format,val);
     TextExtent(label,&tw,&th);
     Text(graph,sx - tw/2,
-    (int32_t)(sy + 2*graph->ticksize + th +graph->xaxis.ticklabel_offset),label);
+    (int)(sy + 2*graph->ticksize + th +graph->xaxis.ticklabel_offset),label);
 }
 
 DrawYTickLabel(graph,sx,sy,val,left,right)
 Graph *graph;
-int32_t sx,sy;
+int sx,sy;
 float val;
-int32_t left,right;
+int left,right;
 {
 char format[80];
 char label[80];
-int32_t 	tw,th;
+int 	tw,th;
 
     SetColor(MININTERFACECOLOR + AXESTICKLABELS);
     if(right < 0){
@@ -128,7 +128,7 @@ int32_t 	tw,th;
 CalculateYTicks(graph)
 Graph *graph;
 {
-int32_t	desired_nticks;
+int	desired_nticks;
 
     /*
     ** if the desired tick count is less than 0 then
@@ -160,7 +160,7 @@ int32_t	desired_nticks;
 CalculateXTicks(graph)
 Graph *graph;
 {
-int32_t	desired_nticks;
+int	desired_nticks;
 
     /*
     ** if the desired tick count is less than 0 then
@@ -189,15 +189,15 @@ int32_t	desired_nticks;
 DrawYTicks(graph)
 Graph *graph;
 {
-int32_t	sx1,sy1;
-int32_t	sx2,sy2;
-int32_t	i;
+int	sx1,sy1;
+int	sx2,sy2;
+int	i;
 float	xint;
 float	val;
 float	scale;
-int32_t	tmp;
-int32_t	axisy;
-int32_t	j;
+int	tmp;
+int	axisy;
+int	j;
 double	ts,te;
 
     if(graph->yaxis.desired_nticks == 0){
@@ -285,8 +285,8 @@ double	ts,te;
                     }
 		}
 	    } else {
-		DrawLine(sx1- (int32_t)(0.5*graph->ticksize),sy1,
-		sx2+(int32_t)(0.5*graph->ticksize), sy1);
+		DrawLine(sx1- (int)(0.5*graph->ticksize),sy1,
+		sx2+(int)(0.5*graph->ticksize), sy1);
 	    }
 	}
     }
@@ -295,16 +295,16 @@ double	ts,te;
 DrawXTicks(graph)
 Graph *graph;
 {
-int32_t	sx1,sy1;
-int32_t	sx2,sy2;
-int32_t	i;
+int	sx1,sy1;
+int	sx2,sy2;
+int	i;
 float	yint;
 float	val;
 char	label[100];
 float	scale;
-int32_t	tmp;
-int32_t	axisx;
-int32_t	j;
+int	tmp;
+int	axisx;
+int	j;
 float	tinc;
 float	tstart;
 double	ts,te;
@@ -383,8 +383,8 @@ double	ts,te;
                     }
 		}
 	    } else {
-		DrawLine(sx1,sy1- (int32_t)(0.5*graph->ticksize),sx1,
-		sy2+(int32_t)(0.5*graph->ticksize));
+		DrawLine(sx1,sy1- (int)(0.5*graph->ticksize),sx1,
+		sy2+(int)(0.5*graph->ticksize));
 	    }
 	}
     }

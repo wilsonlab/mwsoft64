@@ -7,8 +7,8 @@ char *file;
 FILE 		*fp;
 Plot		*plot;
 DataSource	*source;
-int32_t		i;
-int32_t		offset,size;
+int		i;
+int		offset,size;
 Label		*label;
 
     if(graph == NULL || file == NULL){
@@ -25,7 +25,7 @@ Label		*label;
     /*
     ** write out the graph data structure
     */
-    offset = (int32_t)(&(graph->label)) - (int32_t)(graph);
+    offset = (int)(&(graph->label)) - (int)(graph);
     size = sizeof(Graph) - offset;
     fwrite(((char *)graph)+offset,size,1,fp);
     /*
@@ -42,7 +42,7 @@ Label		*label;
     for(label = graph->label;label;label=label->next){
 	i++;
     }
-    fwrite(&i,sizeof(int32_t),1,fp);
+    fwrite(&i,sizeof(int),1,fp);
     /*
     ** write out the label list
     */
@@ -57,7 +57,7 @@ Label		*label;
     for(source = graph->source;source;source=source->next){
 	i++;
     }
-    fwrite(&i,sizeof(int32_t),1,fp);
+    fwrite(&i,sizeof(int),1,fp);
     /*
     ** write out the data source list
     */
@@ -75,7 +75,7 @@ Label		*label;
     for(plot = graph->plot;plot;plot=plot->next){
 	i++;
     }
-    fwrite(&i,sizeof(int32_t),1,fp);
+    fwrite(&i,sizeof(int),1,fp);
     for(plot = graph->plot;plot;plot=plot->next){
 	/*
 	** write out the plot data structure
@@ -89,35 +89,35 @@ Label		*label;
 	*/
 	if(plot->data){
 	    i = 1;
-	    fwrite(&i,sizeof(int32_t),1,fp);
+	    fwrite(&i,sizeof(int),1,fp);
 	    fwrite(plot->data,sizeof(FCoord),plot->npoints,fp);
 	} else {
 	    i = 0;
-	    fwrite(&i,sizeof(int32_t),1,fp);
+	    fwrite(&i,sizeof(int),1,fp);
 	}
 	if(plot->coord){
 	    i = 1;
-	    fwrite(&i,sizeof(int32_t),1,fp);
+	    fwrite(&i,sizeof(int),1,fp);
 	    fwrite(plot->coord,sizeof(Coord),plot->npoints,fp);
 	} else {
 	    i = 0;
-	    fwrite(&i,sizeof(int32_t),1,fp);
+	    fwrite(&i,sizeof(int),1,fp);
 	}
 	if(plot->fcoord){
 	    i = 1;
-	    fwrite(&i,sizeof(int32_t),1,fp);
+	    fwrite(&i,sizeof(int),1,fp);
 	    fwrite(plot->fcoord,sizeof(FCoord),plot->npoints,fp);
 	} else {
 	    i = 0;
-	    fwrite(&i,sizeof(int32_t),1,fp);
+	    fwrite(&i,sizeof(int),1,fp);
 	}
 	if(plot->edata){
 	    i = 1;
-	    fwrite(&i,sizeof(int32_t),1,fp);
+	    fwrite(&i,sizeof(int),1,fp);
 	    fwrite(plot->edata,sizeof(ErrorData),plot->npoints,fp);
 	} else {
 	    i = 0;
-	    fwrite(&i,sizeof(int32_t),1,fp);
+	    fwrite(&i,sizeof(int),1,fp);
 	}
 	/*
 	** store the strings at the end
@@ -125,8 +125,8 @@ Label		*label;
 	fprintf(fp,"%s\n",plot->filename);
 	fprintf(fp,"%s\n",plot->title);
     }
-    fwrite(&F->wwidth,sizeof(int32_t),1,fp);
-    fwrite(&F->wheight,sizeof(int32_t),1,fp);
+    fwrite(&F->wwidth,sizeof(int),1,fp);
+    fwrite(&F->wheight,sizeof(int),1,fp);
     fclose(fp);
     return(1);
 }
@@ -139,14 +139,14 @@ FILE 		*fp;
 Plot		*plot, *newplot;
 DataSource	*source, *newsource;
 char		line[1000];
-int32_t		count;
-int32_t		i;
-int32_t		flag;
-int32_t		offset,size;
+int		count;
+int		i;
+int		flag;
+int		offset,size;
 char		*ptr;
 char		*strchr();
 Label		*label,*newlabel;
-int32_t		status;
+int		status;
 
     if(graph == NULL || file == NULL){
 	return(0);
@@ -170,7 +170,7 @@ int32_t		status;
     /*
     ** read in the graph data structure
     */
-    offset = (int32_t)(&(graph->label)) - (int32_t)(graph);
+    offset = (int)(&(graph->label)) - (int)(graph);
     size = sizeof(Graph) - offset;
     fread(((char *)graph)+offset,size,1,fp);
     graph->source = NULL;
@@ -211,7 +211,7 @@ int32_t		status;
     /*
     ** read in the label list
     */
-    fread(&count,sizeof(int32_t),1,fp);
+    fread(&count,sizeof(int),1,fp);
     for(i=0;i<count;i++){
 	newlabel = (Label *)malloc(sizeof(Label));
 	newlabel->next = NULL;
@@ -226,7 +226,7 @@ int32_t		status;
     /*
     ** read in the data source list
     */
-    fread(&count,sizeof(int32_t),1,fp);
+    fread(&count,sizeof(int),1,fp);
     for(i=0;i<count;i++){
 	newsource = (DataSource *)malloc(sizeof(DataSource));
 	if(graph->source == NULL){
@@ -246,7 +246,7 @@ int32_t		status;
     /*
     ** read in the plots
     */
-    fread(&count,sizeof(int32_t),1,fp);
+    fread(&count,sizeof(int),1,fp);
     for(i=0;i<count;i++){
 	newplot = (Plot *)malloc(sizeof(Plot));
 	if(graph->plot == NULL){
@@ -266,22 +266,22 @@ int32_t		status;
 	/*
 	** read the data at the end
 	*/
-	fread(&flag,sizeof(int32_t),1,fp);
+	fread(&flag,sizeof(int),1,fp);
 	if(flag){
 	    plot->data = (FCoord *)malloc(plot->npoints*sizeof(FCoord));
 	    fread(plot->data,sizeof(FCoord),plot->npoints,fp);
 	} 
-	fread(&flag,sizeof(int32_t),1,fp);
+	fread(&flag,sizeof(int),1,fp);
 	if(flag){
 	    plot->coord = (Coord *)malloc(plot->npoints*sizeof(Coord));
 	    fread(plot->coord,sizeof(Coord),plot->npoints,fp);
 	}
-	fread(&flag,sizeof(int32_t),1,fp);
+	fread(&flag,sizeof(int),1,fp);
 	if(flag){
 	    plot->fcoord = (FCoord *)malloc(plot->npoints*sizeof(FCoord));
 	    fread(plot->fcoord,sizeof(FCoord),plot->npoints,fp);
 	}
-	fread(&flag,sizeof(int32_t),1,fp);
+	fread(&flag,sizeof(int),1,fp);
 	if(flag){
 	    plot->edata = (ErrorData *)malloc(plot->npoints*sizeof(ErrorData));
 	    fread(plot->edata,sizeof(ErrorData),plot->npoints,fp);
@@ -303,8 +303,8 @@ int32_t		status;
     /*
     ** restore the window dimension
     */
-    status = fread(&F->width,sizeof(int32_t),1,fp);
-    status = fread(&F->height,sizeof(int32_t),1,fp);
+    status = fread(&F->width,sizeof(int),1,fp);
+    status = fread(&F->height,sizeof(int),1,fp);
     if(status != 1){
 	F->width = -1;
 	F->height = -1;

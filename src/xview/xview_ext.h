@@ -11,7 +11,7 @@
 #include 	"xview_defs.h"
 #include	"xview_struct.h"
 
-extern int32_t	ncontours;
+extern int	ncontours;
 
 extern	char    fname[80],
 		ch[80],
@@ -19,15 +19,15 @@ extern	char    fname[80],
 		timestr[20];
 char	*display;
 extern char	*commandfile;
-extern	int32_t	commandsource;
+extern	int	commandsource;
 Image	*image, *imageptr;
 extern	float	xs,lscale,ys,dscale;
-extern int16_t manual_xsize,manual_ysize;
-extern int16_t report_autoscale;
+extern short manual_xsize,manual_ysize;
+extern short report_autoscale;
 extern	float 	xsize,
 		ysize,
 		zsize;
-extern	int32_t     display_mode,
+extern	int     display_mode,
 		legend_base,
 		xbase_size,
 		ybase_size,
@@ -57,27 +57,27 @@ extern		float count,
 	   *tmpdata,
 	   *curdata,
 	   *data;
-extern	int16_t	cumulative;
+extern	short	cumulative;
 extern	FILE	*fp;
-extern	int32_t		debug;
+extern	int		debug;
 extern	char	**global_envp;
-extern	int32_t		backup;
-extern	int16_t	representation;
-extern  int16_t	title_mode;
+extern	int		backup;
+extern	short	representation;
+extern  short	title_mode;
 extern  char	title[MAXTITLES][100];
-extern	int16_t	ntitles;
+extern	short	ntitles;
 extern	Display	*x_display;
-extern	int16_t	orient;
-extern	int16_t	speed;
-extern	int16_t	posneg;
+extern	short	orient;
+extern	short	speed;
+extern	short	posneg;
 extern char *geometry;
-extern int16_t header;
-extern int32_t background;
-extern int32_t foreground;
-extern int16_t color_mode;
-extern int16_t no_lines;
-extern int32_t signal_step;
-extern int32_t got_signal;
+extern short header;
+extern int background;
+extern int foreground;
+extern short color_mode;
+extern short no_lines;
+extern int signal_step;
+extern int got_signal;
 
 extern GlobalContext	*G;
 extern ViewContext	*V;

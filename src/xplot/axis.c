@@ -54,11 +54,11 @@ Graph *graph;
 
 CalculateAxisScale(wmin,wmax,left,right,exponent,nticks)
 float wmin,wmax;
-int32_t left,right;
-int32_t *exponent;
-int32_t nticks;
+int left,right;
+int *exponent;
+int nticks;
 {
-int32_t scale_factor;
+int scale_factor;
 
     /*
     ** determine the scale factor which will allow
@@ -107,11 +107,11 @@ int32_t scale_factor;
 DrawXAxis(graph)
 Graph *graph;
 {
-int32_t	sy;
-int32_t	tmp;
-int32_t	sx1;
-int32_t	sx2;
-int32_t	axisx;
+int	sy;
+int	tmp;
+int	sx1;
+int	sx2;
+int	axisx;
 Plot	*plot;
 
     /*
@@ -157,11 +157,11 @@ Plot	*plot;
 DrawYAxis(graph)
 Graph *graph;
 {
-int32_t	sx;
-int32_t	sy1;
-int32_t	sy2;
-int32_t	tmp;
-int32_t	axisy;
+int	sx;
+int	sy1;
+int	sy2;
+int	tmp;
+int	axisy;
 Plot	*plot;
 
     /*
