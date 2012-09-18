@@ -24,9 +24,9 @@ COMPILE = $(CC) $@.c $(CFLAGS) -o $@ $(LIBS) $(INCLUDE)
 
 ALL = \
 	atob \
-	y
-	#carve \
-	#csi \
+	y \
+	carve \
+	csi \
  
 
 .c:

@@ -17,7 +17,7 @@ lib:
 util: lib
 	mkdir -p $(BUILD_DIR)/bin;
 	$(MAKE) -C src/util
-	mv src/util/{atob,y} $(BUILD_DIR)/bin/
+	mv src/util/{atob,y,csi,carve} $(BUILD_DIR)/bin/
 
 behav: lib
 	mkdir -p $(BUILD_DIR)/bin;
@@ -28,6 +28,7 @@ popanal: popanal
 	mkdir -p $(BUILD_DIR)/bin;
 	$(MAKE) -C src/popanal
 	mv src/popanal/popanal $(BUILD_DIR)/bin/
+
 # xclust: libs
 # 	$(MAKE) -C X11/xclust/ xclust
 # 	$(MAKE) -C X11/xplot/ xplot
