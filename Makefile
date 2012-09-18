@@ -4,7 +4,7 @@ SHELL=/bin/bash
 BUILD_DIR=build
 
 
-all: lib  extract util popanal behav 
+all: lib  extract util popanal behav xclust xplot xview
 
 lib:
 	mkdir -p $(BUILD_DIR)/lib;
