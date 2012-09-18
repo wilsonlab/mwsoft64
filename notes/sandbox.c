@@ -1,15 +1,17 @@
 
 #include <iostream>
 #include <stdint.h>
-
+#include <time.h>
 
 int main(int argc, char** argv){
 
+
+	std::cout<<	"time_t:\t"	<<sizeof(time_t)<<std::endl;
 	// std::cout<<	"char:\t"	<<sizeof(char)<<std::endl;
 	// std::cout<<	"short:\t"	<<sizeof(short)<<std::endl;
-	std::cout<<	"int:\t"	<<sizeof(int)<<std::endl;
-	std::cout<< "long:\t"	<<sizeof(long)<<std::endl;
-	std::cout<< "long int:\t"<<sizeof(long int)<<std::endl;
+	// std::cout<<	"int:\t"	<<sizeof(int)<<std::endl;
+	// std::cout<< "long:\t"	<<sizeof(long)<<std::endl;
+	// std::cout<< "long int:\t"<<sizeof(long int)<<std::endl;
 	// std::cout<< "float:\t"	<<sizeof(float)<<std::endl;
 	// std::cout<< "double:\t" <<sizeof(double)<<std::endl;
 
