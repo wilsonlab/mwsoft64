@@ -19,27 +19,24 @@ CFLAGS += -Wall
 
 ALL = 	\
 	spikeparms2 \
-	adextract 
-	# crextract \
-	# editheader \
-	# esextract \
-	# findspike \
-	# header \
-	# parmextract \
-	# posextract \
-	# showcmd \
-	# spikeanal \
-	# spikeavg \
-	# textract
+	adextract \
+	crextract \
+	editheader \
+	esextract \
+	findspike \
+	parmextract \
+	posextract \
+	showcmd \
+	spikeanal \
+	spikeavg \
+	textract 
 
 all: $(ALL)
 	mv $(ALL) ../../build/extract/
 .c:
-	echo ".c"
 	$(CC) $(CFLAGS) $< -o $@ $(INCLUDE) $(LIBS)
 
 .c.o:
-	echo ".c.o"
 	$(CC) $(CFLAGS) $< -c $(INCLUDE) $(LIBS)
 
 clean:

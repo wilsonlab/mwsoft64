@@ -20,6 +20,8 @@ DATES:
     now accepts any data file with a 'time' or 'timestamp' field,
     e.g. pxyabw or other parm files Tom Davidson (tjd@mit.edu) 12/04
 
+    9/2012 - Updated code to run on i686 and x86_64 Stuart Layton <slayton@mit.edu>
+
 *******************************************************************
 */
 #include <stdio.h>
@@ -161,11 +163,11 @@ int32_t	targetid;
       }
     }
     if(fseek(result->fpin,result->headersize+centerid*(result->spike_rec_size),SEEK_SET) == -1){
-	fprintf(stderr,"findspike: unable to seek to spikeid '%ld'\n",centerid);
+	fprintf(stderr,"findspike: unable to seek to spikeid '%"PRId32"'\n",centerid);
 	exit(ERROR_FILE);
     }
     if(ReadTS(&centertime,result->fpin,result->ts_type,result->ts_offset,result->ts_convertsecs) != 1){
-	fprintf(stderr,"findspike: unable to read timestamp for spike '%ld'\n",centerid);
+	fprintf(stderr,"findspike: unable to read timestamp for spike '%"PRId32"'\n",centerid);
 	exit(ERROR_GENERIC);
     }
     if(result->convert){
@@ -176,7 +178,7 @@ int32_t	targetid;
     */
     if((targettime >= starttime) && (targettime < centertime)){
 	if(centertime == 0){
-	    fprintf(stderr,"findspike: center timestamp %ld out of search range (%ld - %ld)\n",
+	    fprintf(stderr,"findspike: center timestamp %"PRId32" out of search range (%"PRId32" - %"PRId32")\n",
 	    centertime,starttime,endtime);
 	    exit(ERROR_GENERIC);
 	}
@@ -188,7 +190,7 @@ int32_t	targetid;
     } else 
     if((targettime <= endtime) && (targettime >= centertime)){
 	if(endtime == 0){
-	    fprintf(stderr,"findspike: end timestamp %ld out of search range (%ld - %ld)\n",
+	    fprintf(stderr,"findspike: end timestamp %"PRId32" out of search range (%"PRId32" - %"PRId32")\n",
 	    centertime,starttime,endtime);
 	    exit(ERROR_GENERIC);
 	}
@@ -198,7 +200,7 @@ int32_t	targetid;
 	targetid = SpikeSearch(result,centerid,endid,centertime,
 	endtime,targettime);
     } else {
-	fprintf(stderr,"findspike: spike timestamp %ld out of search range (%ld - %ld)\n",
+	fprintf(stderr,"findspike: spike timestamp %"PRId32" out of search range (%"PRId32" - %"PRId32")\n",
 	targettime,starttime,endtime);
 	exit(ERROR_OUTOFRANGE);
     }
@@ -280,7 +282,7 @@ int32_t	index;
 uint32_t	timestamp;
 int32_t	nspikes;
     if(index < 0){
-	fprintf(stderr,"findspike: ERROR: invalid index '%ld'\n",index);
+	fprintf(stderr,"findspike: ERROR: invalid index '%"PRId32"'\n",index);
 	exit(ERROR_OUTOFRANGE);
     }
     /*
@@ -305,7 +307,7 @@ int32_t	nspikes;
     fseek(result->fpin,0L,SEEK_END); 
     nspikes = (ftell(result->fpin) - result->headersize)/result->spike_rec_size;    
     if (index > nspikes - 1){
-      fprintf(stderr,"findspike: invalid index. unable to seek to id %ld.\n",index);
+      fprintf(stderr,"findspike: invalid index. unable to seek to id %"PRId32".\n",index);
       exit(ERROR_OUTOFRANGE);
     }
 
@@ -313,7 +315,7 @@ int32_t	nspikes;
     fseek(result->fpin,result->headersize + (index * (result->spike_rec_size)),SEEK_SET);
 
     if(ReadTS(&timestamp,result->fpin,result->ts_type,result->ts_offset,result->ts_convertsecs) != 1){    
-	fprintf(stderr,"findspike: read error at %ld\n",index);
+	fprintf(stderr,"findspike: read error at %"PRId32"\n",index);
 	exit(ERROR_FILE);
     }
     if(result->convert){
@@ -328,7 +330,7 @@ int32_t GetIdByIndex(Result *result,int32_t index)
   int32_t iindex;
   
   if (verbose)
-          fprintf(stderr,"findspike: Getting index field for record index %ld (GetIdByIndex)\n",index);
+          fprintf(stderr,"findspike: Getting index field for record index %"PRId32" (GetIdByIndex)\n",index);
 
   fseek(result->fpin,
 	result->headersize + index*(result->spike_rec_size) + result->id_offset,
@@ -339,14 +341,14 @@ int32_t GetIdByIndex(Result *result,int32_t index)
 
   case FLOAT:
     if(fread(&findex,sizeof(float),1,result->fpin) != 1){
-      fprintf(stderr,"findspike: ERROR: reading index (float) %ld (GetIdByIndex)\n",index);      
+      fprintf(stderr,"findspike: ERROR: reading index (float) %"PRId32" (GetIdByIndex)\n",index);      
       exit(ERROR_FILE);
     }
     return((int32_t)findex);
 
   case INT:
     if(fread(&iindex,sizeof(int32_t),1,result->fpin) != 1){
-      fprintf(stderr,"findspike: ERROR: reading index (int32_t) at index %ld (GetIdByIndex)\n",index);
+      fprintf(stderr,"findspike: ERROR: reading index (int32_t) at index %"PRId32" (GetIdByIndex)\n",index);
       exit(ERROR_FILE);
     }
     return((int32_t)iindex);
@@ -645,7 +647,7 @@ char 	**argv;
 	    index = FindSpikeByTimestamp(&result,timestamp);
 	    if (id_field && !recid)
 	      index = GetIdByIndex(&result,index);
-	    fprintf(result.fpout,"%ld\n",index);   
+	    fprintf(result.fpout,"%"PRId32"\n",index);   
 	}
     } else
     if(result.mode == GETIDX){
@@ -656,25 +658,25 @@ char 	**argv;
 	index = FindSpikeByTimestamp(&result,timestamp);
 	if (id_field && !recid)
 	  index = GetIdByIndex(&result,index);
-	fprintf(result.fpout,"%ld\n",index);
+	fprintf(result.fpout,"%"PRId32"\n",index);
 	
     } else
     if(result.mode == GETTIMESTAMP){
 	if(verbose){
-	    fprintf(stderr,"findspike: locating spike at index %ld\n",index);
+	    fprintf(stderr,"findspike: locating spike at index %"PRId32"\n",index);
 	}
 	timestamp  = FindSpikeByIndex(&result,index);
 	if(result.format){
 	    fprintf(result.fpout,"%s\n",TimestampToString(timestamp));
 	} else {
-	    fprintf(result.fpout,"%lu\n",timestamp);
+	    fprintf(result.fpout,"%"PRIu32"\n",timestamp);
 	}
     } else
     if(result.mode == GETSPIKECOUNT){
 	fseek(result.fpin,0L,SEEK_END);
 	fsize = ftell(result.fpin);
 	nrecords = (fsize - result.headersize)/result.spike_rec_size;
-	fprintf(result.fpout,"%ld\n",nrecords);
+	fprintf(result.fpout,"%"PRId32"\n",nrecords);
     }
     exit(SUCCESS);
 }

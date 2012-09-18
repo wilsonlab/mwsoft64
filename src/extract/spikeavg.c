@@ -21,6 +21,7 @@ AUTHOR:
 DATES:
     original program 4/91
     program update 6/96
+    9/2012 - Updated code to run on i686 and x86_64 Stuart Layton <slayton@mit.edu>
 
 MODIFICATIONS
     1.27 changed headers to include Fields information for spiketimes
@@ -371,7 +372,7 @@ int32_t		burstpeak[MAXBURSTLEN];
 		    }
 		}
 	    } else {
-		fprintf(fpout,"%d\t%lu\t%d\t%d\t%d\t%d\t%d",
+		fprintf(fpout,"%d\t%"PRIu32"\t%d\t%d\t%d\t%d\t%d",
 		sid,stimestamp,nburst_events,duration,speak,epeak,speak-epeak);
 		/*
 		** write out all of the burst times and peaks
@@ -423,7 +424,7 @@ int32_t		burstpeak[MAXBURSTLEN];
 			fprintf(stderr,"ERROR: unable to write record %d\n",loc);
 		    }
 		} else {
-		    fprintf(fpout,"%d\t%lu\t%d\t%d\t%d\t%d\t%d\n",
+		    fprintf(fpout,"%d\t%"PRIu32"\t%d\t%d\t%d\t%d\t%d\n",
 		    ploc,ptimestamp,0,0,ppeak,ppeak,0);
 		}
 		single_spike = 0;
@@ -549,7 +550,7 @@ int32_t	val;
 		    fprintf(stderr,"ERROR: unable to write record %d\n",loc);
 		}
 	    } else {
-		fprintf(fpout,"%d\t%lu\t%d\n",ploc,ptimestamp,ppeak);
+		fprintf(fpout,"%d\t%"PRIu32"\t%d\n",ploc,ptimestamp,ppeak);
 	    }
 	    single_spike = 0;
 	}
@@ -1797,7 +1798,7 @@ int32_t	loc;
 		fprintf(stderr,"ERROR: unable to write record %d\n",loc);
 	    }
 	} else {
-	    fprintf(fpout,"%lu 1\n",timestamp);
+	    fprintf(fpout,"%"PRIu32" 1\n",timestamp);
 	}
     }
 }
@@ -1851,7 +1852,7 @@ int32_t	loc;
 		fprintf(stderr,"ERROR: unable to write record %d\n",loc);
 	    }
 	} else {
-	    fprintf(fpout,"%lu 1\n",timestamp);
+	    fprintf(fpout,"%"PRIu32" 1\n",timestamp);
 	}
     }
 }
@@ -1917,7 +1918,7 @@ int32_t	loc;
 		fprintf(stderr,"ERROR: unable to write record %d\n",loc);
 	    }
 	} else {
-	    fprintf(fpout,"%lu\t1\n",timestamp);
+	    fprintf(fpout,"%"PRIu32"\t1\n",timestamp);
 	}
     }
 }

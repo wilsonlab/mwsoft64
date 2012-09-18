@@ -15,6 +15,7 @@ AUTHOR:
 
 DATES:
     original xx/xx
+    9/2012 - Updated code to run on i686 and x86_64 Stuart Layton <slayton@mit.edu>
 
 **************************************************
 */
@@ -254,8 +255,7 @@ int32_t	i;
     */
     if(fread(&posrec->nitems,sizeof(unsigned char),1,result->fpin) != 1){
 	if(feof(result->fpin)) return(0);
-	fprintf(stderr,"\nerror reading nitems at offset %ld\n",
-	ftell(result->fpin));
+	fprintf(stderr,"\nerror reading nitems at offset %ld\n", ftell(result->fpin));
 	return(0);
     }
     /*
@@ -293,7 +293,7 @@ int32_t	i;
 	posrec->timestamp += result->toffset;
     }
     if(dump && !singlecolumn)
-	fprintf(result->fpout,"%lu:\t%2d\t%2d\t",posrec->timestamp,posrec->frame,posrec->nitems);
+	fprintf(result->fpout,"%"PRIu32":\t%2d\t%2d\t",posrec->timestamp,posrec->frame,posrec->nitems);
     /*
     ** read in all of the coords
     if(verbose){
@@ -1022,7 +1022,7 @@ uint32_t mininterval;
     mininterval = 1.5*(1e4*rate/60);
 if(result.nbounds > 0){
    for(i=0;i<result.nbounds;i++){
-      fprintf(stderr,"%lu %lu\n",
+      fprintf(stderr,"%"PRIu32" %"PRIu32"\n",
       result.bound[i].t1,
       result.bound[i].t2);
    }
@@ -1094,7 +1094,7 @@ if(result.nbounds > 0){
 	    ** diode that follows it in the next frame.
 	    */
 	    if(got_rear && verbose){
-		fprintf(stderr,"calibrate front/back diode order at timestamp %ld\n",front_time);
+		fprintf(stderr,"calibrate front/back diode order at timestamp %"PRIi32"\n",front_time);
 	    }
 	    got_rear = 0;
 	} 
@@ -1139,7 +1139,7 @@ if(result.nbounds > 0){
 #ifdef OLD
 		    if((nitems=posrec[precnum].nitems + posrec[recnum].nitems) > 0){
 			diff = PixelDiff(posrec + precnum,posrec + recnum);
-			fprintf(result.fpstatout,"%lu %d %d %-7.3g %-7.3g\n",
+			fprintf(result.fpstatout,"%"PRIu32" %d %d %-7.3g %-7.3g\n",
 			front_time,
 			diff,
 			nitems,
@@ -1167,7 +1167,7 @@ if(result.nbounds > 0){
 			nitems = EvaluateQueuedDifference(&result,posrec,recnum,
 			&dist,&diff);
 			if(nitems > 0){
-			    fprintf(result.fpstatout,"%lu %d %d %-7.3g %-7.3g\n",
+			    fprintf(result.fpstatout,"%"PRIu32" %d %d %-7.3g %-7.3g\n",
 			    rear_time,
 			    diff,
 			    nitems,
@@ -1196,7 +1196,7 @@ if(result.nbounds > 0){
 #ifdef OLD
 		    if((nitems=posrec[precnum].nitems + posrec[recnum].nitems) > 0){
 			diff = PixelDiff(posrec + precnum,posrec + recnum);
-			fprintf(result.fpstatout,"%lu %d %d %-7.3g %-7.3g\n",
+			fprintf(result.fpstatout,"%"PRIu32" %d %d %-7.3g %-7.3g\n",
 			front_time,
 			diff,
 			nitems,
@@ -1224,7 +1224,7 @@ if(result.nbounds > 0){
 			nitems = EvaluateQueuedDifference(&result,posrec,recnum,
 			&dist,&diff);
 			if(nitems > 0){
-			    fprintf(result.fpstatout,"%lu %d %d %-7.3g %-7.3g\n",
+			    fprintf(result.fpstatout,"%"PRIu32" %d %d %-7.3g %-7.3g\n",
 			    front_time,
 			    diff,
 			    nitems,
@@ -1248,14 +1248,14 @@ if(result.nbounds > 0){
 	    */
 	    if((rear_time - front_time > mininterval) || 
 	    (rear_time - front_time < 0)){
-		fprintf(stderr,"skip diode gap at timestamp %ld\n",front_time);
+		fprintf(stderr,"skip diode gap at timestamp %"PRIi32"\n",front_time);
 	    } else {
 		/*
 		** write out the position
 		*/
 		if(result.ascii){
 		      fprintf(result.fpout,
-		      "%lu %3hd,%3hd %3hd,%3hd\n",
+		      "%"PRIu32" %3hd,%3hd %3hd,%3hd\n",
 		      front_time,
 		      front_diode.xcoord,
 		      front_diode.ycoord,

@@ -15,6 +15,8 @@ AUTHOR:
 
 DATES:
     original program 9/92
+    9/2012 - Updated code to run on i686 and x86_64 Stuart Layton <slayton@mit.edu>
+
 *******************************************************************
 */
 #include <stdio.h>
@@ -217,11 +219,11 @@ char	**argv;
     }
     fprintf(result->fpout,"%% CR channel:\t%d\n",
 	result->channel);
-    fprintf(result->fpout,"%% Start time:\t%s (%ld)\n",
+    fprintf(result->fpout,"%% Start time:\t%s (%"PRIu32")\n",
 	TimestampToString(result->starttime),result->starttime);
-    fprintf(result->fpout,"%% End time:\t%s (%ld)\n",
+    fprintf(result->fpout,"%% End time:\t%s (%"PRIu32")\n",
 	TimestampToString(result->endtime),result->endtime);
-    fprintf(result->fpout,"%% rate:\t%ld\n",result->freq);
+    fprintf(result->fpout,"%% rate:\t%"PRIu32"\n",result->freq);
     if(result->fileformat == BINARY){
 	fprintf(result->fpout,"%% Fields:\t");
 	if(!result->nox){
@@ -379,7 +381,7 @@ char	*parmstr;
 	fprintf(stderr,"Output file:\t%s\n",result.fname_out);
 	fprintf(stderr,"Nchannels:\t%d\n",result.nchannels);
 	fprintf(stderr,"Bufsize:\t%d\n",result.bufsize);
-	fprintf(stderr,"Sample Rate:\t%ld\n",result.freq);
+	fprintf(stderr,"Sample Rate:\t%"PRIu32"\n",result.freq);
 	fprintf(stderr,"\n\n");
     }
     /*

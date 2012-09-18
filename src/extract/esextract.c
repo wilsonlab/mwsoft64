@@ -15,6 +15,7 @@ AUTHOR:
     wilson@ai.mit.edu
 
 DATES:
+9/2012 - Updated code to run on i686 and x86_64 Stuart Layton <slayton@mit.edu>
 *******************************************************************
 */
 #include <stdio.h>
@@ -291,7 +292,7 @@ EString	*eslist;
 		fwrite(&timestamp,sizeof(uint32_t),1,result->fpout);
 	    } else {
 		if(result->timestamp_out){
-		    fprintf(result->fpout,"%s\t%lu\n",
+		    fprintf(result->fpout,"%s\t%"PRIu32"\n",
 		    es,timestamp);
 		} else {
 		    fprintf(result->fpout,"%s\t%s\n",
@@ -383,9 +384,9 @@ EString	*eslist;
 				result->pair[i].esmatch1,
 				result->pair[i].esmatch2);
 			    if(result->timestamp_out){
-				fprintf(result->fpout,"\t%lu",
+				fprintf(result->fpout,"\t%"PRIu32"",
 				    result->pair[i].timestamp[0]);
-				fprintf(result->fpout,"\t%lu\n",
+				fprintf(result->fpout,"\t%"PRIu32"\n",
 				    result->pair[i].timestamp[1]);
 			    } else {
 				fprintf(result->fpout,"\t%s",
@@ -418,7 +419,7 @@ EString	*eslist;
 			    fwrite(&timestamp,sizeof(uint32_t),1,result->fpout);
 			} else {
 			    if(result->timestamp_out){
-				fprintf(result->fpout,"%s\t%lu\n",
+				fprintf(result->fpout,"%s\t%"PRIu32"\n",
 				es,timestamp);
 			    } else {
 				fprintf(result->fpout,"%s\t%s\n",

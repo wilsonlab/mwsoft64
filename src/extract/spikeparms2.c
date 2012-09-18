@@ -25,7 +25,7 @@
  DATES:
  original program 4/91
  program update 9/95
- 9/2012 - Made compatible with 32 and 64bit cpu architectures Stuart Layton <slayton@mit.edu>
+ 9/2012 - Updated code to run on i686 and x86_64 Stuart Layton <slayton@mit.edu>
 
  *******************************************************************
  */

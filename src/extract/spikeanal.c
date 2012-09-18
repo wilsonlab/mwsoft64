@@ -18,6 +18,7 @@ AUTHOR:
 DATES:
     original 5/91
     program update 9/92
+    9/2012 - Updated code to run on i686 and x86_64 Stuart Layton <slayton@mit.edu>
 *******************************************************************
 */
 
@@ -192,10 +193,10 @@ int32_t	convert;
 	count++;
     }
     if(verbose){
-	fprintf(stderr,"Loaded %d spikes from %s (%ld)",
+	fprintf(stderr,"Loaded %d spikes from %s (%"PRId32")",
 	*nspikes,
 	TimestampToString(sarray[0]),sarray[0]);
-	fprintf(stderr," to %s (%ld)\n",
+	fprintf(stderr," to %s (%"PRId32")\n",
 	TimestampToString(sarray[count-1]),sarray[count-1]);
     }
     return(sarray);
@@ -251,7 +252,7 @@ int32_t	i;
     for(i=0;i<result->nspikes;i++){
 	if(verbose){
 	    if((result->nspikes > 100) && (i%(result->nspikes/100) == 0)){
-		fprintf(stderr," %3ld%%\b\b\b\b\b",
+		fprintf(stderr," %3"PRId32"%%\b\b\b\b\b",
 		(100*i)/(result->nspikes));
 	    }
 	}
@@ -266,7 +267,7 @@ int32_t	i;
 	if(result->binaryout){
 	    fwrite(result->spikearray+i,sizeof(uint32_t),1, result->fpout);
 	} else {
-	    fprintf(result->fpout,"%lu\n",result->spikearray[i]);
+	    fprintf(result->fpout,"%"PRIu32"\n",result->spikearray[i]);
 	}
     }
 }
@@ -291,7 +292,7 @@ int32_t	maxinterval;
     if(result->nbins <= 0){
 	result->nbins = 0;
 	fprintf(stderr,
-	"Warning: nothing to bin. nbins = %ld\n",
+	"Warning: nothing to bin. nbins = %"PRId32"\n",
 	result->nbins);
 	return;
     }
@@ -302,7 +303,7 @@ int32_t	maxinterval;
     for(i=0;i<result->nspikes;i++){
 	if(verbose){
 	    if((result->nspikes > 100) && (i%(result->nspikes/100) == 0)){
-		fprintf(stderr," %3ld%%\b\b\b\b\b",
+		fprintf(stderr," %3"PRIu32"%%\b\b\b\b\b",
 		(100*i)/(result->nspikes));
 	    }
 	}
@@ -320,7 +321,7 @@ int32_t	maxinterval;
 	*/
 	bin = (result->spikearray[i] - result->spikearray[0])/result->binsize;
 	if(bin < 0){
-	    fprintf(stderr,"ERROR: invalid spike at timestamp %lu\n",
+	    fprintf(stderr,"ERROR: invalid spike at timestamp %"PRIu32"\n",
 		result->spikearray[i]);
 	    continue;
 	}
@@ -349,7 +350,7 @@ double	interval;
     for(i=0;i<result->nspikes;i++){
 	if(verbose){
 	    if((result->nspikes > 100) && (i%(result->nspikes/100) == 0)){
-		fprintf(stderr," %3ld%%\b\b\b\b\b",
+		fprintf(stderr," %3"PRIu32"%%\b\b\b\b\b",
 		(100*i)/(result->nspikes));
 	    }
 	}
@@ -426,7 +427,7 @@ uint32_t 	toffset;
     ** clear the correlation array
     */
     if((result->corrarray = (float *)calloc(result->nbins,sizeof(float))) == NULL){
-	fprintf(stderr,"ERROR: unable to allocate %ld bins\n",result->nbins);
+	fprintf(stderr,"ERROR: unable to allocate %"PRId32" bins\n",result->nbins);
 	exit(-1);
     }
 
@@ -451,7 +452,7 @@ uint32_t 	toffset;
 	ca = result->corrarray;
 	if(verbose){
 	    if((result->nspikes > 100) && (i%(result->nspikes/100) == 0)){
-		fprintf(stderr," %3ld%%\b\b\b\b\b",
+		fprintf(stderr," %3"PRIu32"%%\b\b\b\b\b",
 		(100*i)/(result->nspikes));
 	    }
 	}
@@ -617,13 +618,13 @@ int32_t	i;
  if(result->nbins > maxbins){
    result->nbins = maxbins;
    fprintf(stderr,
-	   "Warning: exceeded maximum number of bins (%ld). Using %ld instead\n",
+	   "Warning: exceeded maximum number of bins (%"PRId32"). Using %"PRId32" instead\n",
 	   maxbins,result->nbins);
  }
  if(result->nbins <= 0){
    result->nbins = 0;
    fprintf(stderr,
-	   "Warning: nothing to bin. nbins = %ld\n",
+	   "Warning: nothing to bin. nbins = %"PRId32"\n",
 	   result->nbins);
 	return;
     }
@@ -639,7 +640,7 @@ int32_t	i;
     for(i=0;i<result->nspikes;i++){
 	if(verbose){
 	    if((result->nspikes > 100) && (i%(result->nspikes/100) == 0)){
-		fprintf(stderr," %3ld%%\b\b\b\b\b",
+		fprintf(stderr," %3"PRIu32"%%\b\b\b\b\b",
 		(100*i)/(result->nspikes));
 	    }
 	}
@@ -830,11 +831,11 @@ int32_t	first = 1;
 	}
 	if(result->logtime){
 	    fprintf(result->fpout,
-	    "%g %ld\n", 
+	    "%g %"PRId32"\n", 
 	    pow(10.0,0.1*(i-result->binmin)*result->binsize), result->isiarray[i]);
 	} else {
 	    fprintf(result->fpout,
-	    "%g %ld\n", 
+	    "%g %"PRId32"\n", 
 	    0.1*(i-result->binmin)*result->binsize, result->isiarray[i]);
 	}
     }
@@ -1079,7 +1080,7 @@ int32_t	count;
 	*/
 	if(spikearray[i] == spikearray[i+1]){
 	    fprintf(stderr,
-	    "\tmultiple timestamp %lu for spike %d\n",spikearray[i],i);
+	    "\tmultiple timestamp %"PRIu32" for spike %d\n",spikearray[i],i);
 	    count++;
 	    /*
 	    ** delete the offending spike
@@ -1201,9 +1202,9 @@ int32_t	i;
     if(result->nranges > 0){
 	fprintf(result->fpout,"%% Input data timestamp range restrictions:\n");
 	for(i=0;i<result->nranges;i++){
-	    fprintf(result->fpout,"%% \t%s (%lu) to",
+	    fprintf(result->fpout,"%% \t%s (%"PRIu32") to",
 	    TimestampToString(result->range[i].stime),result->range[i].stime);
-	    fprintf(result->fpout," %s (%lu)\n",
+	    fprintf(result->fpout," %s (%"PRIu32")\n",
 	    TimestampToString(result->range[i].etime),result->range[i].etime);
 	}
     }
@@ -1252,7 +1253,7 @@ int32_t	cdat;
     ** clear the correlation array
     */
     if((result->corrarray = (float *)calloc(result->nbins,sizeof(float))) == NULL){
-	fprintf(stderr,"ERROR: unable to allocate %ld bins\n",result->nbins);
+	fprintf(stderr,"ERROR: unable to allocate %"PRId32" bins\n",result->nbins);
 	exit(-1);
     }
     ncorr = (int32_t *)calloc(result->nbins,sizeof(int32_t));
@@ -1302,8 +1303,8 @@ int32_t	cdat;
 	    }
 	}
 	if(verbose){
-	    /*fprintf(stderr,"%10lu %6d %6d\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b",startstamp,nsamples,freq);*/
-	    fprintf(stderr,"%10lu %6d %6ld\n",startstamp,nsamples,freq);
+	    /*fprintf(stderr,"%10"PRIu32" %6d %6d\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b",startstamp,nsamples,freq);*/
+	    fprintf(stderr,"%10"PRIu32" %6d %10"PRId32"\n",startstamp,nsamples,freq);
 	}
 	dt = 1e4/freq;
 	/*
@@ -1739,7 +1740,7 @@ uint32_t windowmax;
     ** analyses complete
     */
     if(verbose){
-	fprintf(stderr,"Done. Binned %ld x %ld spikes",
+	fprintf(stderr,"Done. Binned %"PRId32" x %"PRId32" spikes",
 	result.nspikes,result.nspikes2);
 	if(result.outofrange > 0){
 	    fprintf(stderr," : %d out of range\n",result.outofrange);

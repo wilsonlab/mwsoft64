@@ -16,6 +16,7 @@ AUTHOR:
 
 DATES:
     original xx/xx
+    9/2012 - Updated code to run on i686 and x86_64 Stuart Layton <slayton@mit.edu>
 
 **************************************************
 */
