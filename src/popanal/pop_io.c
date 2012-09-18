@@ -374,7 +374,7 @@ FILE	*fp;
 	    ** go through each time bin and output the data vector
 	    */
 	    for(i=0;i<result->ntimebins;i++){
-		fprintf(fp,"%lu",(uint32_t)(i*result->binsize +result->tstart));
+		fprintf(fp,"%"PRIu32"",(uint32_t)(i*result->binsize +result->tstart));
 		for(j=0;j<result->nclusters;j++){
 		    fprintf(fp,"\t%6.2g",result->datavector[i][j]);
 		}

@@ -1,7 +1,7 @@
 ### MWL Makefile includes
 
 # needed by include files
-TOPDIR = ../../../
+TOPDIR = ../../
 
 # include commonly used definitions (CC,INCLUDE, LIBS etc...) and
 # cflags (Date, RPM name ...)
