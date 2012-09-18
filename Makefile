@@ -29,8 +29,8 @@ popanal: popanal
 	$(MAKE) -C src/popanal
 	mv src/popanal/popanal $(BUILD_DIR)/bin/
 
-# xclust: libs
-# 	$(MAKE) -C X11/xclust/ xclust
+xclust: libs
+ 	$(MAKE) -C X11/xclust/ xclust
 # 	$(MAKE) -C X11/xplot/ xplot
 # 	$(MAKE) -C X11/xview/ xview
 # 	$(MAKE) -C src csi
