@@ -17,6 +17,7 @@ Other conversions:
 fprintf issues:
 	- fprintf %d cuts off input at 16 bits buts we are using a 32bit type, which causes problems on the 64bit systems,
 		so when appropriate the %d is replaced with %ld, a preprocessor flag is used to determine the architecture and generate the appopriate format string for fprintf
+	- uint32_t doesn't work with %ld so use macros from <inttypes.h>
 
 Consulted websites:
 	* Here is a good (lengthy) write up that addresses a lot of the issues realted to porting 32 to 64 bit
