@@ -1,0 +1,41 @@
+%%BEGINHEADER
+% Program: 	xclust3
+% Program Version: 	3.3
+% Argc: 	1
+% Date: 	Tue Sep 18 16:06:19 2012
+% Directory: 	/home/slayton/src/mwsoft64/tests/spikeavg
+% Hostname: 	stockton
+% Architecture: 	i686
+% User: 	slayton ()
+% File type:	Ascii
+% Data files:
+%	orig.pxyabw : 41443 points
+%
+% Cluster Bounds definition file format:
+% 	clusterid
+% 	projection numbers
+% 	projection names
+% 	number of bounds coordinates
+% 	wx1 wy1
+% 	wx2 wy2
+% 	... ...
+% 	wxn wyn
+%
+%%ENDHEADER
+
+1
+2	4
+t_py
+t_pb
+11
+715.803	488.17
+651.204	411.213
+626.359	264.995
+637.953	153.408
+735.679	122.625
+869.846	180.343
+1164.68	390.05
+1214.37	522.801
+1182.9	595.91
+1063.64	618.997
+873.159	605.529
