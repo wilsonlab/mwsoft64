@@ -2,7 +2,7 @@
 
 SEDARG='/% Program:/,/Ascii/d';
 
-for F in *.pxyabw
+for F in *.cl
 do
 
 	OUT=$F'.nh';
