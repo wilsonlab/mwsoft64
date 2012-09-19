@@ -2727,7 +2727,7 @@ char	line[100];
         (GetFileArchitecture(header) == ARCH_UNKNOWN)) {
         convert = 0;
     } else {
-        convert = 1;
+        convert = 0;
         fprintf(stderr,"Converting data from %s to %s architectures.\n",
             GetFileArchitectureStr(header),
             GetLocalArchitectureStr());
