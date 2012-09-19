@@ -2720,8 +2720,6 @@ char	line[100];
     if(verbose){
 	DisplayHeader(stderr,header,stheadersize);
     }
-    
-/*
     /*
     ** compare architectures
     */
@@ -2729,15 +2727,11 @@ char	line[100];
         (GetFileArchitecture(header) == ARCH_UNKNOWN)) {
         convert = 0;
     } else {
-        convert = 0;
+        convert = 1;
         fprintf(stderr,"Converting data from %s to %s architectures.\n",
             GetFileArchitectureStr(header),
             GetLocalArchitectureStr());
-        fprintf(stderr,"Conversion has been DISABLED!\n");
-
     }
-
-
 
     /*
     ** try to read some parameters from the header
