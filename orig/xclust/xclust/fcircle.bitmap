@@ -1,4 +1,0 @@
-#define fcircle_width 5
-#define fcircle_height 5
-static char fcircle_bits[] = {
-   0xee, 0xff, 0xff, 0xff, 0xee};
