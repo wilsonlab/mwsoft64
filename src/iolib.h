@@ -23,8 +23,8 @@ extern int32_t	GetFieldInfoByName();
 extern int32_t	VerifyIdentical();
 
 /* Architecture-specific */
-extern int32_t	GetFileArchitecture();
-extern int32_t	GetLocalArchitecture();
+extern int	GetFileArchitecture();
+extern int	GetLocalArchitecture();
 extern char	*GetFileArchitectureStr();
 extern char	*GetLocalArchitectureStr();
 extern void	ConvertData();

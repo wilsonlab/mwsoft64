@@ -129,6 +129,9 @@ int32_t EvalArchitectureStr(char *name)
     if(strcmp(name,"i686") == 0){
 	return(ARCH_I386);
     }
+    if(strcmp(name,"x86_64") == 0){
+	return(ARCH_I386);
+    }
     if(strcmp(name,"sun3") == 0){
 	return(ARCH_SPARC);
     }
@@ -180,7 +183,7 @@ char	*type;
     return(type);
 }
 
-int32_t GetFileArchitecture(header)
+int GetFileArchitecture(header)
 char	**header;
 {
     if(header == NULL) return(ARCH_UNKNOWN);
@@ -198,7 +201,7 @@ static char	newstr[80];
     return(newstr);
 }
 
-int32_t GetLocalArchitecture(void)
+int GetLocalArchitecture(void)
 {
     return(EvalArchitectureStr(GetLocalArchitectureStr()));
 }
