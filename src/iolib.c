@@ -14,6 +14,8 @@ AUTHOR:
 DATES:
     original 9/91
     program update 6/96
+    9/2012 - Updated code to run on i686 and x86_64 Stuart Layton <slayton@mit.edu>
+
 *******************************************************************
 */
 
@@ -34,7 +36,7 @@ DATES:
 #include <iolib.h>
 #include <header.h>
 
-#define VERSION "2.5"
+#define VERSION "2.6"
 #define REVISION "3.0"
 
 /*
