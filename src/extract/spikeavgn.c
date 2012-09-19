@@ -2722,38 +2722,20 @@ char	line[100];
     }
     
 /*
+    /*
     ** compare architectures
     */
     if((GetLocalArchitecture() == GetFileArchitecture(header)) ||
         (GetFileArchitecture(header) == ARCH_UNKNOWN)) {
         convert = 0;
     } else {
-    	if (( GetLocalArchitecture() == 'i686' && GetFileArchitecture(header) != 'x86_64') || ( GetLocalArchitecture() == 'x86_64' && GetFileArchitecture(header) != 'i686'))
-    	{
-    		convert = 0;
-    		fprintf(stderr,"Different architectures %s and %s, but conversion not needed.\n",
-        	    GetFileArchitectureStr(header),
-            	GetLocalArchitectureStr());
+        convert = 0;
+        fprintf(stderr,"Converting data from %s to %s architectures.\n",
+            GetFileArchitectureStr(header),
+            GetLocalArchitectureStr());
+        fprintf(stderr,"Conversion has been DISABLED!\n");
 
-    	} else{
-	        convert = 1;
-    	    fprintf(stderr,"Converting data from %s to %s architectures.\n",
-        	    GetFileArchitectureStr(header),
-            	GetLocalArchitectureStr());
-        }
     }
-    /*
-    ** compare architectures
-    */
-    // if((GetLocalArchitecture() == GetFileArchitecture(header)) ||
-    //     (GetFileArchitecture(header) == ARCH_UNKNOWN)) {
-    //     convert = 0;
-    // } else {
-    //     convert = 1;
-    //     fprintf(stderr,"Converting data from %s to %s architectures.\n",
-    //         GetFileArchitectureStr(header),
-    //         GetLocalArchitectureStr());
-    // }
 
 
 
