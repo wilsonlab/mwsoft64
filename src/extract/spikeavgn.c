@@ -121,7 +121,7 @@ typedef struct index_type {
 
 typedef struct timeindex_type {
     int			index;
-    unsigned long	timestamp;
+    uint32_t	timestamp;
 } TimeIndex;
 
 /*
@@ -141,8 +141,8 @@ int	allspikes;
 int	verbose;
 int	relative_cov;
 long	stheadersize;
-unsigned long	tstart;
-unsigned long	tend;
+uint32_t	tstart;
+uint32_t	tend;
 float	samplerate;
 int	spkvoffset;
 int     spikelen;
@@ -245,9 +245,9 @@ int	i,j;
 short	tmp[TT_REC_SIZE];
 int	maxpeak = 0;
 int	loc;
-unsigned long timestamp;
-unsigned long ptimestamp = 0;
-unsigned long stimestamp;
+uint32_t timestamp;
+uint32_t ptimestamp = 0;
+uint32_t stimestamp;
 int	nburst_events = 0;
 short	in_burst = 0;
 short	end_burst = 0;
@@ -260,7 +260,7 @@ int	epeak = 0;
 int	ppeak = 0;
 int	ploc = 0;
 int	val;
-unsigned long	bursttime[MAXBURSTLEN];
+uint32_t	bursttime[MAXBURSTLEN];
 int		burstpeak[MAXBURSTLEN];
 
     for(i=0;i<idx->n;i++){
@@ -277,12 +277,12 @@ int		burstpeak[MAXBURSTLEN];
 	/*
 	** read the timestamp
 	*/
-	if(fread(&timestamp,sizeof(unsigned long),1,fp) != 1){
+	if(fread(&timestamp,sizeof(uint32_t),1,fp) != 1){
 	    fprintf(stderr,"ERROR: illegal read from record %d\n",loc);
 	    return;
 	}
 	if(convert){
-	    ConvertData(&timestamp,sizeof(unsigned long));
+	    ConvertData(&timestamp,sizeof(uint32_t));
 	}
 	if(result->toffset != 0){
 	    timestamp += result->toffset;
@@ -362,7 +362,7 @@ int		burstpeak[MAXBURSTLEN];
 			fprintf(stderr,"ERROR: unable to write record %d\n",loc);
 		    }
 		}
-		if(fwrite(&stimestamp,sizeof(unsigned long),1,fpout) != 1){
+		if(fwrite(&stimestamp,sizeof(uint32_t),1,fpout) != 1){
 		    fprintf(stderr,"ERROR: unable to write record %d\n",loc);
 		}
 		if(!showtimes){
@@ -374,7 +374,7 @@ int		burstpeak[MAXBURSTLEN];
 		    }
 		}
 	    } else {
-		fprintf(fpout,"%d\t%lu\t%d\t%d\t%d\t%d\t%d",
+		fprintf(fpout,"%d\t%"PRIu32"\t%d\t%d\t%d\t%d\t%d",
 		sid,stimestamp,nburst_events,duration,speak,epeak,speak-epeak);
 		/*
 		** write out all of the burst times and peaks
@@ -422,11 +422,11 @@ int		burstpeak[MAXBURSTLEN];
 			    fprintf(stderr,"ERROR: unable to write record %d\n",loc);
 			}
 		    }
-		    if(fwrite(&ptimestamp,sizeof(unsigned long),1,fpout) != 1){
+		    if(fwrite(&ptimestamp,sizeof(uint32_t),1,fpout) != 1){
 			fprintf(stderr,"ERROR: unable to write record %d\n",loc);
 		    }
 		} else {
-		    fprintf(fpout,"%d\t%lu\t%d\t%d\t%d\t%d\t%d\n",
+		    fprintf(fpout,"%d\t%"PRIu32"\t%d\t%d\t%d\t%d\t%d\n",
 		    ploc,ptimestamp,0,0,ppeak,ppeak,0);
 		}
 		single_spike = 0;
@@ -452,8 +452,8 @@ int	showtimes;
 int	i,j;
 short	tmp[TT_REC_SIZE];
 int	loc;
-unsigned long timestamp;
-unsigned long ptimestamp = 0;
+uint32_t timestamp;
+uint32_t ptimestamp = 0;
 short	in_burst = 0;
 int	maxpeak = 0;
 int	ppeak = 0;
@@ -475,12 +475,12 @@ int	val;
 	/*
 	** read the timestamp
 	*/
-	if(fread(&timestamp,sizeof(unsigned long),1,fp) != 1){
+	if(fread(&timestamp,sizeof(uint32_t),1,fp) != 1){
 	    fprintf(stderr,"ERROR: illegal read from record %d\n",loc);
 	    return;
 	}
 	if(convert){
-	    ConvertData(&timestamp,sizeof(unsigned long));
+	    ConvertData(&timestamp,sizeof(uint32_t));
 	}
 	if(result->toffset != 0){
 	    timestamp += result->toffset;
@@ -548,11 +548,11 @@ int	val;
 			fprintf(stderr,"ERROR: unable to write record %d\n",loc);
 		    }
 		}
-		if(fwrite(&ptimestamp,sizeof(unsigned long),1,fpout) != 1){
+		if(fwrite(&ptimestamp,sizeof(uint32_t),1,fpout) != 1){
 		    fprintf(stderr,"ERROR: unable to write record %d\n",loc);
 		}
 	    } else {
-		fprintf(fpout,"%d\t%lu\t%d\n",ploc,ptimestamp,ppeak);
+		fprintf(fpout,"%d\t%"PRIu32"\t%d\n",ploc,ptimestamp,ppeak);
 	    }
 	    single_spike = 0;
 	}
@@ -573,16 +573,16 @@ int	channel;
 {
 int	i,j;
 int	cindex;
-unsigned long timestamp;
-unsigned long otimestamp;
+uint32_t timestamp;
+uint32_t otimestamp;
 short	tmp[TT_REC_SIZE];
 FILE	*audio;
 unsigned char	cval;
 TimeIndex	*tindex;
-unsigned long gatetime;
-unsigned long tottime;
-unsigned long delay;
-unsigned long tdelay;
+uint32_t gatetime;
+uint32_t tottime;
+uint32_t delay;
+uint32_t tdelay;
 unsigned	tsleep;
 double		dval;
 int		n;
@@ -612,12 +612,12 @@ int		spikereclen;
 	    }
 	    fseek(fp,(start + loc)*(sizeof(short)*TT_REC_SIZE
 	    +TIMESTAMP_SIZE) + stheadersize,0L);
-	    if(fread(&timestamp,sizeof(unsigned long),1,fp) != 1){
+	    if(fread(&timestamp,sizeof(uint32_t),1,fp) != 1){
 		fprintf(stderr,"ERROR: illegal read from record %d\n",loc);
 		return;
 	    }
 	    if(convert){
-		ConvertData(&timestamp,sizeof(unsigned long));
+		ConvertData(&timestamp,sizeof(uint32_t));
 	    }
 	    if(result->toffset != 0){
 		timestamp += result->toffset;
@@ -670,11 +670,11 @@ int		spikereclen;
 	    ** read the next spike timestamp
 	    */
 	    cindex = i;
-	    if(fread(&timestamp,sizeof(unsigned long),1,fp) != 1){
+	    if(fread(&timestamp,sizeof(uint32_t),1,fp) != 1){
 		fprintf(stderr,"ERROR: illegal read from record %d\n",cindex);
 	    }
 	    if(convert){
-		ConvertData(&timestamp,sizeof(unsigned long));
+		ConvertData(&timestamp,sizeof(uint32_t));
 	    }
 	    if(result->toffset != 0){
 		timestamp += result->toffset;
@@ -774,16 +774,16 @@ int	channel;
 {
 int	i,j;
 int	cindex;
-unsigned long timestamp;
-unsigned long otimestamp;
+uint32_t timestamp;
+uint32_t otimestamp;
 short	tmp[TT_REC_SIZE];
 FILE	*audio;
 unsigned char	cval;
 TimeIndex	*tindex;
-unsigned long gatetime;
-unsigned long tottime;
-unsigned long delay;
-unsigned long tdelay;
+uint32_t gatetime;
+uint32_t tottime;
+uint32_t delay;
+uint32_t tdelay;
 unsigned	tsleep;
 double		dval;
 int		n;
@@ -815,12 +815,12 @@ int		spikereclen;
 	    }
 	    fseek(fp,(start + loc)*(sizeof(short)*TT_REC_SIZE
 	    +TIMESTAMP_SIZE) + stheadersize,0L);
-	    if(fread(&timestamp,sizeof(unsigned long),1,fp) != 1){
+	    if(fread(&timestamp,sizeof(uint32_t),1,fp) != 1){
 		fprintf(stderr,"ERROR: illegal read from record %d\n",loc);
 		return;
 	    }
 	    if(convert){
-		ConvertData(&timestamp,sizeof(unsigned long));
+		ConvertData(&timestamp,sizeof(uint32_t));
 	    }
 	    if(result->toffset != 0){
 		timestamp += result->toffset;
@@ -871,11 +871,11 @@ int		spikereclen;
 	    ** read the next spike timestamp
 	    */
 	    cindex = i;
-	    if(fread(&timestamp,sizeof(unsigned long),1,fp) != 1){
+	    if(fread(&timestamp,sizeof(uint32_t),1,fp) != 1){
 		fprintf(stderr,"ERROR: illegal read from record %d\n",cindex);
 	    }
 	    if(convert){
-		ConvertData(&timestamp,sizeof(unsigned long));
+		ConvertData(&timestamp,sizeof(uint32_t));
 	    }
 	    if(result->toffset != 0){
 		timestamp += result->toffset;
@@ -967,16 +967,16 @@ int	channel;
 {
 int	i,j;
 int	cindex;
-unsigned long timestamp;
-unsigned long otimestamp;
+uint32_t timestamp;
+uint32_t otimestamp;
 short	tmp[ST_REC_SIZE];
 FILE	*audio;
 unsigned char	cval;
 TimeIndex	*tindex;
-unsigned long gatetime;
-unsigned long tottime;
-unsigned long delay;
-unsigned long tdelay;
+uint32_t gatetime;
+uint32_t tottime;
+uint32_t delay;
+uint32_t tdelay;
 unsigned	tsleep;
 double		dval;
 int		n;
@@ -1006,12 +1006,12 @@ int		spikereclen;
 	    }
 	    fseek(fp,(start + loc)*(sizeof(short)*ST_REC_SIZE
 	    +TIMESTAMP_SIZE) + stheadersize,0L);
-	    if(fread(&timestamp,sizeof(unsigned long),1,fp) != 1){
+	    if(fread(&timestamp,sizeof(uint32_t),1,fp) != 1){
 		fprintf(stderr,"ERROR: illegal read from record %d\n",loc);
 		return;
 	    }
 	    if(convert){
-		ConvertData(&timestamp,sizeof(unsigned long));
+		ConvertData(&timestamp,sizeof(uint32_t));
 	    }
 	    if(result->toffset != 0){
 		timestamp += result->toffset;
@@ -1064,11 +1064,11 @@ int		spikereclen;
 	    ** read the next spike timestamp
 	    */
 	    cindex = i;
-	    if(fread(&timestamp,sizeof(unsigned long),1,fp) != 1){
+	    if(fread(&timestamp,sizeof(uint32_t),1,fp) != 1){
 		fprintf(stderr,"ERROR: illegal read from record %d\n",cindex);
 	    }
 	    if(convert){
-		ConvertData(&timestamp,sizeof(unsigned long));
+		ConvertData(&timestamp,sizeof(uint32_t));
 	    }
 	    if(result->toffset != 0){
 		timestamp += result->toffset;
@@ -1180,7 +1180,7 @@ float	corrx,corry;
 int	first;
 int	loc;
 int	spikereclen;
-unsigned long timestamp;
+uint32_t timestamp;
 
     spikereclen = ST_REC_SIZE/2;
     for(i=0;i<idx->n;i++){
@@ -1200,9 +1200,9 @@ unsigned long timestamp;
 	}
 	fseek(fp,(start + loc)*(sizeof(short)*ST_REC_SIZE + TIMESTAMP_SIZE) +
 	stheadersize,0L);
-	fread(&timestamp,sizeof(unsigned long),1,fp);
+	fread(&timestamp,sizeof(uint32_t),1,fp);
 	if(convert){
-	    ConvertData(&timestamp,sizeof(unsigned long));
+	    ConvertData(&timestamp,sizeof(uint32_t));
 	}
 	if(result->toffset != 0){
 	    timestamp += result->toffset;
@@ -1351,7 +1351,7 @@ float	corra,corrb;
 int	first;
 int	loc;
 int	spikereclen;
-unsigned long timestamp;
+uint32_t timestamp;
 
     spikereclen = TT_REC_SIZE/4;
     for(i=0;i<idx->n;i++){
@@ -1371,9 +1371,9 @@ unsigned long timestamp;
 	}
 	fseek(fp,(start + loc)*(sizeof(short)*TT_REC_SIZE + TIMESTAMP_SIZE) +
 	stheadersize,0L);
-	fread(&timestamp,sizeof(unsigned long),1,fp);
+	fread(&timestamp,sizeof(uint32_t),1,fp);
 	if(convert){
-	    ConvertData(&timestamp,sizeof(unsigned long));
+	    ConvertData(&timestamp,sizeof(uint32_t));
 	}
 	if(result->toffset != 0){
 	    timestamp += result->toffset;
@@ -1534,7 +1534,7 @@ FILE	*fpstout;
 {
 int	i,j;
 short	tmp[ST_REC_SIZE];
-unsigned long timestamp;
+uint32_t timestamp;
 int	loc;
 int	spikereclen;
 
@@ -1556,9 +1556,9 @@ int	spikereclen;
 	/*
 	** read in the timestamp
 	*/
-	fread(&timestamp,sizeof(unsigned long),1,fp);
+	fread(&timestamp,sizeof(uint32_t),1,fp);
 	if(convert){
-	    ConvertData(&timestamp,sizeof(unsigned long));
+	    ConvertData(&timestamp,sizeof(uint32_t));
 	}
 	if(result->toffset != 0){
 	    timestamp += result->toffset;
@@ -1578,7 +1578,7 @@ int	spikereclen;
 	    }
 	}
 	if(fpstout){
-	    fwrite(&timestamp,sizeof(unsigned long),1,fpstout);
+	    fwrite(&timestamp,sizeof(uint32_t),1,fpstout);
 	    if(fwrite(tmp,sizeof(short),ST_REC_SIZE,fpstout) != ST_REC_SIZE){
 		fprintf(stderr,"ERROR: unable to write record %d\n",loc);
 		return;
@@ -1634,7 +1634,7 @@ int	timech;
 int	i,j;
 short	tmp[TT_REC_SIZE];
 int	itmp[TT_REC_SIZE];
-unsigned long timestamp;
+uint32_t timestamp;
 int	loc;
 int	spikereclen;
 double	dt;
@@ -1658,9 +1658,9 @@ int	count;
 	/*
 	** read in the timestamp
 	*/
-	fread(&timestamp,sizeof(unsigned long),1,fp);
+	fread(&timestamp,sizeof(uint32_t),1,fp);
 	if(convert){
-	    ConvertData(&timestamp,sizeof(unsigned long));
+	    ConvertData(&timestamp,sizeof(uint32_t));
 	}
 	if(result->toffset != 0){
 	    timestamp += result->toffset;
@@ -1692,7 +1692,7 @@ int	count;
 	    if(j == TT_REC_SIZE) continue;
 	}
 	if(fpstout){
-	    fwrite(&timestamp,sizeof(unsigned long),1,fpstout);
+	    fwrite(&timestamp,sizeof(uint32_t),1,fpstout);
 	    if(fwrite(tmp,sizeof(short),TT_REC_SIZE,fpstout) != TT_REC_SIZE){
 		fprintf(stderr,"ERROR: unable to write record %d\n",loc);
 		return;
@@ -1772,7 +1772,7 @@ FILE	*fpout;
 int	binary;
 {
 int	i;
-unsigned long	timestamp;
+uint32_t	timestamp;
 int	loc;
 
     for(i=0;i<idx->n;i++){
@@ -1783,12 +1783,12 @@ int	loc;
 	}
 	fseek(fp,(start + loc)*(sizeof(short)*ST_REC_SIZE +TIMESTAMP_SIZE) +
 	stheadersize,0L);
-	if(fread(&timestamp,sizeof(unsigned long),1,fp) != 1){
+	if(fread(&timestamp,sizeof(uint32_t),1,fp) != 1){
 	    fprintf(stderr,"ERROR: illegal read from record %d\n",loc);
 	    return;
 	}
 	if(convert){
-	    ConvertData(&timestamp,sizeof(unsigned long));
+	    ConvertData(&timestamp,sizeof(uint32_t));
 	}
 	if(result->toffset != 0){
 	    timestamp += result->toffset;
@@ -1796,11 +1796,11 @@ int	loc;
 	if(timestamp < tstart) continue;
 	if((tend > 0) && (timestamp > tend)) continue;
 	if(binary){
-	    if(fwrite(&timestamp,sizeof(unsigned long),1,fpout) != 1){
+	    if(fwrite(&timestamp,sizeof(uint32_t),1,fpout) != 1){
 		fprintf(stderr,"ERROR: unable to write record %d\n",loc);
 	    }
 	} else {
-	    fprintf(fpout,"%lu 1\n",timestamp);
+	    fprintf(fpout,"%"PRIu32" 1\n",timestamp);
 	}
     }
 }
@@ -1815,8 +1815,8 @@ int	binary;
 int	mingap;
 {
 int	i;
-unsigned long	timestamp;
-unsigned long	ptimestamp;
+uint32_t	timestamp;
+uint32_t	ptimestamp;
 unsigned char	probe;
 int	loc;
 
@@ -1834,12 +1834,12 @@ int	loc;
 	    fprintf(stderr,"ERROR: illegal read from record %d\n",loc);
 	    return;
 	}
-	if(fread(&timestamp,sizeof(unsigned long),1,fp) != 1){
+	if(fread(&timestamp,sizeof(uint32_t),1,fp) != 1){
 	    fprintf(stderr,"ERROR: illegal read from record %d\n",loc);
 	    return;
 	}
 	if(convert){
-	    ConvertData(&timestamp,sizeof(unsigned long));
+	    ConvertData(&timestamp,sizeof(uint32_t));
 	}
 	if(result->toffset != 0){
 	    timestamp += result->toffset;
@@ -1850,11 +1850,11 @@ int	loc;
 	    continue;
 	}
 	if(binary){
-	    if(fwrite(&timestamp,sizeof(unsigned long),1,fpout) != 1){
+	    if(fwrite(&timestamp,sizeof(uint32_t),1,fpout) != 1){
 		fprintf(stderr,"ERROR: unable to write record %d\n",loc);
 	    }
 	} else {
-	    fprintf(fpout,"%lu 1\n",timestamp);
+	    fprintf(fpout,"%"PRIu32" 1\n",timestamp);
 	}
     }
 }
@@ -1869,7 +1869,7 @@ int	binary;
 {
 short	spikedata[TT_REC_SIZE];
 int	i,j;
-unsigned long	timestamp;
+uint32_t	timestamp;
 int	loc;
 
     for(i=0;i<idx->n;i++){
@@ -1880,12 +1880,12 @@ int	loc;
 	}
 	fseek(fp,(start + loc)*(sizeof(short)*TT_REC_SIZE +TIMESTAMP_SIZE) +
 	stheadersize,0L);
-	if(fread(&timestamp,sizeof(unsigned long),1,fp) != 1){
+	if(fread(&timestamp,sizeof(uint32_t),1,fp) != 1){
 	    fprintf(stderr,"ERROR: illegal read from record %d\n",loc);
 	    return;
 	}
 	if(convert){
-	    ConvertData(&timestamp,sizeof(unsigned long));
+	    ConvertData(&timestamp,sizeof(uint32_t));
 	}
 	if(result->toffset != 0){
 	    timestamp += result->toffset;
@@ -1916,11 +1916,11 @@ int	loc;
 	    }
 	}
 	if(binary){
-	    if(fwrite(&timestamp,sizeof(unsigned long),1,fpout) != 1){
+	    if(fwrite(&timestamp,sizeof(uint32_t),1,fpout) != 1){
 		fprintf(stderr,"ERROR: unable to write record %d\n",loc);
 	    }
 	} else {
-	    fprintf(fpout,"%lu\t1\n",timestamp);
+	    fprintf(fpout,"%"PRIu32"\t1\n",timestamp);
 	}
     }
 }
@@ -2001,7 +2001,7 @@ int	peak_x;
 int	peak_y;
 int	loc;
 int	spikereclen;
-unsigned long timestamp;
+uint32_t timestamp;
 
     spikereclen = ST_REC_SIZE/2;
     for(j=0;j<spikereclen;j++){
@@ -2019,12 +2019,12 @@ unsigned long timestamp;
 	}
 	fseek(fp,(start + loc)*(sizeof(short)*ST_REC_SIZE+TIMESTAMP_SIZE) +
 	stheadersize,0L);
-	if(fread(&timestamp,sizeof(unsigned long),1,fp) != 1){
+	if(fread(&timestamp,sizeof(uint32_t),1,fp) != 1){
 	    fprintf(stderr,"ERROR: illegal read from record %d\n",loc);
 	    return;
 	}
 	if(convert){
-	    ConvertData(&timestamp,sizeof(unsigned long));
+	    ConvertData(&timestamp,sizeof(uint32_t));
 	}
 	if(result->toffset != 0){
 	    timestamp += result->toffset;
@@ -2138,7 +2138,7 @@ int	peak_a;
 int	peak_b;
 int	loc;
 int	spikereclen;
-unsigned long timestamp;
+uint32_t timestamp;
 
     spikereclen = TT_REC_SIZE/4;
     for(j=0;j<TT_REC_SIZE;j++){
@@ -2154,12 +2154,12 @@ unsigned long timestamp;
 	}
 	fseek(fp,(start + loc)*(sizeof(short)*TT_REC_SIZE+TIMESTAMP_SIZE) +
 	stheadersize,0L);
-	if(fread(&timestamp,sizeof(unsigned long),1,fp) != 1){
+	if(fread(&timestamp,sizeof(uint32_t),1,fp) != 1){
 	    fprintf(stderr,"ERROR: illegal read from record %d\n",loc);
 	    return;
 	}
 	if(convert){
-	    ConvertData(&timestamp,sizeof(unsigned long));
+	    ConvertData(&timestamp,sizeof(uint32_t));
 	}
 	if(result->toffset != 0){
 	    timestamp += result->toffset;
@@ -2847,12 +2847,12 @@ char	line[100];
 	if(binary){
 	    if(showspiketimes){
 		fprintf(fpout,"%% Fields: \t%s,%d,%d,%d\n",
-		"timestamp",ULONG,sizeof(unsigned long),1);
+		"timestamp",ULONG,sizeof(uint32_t),1);
 	    } else
 	    fprintf(fpout,
 "%% Fields: \t%s,%d,%d,%d\t%s,%d,%d,%d\t%s,%d,%d,%d\t%s,%d,%d,%d\t%s,%d,%d,%d\t%s,%d,%d,%d\t%s,%d,%d,%d\n",
 	    "id",INT,sizeof(int),1,
-	    "timestamp",ULONG,sizeof(unsigned long),1,
+	    "timestamp",ULONG,sizeof(uint32_t),1,
 	    "nevents",INT,sizeof(int),1,
 	    "duration",INT,sizeof(int),1,
 	    "peak1",INT,sizeof(int),1,
@@ -2862,7 +2862,7 @@ char	line[100];
 	    fprintf(fpout,
 "%% Fields: \t%s,%d,%d,%d\t%s,%d,%d,%d\t%s,%d,%d,%d\t%s,%d,%d,%d\t%s,%d,%d,%d\t%s,%d,%d,%d\t%s,%d,%d,%d",
 	    "id",INT,sizeof(int),1,
-	    "timestamp",ULONG,sizeof(unsigned long),1,
+	    "timestamp",ULONG,sizeof(uint32_t),1,
 	    "nevents",INT,sizeof(int),1,
 	    "duration",INT,sizeof(int),1,
 	    "peak1",INT,sizeof(int),1,
@@ -2879,22 +2879,22 @@ char	line[100];
 	if(binary){
 	    if(showspiketimes){
 		fprintf(fpout,"%% Fields: \t%s,%d,%d,%d\n",
-		"timestamp",ULONG,sizeof(unsigned long),1);
+		"timestamp",ULONG,sizeof(uint32_t),1);
 	    } else
 	    fprintf(fpout,"%% Fields: \t%s,%d,%d,%d\t%s,%d,%d,%d\t%s,%d,%d,%d\n",
 	    "id",INT,sizeof(int),1,
-	    "timestamp",ULONG,sizeof(unsigned long),1,
+	    "timestamp",ULONG,sizeof(uint32_t),1,
 	    "delpeak",INT,sizeof(int),1);
 	} else {
 	    fprintf(fpout,"%% Fields: \t%s,%d,%d,%d\t%s,%d,%d,%d\t%s,%d,%d,%d\n",
 	    "id",INT,sizeof(int),1,
-	    "timestamp",ULONG,sizeof(unsigned long),1,
+	    "timestamp",ULONG,sizeof(uint32_t),1,
 	    "delpeak",INT,sizeof(int),1);
 	}
     } else 
     if(showspiketimes){
 	fprintf(fpout,"%% Fields: \t%s,%d,%d,%d\n",
-	"timestamp",ULONG,sizeof(unsigned long),1);
+	"timestamp",ULONG,sizeof(uint32_t),1);
     }
     EndStandardHeader(fpout);
     /*

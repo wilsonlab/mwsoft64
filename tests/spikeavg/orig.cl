@@ -1,11 +1,11 @@
 %%BEGINHEADER
-% Program: 	./sa_i686
+% Program: 	./sa_orig
 % Program Version: 	1.29
 % Argc: 	4
 % Argv[1] :	orig.tt
 % Argv[2] :	-if
 % Argv[3] :	cbfile
-% Date: 	Wed Sep 19 12:01:54 2012
+% Date: 	Wed Sep 19 12:04:50 2012
 % Directory: 	/home/slayton/src/mwsoft64/tests/spikeavg
 % Hostname: 	stockton
 % Architecture: 	i686
