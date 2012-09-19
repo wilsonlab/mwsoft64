@@ -5,7 +5,7 @@
 % Argv[1] :	orig.tt
 % Argv[2] :	-if
 % Argv[3] :	cbfile
-% Date: 	Tue Sep 18 16:30:54 2012
+% Date: 	Wed Sep 19 11:55:02 2012
 % Directory: 	/home/slayton/src/mwsoft64/tests/spikeavg
 % Hostname: 	stockton
 % Architecture: 	i686
