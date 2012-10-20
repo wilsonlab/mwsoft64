@@ -46,8 +46,7 @@
  **              DEFINES
  *********************************************************
  */
-#define	MAX_SPIKE_LEN	32*10
-#define DEFAULT_SPIKE_LEN 32
+#define	MAX_SPIKE_LEN	32
 #define TRIGGER_PT	5
 #define MAX_VECTORS	200000
 
@@ -62,8 +61,8 @@
 #define M_PI 3.14159
 #endif
 
-#define ST_REC_SIZE 2*spikelen
-#define TT_REC_SIZE 4*spikelen
+#define ST_REC_SIZE 64
+#define TT_REC_SIZE 128
 #define TIMESTAMP_SIZE 4
 
 #define SINGLE	0
@@ -315,8 +314,7 @@ typedef struct {
 } PosRecord;
 
 typedef struct spike_channel_type {
-  /*  int		data[MAX_SPIKE_LEN];*/
-  int           *data;
+  int		data[MAX_SPIKE_LEN];
   int		len;
   FILE		*fp;
   char		*filename;
@@ -398,7 +396,6 @@ int	trigger_pt;
 FILE	*position_file;
 int	xoffset;
 int	spkvoffset;
-int     spikelen;
 int     backdiode;
 
 int		nwaveforms;
@@ -874,10 +871,10 @@ char		*eptr;
 	    fprintf(stderr,"(%d %d)",data1[npts],data2[npts]);
 	    */
 	    npts++;
-	    if(npts > spikelen){	/* check for data size */
+	    if(npts > MAX_SPIKE_LEN){	/* check for data size */
 		fprintf(stderr,
 		"number of points in data (%d) exceeded maximum (%d)\n",
-		npts,spikelen);
+		npts,MAX_SPIKE_LEN);
 		return(0);
 	    }
 	}
@@ -949,10 +946,10 @@ char		*eptr;
 	    data4[npts] = atoi(ptr);
 	    ptr = eptr+1;
 	    npts++;
-	    if(npts > spikelen){	/* check for data size */
+	    if(npts > MAX_SPIKE_LEN){	/* check for data size */
 		fprintf(stderr,
 		"number of points in data (%d) exceeded maximum (%d)\n",
-		npts,spikelen);
+		npts,MAX_SPIKE_LEN);
 		return(0);
 	    }
 	}
@@ -992,7 +989,7 @@ int		nargs;
 	if(nargs == 2) {
 	    data[npts++] = ival[2];
 	}
-	if(npts >= spikelen){	/* check for data size */
+	if(npts >= MAX_SPIKE_LEN){	/* check for data size */
 	    /*
 	    fprintf(stderr,
 	    "number of points in data exceeded maximum (%d)\n",MAX_SPIKE_LEN);
@@ -2679,7 +2676,6 @@ Index	index;
   nxtarg = 0;
   bw = 0;
   spkvoffset = 0;
-  spikelen = 0;
   showparms = 0;
   index.index = (int *)malloc(MAX_VECTORS*sizeof(int));
   index.n = 0;
@@ -2964,10 +2960,6 @@ Index	index;
     else if(strcmp(argv[nxtarg],"-voffset") == 0){
       spkvoffset = atoi(argv[++nxtarg]);
     }
-    else if(strcmp(argv[nxtarg],"-spikelen") == 0){
-      spikelen = atoi(argv[++nxtarg]);
-      fprintf(stderr,"User defined spike length: %d\n", spikelen);
-    }
     else if(argv[nxtarg][0] != '-'){
       if((xchannel.fp = fopen(argv[nxtarg],"r")) == NULL){
 	fprintf(stderr,"unable to read xy channel file '%s'\n",
@@ -2976,7 +2968,7 @@ Index	index;
       }
       xchannel.filename = argv[nxtarg];
     } 
-    else
+    else 
       {
 	fprintf(stderr,"Invalid option '%s'\n",argv[nxtarg]);
 	exit(-1);
@@ -2986,7 +2978,10 @@ Index	index;
     fprintf(stderr,"must enter spike data file\n");
     exit(-1);
   }
-
+  if(trigger_pt < 0 || trigger_pt >= MAX_SPIKE_LEN){
+    fprintf(stderr,"ERROR: invalid trigger pt (%d)\n",trigger_pt);
+    exit(-1);
+  }
   if(result.fptrange){
     count = ReadRange(&result);
     if(verbose){
@@ -3005,22 +3000,6 @@ Index	index;
   /*
    ** try to locate parameters in the header
    */
-  if(spikelen<=0 && (etype = GetHeaderParameter(header,"spikelen:"))){
-    spikelen = atoi(etype);
-    fprintf(stderr,"Got spike length from header: %d\n", spikelen);
-  }
-  if (spikelen<=0) {
-      spikelen = DEFAULT_SPIKE_LEN;
-      fprintf(stderr,"Using default spike length: %d\n", spikelen);
-  } else if (spikelen>MAX_SPIKE_LEN) {
-    fprintf(stderr,"spike length larger than maximum\n");
-    exit(0);
-  }
-  if(trigger_pt < 0 || trigger_pt >= spikelen){
-    fprintf(stderr,"ERROR: invalid trigger pt (%d)\n",trigger_pt);
-    exit(-1);
-  }
-
   if((etype = GetHeaderParameter(header,"Extraction type:"))){
     if(strcmp(etype,"tetrode waveforms") == 0){
       result.electrode = TETRODE;
@@ -3120,11 +3099,6 @@ Index	index;
   /*
    ** process the spikes
    */
-
-  xchannel.data = (int *)malloc(spikelen*sizeof(int));
-  ychannel.data = (int *)malloc(spikelen*sizeof(int));
-  achannel.data = (int *)malloc(spikelen*sizeof(int));
-  bchannel.data = (int *)malloc(spikelen*sizeof(int));
   ProcessSpikes(&result,sparms,&xchannel,&ychannel,&achannel,&bchannel,
 		start,end,0,&index);
   
@@ -3197,12 +3171,6 @@ Index	index;
      */
     AnalyzeHistograms(sparms,fpanalout);
   }
-
-  free(xchannel.data);
-  free(ychannel.data);
-  free(achannel.data);
-  free(bchannel.data);
-
   if(nwaveforms == 0){
     exit(1);
   } else {
