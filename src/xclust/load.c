@@ -741,6 +741,7 @@ int32_t	lastid = 0;
 	  /*
 	  ** echo the field name
 	  */
+	  printf("%s", FieldTypeToString(fieldinfo.type));
 	  fprintf(stderr,"P%d :'%s'\t%d\t%d\t%d\t(%s)\n", i, fieldinfo.name, fieldinfo.type, fieldinfo.size, fieldinfo.count, FieldTypeToString(fieldinfo.type) );
 	  if(fieldinfo.count > 1){
 	    fprintf(stderr,"ERROR: multiple count (%d) fields (%s) not supported\n",fieldinfo.count,fieldinfo.name);
