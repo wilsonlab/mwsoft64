@@ -1,0 +1,224 @@
+			  X V I E W - version 0.9
+                          written by Matt Wilson
+                    California Institute of Technology
+                                 6/89
+			University of Arizona
+			    revised 5/91
+
+usage: xview file [file ..][-d display][-geometry str][-t title [-t title2]..] 
+	    [-bw][-speed #][-rep #][-add][-debug][-signal]
+	    [-noheader][-nomap][-nolines]
+	    [-maxmin # #][-scale #][xsize #][-ysize #][-zsize #]
+	    [-plainformat xmax ymax dt datatype][-adjust #]
+	    [-gray][-rgray][-box][-filledbox][-colorbox][-surface]
+	    [-filledsurface][-colorfilledsurface]
+	    [-command str][-commandfile name]
+
+While in XVIEW, entering key actions in the view window will cause
+various actions to take place. Many commands take numeric arguments
+which are entered by typing the appropriate
+value in the plot window.
+
+			Key/button actions 
+			---------------------
+Buttons
+-------
+
+left		back one frame
+right		forward one frame
+middle		display the data value of the array element at cursor location
+
+<int> refers to any integer 
+<float> refers to any floating point number
+^ refers to the control character
+
+Keys
+----
+
+numeric arg	       key	description
+--------------------------------------------------
+			^D	quit
+			^L	refresh the display (clears temporary labels)
+			^T	label at the cursor screen coordinates
+			^U	clear the current numeric argument
+			A	autoscale 
+			D	dump raw data frame to the file "xview.data"
+			N	append the frame to postscript file "xview.ps"
+			F	write the frame to postscript file "xview.ps"
+<int>			L	set the line width
+			P	print the frame to a postscript printer
+<float>			S	set the postscript scale from 0-1
+<int>			+	set the rectification mode
+<float>			[	set the lower z bound
+<float>			]	set the upper z bound 
+			b	back one frame
+<int>			c	set number of contours
+			f	forward one frame
+<float>			g	go to a particular frame
+<float>			i	set the interframe interval
+<int>			m	set the display mode [0-9]
+			n	cycle through the titles
+			p	plot the data across frames for the array
+				element under the cursor using 'xplot'
+<int>			r	set the display representation (mode specific)
+			s	toggle single stepping
+<int>			w	set the animation speed
+			x	quit
+<float>			z	set the z scale factor used in surface display
+
+to display the data using colored boxes you would type
+
+    2  m
+
+to autoscale the across the data file
+
+    A
+
+to change the upper z bound
+
+    10 ]
+
+
+--------------------------------------------------------
+Command file format
+
+Commands can be placed in a file or specified on the command line which
+will be executed prior to interactive display.
+These commands are:
+
+/appendtofile	[filename]
+/back
+/color		[0/1]
+/forward
+/geometry	[str]
+/help
+/mode		[0-9]
+/printtofile	[filename]
+/print
+/psheader	[0/1]
+/quit
+/setenv		[var value]
+/wait		[sec]
+
+
+For example these commands would automatically display and print multiple frames
+
+/mode 0 
+/printtofile xview.ps
+/forward ; /appendtofile xview.ps
+/forward ; /appendtofile xview.ps
+/forward ; /appendtofile xview.ps
+/forward ; /appendtofile xview.ps
+/forward ; /appendtofile xview.ps
+/quit
+
+--------------------------------------------------------
+Data file format
+
+Xview displays data from binary data files. The files are assumed to have
+a short header which provides information concerning the data type and
+the array dimensions. Files lacking this header (raw data files) must use
+the -plainformat' option and specify the header information on the command
+line.
+
+The basic header format is 
+xmax            in      zero based x array dimension
+ymax            int     zero based y array dimension
+dt              float   time interval between frames (can be any nonzero value)
+datatype        int     code indicating the type of data (e.g. int float etc.)
+
+and the remainder of the file is simply frames of FRAME=(xmax +1)*(ymax +1) 
+elements of data
+
+FRAME1
+FRAME2
+...
+
+Note that the dimensions 'xmax' and 'ymax' are zero-based. Therefore a
+10x5 array would have xmax=9 and ymax=4
+
+
+-------------------------------------------------------
+Writing a formatted data file
+
+This is sample code to write the header:
+    fwrite(&xmax,sizeof(int),1,fp);
+    fwrite(&ymax,sizeof(int),1,fp);
+    fwrite(&dt,sizeof(float),1,fp);
+    fwrite(&datatype,sizeof(int),1,fp);
+
+where 
+
+    datatype = SHORT, INT, FLOAT, DOUBLE
+
+and each frame of data is written as 
+    nelements = (xmax+1)*(ymax+1);
+    fwrite(data,datasize,nelements,fp);
+
+for multiple frames
+
+    for(i=0;i<nframes;i++){
+	fwrite(data,datasize,nelements,fp);
+    }
+
+where
+
+    data = (char *)malloc(cellnum*datasize);
+
+and
+
+   switch(datatype){
+        case SHORT :
+        datasize = sizeof(short);
+        break;
+        case INT :
+        datasize = sizeof(int);
+        break;
+        case FLOAT :
+        datasize = sizeof(float);
+        break;
+        case DOUBLE :
+        datasize =  sizeof(double);
+        break;
+    }
+
+The datatype codes are found in a file called header.h
+
+-------------------------------------------------------
+Reading a formatted data file
+
+This is sample code to read the header:
+    fread(&xmax,sizeof(int),1,fp);
+    fread(&ymax,sizeof(int),1,fp);
+    cellnum= (xmax+1)*(ymax+1);
+    fread(&dt,sizeof(float),1,fp);
+    fread(&datatype,sizeof(int),1,fp);
+    header_size = 3*sizeof(int) + sizeof (float);
+
+and this is how to read each frame of data
+
+    fread(data,datasize,cellnum,fp)
+
+where
+
+    data = (char *)malloc(cellnum*datasize);
+
+and
+
+   switch(datatype){
+        case SHORT :
+        datasize = sizeof(short);
+        break;
+        case INT :
+        datasize = sizeof(int);
+        break;
+        case FLOAT :
+        datasize = sizeof(float);
+        break;
+        case DOUBLE :
+        datasize =  sizeof(double);
+        break;
+    }
+
+The datatype codes are found in a file called header.h
+
