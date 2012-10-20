@@ -49,4 +49,5 @@ behav: $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $@ $(INCLUDE) $(LIBS)
 
 clean:
-	rm -f *.o $(ALL)
+	rm -f *.o $(ALL) 
+	rm -rf *.dSYM

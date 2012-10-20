@@ -25,4 +25,5 @@ iolib.a: iolib.o
 	ranlib iolib.a
 
 clean:
-	rm -f *.o iolib.a
+	rm -f *.o iolib.a 
+	rm -rf *.dSYM

@@ -46,3 +46,4 @@ pop_args.o: pop_defs.h
 
 clean:
 	rm -f *.o $(ALL)
+	rm -rf *.dSYM

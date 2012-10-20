@@ -40,4 +40,5 @@ all: $(ALL)
 	$(CC) $(CFLAGS) $< -c $(INCLUDE) $(LIBS)
 
 clean:
-	rm -f *.o 
+	rm -f *.o  
+	rm -rf *.dSYM

@@ -60,4 +60,5 @@ $(XCLUST):		$(OBJ)
 		$(CC) $(CFLAGS) $(OBJ) $(INCLUDE) -o $@ $(LIBS)
 
 clean:
-		rm -f *.o $(XCLUST)
+		rm -f *.o $(XCLUST) 
+		rm -rf *.dSYM

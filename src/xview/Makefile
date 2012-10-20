@@ -66,4 +66,5 @@ xview:		$(OBJ)
 
 clean:
 		rm -f *.o xview
+		rm -rf *.dSYM
 

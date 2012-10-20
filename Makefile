@@ -70,8 +70,10 @@ clean:
  	#$(MAKE) -C src/ clean; 
 	rm -rf $(BUILD_DIR)
 	$(MAKE) -C src/ clean
-	$(MAKE) -C src/popanal/ clean
 	$(MAKE) -C src/behav/ clean
+	$(MAKE) -C src/extract/ clean
+	$(MAKE) -C src/popanal/ clean
+	$(MAKE) -C src/util/ clean
 	$(MAKE) -C src/xclust/ clean
 	$(MAKE) -C src/xplot/ clean
 	$(MAKE) -C src/xview/ clean
