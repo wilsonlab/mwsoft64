@@ -1,0 +1,72 @@
+%%BEGINHEADER
+% adversion: 		1.36b
+% rate: 		250000.000000
+% nelectrodes: 2
+% nchannels: 		8
+% nelect_chan: 		4
+% errors: 		0
+% disk_errors: 		0
+% dma_bufsize: 		24576
+% spikelen: 		32
+% spikesep: 		26
+% channel 0 ampgain: 	24994
+% channel 0 adgain: 	0
+% channel 0 filter: 	200
+% channel 0 threshold: 	425
+% channel 0 color: 		15
+% channel 0 offset: 	65
+% channel 0 contscale: 	0
+% channel 1 ampgain: 	24994
+% channel 1 adgain: 	0
+% channel 1 filter: 	200
+% channel 1 threshold: 	425
+% channel 1 color: 		14
+% channel 1 offset: 	122
+% channel 1 contscale: 	0
+% channel 2 ampgain: 	24994
+% channel 2 adgain: 	0
+% channel 2 filter: 	200
+% channel 2 threshold: 	425
+% channel 2 color: 		13
+% channel 2 offset: 	180
+% channel 2 contscale: 	0
+% channel 3 ampgain: 	24994
+% channel 3 adgain: 	0
+% channel 3 filter: 	200
+% channel 3 threshold: 	425
+% channel 3 color: 		12
+% channel 3 offset: 	238
+% channel 3 contscale: 	0
+% channel 4 ampgain: 	24994
+% channel 4 adgain: 	0
+% channel 4 filter: 	200
+% channel 4 threshold: 	325
+% channel 4 color: 		11
+% channel 4 offset: 	296
+% channel 4 contscale: 	0
+% channel 5 ampgain: 	24994
+% channel 5 adgain: 	0
+% channel 5 filter: 	200
+% channel 5 threshold: 	325
+% channel 5 color: 		10
+% channel 5 offset: 	353
+% channel 5 contscale: 	0
+% channel 6 ampgain: 	24994
+% channel 6 adgain: 	0
+% channel 6 filter: 	200
+% channel 6 threshold: 	325
+% channel 6 color: 		9
+% channel 6 offset: 	411
+% channel 6 contscale: 	0
+% channel 7 ampgain: 	24994
+% channel 7 adgain: 	0
+% channel 7 filter: 	200
+% channel 7 threshold: 	325
+% channel 7 color: 		8
+% channel 7 offset: 	469
+% channel 7 contscale: 	0
+% spike_size: 		264
+% fields: int electrode_num; long timestamp; int data[128]
+% End of header from input file 'raw.spk'
+%
+%%ENDHEADER
