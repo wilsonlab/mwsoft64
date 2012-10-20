@@ -1,0 +1,234 @@
+
+PROGRAM:
+    none
+
+DESCRIPTION:
+    Examples of data analysis procedures. 
+
+AUTHOR:
+    Written by Matthew Wilson
+    ARL Division of Neural Systems, Memory, and Aging
+    University of Arizona
+    Tucson, AZ 85724
+    wilson@nsma.arizona.edu
+
+DATES:
+    documentation update 11/91
+
+NOTES:
+    The following examples describe the steps necessary to perform the
+    following analyses
+
+    peth
+    autocorrelation
+    crosscorrelation
+    isi histogram
+    log isi histogram
+    inverse log interval vs time
+    firing rate vs time
+    spike/position behavioral correlation
+    spike/direction behavioral correlation
+
+    In each of the examples the -v option has been specified to provide
+    more information to the novice user. This option can be 
+    omitted if desired.
+
+EXAMPLES:
+
+    INITIAL UFF CONVERSION
+    --------------------------
+
+    All of the examples given below describe the steps which must be
+    taken to run the desired analysis starting from a SUN-converted
+    Brainwave(tm) uff file.
+    This conversion must be performed if you are starting from a 
+    PC formatted uff file. i.e. one that was created on the PC and
+    was simply copied to the SUN. 
+    This conversion can be performed by running the following command:
+
+	convert pc_uff_file
+
+    where 'pc_uff_file' is the name of the PC formatted uff file.
+    The result of this conversion will be another file having the
+    same name with the '.sun' extension appended. Note that this
+    need only be performed once per data file, and does not need
+    to be repeated for each analysis.
+
+    UFF EXTRACTIONS
+    ---------------
+
+    The various analysis programs require selected data to be extracted
+    from the uff file in order to perform the required calculations.
+    This section describes the procedures for extracting this information
+    from the converted uff files.
+
+    CREATING TIMESTAMP FILES
+    ------------------------
+
+    WHAT YOU HAVE:
+	A uff file containing manually clustered spikes.
+    WHAT YOU WANT:
+	to perform any of the interval based analyses such as
+
+	peth
+	autocorrelation
+	crosscorrelation
+	isi histogram
+	log isi histogram
+	inverse log interval vs time
+	firing rate vs time
+
+    WHAT YOU DO:
+	You must first extract the timestamp information for the
+	desired clusters from the converted uff file.
+
+	STEP 1: First extract the cluster information from the uff file
+
+	    Given the uff file 'data.cut.sun' which contains manually 
+	    clustered stereotrode spike data, create a cluster id file
+	    data.cid.
+
+		uffextract data.cut.sun -c -o data.cid -v
+
+	    If multiple probes are present in the same file, the extraction 
+	    can be restricted to data from probe 1 with the command:
+
+		uffextract data.cut.sun -c -probe 1 -o data1.cid -v
+
+	STEP 2: extract timestamp data for the desired cluster
+
+	    cidextract data.cid -to tdata1 -no -cluster 1 -v
+	
+	You now have a timestamp data file 'tdata1' which can be used to compute
+	interval based analyses
+
+    CREATING POSITION FILES
+    ------------------------
+
+    WHAT YOU HAVE:
+	A uff file containing dual-diode xy position data
+    WHAT YOU WANT:
+	to perform a behavioral correlation analysis
+    WHAT YOU DO:
+
+	STEP 1: extract the position information from the uff file.
+	    Given the uff file 'data.cut.sun' which contains dual-diode xy 
+	    position data, create the position data file 'pdata1'
+
+		uffextract data.cut.sun -p -o pdata1 -v
+
+    PERFORMING INTERVAL ANALYSES
+    ----------------------------
+
+    WHAT YOU HAVE:
+	A timestamp data file (see above)
+    WHAT YOU WANT:
+	to perform an interval based analysis
+    WHAT YOU DO:
+
+    In each of these examples the output will be in the form of an ascii 
+    data file which can be viewed with the 'xplot' program. 
+
+    AUTOCORR
+
+    Given spiketime data file 'tdata1' the auto correlation
+    over a 200 msec interval with 1 msec bin size could be computed with 
+    the following command:
+
+	isi tdata1 -corr -bin 1 -tmax 200 -o acorr.out -v
+
+    CROSSCORR
+
+    Given spiketime data files 'tdata1' and 'tdata2' the cross correlation
+    over a 200 msec interval with 1 msec bin size could be computed with 
+    the following command:
+
+	isi tdata1 tdata2 -corr -bin 1 -tmax 200 -o xcorr.out -v
+
+    RATE vs TIME
+
+    Given spike data file 'tdata1', average spike rate as a function of time 
+    in 1 sec bins can be computed as follows
+
+	isi tdata1 -rate -bin 1000 -o rate.out -v
+
+    LOGINTERVAL vs TIME
+
+    Given spike data file 'tdata1', average inverse log interval
+    as a function of time in 1 sec bins can be computed as follows
+
+	isi tdata1 -rate -logtime -bin 1000 -o logint.out -v
+
+    ISI
+
+    The interspike interval histogram for spike time data 'tdata1'
+    with 10 msec bins and maximum interval of 1 sec can be computed using
+
+	isi tdata1 -isi -bin 10 -tmax 1000 -o isi.out -v
+
+    LOGISI
+
+    log isi for intervals up to 1 sec (10^3 msec) with 10 intervals per log
+    unit can be computed as follows
+
+	isi tdata1 -isi -logtime -bin .1 -tmax 3 -o logisi.out -v
+
+    PETH
+
+    Given event time file 'tevent1' and spiketime file 'tdata1', the PETH
+    for 200 msec can be computed as follows:
+
+	isi tevent1 tdata1 -corr -norm1 -tmax 200 -o peth.out -v
+
+
+    PERFORMING BEHAVIORAL CORRELATIONS
+    ----------------------------------
+
+    WHAT YOU HAVE:
+	A timestamp and position data file (see above)
+    WHAT YOU WANT:
+	to perform a behavioral correlation analysis
+    WHAT YOU DO:
+
+    POSITION
+
+    Given positional data file 'pdata1' and spiketime data files 'tdata1'
+    and 'tdata2' the xy spatial firing bias of spikes in tdata1 could
+    be computed with the following command:
+
+	behav pdata1 -t tdata1 -grid -xysize 20 -o grid.out -v
+
+    The output will be in the form of a 'xview' compatible binary
+    data file which can be viewed with the 'xview' program. There will
+    be 20 spatial bins in x and y. 
+
+    POSITION/DIRECTION
+
+    The directional firing bias as a function of position over the
+    range of 0 to 45 degrees could be computed using:
+
+	behav pdata1 -t tdata1 -dgrid 0 45 -xysize 20 -o dgrid0-45.out -v
+
+    DIRECTION
+
+    The total directional firing bias independent of position could be
+    computed with:
+
+	behav pdata1 -t tdata1 -dvector -dsize 100 -o dir.out -v
+
+    The output would be in the form of an ascii file with the normalized
+    spike event count as a function of direction with a 3.6 degree binsize.
+
+    OTHER STUFF
+
+    To compute the time-shifted correlation between spike data 'tdata1' and
+    future position 1 sec after firing
+	
+	behav pdata1 -ts tdata1 1000 -grid -xysize 20 -o gridpredict.out -v
+
+    To compute multiple unit time-shifted correlation between spikes
+    tdata1 and tdata2 and position 
+
+	behav pdata1 -t tdata1 -ts tdata2 10 -grid -xysize 20 -o grid12.out -v
+
+

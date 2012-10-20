@@ -1,0 +1,165 @@
+
+PROGRAM:
+    iolib.a
+
+DESCRIPTION:
+    Library of input/output functions used in the analysis/extraction suite of
+    programs.
+
+AUTHOR:
+    Written by Matthew Wilson
+    ARL Division of Neural Systems, Memory, and Aging
+    University of Arizona
+    Tucson, AZ 85724
+    wilson@nsma.arizona.edu
+
+DATES:
+    documentation update 11/91
+    small update 11/04, but still very incomplete
+
+FUNCTIONS:
+    #include "iolib.h"
+
+    char **ReadHeader(fp,headersize)
+    FILE *fp;
+    long *headersize;
+
+    void DisplayHeader(fpout,header,headersize)
+    FILE *fpout;
+    char **header;
+    long headersize;
+
+    void BeginStandardHeader(fpout,argc,argv,binaryver)
+    FILE *fpout;
+    int	 argc;
+    char **argv;
+    char *binaryver;
+
+    void EndStandardHeader(fpout)
+    FILE *fpout;
+
+    char *TFstr(bool)
+    int bool;
+
+    int sgetargs(line,n,vector)
+    char *line;
+    int n;
+    double *vector;
+
+    char *iolibversion()
+
+    int VerifyIdentical(file1,file2)
+    char *file1;
+    char *file2;
+
+
+DESCRIPTION:
+    These routines perform a set of standard operations on data files
+    used by the suite of UNIX-based analysis/extraction programs. 
+    The format of these data files consists of a standard ascii header
+    of variable size delimited by 'magic' beginning and end of header
+    strings. This is followed by the contents of the data file which
+    is of arbitrary format and is the responsibility of the application.
+    These routines manage the 'magic' strings which are transparent
+    to the user.
+
+    ReadHeader() reads the header from the file pointed to by fp and
+    returns the contents in a null terminated list of strings. The
+    headersize argument contains the length, in bytes, of the header.
+    If the routine is unsuccessful in reading a header it returns NULL and
+    the headersize is set to 0. If either the fp or headersize pointers
+    are NULL, the routine returns immediately and the value of headersize
+    is unaltered.
+
+    DisplayHeader() outputs the contents of a header read in by ReadHeader()
+    to the file pointed to by fpout.
+
+    BeginStandardHeader() prepares the beginning of the standard file
+    header by writing out header information to the file pointed to by fpout. 
+    The applicationname argument is simply used as a standard identifier
+    in the header and may be any arbitrary string.
+    This routine should be used by all programs which wish to write out 
+    standard file headers to their data files. 
+
+    EndStandardHeader() terminates a standard file header and should
+    be performed after the body of the header (if any)  has been written.
+
+    TFstr() returns the string "FALSE" if the value of bool = 0 and
+    the string "TRUE" otherwise.
+
+    sgetargs() parses a line containing numeric arguments and returns the
+    result in the double precision arrray 'vector'. n is the maximum
+    number of entries in the vector array. Note that the array must
+    be allocated and must be of at least size n or bad things will happen.
+    This function returns the actual number of arguments parsed from the
+    line.
+
+    VerifyIdentical() compares the data section of two files ignoring the
+    file headers (if any). This function returns 0 if the files match and
+    1 if they differ.
+
+    iolibversion() returns the version number of the library in a string.
+
+    iolibrevision() returns the revision number of the library in a string.
+
+NOTES:
+    The include file iolib.h contains extern definitions for the
+    functions contained in iolib.a and should be included in all
+    programs using iolib.a
+
+EXAMPLES:
+    
+    #include "iolib.h"
+
+    #define VERSION "1.0"
+
+    main(argc,argv)
+    int argc;
+    char **argv;
+    {
+    char	**header;
+    int		i;
+    long	headersize;
+    FILE	*fp;
+
+	.
+	.
+	.
+	/*
+	** read in the header from the file pointed to by fp
+	*/
+	header = ReadHeader(fp,&headersize);
+	/*
+	** examine the contents of the header
+	*/
+	if(header == NULL){
+	    fprintf(stderr,"no header\n");
+	} else {
+	    fprintf(stdout,"header size in bytes = %d\n",headersize);
+	    for(i=0;;i++){
+		if(header[i] == NULL) break;
+		fprintf(stdout,"%s\n",header[i]);
+	    }
+	    /*
+	    ** or use the built in routine for displaying header contents
+	    */
+	    DisplayHeader(fpout,header,headersize);
+	}
+	.
+	.
+	.
+	/*
+	** write a header to the file pointed to by fpout
+	*/
+	BeginStandardHeader(fpout,argc,argv,VERSION);
+	/*
+	** place arbitrary ascii information in the body of the header
+	*/
+	fprintf(fpout,"%% stuff for the header\n");
+	.
+	.
+	.
+	EndStandardHeader(fpout);
+    }
+    
+
