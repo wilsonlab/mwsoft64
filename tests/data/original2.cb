@@ -1,0 +1,39 @@
+%%BEGINHEADER
+% Program: 	xclust3
+% Program Version: 	3.3
+% Argc: 	1
+% Date: 	Mon Oct 22 16:52:30 2012
+% Directory: 	/home/stuart/src/mwl-svn-export/bin
+% Hostname: 	ubuntu
+% Architecture: 	i686
+% User: 	stuart ()
+% File type:	Ascii
+% Data files:
+%	data/original2.pxyabw : 41443 points
+%
+% Cluster Bounds definition file format:
+% 	clusterid
+% 	projection numbers
+% 	projection names
+% 	number of bounds coordinates
+% 	wx1 wy1
+% 	wx2 wy2
+% 	... ...
+% 	wxn wyn
+%
+%%ENDHEADER
+
+1
+3	4
+t_pa
+t_pb
+9
+246.547	857.43
+371.026	1132.23
+521.605	1227.35
+617.976	1261.17
+670.177	1176.62
+630.023	1049.79
+499.52	787.674
+367.01	671.414
+258.593	656.618
