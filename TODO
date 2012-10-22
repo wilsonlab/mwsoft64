@@ -6,3 +6,33 @@ TESTS:
 CODE:
  * Convert the version of xclust that can analyze waveforms with more than 32 samples
 
+
+
+TESTS TO IMPLEMENT
+==================================================================================================
+EXTRACTION COMMANDS:
+ - EEG: 
+	./adextract -eslen80 data/orig.raw -c -o data/eeg.orig.eeg
+ 
+ - Position:
+	./adextract data/original.pos.raw -o data/original.pos
+	./posextract data/original.pos -o data/original.p
+ 
+ - Tetrode:
+	./adextract data/original.spk.raw -eslen80 -t -probe 0 -o data/original.tt 
+
+- Spike Parms:
+	./spikeparms2 data/original2.tt -tetrode -parms t_px,t_py,t_pa,t_pb -o data/original2.pxyabw
+
+ANALYSIS COMMANDS:
+- SPIKEAVE:
+	./spikeavg data/original2.tt -if data/original.cb > data/original.ave
+
+
+
+
+REMOVING HEADERS FROM FILES
+===================================================================================================
+sed '/start/,/stop/ s/#.*//'
+
+sed '1,/<START>/ d'
