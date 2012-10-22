@@ -1,0 +1,8 @@
+TESTS:
+ * Position extraction
+ * EEG Extration
+ * Event Sting exraction
+ 
+CODE:
+ * Convert the version of xclust that can analyze waveforms with more than 32 samples
+

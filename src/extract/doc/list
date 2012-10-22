@@ -1,0 +1,54 @@
+
+PROGRAM/REFERENCE LIST:
+This list outlines the programs which make up the current set of UNIX-based
+unit analysis tools.
+
+    analysis suite ANAL1
+	behav
+	isi
+	spikesor
+	spikeavg
+	batchcorr
+
+    cluster suite CLUST1
+	autocluster
+	autooptimize
+	cluster
+	extract
+	optimize
+
+    conversion/extraction suite EXTRACT1
+	uffextract
+	cidextract
+	efextract
+	wbconv
+	wbextract
+    
+    display/output suite DISPLAY1
+	xplot
+	xview
+	pslayout
+
+    library routines LIB1
+	iolib.a
+    
+    tutorials TUT1
+	examples
+
+    file utilities UTIL1
+	header
+	editheader
+	cmpfiles
+
+    miscellaneous utilities UTIL2
+	add
+	mult
+	hist
+	2dhist
+	funcgen
+	rand
+	atob
+	cutline
+	cutcol
+	spectrum
+	FFTfilter
