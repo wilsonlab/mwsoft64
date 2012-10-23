@@ -41,7 +41,8 @@ def runTests():
 	testExtractTet()
 	testSpikeParms()
 	testSpikeAve()
-
+	rmTmpDir()
+	
 	report()
 
 def testExtractEEG():
@@ -112,7 +113,7 @@ def executeTest(cmd, orig, new):
 		return
 
 def areSameFile(orig, new):
-	out = [tmpDir + 'out1', 	tmpDir + 'out2']
+	out = [tmpDir + os.path.basename(orig) + '.tmp', 	tmpDir + os.path.basename(new) + '.tmp']
 	
 	cmd = [ "sed '1,/%%ENDHEADER/ d' " + orig + ' > ' + out[0], 
 		    "sed '1,/%%ENDHEADER/ d' " + new + ' > ' + out[1] ]
