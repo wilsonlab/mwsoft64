@@ -1,18 +1,18 @@
 %%BEGINHEADER
-% Program: 	./spikeavg
+% Program: 	./sa
 % Program Version: 	1.29
 % Argc: 	4
-% Argv[1] :	data/original2.tt
+% Argv[1] :	./tests/data/original2.tt
 % Argv[2] :	-if
-% Argv[3] :	data/original.cb
-% Date: 	Mon Oct 22 16:54:47 2012
-% Directory: 	/home/stuart/src/mwl-svn-export/bin
+% Argv[3] :	./tests/data/original2.cb
+% Date: 	Tue Oct 23 15:09:11 2012
+% Directory: 	/home/stuart/src/mwsoft64
 % Hostname: 	ubuntu
 % Architecture: 	i686
 % User: 	stuart ()
 % Units: 	AD
-% Input Spike file: 	data/original2.tt
-% Spike Index file: 	data/original.cb
+% Input Spike file: 	./tests/data/original2.tt
+% Spike Index file: 	./tests/data/original2.cb
 % Output file: 	STDOUT
 % File type: 	Ascii
 % Spike type: 	tetrode
