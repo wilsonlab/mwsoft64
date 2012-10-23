@@ -4,7 +4,7 @@ SHELL=/bin/bash
 BUILD_DIR=build
 
 
-all: lib  extract util popanal behav xclust xplot xview
+all: lib extract util popanal behav xclust xplot xview test
 
 lib:
 	mkdir -p $(BUILD_DIR)/lib;
@@ -65,6 +65,8 @@ extract: lib
 	                       #posextract \
 	                       #spikeparms2 
 	                       #textract
+test: lib extract
+	./run_test
 
 clean: 
  	#$(MAKE) -C src/ clean; 
