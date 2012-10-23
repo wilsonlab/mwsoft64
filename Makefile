@@ -65,7 +65,7 @@ extract: lib
 	                       #posextract \
 	                       #spikeparms2 
 	                       #textract
-test: lib extract
+test:
 	./run_test
 
 clean: 
