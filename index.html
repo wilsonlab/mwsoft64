@@ -45,7 +45,12 @@
         <section>
           <h3>Compiling the Software</h3>
             <p>
-              To compile the software under Ubuntu 12.04 <code>cd</code> into <code>src_dir</code> and invoke <code>make</code>. When the process finishes the compiled binaries can can then be found under: <code>src_dir/build/bin</code>
+              To compile the software under Ubuntu 12.04:
+              <pre align><code>$ sudo apt-get install build-essential libx11-dev csh xfonts-75dpi xfonts-100dpi
+$ cd mwsoft64
+$ make all</code></pre>
+          If compiliation is successfull, units tests will be extecuted to ensure that the resulting binaries can accruately open and manipulate the various wilson lab data files.
+
           <h4> Build Dependencies </h4>
           <ul>
           <li><code>libx11-dev</code></li>
