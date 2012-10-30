@@ -3,12 +3,12 @@
 #define OLDBINARY 100
 
 typedef struct field_range_type {
-    char	*name;
-    int32_t		index;
-    int32_t		hasstart;
-    double	start;
-    int32_t		hasend;
-    double	end;
+	char	*name;
+	int32_t		index;
+	int32_t		hasstart;
+	double	start;
+	int32_t		hasend;
+	double	end;
 } FieldRange;
 
 static blocksize = BLOCKSIZE;
@@ -19,8 +19,8 @@ CheckFieldRange(graph,rangedata)
 Graph		*graph;
 FieldRange	*rangedata;
 {
-char	*sptr;
-ProjectionInfo	*pinfo;
+	char	*sptr;
+	ProjectionInfo	*pinfo;
 
     /*
     ** check for range information
@@ -32,7 +32,7 @@ ProjectionInfo	*pinfo;
 	** any field specified?
 	*/
 	if(strlen(sptr) > 0){
-	    fprintf(stderr,"Field range limiting active\n");
+		fprintf(stderr,"Field range limiting active\n");
 	    /*
 	    ** look up the projection by name
 	    */
@@ -41,63 +41,63 @@ ProjectionInfo	*pinfo;
 		** if that fails then look  up by number
 		*/
 		pinfo = GetProjectionInfo(graph,Atoi(sptr));
-	    }
-	    if(pinfo){
+	}
+	if(pinfo){
 		rangedata->index = pinfo->projectionid;
 		fprintf(stderr,"\tField: '%s' (%d)\n",sptr,rangedata->index);
 		/*
 		** check the ranges
 		*/
 		if(sptr = GetItemValue("/epochmenu/startrange")){
-		    if(strlen(sptr) > 0){
-			rangedata->hasstart = 1;
+			if(strlen(sptr) > 0){
+				rangedata->hasstart = 1;
 			/*
 			** look for special timestamp format
 			*/
 			if(strchr(sptr,':')){
-			    rangedata->start = ParseTimestamp(sptr)/1e4;
+				rangedata->start = ParseTimestamp(sptr)/1e4;
 			} else {
-			    rangedata->start = atof(sptr);
+				rangedata->start = atof(sptr);
 			}
 			fprintf(stderr,"\tStart: %g\n",rangedata->start);
-		    }
 		}
-		if(sptr = GetItemValue("/epochmenu/endrange")){
-		    if(strlen(sptr) > 0){
+	}
+	if(sptr = GetItemValue("/epochmenu/endrange")){
+		if(strlen(sptr) > 0){
 			rangedata->hasend = 1;
 			if(strchr(sptr,':')){
-			    rangedata->end = ParseTimestamp(sptr)/1e4;
+				rangedata->end = ParseTimestamp(sptr)/1e4;
 			} else {
-			    rangedata->end = atof(sptr);
+				rangedata->end = atof(sptr);
 			}
 			fprintf(stderr,"\tEnd: %g\n",rangedata->end);
-		    }
 		}
-	    } else {
-		fprintf(stderr,
-		"Could not find field '%s' for range limiting\n",sptr);
-	    }
 	}
-    }
+} else {
+	fprintf(stderr,
+		"Could not find field '%s' for range limiting\n",sptr);
+}
+}
+}
 }
 
 SetRestoreFile(name)
 char *name;
 {
-    restorefile = name;
+	restorefile = name;
 }
 
 DataSource *AddSource(graph)
 Graph *graph;
 {
-DataSource	*source;
+	DataSource	*source;
 
     /*
     ** allocate it
     */
     if((source = (DataSource *)calloc(1,sizeof(DataSource))) == NULL){
-	fprintf(stderr,"MEMORY ERROR: unable to allocate data source\n");
-	return(NULL);
+    	fprintf(stderr,"MEMORY ERROR: unable to allocate data source\n");
+    	return(NULL);
     }
     /*
     ** insert it into the global list
@@ -112,8 +112,8 @@ DataSource	*source;
 Plot *ClosePlot(plot)
 Plot	*plot;
 {
-    if(plot == NULL) return(NULL);
-    if(plot->npoints > 0){
+	if(plot == NULL) return(NULL);
+	if(plot->npoints > 0){
 	/*
 	** assign the source defaults to the plot
 	UseSourceDefaults(plot->source,plot);
@@ -123,48 +123,48 @@ Plot	*plot;
 	** allocate space for the screen coordinates
 	*/
 	if(plot->coord == NULL){
-	    if((plot->coord = (Coord *)calloc(plot->npoints,sizeof(Coord))) ==
-	    NULL){
-		fprintf(stderr,"MEMORY ERROR: unable to allocate plot coordinates.\n");
+		if((plot->coord = (Coord *)calloc(plot->npoints,sizeof(Coord))) ==
+			NULL){
+			fprintf(stderr,"MEMORY ERROR: unable to allocate plot coordinates.\n");
 		fprintf(stderr,"\tToo many points (%d). Try a partial load.\n",
-		plot->npoints);
+			plot->npoints);
 		return(NULL);
-	    }
 	}
-	if(plot->fcoord == NULL){
-	    if((plot->fcoord = (FCoord *)calloc(plot->npoints,sizeof(FCoord)))
-	    == NULL){
+}
+if(plot->fcoord == NULL){
+	if((plot->fcoord = (FCoord *)calloc(plot->npoints,sizeof(FCoord)))
+		== NULL){
 
 		fprintf(stderr,"MEMORY ERROR: unable to allocate plot coordinates.\n");
-		fprintf(stderr,"\tToo many points (%d). Try a partial load.\n",
+	fprintf(stderr,"\tToo many points (%d). Try a partial load.\n",
 		plot->npoints);
-		return(NULL);
-	    }
-	}
-	if(plot->xhi < 0){
-	    plot->xhi = plot->npoints-1;
-	}
-    } else {
+	return(NULL);
+}
+}
+if(plot->xhi < 0){
+	plot->xhi = plot->npoints-1;
+}
+} else {
 #ifdef OLD
 	DeletePlot(plot);
 #endif
 	return(NULL);
-    }
-    return(plot);
+}
+return(plot);
 }
 
 Plot *AddPlot(graph,source)
 Graph 		*graph;
 DataSource	*source;
 {
-Plot	*plot;
+	Plot	*plot;
 
     /*
     ** allocate it
     */
     if((plot = (Plot *)calloc(1,sizeof(Plot))) == NULL){
-	fprintf(stderr,"MEMORY ERROR: unable to allocate plot\n");
-	return(NULL);
+    	fprintf(stderr,"MEMORY ERROR: unable to allocate plot\n");
+    	return(NULL);
     }
     /*
     ** insert it into the global list
@@ -180,8 +180,8 @@ Plot	*plot;
     plot->escale = 1;		
     plot->cscale = 1;		
     if((plot->rawdata = (DataCoord *)calloc(blocksize,sizeof(DataCoord))) == NULL){
-	fprintf(stderr,"MEMORY ERROR: unable to allocate coordinate block\n");
-	return(NULL);
+    	fprintf(stderr,"MEMORY ERROR: unable to allocate coordinate block\n");
+    	return(NULL);
     }
     plot->arraysize = blocksize;
     plot->npoints = 0;
@@ -202,20 +202,20 @@ DeleteSource(graph,source)
 Graph *graph;
 DataSource *source;
 {
-DataSource *s;
+	DataSource *s;
 
-    if(graph->source == source){
-	graph->source = source->next;
-	free(source);
-	return;
-    }
-    for(s=graph->source;s;s=s->next){
-	if(s->next == source){
-	    s->next = source->next;
-	    free(source);
-	    return;
+	if(graph->source == source){
+		graph->source = source->next;
+		free(source);
+		return;
 	}
-    }
+	for(s=graph->source;s;s=s->next){
+		if(s->next == source){
+			s->next = source->next;
+			free(source);
+			return;
+		}
+	}
 }
 
 int32_t AddPoint(plot,line,datavector,ndatafields)
@@ -224,19 +224,19 @@ char *line;
 char	*datavector;
 int32_t	ndatafields;
 {
-float	x,y,err;
-int32_t	nitems;
-int32_t	have_error;
-char	*ptr;
-char	*strchr();
-double	vector[100];
-int32_t	i;
-int32_t	shift;
-double	dval;
-ProjectionInfo	*pinfo;
-char	namestr[80];
+	float	x,y,err;
+	int32_t	nitems;
+	int32_t	have_error;
+	char	*ptr;
+	char	*strchr();
+	double	vector[100];
+	int32_t	i;
+	int32_t	shift;
+	double	dval;
+	ProjectionInfo	*pinfo;
+	char	namestr[80];
 
-    shift = 0;
+	shift = 0;
     /*
     ** is the data coming from the line or the data vector
     */
@@ -245,56 +245,56 @@ char	namestr[80];
 	** from the data vector
 	*/
 	nitems = ndatafields;
-    } else 
+} else 
 	/*
 	** from the line
 	*/
-    if(line != NULL){
+	if(line != NULL){
 	/*
 	** deal with comments
 	*/
 	if(ptr = strchr(line,'%')){
-	    *ptr = '\0';
+		*ptr = '\0';
 	}
 	/*
 	** get the coordinates
 	*/
 	nitems = sgetargs(line,100,vector);
 	if(nitems < 1){
-	    return(0);
+		return(0);
 	}
-    } else {
+} else {
 	return(0);
-    }
+}
     /*
     ** deal with the case of no header info and fill in the missing info
     ** based upon what was found
     */
     if((plot->graph->source->nsourcefields == 0) && (nitems > 0)){
-	plot->graph->source->nsourcefields = nitems;
-	for(i=0;i<nitems;i++){
-	    sprintf(namestr,"P%d",i);
-	    AddProjectionInfo(plot->graph,i,namestr,FLOAT,sizeof(float));
-	}
-	plot->graph->source->recordsize = nitems*sizeof(float);
+    	plot->graph->source->nsourcefields = nitems;
+    	for(i=0;i<nitems;i++){
+    		sprintf(namestr,"P%d",i);
+    		AddProjectionInfo(plot->graph,i,namestr,FLOAT,sizeof(float));
+    	}
+    	plot->graph->source->recordsize = nitems*sizeof(float);
     }
     /*
     ** fill the data vector
     */
     if(plot->ndatafields != 0 && plot->ndatafields != nitems && suppresswarnings == 0){
-	fprintf(stderr,"warning: mismatch in data vector size (%d fields) at point %d\n",
-	nitems,plot->npoints);
+    	fprintf(stderr,"warning: mismatch in data vector size (%d fields) at point %d\n",
+    		nitems,plot->npoints);
     } else {
     /*
 	plot->ndatafields = nitems;
 	*/
-    }
+}
 #ifdef OLD
     /*
     ** check for some special cases of implied x coordinates
     */
     if((nitems == 1) && (plot->auto_x == 0)){
-	plot->auto_x = 1;
+    	plot->auto_x = 1;
 	/*
 	** check to see if the projections have been established
 	*/
@@ -307,58 +307,58 @@ char	namestr[80];
 		** and shift it over
 		*/
 		AddProjectionInfo(plot->graph,1,pinfo->name,pinfo->type,pinfo->size);
-	    }
+	}
 	    /*
 	    ** add the autox projection
 	    */
 	    AddProjectionInfo(plot->graph,0,"autox",FLOAT,sizeof(float));
 	} 
-    }
-    if(plot->auto_x == 1){
+}
+if(plot->auto_x == 1){
 	shift = 1;
-    } else {
+} else {
 	shift = 0;
-    }
+}
 #endif
     /*
     ** if range restrictions are in force then check them
     */
     if(rangedata.hasstart){
-	if((pinfo=GetProjectionInfo(plot->graph,rangedata.index)) == NULL){
-	    fprintf(stderr,"ERROR: unable to find projection %d for range\n",rangedata.index);
-	}
-	dval = GetDoubleFromRawData(datavector,pinfo);
-	if(datavector){
-	    if(dval  < rangedata.start){
-		return(0);
-	    } 
-	} else
-	if(vector[rangedata.index] < rangedata.start){
-	    return(0);
-	}
+    	if((pinfo=GetProjectionInfo(plot->graph,rangedata.index)) == NULL){
+    		fprintf(stderr,"ERROR: unable to find projection %d for range\n",rangedata.index);
+    	}
+    	dval = GetDoubleFromRawData(datavector,pinfo);
+    	if(datavector){
+    		if(dval  < rangedata.start){
+    			return(0);
+    		} 
+    	} else
+    	if(vector[rangedata.index] < rangedata.start){
+    		return(0);
+    	}
     }
     if(rangedata.hasend){
-	if((pinfo=GetProjectionInfo(plot->graph,rangedata.index)) == NULL){
-	    fprintf(stderr,"ERROR: unable to find projection %d for range\n",rangedata.index);
-	}
-	dval = GetDoubleFromRawData(datavector,pinfo);
-	if(datavector){
-	    if(dval > rangedata.end){
-		return(0);
-	    }
-	} else
-	if(vector[rangedata.index] > rangedata.end){
-	    return(0);
-	}
+    	if((pinfo=GetProjectionInfo(plot->graph,rangedata.index)) == NULL){
+    		fprintf(stderr,"ERROR: unable to find projection %d for range\n",rangedata.index);
+    	}
+    	dval = GetDoubleFromRawData(datavector,pinfo);
+    	if(datavector){
+    		if(dval > rangedata.end){
+    			return(0);
+    		}
+    	} else
+    	if(vector[rangedata.index] > rangedata.end){
+    		return(0);
+    	}
     }
     /*
     ** allocate the data vector
     */
     if((plot->rawdata[plot->npoints].data = 
-	(char *)calloc(1,plot->source->recordsize + shift*sizeof(float))) == NULL){
-	fprintf(stderr,"MEMORY ERROR: unable to allocate data vector of size %d\n", plot->source->recordsize);
-	return(-1);
-    }
+    	(char *)calloc(1,plot->source->recordsize + shift*sizeof(float))) == NULL){
+    	fprintf(stderr,"MEMORY ERROR: unable to allocate data vector of size %d\n", plot->source->recordsize);
+    return(-1);
+}
     /*
     ** assign the implied x coord if defined
     if(plot->auto_x == 1){
@@ -368,21 +368,21 @@ char	namestr[80];
     */
     plot->rawdata[plot->npoints].datasize = plot->source->recordsize +shift*sizeof(float);
     if(datavector){
-	    bcopy(datavector,
-	    plot->rawdata[plot->npoints].data+shift*sizeof(float),plot->source->recordsize);
+    	bcopy(datavector,
+    		plot->rawdata[plot->npoints].data+shift*sizeof(float),plot->source->recordsize);
     } else {
 	/*
 	** copy the parsed data into the coordinate vector
 	*/
 	for(i=0;i<nitems;i++){
 
-	    if((pinfo=GetProjectionInfo(plot->graph,i+shift)) == NULL){
-		fprintf(stderr,"ERROR: unable to find projection %d for range\n",rangedata.index);
-		break;
-	    }
-	    AssignRawDataFromDouble(plot->rawdata[plot->npoints].data,pinfo,vector[i]);
+		if((pinfo=GetProjectionInfo(plot->graph,i+shift)) == NULL){
+			fprintf(stderr,"ERROR: unable to find projection %d for range\n",rangedata.index);
+			break;
+		}
+		AssignRawDataFromDouble(plot->rawdata[plot->npoints].data,pinfo,vector[i]);
 	}
-    }
+}
     /*
     ** assign the point to the default cluster
     */
@@ -399,19 +399,19 @@ char	namestr[80];
     ** keep track of the min max values
     */
     if((pinfo=GetProjectionInfo(plot->graph, plot->graph->currentprojection[0])) != NULL){
-	x = GetDoubleFromRawData(plot->rawdata[plot->npoints].data,pinfo);
+    	x = GetDoubleFromRawData(plot->rawdata[plot->npoints].data,pinfo);
     }
     if((pinfo=GetProjectionInfo(plot->graph, plot->graph->currentprojection[1])) != NULL){
-	y = GetDoubleFromRawData(plot->rawdata[plot->npoints].data,pinfo);
+    	y = GetDoubleFromRawData(plot->rawdata[plot->npoints].data,pinfo);
     }
     if(plot->npoints < 1){
-	plot->xmin = plot->xmax = x;
-	plot->ymin = plot->ymax = y;
+    	plot->xmin = plot->xmax = x;
+    	plot->ymin = plot->ymax = y;
     } else {
-	if(x < plot->xmin) plot->xmin = x;
-	if(x > plot->xmax) plot->xmax = x;
-	if(y < plot->ymin) plot->ymin = y;
-	if(y > plot->ymax) plot->ymax = y;
+    	if(x < plot->xmin) plot->xmin = x;
+    	if(x > plot->xmax) plot->xmax = x;
+    	if(y < plot->ymin) plot->ymin = y;
+    	if(y > plot->ymax) plot->ymax = y;
     }
     /*
     ** increment the points counter
@@ -423,23 +423,23 @@ char	namestr[80];
     ** necessary
     */
     if(plot->npoints%blocksize == 0){
-	plot->arraysize += blocksize;
-	if(plot->rawdata){
-	    if((plot->rawdata = (DataCoord *)
-	    realloc(plot->rawdata,plot->arraysize*sizeof(DataCoord))) == NULL){
-		fprintf(stderr,
-		"MEMORY ERROR: unable to reallocate data vector while adding point %d\n",plot->npoints);
-		return(-1);
-	    }
-	}
+    	plot->arraysize += blocksize;
+    	if(plot->rawdata){
+    		if((plot->rawdata = (DataCoord *)
+    			realloc(plot->rawdata,plot->arraysize*sizeof(DataCoord))) == NULL){
+    			fprintf(stderr,
+    				"MEMORY ERROR: unable to reallocate data vector while adding point %d\n",plot->npoints);
+    		return(-1);
+    	}
     }
-    return(1);
+}
+return(1);
 }
 
 LoadGraphData(graph)
 Graph	*graph;
 {
-DataSource	*source;
+	DataSource	*source;
 
     /*
     ** set the default blocksize
@@ -452,7 +452,7 @@ DataSource	*source;
     ** go through the data sources
     */
     for(source=graph->source;source;source=source->next){
-	LoadPlotFromSource(graph,source);
+    	LoadPlotFromSource(graph,source);
     }
     /*
     ** initialize cluster assignments
@@ -467,8 +467,8 @@ int32_t		index;
 int32_t		byteoffset;
 int32_t		lineoffset;
 {
-PlotOffset	*plotoffset;
-PlotOffset	*newpoffset;
+	PlotOffset	*plotoffset;
+	PlotOffset	*newpoffset;
 
     /*
     ** add the file position information for the specified plot
@@ -483,21 +483,21 @@ PlotOffset	*newpoffset;
 	    ** check for consistency
 	    */
 	    if(plotoffset->byteoffset != byteoffset){
-		fprintf(stderr,
-		"ERROR: inconsistency in byte offsets (%d:%d) for plot %d\n",
-		plotoffset->byteoffset,byteoffset,index);
+	    	fprintf(stderr,
+	    		"ERROR: inconsistency in byte offsets (%d:%d) for plot %d\n",
+	    		plotoffset->byteoffset,byteoffset,index);
 	    } 
 	    if(plotoffset->lineoffset != lineoffset){
-		fprintf(stderr,
-		"ERROR: inconsistency in line offsets (%d:%d) for plot %d\n",
-		plotoffset->lineoffset,lineoffset,index);
+	    	fprintf(stderr,
+	    		"ERROR: inconsistency in line offsets (%d:%d) for plot %d\n",
+	    		plotoffset->lineoffset,lineoffset,index);
 	    }
 	    /*
 	    ** just go back
 	    */
 	    return(1);
 	}
-    }
+}
     /*
     ** otherwise add it to the list
     */
@@ -514,46 +514,46 @@ PlotOffset *FindOffset(source,index)
 DataSource	*source;
 int32_t		index;
 {
-PlotOffset	*poffset;
+	PlotOffset	*poffset;
 
-    for(poffset=source->plotoffset;poffset;poffset=poffset->next){
-	if(poffset->index == index){
-	    return(poffset);
+	for(poffset=source->plotoffset;poffset;poffset=poffset->next){
+		if(poffset->index == index){
+			return(poffset);
+		}
 	}
-    }
-    return(NULL);
+	return(NULL);
 }
 
 FILE *OpenSource(source)
-     DataSource *source;
+DataSource *source;
 {
-  FILE *fp;
+	FILE *fp;
 
   /* is the file closed? */
-  if(source->fp == NULL) {
-    
+	if(source->fp == NULL) {
+
     /* use stdin only if in FULL_LOAD mode */
-    if(strcmp(source->filename,"STDIN") == 0){
+		if(strcmp(source->filename,"STDIN") == 0){
 
-      if(source->loadmode != FULL_LOAD){
-	printf("can't open 'STDIN' in partial load mode \n");
-	return(NULL);
-      } else {
-	fp = stdin;
-      }
+			if(source->loadmode != FULL_LOAD){
+				printf("can't open 'STDIN' in partial load mode \n");
+				return(NULL);
+			} else {
+				fp = stdin;
+			}
 
-    } else {
-      if((fp = fopen(source->filename,"r")) == NULL){
-	printf("can't open file '%s'\n",source->filename);
-	return(NULL);
-      }
-    }
-    
-  } else {
-    fp = source->fp;
-  }
+		} else {
+			if((fp = fopen(source->filename,"r")) == NULL){
+				printf("can't open file '%s'\n",source->filename);
+				return(NULL);
+			}
+		}
 
-  return fp;
+	} else {
+		fp = source->fp;
+	}
+
+	return fp;
 }
 
 
@@ -564,88 +564,88 @@ Graph	*graph;
 DataSource	*source;
 {
   /* local variables */
-static char timestampstr[50];
-Plot	*plot;
-Plot	*oldplot;
+	static char timestampstr[50];
+	Plot	*plot;
+	Plot	*oldplot;
 /* FILE	*fp; */
-char	line[1001];
-char	lastline[1001];
-int32_t	headersize;
-char	**header;
-char	*filetype;
-int32_t	*vectorformat;
-char	vector[1000];
-double  dvector[100]; 
-unsigned char diodeval[4];
-int16_t diodeval2[4];
-char	*parmnames;
-char	*sptr;
-int32_t	fieldcount;
-int32_t	bytefileoffset;
-int32_t	linefileoffset;
-int32_t	xsize,ysize;
-PlotOffset	*poffset;
-uint32_t timestamp;
-char		str[30];
-int32_t	i,j;
-FieldInfo	fieldinfo;
-int32_t	status;
-int32_t	got_header;
-int16_t	type;
-int16_t	size;
-char	channelstr[80];
-char	*nchannelstr;
-char	*ratestr;
-double	time;
-int32_t	startline_temp;
+	char	line[1001];
+	char	lastline[1001];
+	int32_t	headersize;
+	char	**header;
+	char	*filetype;
+	int32_t	*vectorformat;
+	char	vector[1000];
+	double  dvector[100]; 
+	unsigned char diodeval[4];
+	int16_t diodeval2[4];
+	char	*parmnames;
+	char	*sptr;
+	int32_t	fieldcount;
+	int32_t	bytefileoffset;
+	int32_t	linefileoffset;
+	int32_t	xsize,ysize;
+	PlotOffset	*poffset;
+	uint32_t timestamp;
+	char		str[30];
+	int32_t	i,j;
+	FieldInfo	fieldinfo;
+	int32_t	status;
+	int32_t	got_header;
+	int16_t	type;
+	int16_t	size;
+	char	channelstr[80];
+	char	*nchannelstr;
+	char	*ratestr;
+	double	time;
+	int32_t	startline_temp;
 
- int32_t	id_column = 0;
- int32_t	id_type = INVALID_TYPE;
- int32_t	id_offset = 0;
- float	flastid = 0;
- int32_t	ilastid = 0;
-int32_t	lastrec = 0;
-int32_t	lastid = 0;
+	int32_t	id_column = 0;
+	int32_t	id_type = INVALID_TYPE;
+	int32_t	id_offset = 0;
+	float	flastid = 0;
+	int32_t	ilastid = 0;
+	int32_t	lastrec = 0;
+	int32_t	lastid = 0;
  int32_t	firstpass = 0; /* is this our first time through the source file*/
- char *tmpstr;
+	char *tmpstr = NULL;
 
 
-    oldplot = NULL;
-    plot = NULL;
-    got_header = 0;
+	oldplot = NULL;
+	plot = NULL;
+	got_header = 0;
 
   /*only load from file */
-  if(source->type == FROM_FILE) {
+	if(source->type == FROM_FILE) {
 
     /* open the source file */
-    if ((source->fp = OpenSource(source)) == NULL)
-      return(NULL);
+		if ((source->fp = OpenSource(source)) == NULL)
+			return(NULL);
 
     /* is it the beginning of the file? */
-    if(source->currentline == 0){ 
+		if(source->currentline == 0){ 
 
-      firstpass = 1;
-      
+			firstpass = 1;
+
       /* read the file header */
-      header = ReadHeader(source->fp,&headersize);
-      
-      /* compare architectures */
-	   
-      if((GetLocalArchitecture() == GetFileArchitecture(header)) ||
-	 (GetFileArchitecture(header) == ARCH_UNKNOWN)) {
-	source->convert = 0;
+			header = ReadHeader(source->fp,&headersize);
 
-      } else {
-	source->convert = 1;
-	fprintf(stderr,"Data conversion no longer supported");
-	exit(0);
-      }
-      
-      got_header = 1;
-      source->headersize = headersize;
+      /* compare architectures */
+
+			if((GetLocalArchitecture() == GetFileArchitecture(header)) ||
+				(GetFileArchitecture(header) == ARCH_UNKNOWN)) {
+				source->convert = 0;
+
+		} else {
+			source->convert = 1;
+			fprintf(stderr,"Data conversion no longer supported");
+			exit(0);
+		}
+
+		got_header = 1;
+		source->headersize = headersize;
 
       /* track the position of the first plot */
-      SavePlotOffset(source,source->currentplot,ftell(source->fp),source->currentline);
+		SavePlotOffset(source,source->currentplot,ftell(source->fp),source->currentline);
 
 
       /* get fileformat */
@@ -661,7 +661,7 @@ int32_t	lastid = 0;
 /* 	} */
 
 /*       } else { */
-	source->fileformat = GetFileType(header);
+		source->fileformat = GetFileType(header);
 /*       } */
 
 
@@ -706,25 +706,25 @@ int32_t	lastid = 0;
 /*       } */
 
       /* get field info */
-      parmnames = GetFieldString(header);
-      fieldcount = GetFieldCount(parmnames);
-      if(debug) fprintf(stderr,"count = %d ; fieldstr = '%s'\n",fieldcount,parmnames);
+		parmnames = GetFieldString(header);
+		fieldcount = GetFieldCount(parmnames);
+		if(debug) fprintf(stderr,"count = %d ; fieldstr = '%s'\n",fieldcount,parmnames);
 
       /*
       ** if the file format is empty assume ASCII
       */
       if(source->fileformat == INVALID_TYPE){
-	fprintf(stderr,"No filetype found in header.  Assuming ASCII.\n");
-	source->fileformat = ASCII;
+      	fprintf(stderr,"No filetype found in header.  Assuming ASCII.\n");
+      	source->fileformat = ASCII;
       }
 
       if(fieldcount == 0){
-	if(source->fileformat == ASCII){
-	  fprintf(stderr,"No Fields found in header.  Assuming default floating point fields.\n");
-	} else {
-	  fprintf(stderr,"No Fields found in header. Unable to read datafile.\n");
-	  exit(-1);
-	}
+      	if(source->fileformat == ASCII){
+      		fprintf(stderr,"No Fields found in header.  Assuming default floating point fields.\n");
+      	} else {
+      		fprintf(stderr,"No Fields found in header. Unable to read datafile.\n");
+      		exit(-1);
+      	}
       }
 
       if((source->fileformat == ASCII) || (source->fileformat == BINARY)){
@@ -735,22 +735,22 @@ int32_t	lastid = 0;
 	fprintf(stderr,"\nProjection:\ttype\tsize\tcount\n");
 	source->recordsize = 0;
 	for(i=0;i<fieldcount;i++){
-	  GetFieldInfoByNumber(parmnames,i,&fieldinfo);
-	  type = fieldinfo.type;
-	  size = fieldinfo.size;
+		GetFieldInfoByNumber(parmnames,i,&fieldinfo);
+		type = fieldinfo.type;
+		size = fieldinfo.size;
 	  /*
 	  ** echo the field name
 	  */
 	  // printf("%s", FieldTypeToString(fieldinfo.type));
 	  fprintf(stderr,"P%d :'%s'\t%d\t%d\t%d\t(%c)\n", i, fieldinfo.name, fieldinfo.type, fieldinfo.size, fieldinfo.count, FieldTypeToString(fieldinfo.type) );
 	  if(fieldinfo.count > 1){
-	    fprintf(stderr,"ERROR: multiple count (%d) fields (%s) not supported\n",fieldinfo.count,fieldinfo.name);
-	    exit(0);
+	  	fprintf(stderr,"ERROR: multiple count (%d) fields (%s) not supported\n",fieldinfo.count,fieldinfo.name);
+	  	exit(0);
 	  }
 	  if(fieldinfo.type == -1){
-	    fprintf(stderr,"No valid type information found for field %s.  Assuming default floating point fields.\n", fieldinfo.name);
-	    type = FLOAT;
-	    size = sizeof(float);
+	  	fprintf(stderr,"No valid type information found for field %s.  Assuming default floating point fields.\n", fieldinfo.name);
+	  	type = FLOAT;
+	  	size = sizeof(float);
 	  }
 	  
 	  /*
@@ -762,23 +762,23 @@ int32_t	lastid = 0;
 	    ** and set the projection name to the field name
 	    */
 	    if(SetProjectionName(graph,i,fieldinfo.name) == 0){
-	      AddProjectionInfo(graph,i,fieldinfo.name,type,size);
+	    	AddProjectionInfo(graph,i,fieldinfo.name,type,size);
 	    }
-	  }
-	  source->recordsize += size;
 	}
-	source->nsourcefields = fieldcount;
-	fprintf(stderr,"total recordsize = %d bytes\n",source->recordsize);
-	
+	source->recordsize += size;
+}
+source->nsourcefields = fieldcount;
+fprintf(stderr,"total recordsize = %d bytes\n",source->recordsize);
+
 	/* Check to see if we have a time or timestamp field
 	** (used below to test whether we can use a
 	** 'degenerate parm-file 
 	*/
 	if (!GetFieldInfoByName(parmnames,"timestamp",&fieldinfo) &&
-	    !GetFieldInfoByName(parmnames,"time",&fieldinfo))
-	  source->notimefield = 1;
+		!GetFieldInfoByName(parmnames,"time",&fieldinfo))
+		source->notimefield = 1;
 	
-      }
+}
 
       /*
       ** deal with old and new binary formats
@@ -788,10 +788,10 @@ int32_t	lastid = 0;
 	** is this an old binary format file?
 	*/
 	if(fieldinfo.type == -1){
-	  source->fileformat = OLDBINARY;
+		source->fileformat = OLDBINARY;
 	}
-      }
-    }
+}
+}
 
     /*
     ** look for any field range restrictions
@@ -812,31 +812,31 @@ int32_t	lastid = 0;
       ** rewinding is necessary
       */
       if(source->startline < source->currentline){
-	fseek(source->fp,source->headersize,0L);
-	source->currentline = 0;
+      	fseek(source->fp,source->headersize,0L);
+      	source->currentline = 0;
       }
       if(source->currentline == 0){
-	switch(source->fileformat){
-	case BINARY:
-	  if (debug) fprintf(stderr,"BINARY format\n");
-	  if(got_header)
-	    source->nsourcefields = fieldcount;
-	  break;
+      	switch(source->fileformat){
+      		case BINARY:
+      		if (debug) fprintf(stderr,"BINARY format\n");
+      		if(got_header)
+      			source->nsourcefields = fieldcount;
+      		break;
 /* 	case EEG: */
 /* 	  if (debug) fprintf(stderr,"EEG format\n"); */
 /* 	  source->nsourcefields = source->nchannels +1; */
 /* 	  source->recordsize = sizeof(uint32_t) + source->nchannels*sizeof(int16_t); */
 /* 	  break; */
-	case ASCII:
-	  if (debug) fprintf(stderr,"ASCII format\n");
-	  if(got_header)
-	    source->nsourcefields = fieldcount;
-	  break;
-	default:
-	  break;
-	}
+      		case ASCII:
+      		if (debug) fprintf(stderr,"ASCII format\n");
+      		if(got_header)
+      			source->nsourcefields = fieldcount;
+      		break;
+      		default:
+      		break;
+      	}
       }
-    } else if(source->loadmode == PARTIAL_PLOT_LOAD){
+  } else if(source->loadmode == PARTIAL_PLOT_LOAD){
       /*
       ** prepare to partially load the file by plot
       */
@@ -855,11 +855,11 @@ int32_t	lastid = 0;
 	** beginning of the plot
 	*/
 	if((poffset = FindOffset(source,source->startplot)) == NULL){
-	  fprintf(stderr,"unable to locate offset for plot %d\n",
-		  source->startplot);
-	  fseek(source->fp,source->headersize,0L);
-	  source->currentline = 0;
-	    source->currentplot = 0;
+		fprintf(stderr,"unable to locate offset for plot %d\n",
+			source->startplot);
+		fseek(source->fp,source->headersize,0L);
+		source->currentline = 0;
+		source->currentplot = 0;
 	} else {
 	  /*
 	  ** position the file at the beginning of the plot
@@ -868,59 +868,59 @@ int32_t	lastid = 0;
 	  source->currentline = poffset->lineoffset;
 	  source->currentplot = source->startplot;
 	}
-      }
+}
       /*
       ** if its the beginning of the file then skip past the
       ** vector info header
       */
       if(source->currentplot == 0){
-	switch(source->fileformat){
-	case BINARY:
-	  fprintf(stderr,"BINARY format\n");
-	  if(got_header)
-	    source->nsourcefields = fieldcount;
-	  break;
+      	switch(source->fileformat){
+      		case BINARY:
+      		fprintf(stderr,"BINARY format\n");
+      		if(got_header)
+      			source->nsourcefields = fieldcount;
+      		break;
 /* 	case EEG: */
 /* 	  fprintf(stderr,"EEG format\n"); */
 /* 	  source->nsourcefields = source->nchannels +1; */
 /* 	  source->recordsize = sizeof(uint32_t) + source->nchannels*sizeof(int16_t); */
 /* 	  break; */
-	case ASCII:
-	  fprintf(stderr,"ASCII format\n");
-	  if(got_header)
-	    source->nsourcefields = fieldcount;
-	  break;
-	default:
-	  break;
-	}
+      		case ASCII:
+      		fprintf(stderr,"ASCII format\n");
+      		if(got_header)
+      			source->nsourcefields = fieldcount;
+      		break;
+      		default:
+      		break;
+      	}
       }
-    } else {
-      switch(source->fileformat){
-      case BINARY:
-	fprintf(stderr,"BINARY format\n");
-	if(got_header)
-	    source->nsourcefields = fieldcount;
-	break;
+  } else {
+  	switch(source->fileformat){
+  		case BINARY:
+  		fprintf(stderr,"BINARY format\n");
+  		if(got_header)
+  			source->nsourcefields = fieldcount;
+  		break;
 /*       case EEG: */
 /* 	fprintf(stderr,"EEG format\n"); */
 /* 	source->nsourcefields = source->nchannels +1; */
 /* 	source->recordsize = sizeof(uint32_t) + source->nchannels*sizeof(int16_t); */
 /* 	break; */
-      case ASCII:
-	fprintf(stderr,"ASCII format\n");
-	if(got_header)
-	  source->nsourcefields = fieldcount;
-	break;
-      default:
-	break;
-      }
-    }
-    
-    status = 0;
-    
+  		case ASCII:
+  		fprintf(stderr,"ASCII format\n");
+  		if(got_header)
+  			source->nsourcefields = fieldcount;
+  		break;
+  		default:
+  		break;
+  	}
+  }
+
+  status = 0;
+
     /* DO THE ACTUAL LOADING */
-    while(!feof(source->fp) && (status != -1)){
-      oldplot = plot;
+  while(!feof(source->fp) && (status != -1)){
+  	oldplot = plot;
       /*
       ** keep track of the file position
       */
@@ -930,12 +930,12 @@ int32_t	lastid = 0;
       ** is this an ascii or a binary file
       */
       switch(source->fileformat){
-      case ASCII:
+      	case ASCII:
 	/*
 	** read a line from the data file
 	*/
 	if(fgets(line,1000,source->fp) == NULL) {
-	  break;
+		break;
 	}
 	if(line[0] == '%') continue;
 	line[1000] = '\0';
@@ -947,20 +947,20 @@ int32_t	lastid = 0;
 	strcpy(lastline, line);
 	
 	if(source->loadmode == PARTIAL_LOAD){
-	  if((source->startline >= 0) && 
-	       (source->currentline <= source->startline)){
-	    continue;
-	  }
-	  if((source->endline >= 0) && 
-	     (source->currentline > source->endline+1)) { 
+		if((source->startline >= 0) && 
+			(source->currentline <= source->startline)){
+			continue;
+	}
+	if((source->endline >= 0) && 
+		(source->currentline > source->endline+1)) { 
 	    /* don't break, but continue, so we can use
 	    ** currentline to determine the number of
 	    ** records below */
-	    continue;
-	  }
-	}
-	DoCommand(graph,&plot,line);
-	break;
+	continue;
+}
+}
+DoCommand(graph,&plot,line);
+break;
 /*       case EEG: */
 /* 	/\* */
 /* 	** read the timestamp */
@@ -995,7 +995,7 @@ int32_t	lastid = 0;
 /* 	      continue; */
 /* 	    } */
 /* 	  } */
-	  
+
 
 /* 	  /\* */
 /* 	  ** add it to the plot */
@@ -1006,12 +1006,12 @@ int32_t	lastid = 0;
 /* 	} */
 /* 	plot->title = timestampstr; */
 /* 	break; */
-	case BINARY:
+case BINARY:
 	  /*
 	  ** read the data vector
 	  */
 	  if(fread(vector,sizeof(char),source->recordsize,source->fp) != 
-	     source->recordsize) break;
+	  	source->recordsize) break;
 	  /*
 	    if(source->convert){
 	    for(i=0;i<source->nsourcefields;i++){
@@ -1019,55 +1019,55 @@ int32_t	lastid = 0;
 	    }
 	    }
 	  */
-	  source->currentline++;
-	  if(source->loadmode == PARTIAL_LOAD){
+	    source->currentline++;
+	    if(source->loadmode == PARTIAL_LOAD){
 	    /* test for special '-1' startline, which indicates start of file */
-	    if((source->startline >= 0) && 
-	       (source->currentline <= source->startline)){
-	      continue;
+	    	if((source->startline >= 0) && 
+	    		(source->currentline <= source->startline)){
+	    		continue;
 	    }
 	    
 	    /* test for special '-1' endline, which indicates end of tile */
 	    if((source->endline >= 0) && 
-	       (source->currentline > source->endline+1)) { 
+	    	(source->currentline > source->endline+1)) { 
 	      /* don't break, but continue, so we can use
 	      ** currentline to determine the number of
 	      ** records below */
-	      continue;
-	    }
-	  }
+	  continue;
+	}
+}
 	  /*
 	  ** add it to the plot
 	  */
 	  status = AddPoint(plot,NULL,vector,source->nsourcefields);
 	  break;
-      }
-      
-      if(source->loadmode == PARTIAL_PLOT_LOAD){
-	if((source->endplot >= 0) && 
-	   (source->currentplot > source->endplot)){
-	  break;
 	}
-      }
-    }
-    
-    plot = ClosePlot(plot);
-    if(source->loadmode == PARTIAL_PLOT_LOAD){
-      plot = oldplot;
-    }
-    
-    if(source->loadmode == FULL_LOAD){
-      fclose(source->fp);
-      source->fp = NULL;
-    }
-    source->plot = plot;
-    
-  }
-  
-  
-  if(plot != NULL){
-    SelectPlot(plot);
-    
+
+	if(source->loadmode == PARTIAL_PLOT_LOAD){
+		if((source->endplot >= 0) && 
+			(source->currentplot > source->endplot)){
+			break;
+	}
+}
+}
+
+plot = ClosePlot(plot);
+if(source->loadmode == PARTIAL_PLOT_LOAD){
+	plot = oldplot;
+}
+
+if(source->loadmode == FULL_LOAD){
+	fclose(source->fp);
+	source->fp = NULL;
+}
+source->plot = plot;
+
+}
+
+
+if(plot != NULL){
+	SelectPlot(plot);
+
     /* Determine whether this file is suitable for lookups of
     ** time<-->spike index. Flag the source object so we can test
     ** this flag, e.g. when we want to look up epoch start/end
@@ -1111,10 +1111,10 @@ int32_t	lastid = 0;
     **
     **     - (8) problem 4 and 7
     */
-	
+
     if(source->loadmode == PARTIAL_LOAD && firstpass){
 
-      source->timelookupfile = INVALIDFILE;
+    	source->timelookupfile = INVALIDFILE;
 
       /*
       ** First test whether it's degenerate by comparing # of
@@ -1122,34 +1122,34 @@ int32_t	lastid = 0;
       ** (lastid).
       **
       */
-	  
+
       /* get 'id' field column and type */
       GetFieldInfoByName(parmnames,"id",&fieldinfo);
       id_column = fieldinfo.column;
       id_type = fieldinfo.type;
-	  
+
       switch(source->fileformat){
-      case BINARY:
-	    
+      	case BINARY:
+
 	/*
 	** get # of spikes in file
 	*/
-  
+
 	lastrec = source->currentline;
-	  
+
 	/*
 	** get last spike record's 'id' field
 	*/
 
 	/* get byte offset of id field */
 	for (i = 0; 
-	     GetFieldInfoByNumber(parmnames,i,&fieldinfo);
-	     i++,
-	       id_offset += fieldinfo.size * fieldinfo.count){
-	  if (i >= id_column)
-	    break;
+		GetFieldInfoByNumber(parmnames,i,&fieldinfo);
+		i++,
+		id_offset += fieldinfo.size * fieldinfo.count){
+		if (i >= id_column)
+			break;
 	}
-    
+
 	/*          fprintf(stderr,"*** id_offset: %d",id_offset); */
 
 	/* seek to last record + offset of id field */
@@ -1157,61 +1157,60 @@ int32_t	lastid = 0;
 
 	/* read id field */
 	switch(id_type){
-	case FLOAT:
-	  if(fread(&flastid,sizeof(float),1,source->fp) != 1){
-	    fprintf(stderr,"ERROR: reading last index (float)\n");      
-	    return(NULL);
-	  }
-	  lastid = (int32_t)flastid;
-	  break;
-	    
-	case INT:
-	  if(fread(&ilastid,sizeof(int32_t),1,source->fp) != 1){
-	    fprintf(stderr,"ERROR: reading last index (int32_t)\n");      
-	    return(NULL);
-	  }
-	  lastid = (int32_t)ilastid;
-	  break;
+		case FLOAT:
+		if(fread(&flastid,sizeof(float),1,source->fp) != 1){
+			fprintf(stderr,"ERROR: reading last index (float)\n");      
+			return(NULL);
+		}
+		lastid = (int32_t)flastid;
+		break;
 
-	default:
-	  fprintf(stderr,"ERROR: getting last index: only int32_t and float type index fields supported");
-	  return(NULL);
-	  break;
+		case INT:
+		if(fread(&ilastid,sizeof(int32_t),1,source->fp) != 1){
+			fprintf(stderr,"ERROR: reading last index (int32_t)\n");      
+			return(NULL);
+		}
+		lastid = (int32_t)ilastid;
+		break;
+
+		default:
+		fprintf(stderr,"ERROR: getting last index: only int32_t and float type index fields supported");
+		return(NULL);
+		break;
 	}
 	break;
-	    
-      case ASCII:
+
+	case ASCII:
 
 	/* get last record in file */
 	lastrec = source->currentline;
 
 	/* get lastid */
 	if (sgetargs(lastline,100,dvector) < id_column) {
-	  fprintf(stderr,"ERROR: not enough data columns to find id field in column (%d)",id_column);
-	  return(NULL);
+		fprintf(stderr,"ERROR: not enough data columns to find id field in column (%d)",id_column);
+		return(NULL);
 	}
 	lastid = dvector[id_column];
 	break;
-	    
-      default:
+
+	default:
 	fprintf(stderr,"ERROR: can't do partial loads of EEG files?");
 	break;
-      }
+}
 
       /*
       ** set subset flag 
       */
       source->subsetparmfile = (lastid >= lastrec);
-	  
+
       /* display subset calculations */
-      fprintf(stderr,
-	      "\n"
-	      "spikes in file:     %"PRId32"\n"
-	      "last spike id:      %"PRId32" (0-indexed)\n"
-	      "subset parm file?:  %s\n\n",
-	      lastrec,
-	      lastid,
-	      source->subsetparmfile ? "Yes" : "No");
+      fprintf(stderr,"\n"
+      	"spikes in file:     %"PRId32"\n"
+      	"last spike id:      %"PRId32" (0-indexed)\n"
+      	"subset parm file?:  %s\n\n",
+      	lastrec,
+      	lastid,
+      	source->subsetparmfile ? "Yes" : "No");
 
       /* 
       ** set nlines (number of spikes in file)
@@ -1225,71 +1224,81 @@ int32_t	lastid = 0;
       */
 
       switch (source->fileformat){  
-      case ASCII: 
-	if (source->subsetparmfile){
-	  fprintf(stderr,"WARNING: epochs not supported (degenerate ASCII parm file)\n");   
-	  break;
-	} 
-	source->timelookupfile = TTFILE;
-	break;
-	    
-      case BINARY:
-	if(!source->notimefield){ /* use parm file if it has time info */
-	  source->timelookupfile = PARMFILE;
-	  break;
-	}
-	else /* use spike file unless parm file is degenerate */
-	  if(!source->subsetparmfile){
-	    source->timelookupfile = TTFILE;
-	    break;
-	  } 
-	/* notimefield & subsetparmfile */
-	fprintf(stderr,"WARNING: epochs not supported (degenerate parm files with no time/timestamp field)\n");   
-	break;
-	  	    
-      default:
-	fprintf(stderr,"WARNING: epochs not supported (non-ASCII, non-BINARY (EEG?) parm file)\n");   
-	break;
-      }
-    }
-	
-    /* epochs not meaningful in partialplotload (aka view-spikes) mode */
-    if (source->loadmode == PARTIAL_PLOT_LOAD)
-      source->timelookupfile = INVALIDFILE;
+      	case ASCII: 
+      	if (source->subsetparmfile){
+      		fprintf(stderr,"WARNING: epochs not supported (degenerate ASCII parm file)\n");   
+      		break;
+      	} 
+      	source->timelookupfile = TTFILE;
+      	break;
 
+      	case BINARY:
+	if(!source->notimefield){ /* use parm file if it has time info */
+      	source->timelookupfile = PARMFILE;
+      	break;
+      }
+	else /* use spike file unless parm file is degenerate */
+      if(!source->subsetparmfile){
+      	source->timelookupfile = TTFILE;
+      	break;
+      } 
+	/* notimefield & subsetparmfile */
+      fprintf(stderr,"WARNING: epochs not supported (degenerate parm files with no time/timestamp field)\n");   
+      break;
+
+      default:
+      fprintf(stderr,"WARNING: epochs not supported (non-ASCII, non-BINARY (EEG?) parm file)\n");   
+      break;
   }
+}
+
+    /* epochs not meaningful in partialplotload (aka view-spikes) mode */
+if (source->loadmode == PARTIAL_PLOT_LOAD)
+	source->timelookupfile = INVALIDFILE;
+
+}
 
   /* now we want to find the time corresponding to the start and end point */
-  if (source->timelookupfile != INVALIDFILE) {
-    if (source->startline < 0)
-      startline_temp = 0;
-    else
-      startline_temp = source->startline;
+if (source->timelookupfile != INVALIDFILE) {
 
-    sprintf(str, "%d", startline_temp);
+	if (source->startline < 0)
+		startline_temp = 0;
+	else
+		startline_temp = source->startline;
 
-    tmpstr = (char*)LookupSpikeTime(source, str);
-    if (tmpstr!=NULL)
-      source->starttimestamp = Atoi(tmpstr);
 
-    if(source->plot)
-      sprintf(str,"%d",startline_temp+source->plot->npoints-1);
-    else
-      sprintf(str,"%d",-1);
+	tmpstr = (char*)LookupSpikeTime(source, "0");
 
-    tmpstr = (char*)LookupSpikeTime(source, str);
-    if (tmpstr!=NULL)
-      source->endtimestamp = Atoi(tmpstr);
+
+	if (tmpstr!=NULL){
+		
+		source->starttimestamp = Atoi(tmpstr);
+	}	
+
+	if(source->plot)
+		sprintf(str,"%d",startline_temp+source->plot->npoints-1);
+	else
+		sprintf(str,"%d",-1);
+
+	// Convert lastid (retrieved above) to a string to lookup its timestamp
+	char lastidStr[100];
+	sprintf(lastidStr, "%"PRId32, lastid);
+
+	tmpstr = (char*)LookupSpikeTime( source, lastidStr );
+	if (tmpstr!=NULL)
+	{
+		source->endtimestamp = 10000;//Atoi(tmpstr);
+	}
 
     /* determine timestamp of first last spike in file */
-    if(firstpass){
-      source->mintimestamp = source->starttimestamp;
-      source->maxtimestamp = source->endtimestamp;
-    }
+	if(firstpass){
+		source->mintimestamp = source->starttimestamp;
+		source->maxtimestamp = source->endtimestamp;
+	}
 
-  }
+}
 
-  return(plot);
+return(plot);
 
 }
 
@@ -1529,7 +1538,7 @@ int32_t	lastid = 0;
 /* 		} */
 /* 		source->nsourcefields = fieldcount; */
 /* 		fprintf(stderr,"total recordsize = %d bytes\n",source->recordsize); */
-		
+
 /* 		/\* Check to see if we have a time or timestamp field */
 /* 		** (used below to test whether we can use a */
 /* 		** 'degenerate parm-file  */
@@ -1893,7 +1902,7 @@ int32_t	lastid = 0;
 /*     } */
 /*     if(plot != NULL){ */
 /* 	SelectPlot(plot); */
-	
+
 /* 	/\* Determine whether this file is suitable for lookups of */
 /* 	** time<-->spike index. Flag the source object so we can test */
 /* 	** this flag, e.g. when we want to look up epoch start/end */
@@ -1937,7 +1946,7 @@ int32_t	lastid = 0;
 /* 	** */
 /* 	**     - (8) problem 4 and 7 */
 /* 	*\/ */
-	
+
 /* 	if(source->loadmode == PARTIAL_LOAD && firstpass){ */
 
 /* 	  source->timelookupfile = INVALIDFILE; */
@@ -1948,21 +1957,21 @@ int32_t	lastid = 0;
 /* 	  ** (lastid). */
 /* 	  ** */
 /* 	  *\/ */
-	  
+
 /* 	  /\* get 'id' field column and type *\/ */
 /* 	  GetFieldInfoByName(parmnames,"id",&fieldinfo); */
 /* 	  id_column = fieldinfo.column; */
 /* 	  id_type = fieldinfo.type; */
-	  
+
 /* 	  switch(source->fileformat){ */
 /*      	  case BINARY: */
-	    
+
 /* 	    /\* */
 /* 	    ** get # of spikes in file */
 /* 	    *\/ */
-  
+
 /* 	    lastrec = source->currentline; */
-	  
+
 /* 	    /\* */
 /* 	    ** get last spike record's 'id' field */
 /* 	    *\/ */
@@ -1975,7 +1984,7 @@ int32_t	lastid = 0;
 /* 	      if (i >= id_column) */
 /* 		break; */
 /* 	    } */
-    
+
 /* /\*          fprintf(stderr,"*** id_offset: %d",id_offset); *\/ */
 
 /* 	    /\* seek to last record + offset of id field *\/ */
@@ -1990,7 +1999,7 @@ int32_t	lastid = 0;
 /* 	      } */
 /* 	      lastid = (int32_t)flastid; */
 /* 	      break; */
-	    
+
 /* 	    case INT: */
 /* 	      if(fread(&ilastid,sizeof(int32_t),1,fp) != 1){ */
 /* 		fprintf(stderr,"ERROR: reading last index (int32_t)\n");       */
@@ -2005,7 +2014,7 @@ int32_t	lastid = 0;
 /* 	      break; */
 /* 	    } */
 /* 	    break; */
-	    
+
 /* 	  case ASCII: */
 
 /* 	    /\* get last record in file *\/ */
@@ -2018,7 +2027,7 @@ int32_t	lastid = 0;
 /* 	    } */
 /* 	    lastid = dvector[id_column]; */
 /* 	    break; */
-	    
+
 /* 	  default: */
 /* 	    fprintf(stderr,"ERROR: can't do partial loads of EEG files?"); */
 /* 	    break; */
@@ -2028,7 +2037,7 @@ int32_t	lastid = 0;
 /* 	  ** set subset flag  */
 /* 	  *\/ */
 /* 	  source->subsetparmfile = (lastid > lastrec); */
-	  
+
 /* 	  /\* display subset calculations *\/ */
 /* 	  fprintf(stderr, */
 /* 		  "\n" */
@@ -2052,7 +2061,7 @@ int32_t	lastid = 0;
 /* 	    }  */
 /* 	    source->timelookupfile = TTFILE; */
 /* 	    break; */
-	    
+
 /* 	  case BINARY: */
 /* 	    if(!source->notimefield){ /\* use parm file if it has time info *\/ */
 /* 	      source->timelookupfile = PARMFILE; */
@@ -2066,13 +2075,13 @@ int32_t	lastid = 0;
 /* 	    /\* notimefield & subsetparmfile *\/ */
 /* 	    fprintf(stderr,"WARNING: epochs not supported (degenerate parm files with no time/timestamp field)\n");    */
 /* 	    break; */
-	  	    
+
 /* 	  default: */
 /* 	    fprintf(stderr,"WARNING: epochs not supported (non-ASCII, non-BINARY (EEG?) parm file)\n");    */
 /* 	    break; */
 /* 	  } */
 /* 	} */
-	
+
 /* 	/\* epochs not meaningful in partialplotload (aka view-spikes) mode *\/ */
 /* 	if (source->loadmode == PARTIAL_PLOT_LOAD) */
 /* 	  source->timelookupfile = INVALIDFILE; */
@@ -2089,32 +2098,32 @@ int32_t	lastid = 0;
 SetPlotDefaults(graph)
 Graph	*graph;
 {
-Plot		*plot;
-int32_t		selected=0;
+	Plot		*plot;
+	int32_t		selected=0;
 
     /*
     ** make sure there are plots. If not then exit
     */
     if(!graph->plot){
-	return;
+    	return;
     }
     /*
     ** setup the default linestyle of the plots
     */
     for(plot=graph->plot;plot;plot=plot->next){
-	if(plot->linestyle == -1){
-	    plot->linestyle = graph->foreground;
-	}
-	if(plot->selected){
-	    selected = 1;
-	}
+    	if(plot->linestyle == -1){
+    		plot->linestyle = graph->foreground;
+    	}
+    	if(plot->selected){
+    		selected = 1;
+    	}
     }
     if(!selected){
 	/*
 	** select the first plot
 	*/
 	graph->plot->selected = 1;
-    }
+}
 }
 
 
@@ -2127,21 +2136,21 @@ int32_t	endline;
 int32_t	startplot;
 int32_t	endplot;
 {
-DataSource *source;
-DataSource *AddSource();
-Plot		*plot;
+	DataSource *source;
+	DataSource *AddSource();
+	Plot		*plot;
 
-    if(graph == NULL || filename == NULL) return;
-    source = AddSource(graph);
-    source->type = FROM_FILE;
-    source->loadmode = loadmode;
-    source->startline = startline;
-    source->endline = endline;
-    source->startplot = startplot;
-    source->endplot = endplot;
-    source->filename = CopyString(filename);
-    LoadPlotFromSource(graph,source);
-    SetPlotDefaults(graph);
+	if(graph == NULL || filename == NULL) return;
+	source = AddSource(graph);
+	source->type = FROM_FILE;
+	source->loadmode = loadmode;
+	source->startline = startline;
+	source->endline = endline;
+	source->startplot = startplot;
+	source->endplot = endplot;
+	source->filename = CopyString(filename);
+	LoadPlotFromSource(graph,source);
+	SetPlotDefaults(graph);
 }
 
 DoCommand(graph,plot,lineptr)
@@ -2149,38 +2158,38 @@ Graph	*graph;
 Plot	**plot;
 char 	*lineptr;
 {
-char *strchr();
-Plot	*p;
-int32_t	status;
+	char *strchr();
+	Plot	*p;
+	int32_t	status;
 
-    do {
+	do {
 	/* skip white space */
-	while(lineptr && 
-	(*lineptr == ' ' || *lineptr == '\t' || *lineptr == '\n')){
-	    if(*lineptr == '\0') break;
-	    lineptr++;
+		while(lineptr && 
+			(*lineptr == ' ' || *lineptr == '\t' || *lineptr == '\n')){
+			if(*lineptr == '\0') break;
+		lineptr++;
 	}
 	if(lineptr[0] == ';'){
-	    lineptr++;
-	    /* skip white space */
-	    while(lineptr && 
-	    (*lineptr == ' ' || *lineptr == '\t' || *lineptr == '\n')){
-		if(*lineptr == '\0') break;
 		lineptr++;
-	    }
+	    /* skip white space */
+		while(lineptr && 
+			(*lineptr == ' ' || *lineptr == '\t' || *lineptr == '\n')){
+			if(*lineptr == '\0') break;
+		lineptr++;
 	}
+}
 	/*
 	** check to see if it is a plot command
 	*/
 	if(lineptr[0] == '/'){
-	    if(GlobalOperation()){
-		for(p=graph->plot;p;p=p->next){
-		    InterpretCommand(graph,&p,lineptr);
+		if(GlobalOperation()){
+			for(p=graph->plot;p;p=p->next){
+				InterpretCommand(graph,&p,lineptr);
+			}
+			ResetGlobalOperation();
+		} else {
+			InterpretCommand(graph,plot,lineptr);
 		}
-		ResetGlobalOperation();
-	    } else {
-		InterpretCommand(graph,plot,lineptr);
-	    }
 	} else 
 	if(lineptr[0] == '%'){
 	    /*
@@ -2189,7 +2198,7 @@ int32_t	status;
 	    return;
 	} else 
 	if(*lineptr == '\0'){
-	    break;
+		break;
 	} else {
 	    /*
 	    ** otherwise assume that the line contains coordinates
@@ -2204,10 +2213,10 @@ int32_t	status;
 		*/
 		fprintf(stderr,"NULL plot\n");
 		*plot = AddPlot(graph,NULL);
-	    }
-	    status = AddPoint(*plot,lineptr,NULL,0);
 	}
-    } while(lineptr = strchr(lineptr+1,';'));
+	status = AddPoint(*plot,lineptr,NULL,0);
+}
+} while(lineptr = strchr(lineptr+1,';'));
 }
 
 DoFileCommands(graph,plot,filename)
@@ -2215,28 +2224,28 @@ Graph	*graph;
 Plot	**plot;
 char	*filename;
 {
-FILE	*fp;
-char	line[1001];
+	FILE	*fp;
+	char	line[1001];
 
     /*
     ** open the data file associated with the plot
     */
     if((fp = fopen(filename,"r")) == NULL){
-	printf("cant open file '%s'\n",filename);
-	return;
+    	printf("cant open file '%s'\n",filename);
+    	return;
     }
     while(!feof(fp)){
 	/*
 	** read a line from the data file
 	*/
 	if(fgets(line,1000,fp) == NULL) {
-	    break;
+		break;
 	}
 	line[1000] = '\0';
 	DoCommand(graph,plot,line);
-    }
-    ClosePlot(*plot);
-    fclose(fp);
+}
+ClosePlot(*plot);
+fclose(fp);
 }
 
 Plot *PartialLoadPlot(graph,plot,startline,endline,startplot,endplot)
@@ -2247,15 +2256,15 @@ int32_t	endline;
 int32_t	startplot;
 int32_t	endplot;
 {
-DataSource	*source;
+	DataSource	*source;
 
- if (startline > 0 &&
-     endline > 0 &&
-     startline > endline){
-   fprintf(stderr,"ERROR: Start spike (%d) is greater than End spike(%d) (PartialLoadPlot)\n",
-	   startline, endline);
-   return;
- }
+	if (startline > 0 &&
+		endline > 0 &&
+		startline > endline){
+		fprintf(stderr,"ERROR: Start spike (%d) is greater than End spike(%d) (PartialLoadPlot)\n",
+			startline, endline);
+	return;
+}
     /*
     ** go through all of the data sources and perform the partial
     ** load on the matching one
@@ -2269,10 +2278,10 @@ DataSource	*source;
 	    ** was it partially loaded?
 	    */
 	    if(source->loadmode != PARTIAL_LOAD){
-		fprintf(stderr,"Plot is not in partial load mode\n");
-		return(NULL);
+	    	fprintf(stderr,"Plot is not in partial load mode\n");
+	    	return(NULL);
 	    } else {
-		DeletePlot(plot);
+	    	DeletePlot(plot);
 		/*
 		** set the desired source load parameters
 		*/
@@ -2284,7 +2293,7 @@ DataSource	*source;
 		** set the suggested block size
 		*/
 		if((blocksize = endline - startline + 1) <= 0){
-		    blocksize = BLOCKSIZE;
+			blocksize = BLOCKSIZE;
 		}
 		/*
 		** and load the plot
@@ -2298,40 +2307,40 @@ DataSource	*source;
 		AssignClusterPoints(graph);
 
 		return(source->plot);
-	    }
 	}
-    }
-    return(NULL);
+}
+}
+return(NULL);
 }
 
 MenuPartialPlotLoad(item)
 MenuItem	*item;
 {
-Plot	*p;
-Plot	*newplot;
-DataSource	*source;
-int32_t	stepsize;
-int32_t	i;
-int32_t	currentcolor;    
+	Plot	*p;
+	Plot	*newplot;
+	DataSource	*source;
+	int32_t	stepsize;
+	int32_t	i;
+	int32_t	currentcolor;    
 
-    p = SelectedPlot(G);
-    if(p == NULL){
-	return;
-    }
-    currentcolor = p->linestyle;
-    if((source = p->source) == NULL){
-	fprintf(stderr,"No data source found for this plot\n");
-	return;
-    }
+	p = SelectedPlot(G);
+	if(p == NULL){
+		return;
+	}
+	currentcolor = p->linestyle;
+	if((source = p->source) == NULL){
+		fprintf(stderr,"No data source found for this plot\n");
+		return;
+	}
     /*
     ** propagate the
     ** current state to the loaded plot
     */
     SetSourceDefaultsFromPlot(p,source);
     if(item->value){
-	stepsize = Atoi(item->value);
+    	stepsize = Atoi(item->value);
     } else {
-	stepsize = 1;
+    	stepsize = 1;
     }
     source->startplot = source->currentplot+stepsize-1;
     source->endplot = source->currentplot+stepsize-1;
@@ -2340,13 +2349,13 @@ int32_t	currentcolor;
 	** dont go past the beginning of the file
 	*/
 	return;
-    }
-    if(G->overlay){
+}
+if(G->overlay){
 	/*
 	** redraw in the current color
 	*/
 	RefreshGraph(G);
-    }
+}
     /*
     ** load the new plot
     ** note that this updates the menu which is somewhat annoying
@@ -2358,7 +2367,7 @@ int32_t	currentcolor;
 /* 	** the plot file itself */
 /* 	*\/ */
 /* 	newplot->linestyle = source->defaults[FOREGROUND]; */
-	DeletePlot(p);
+    	DeletePlot(p);
 	/*
 	for(i=0;i<stepsize;i++){
 	    DeletePlot(p);
@@ -2368,16 +2377,16 @@ int32_t	currentcolor;
 	** if overlay is set then redraw in the foreground color
 	*/
 	if(G->overlay){
-	    newplot->linestyle = 0;
+		newplot->linestyle = 0;
 	}
 	ScaleAndRefreshGraph(G);
 	/*
 	** and set the color to the previous value
 	*/
 	newplot->linestyle = currentcolor;
-    } else {
+} else {
 	ScaleAndRefreshGraph(G);
-    }
+}
     /*
     ** this takes advantage of the way in which the plots are
     ** being loaded.  Each real plot starts off by creating a new
@@ -2386,42 +2395,42 @@ int32_t	currentcolor;
     ** So delete any empty plots after loading.
     */
     for(p=G->plot;p;p=p->next){
-	if(p->npoints == 0){
-	    DeletePlot(p);
-	    break;
-	}
+    	if(p->npoints == 0){
+    		DeletePlot(p);
+    		break;
+    	}
     }
 }
 
 MenuPartialPlotReset(item)
 MenuItem	*item;
 {
-Plot	*p;
-Plot	*newplot;
-DataSource	*source;
+	Plot	*p;
+	Plot	*newplot;
+	DataSource	*source;
 
-    p = SelectedPlot(G);
-    if(p == NULL){
-	return;
-    }
-    if((source = p->source) == NULL){
-	fprintf(stderr,"No data source found for this plot\n");
-	return;
-    }
-    source->startplot = 0;
-    source->endplot = 1;
-    newplot = LoadPlotFromSource(G,source);
-    if(newplot != NULL && newplot->npoints > 0){
-	DeletePlot(p);
-    }
-    ScaleAndRefreshGraph(G);
+	p = SelectedPlot(G);
+	if(p == NULL){
+		return;
+	}
+	if((source = p->source) == NULL){
+		fprintf(stderr,"No data source found for this plot\n");
+		return;
+	}
+	source->startplot = 0;
+	source->endplot = 1;
+	newplot = LoadPlotFromSource(G,source);
+	if(newplot != NULL && newplot->npoints > 0){
+		DeletePlot(p);
+	}
+	ScaleAndRefreshGraph(G);
 }
 
 MenuPartialPlotRead(item)
 MenuItem	*item;
 {
-    LoadPlot(G,item->value,PARTIAL_PLOT_LOAD,-1,-1,0,0);
-    ScaleAndRefreshGraph(G);
+	LoadPlot(G,item->value,PARTIAL_PLOT_LOAD,-1,-1,0,0);
+	ScaleAndRefreshGraph(G);
 }
 
 /* GlobExpand:
@@ -2439,273 +2448,273 @@ MenuItem	*item;
 
 int32_t GlobExpand(char *namein, char *nameout)
 {
-  glob_t	retglob;
-  
+	glob_t	retglob;
+
   /* get the filename to load, using glob to perform shell expansion */
   /* GLOB_TILDE = use tilde expansion */
   /* GLOB_MARK = append slash to end of each path which is a directory */
-  if (glob(namein,GLOB_TILDE|GLOB_MARK,NULL,&retglob) != 0){
-    fprintf(stderr,"ERROR: No match for file '%s' (GlobExpand)\n",namein);
-    return(1);
-  }
-  if (retglob.gl_pathc > 1){
-    fprintf(stderr,"ERROR: multiple files match '%s' (GlobExpand)\n",namein);
-    globfree(&retglob);
-    return(1);
-  }
+	if (glob(namein,GLOB_TILDE|GLOB_MARK,NULL,&retglob) != 0){
+		fprintf(stderr,"ERROR: No match for file '%s' (GlobExpand)\n",namein);
+		return(1);
+	}
+	if (retglob.gl_pathc > 1){
+		fprintf(stderr,"ERROR: multiple files match '%s' (GlobExpand)\n",namein);
+		globfree(&retglob);
+		return(1);
+	}
 
   /* print match message if we had shell expansion */
-  if(strcmp(retglob.gl_pathv[0], namein)){
-    fprintf(stderr,"File '%s' matches '%s' (GlobExpand)\n",retglob.gl_pathv[0], namein);
-  }
+	if(strcmp(retglob.gl_pathv[0], namein)){
+		fprintf(stderr,"File '%s' matches '%s' (GlobExpand)\n",retglob.gl_pathv[0], namein);
+	}
 
   /* test whether the returned path is a directory (is last char '/' ? */
-  if (retglob.gl_pathv[0][strlen(retglob.gl_pathv[0])-1] == '/'){
-    fprintf(stderr,"ERROR: '%s' matches a directory, not a file (GlobExpand)\n",namein);
-    globfree(&retglob);
-    return(1);
-  }
+	if (retglob.gl_pathv[0][strlen(retglob.gl_pathv[0])-1] == '/'){
+		fprintf(stderr,"ERROR: '%s' matches a directory, not a file (GlobExpand)\n",namein);
+		globfree(&retglob);
+		return(1);
+	}
 
-  strcpy(nameout,retglob.gl_pathv[0]);
+	strcpy(nameout,retglob.gl_pathv[0]);
 
-  globfree(&retglob);
-  return(0);
+	globfree(&retglob);
+	return(0);
 }
 
 LoadEpochFile(char *filename)
 {
-  char tmp[200];
-  FILE	*fp;
-  glob_t	retglob;
-  
-  int32_t	i;
-  
-  char	line[1001];
-  char	**header;
-  char	*fieldstring;
-  int32_t	headersize;
-  FieldInfo fieldinfo;
+	char tmp[200];
+	FILE	*fp;
+	glob_t	retglob;
+
+	int32_t	i;
+
+	char	line[1001];
+	char	**header;
+	char	*fieldstring;
+	int32_t	headersize;
+	FieldInfo fieldinfo;
 
   /* epoch strings and corresponding columns in the epoch file */
-  char  *estr[3];
-  int32_t	ecol[3];
-  
+	char  *estr[3];
+	int32_t	ecol[3];
+
   /* epoch string and column array indexes */
 #define ENAME	0
 #define ESTART	1
 #define EEND	2
 
   /* line parsing vars */
-  char	*ptr;
-  char	*eptr;
-  int32_t done = 0;
-  int32_t n = 0;
-  int32_t nmax = 0;
-  
+	char	*ptr;
+	char	*eptr;
+	int32_t done = 0;
+	int32_t n = 0;
+	int32_t nmax = 0;
+
   /* Hard coded because I don't know how to dynamically allocate memory yet (tjd) */
 #define MAXPARAMS 50
 #define MAXVALUELEN 50
-  char params[MAXPARAMS][MAXVALUELEN];
+	char params[MAXPARAMS][MAXVALUELEN];
 
-  int32_t	epoch;
+	int32_t	epoch;
 
   fprintf(stderr,"Trying to load epoch file '%s' ... (LoadEpochFile)\n",filename); /* to be continued with a 'done'*/
-  
+
   /* if we can't expand the filename, return.*/
-  if(GlobExpand(filename,tmp)) {
-    return(1);
-  }
+	if(GlobExpand(filename,tmp)) {
+		return(1);
+	}
 
-  if((fp = fopen(tmp,"r")) == NULL){
-    fprintf(stderr,"ERROR: Can't open file '%s' (LoadEpochFile)\n",filename);
-    return(1);
-  }
+	if((fp = fopen(tmp,"r")) == NULL){
+		fprintf(stderr,"ERROR: Can't open file '%s' (LoadEpochFile)\n",filename);
+		return(1);
+	}
 
-  header = ReadHeader(fp,&headersize);
-  
-  if(header){
-    fieldstring = GetFieldString(header);
-    
-    switch(GetFileType(header)){
-    case BINARY:
-      fprintf(stderr,"ERROR: Binary epoch files not supported (LoadEpochFile)\n");
-      return;
-      
-    case INVALID_TYPE:
-      fprintf(stderr,"No filetype found in header.  Assuming ASCII.(LoadEpochFile)\n");
+	header = ReadHeader(fp,&headersize);
+
+	if(header){
+		fieldstring = GetFieldString(header);
+
+		switch(GetFileType(header)){
+			case BINARY:
+			fprintf(stderr,"ERROR: Binary epoch files not supported (LoadEpochFile)\n");
+			return;
+
+			case INVALID_TYPE:
+			fprintf(stderr,"No filetype found in header.  Assuming ASCII.(LoadEpochFile)\n");
       /* note code continues to next case since there is no 'break' or 'return' */
 
-    case ASCII:
-      if (GetFieldInfoByName(fieldstring,"ep_name",&fieldinfo)){
-	ecol[ENAME] = fieldinfo.column;
-	if (GetFieldInfoByName(fieldstring,"ep_start",&fieldinfo)){
-	  ecol[ESTART] = fieldinfo.column;
-	  if (GetFieldInfoByName(fieldstring,"ep_end",&fieldinfo)){
-	    ecol[EEND] = fieldinfo.column;
+			case ASCII:
+			if (GetFieldInfoByName(fieldstring,"ep_name",&fieldinfo)){
+				ecol[ENAME] = fieldinfo.column;
+				if (GetFieldInfoByName(fieldstring,"ep_start",&fieldinfo)){
+					ecol[ESTART] = fieldinfo.column;
+					if (GetFieldInfoByName(fieldstring,"ep_end",&fieldinfo)){
+						ecol[EEND] = fieldinfo.column;
 	    break; /* found all three fields */
-	  }
-	}
-      }
+					}
+				}
+			}
       /* missing one or more fields */
-      fprintf(stderr,"ERROR: Required fields (ep_end, ep_start, ep_end) not found: '%s' (LoadEpochFile)\n",fieldstring);
-      return(1);
+			fprintf(stderr,"ERROR: Required fields (ep_end, ep_start, ep_end) not found: '%s' (LoadEpochFile)\n",fieldstring);
+			return(1);
     } /* end of filetype switch */
   } else { /* No header in file: assume ASCII and default columns */
-    fprintf(stderr,"No header found: Assuming ASCII format and using default columns for epoch file (name/start/end) (LoadEpochFile)\n");
-    ecol[ENAME] = 0;
-    ecol[ESTART] = 1;
-    ecol[EEND] = 2;
-  } 
+			fprintf(stderr,"No header found: Assuming ASCII format and using default columns for epoch file (name/start/end) (LoadEpochFile)\n");
+			ecol[ENAME] = 0;
+			ecol[ESTART] = 1;
+			ecol[EEND] = 2;
+		} 
 
   /* calculate nmax (highest field column we will need to read) */
   /* iterate over ecol array */
-  for (i = 0; i < ((sizeof ecol)/sizeof(int32_t)); i++) 
-    if (ecol[i] > nmax)
-      nmax = ecol[i];
-  
+		for (i = 0; i < ((sizeof ecol)/sizeof(int32_t)); i++) 
+			if (ecol[i] > nmax)
+				nmax = ecol[i];
+
   /* loop over each epoch slot available */
   /* epochs are 1-indexed for historical reasons */
-  for(epoch=1; epoch <= NUM_EPOCHS; epoch++){
-    if(feof(fp)){
-      SetEpochValues(epoch,NULL,NULL,NULL);
-      continue;
-    }
-    if(fgets(line,1000,fp) == NULL){
-      SetEpochValues(epoch,NULL,NULL,NULL);
-      continue;
-    }
-    
+			for(epoch=1; epoch <= NUM_EPOCHS; epoch++){
+				if(feof(fp)){
+					SetEpochValues(epoch,NULL,NULL,NULL);
+					continue;
+				}
+				if(fgets(line,1000,fp) == NULL){
+					SetEpochValues(epoch,NULL,NULL,NULL);
+					continue;
+				}
+
     /* null terminate the string, if it's not already */
-    line[1000] = '\0';
-    
+				line[1000] = '\0';
+
     /* ignore comment lines (shouldn't see them outside of header?) */
     /* and empty lines */
-    
-    if(line[0] == '%' ||
-       IsStringEmpty(line)) {
-      
+
+				if(line[0] == '%' ||
+					IsStringEmpty(line)) {
+
       /* don't advance epoch counter */
-      epoch--;
-      continue;
-    }
-    
+					epoch--;
+				continue;
+			}
+
     /* parse fields (adapted from Matt's sgetargs) */
-    
+
     /* we allow white-space within fields (but issue a warning?),
        which must be tab separated */
-    
-    ptr = line;
-    
+
+			ptr = line;
+
     /* read one line of params */
 
-    n = 0;
-    while (!done){      
+			n = 0;
+			while (!done){      
       /* end of the line ?*/
-      if(*ptr == '\0') break;
-      
+				if(*ptr == '\0') break;
+
       /* find end of parameter (allow spaces) */
-      for(eptr = ptr;
-	  (*eptr != '\0') && (*eptr != '\t') && (*eptr != '\n');
-	  eptr++);
-	
+				for(eptr = ptr;
+					(*eptr != '\0') && (*eptr != '\t') && (*eptr != '\n');
+					eptr++);
+
       /* is end of parameter == end of line */
-      if(*eptr == '\0'){
-	done = 1;
-      }
-	
+					if(*eptr == '\0'){
+						done = 1;
+					}
+
       /* copy parameter to values array */
 
-      if (n < MAXPARAMS-1 && 
+					if (n < MAXPARAMS-1 && 
 	  eptr-ptr < MAXVALUELEN-1){ /* hack to avoid dynamic memory
 					allocation (see #defines
 					above) */
-	strncpy(params[n], ptr, eptr-ptr);
-	params[n][eptr-ptr] = '\0';
-      } else{
-	fprintf(stderr,"ERROR: Epoch string too int32_t: field %d of '%s'\n", n, line );
-	fclose(fp);
-	return(1);
-      }
+						strncpy(params[n], ptr, eptr-ptr);
+						params[n][eptr-ptr] = '\0';
+					} else{
+						fprintf(stderr,"ERROR: Epoch string too int32_t: field %d of '%s'\n", n, line );
+						fclose(fp);
+						return(1);
+					}
 
       /* have we read all parameters we need? */
-      n++;
-      if(n > nmax) break;
-	
+					n++;
+					if(n > nmax) break;
+
       /* advance to the next parameter */
-      ptr = eptr+1;
+					ptr = eptr+1;
     } /* finished reading the params from this line */
-    
+
     /* did we read enough params? */
-    if (n <= nmax){
-      fprintf(stderr,"ERROR: could only read %d of %d needed fields (LoadEpochFile)\n",n,nmax+1);
-      return(1);
-    }
+					if (n <= nmax){
+						fprintf(stderr,"ERROR: could only read %d of %d needed fields (LoadEpochFile)\n",n,nmax+1);
+						return(1);
+					}
     /* assign correct params to estr array (by looking up param column in ecol) */
-    for (i = 0; i < (sizeof estr/sizeof(char*)); i++){
-      estr[i] = params[ecol[i]];
-    }
-    
+					for (i = 0; i < (sizeof estr/sizeof(char*)); i++){
+						estr[i] = params[ecol[i]];
+					}
+
     /* test whether estart and eend are parseabe time strings (don't change format, though) */
-    if (!ParseTimestamp(estr[ESTART])){
-      fprintf(stderr,
-	      "ERROR: epoch %d start time not valid: '%s' (LoadEpochFile)\n",
-	      epoch,
-	      estr[ESTART]);
-      return(1);
-    }
-    if (!ParseTimestamp(estr[EEND])){
-      fprintf(stderr,
-	      "ERROR: epoch %d end time not valid: '%s' (LoadEpochFile)\n",
-	      epoch,
-	      estr[EEND]);
-      return(1);
-    }
+					if (!ParseTimestamp(estr[ESTART])){
+						fprintf(stderr,
+							"ERROR: epoch %d start time not valid: '%s' (LoadEpochFile)\n",
+							epoch,
+							estr[ESTART]);
+						return(1);
+					}
+					if (!ParseTimestamp(estr[EEND])){
+						fprintf(stderr,
+							"ERROR: epoch %d end time not valid: '%s' (LoadEpochFile)\n",
+							epoch,
+							estr[EEND]);
+						return(1);
+					}
 
     /* Add values to slot 'epoch' in list */
-    SetEpochValues(epoch,estr[ENAME], estr[ESTART], estr[EEND]);
-    
+					SetEpochValues(epoch,estr[ENAME], estr[ESTART], estr[EEND]);
+
   }/* finished iterating over epochs */
-  
+
   /* are there more non-blank, non-comment lines in the file than we
      could load? */
-  
-  while (!feof(fp)){
-    if(fgets(line,1000,fp) == NULL)
-      break;
-    
+
+					while (!feof(fp)){
+						if(fgets(line,1000,fp) == NULL)
+							break;
+
     /* null terminate the string, if it's not already */
-    line[1000] = '\0';
-    
-    if(!(line[0] == '%') &&
-       !(IsStringEmpty(line))){
-      
+						line[1000] = '\0';
+
+						if(!(line[0] == '%') &&
+							!(IsStringEmpty(line))){
+
       /* not EOF, not a comment, not a blank line */
-      fprintf(stderr,
-	      "Warning: Possibly more epochs specified than epoch "
-	      "slots available in xclust (LoadEpochFile)\n");
-      break;
-    }
+							fprintf(stderr,
+								"Warning: Possibly more epochs specified than epoch "
+								"slots available in xclust (LoadEpochFile)\n");
+						break;
+					}
   } /* done checking for extra lines at end of epoch file */
 
   /* finish up */
 
-  fprintf(stderr," ...done. (LoadEpochFile)\n");
-  fclose(fp);
+					fprintf(stderr," ...done. (LoadEpochFile)\n");
+					fclose(fp);
 
 } /* End LoadEpochFile */
 
 
 
-SaveEpochFile(char *file)
-{
+					SaveEpochFile(char *file)
+					{
 
-  FILE *fp;
-  char *epoch_name;
-  char *epoch_tstart;
-  char *epoch_tend;
-  char itemstr[100];
-  char comstr[100];
-  int32_t i;
+						FILE *fp;
+						char *epoch_name;
+						char *epoch_tstart;
+						char *epoch_tend;
+						char itemstr[100];
+						char comstr[100];
+						int32_t i;
     /*
     ** backup the previous epoch file
     */
@@ -2715,10 +2724,10 @@ SaveEpochFile(char *file)
     ** open the file
     */
     fprintf(stderr,"Writing epoch file '%s' (backup saved to %s~)\n",
-	file,file);
+    	file,file);
     if((fp = fopen(file,"w")) == NULL){
-	fprintf(stderr,"ERROR: unable to write epochs file '%s'\n",file);
-	return;
+    	fprintf(stderr,"ERROR: unable to write epochs file '%s'\n",file);
+    	return;
     }
     BeginStandardHeader(fp,standardargc,standardargv,VERSION);
     fprintf(fp,"%% File type:\tAscii\n");
@@ -2727,23 +2736,23 @@ SaveEpochFile(char *file)
     EndStandardHeader(fp);
 
     for(i = 1; i <= NUM_EPOCHS;	i++){
-      sprintf(itemstr,"/epochmenu/epoch/%d",i);
-      epoch_name = GetItemValue(itemstr);
-      sprintf(itemstr,"/epochmenu/epochstart/%d",i);
-      epoch_tstart = GetItemValue(itemstr);
-      sprintf(itemstr,"/epochmenu/epochend/%d",i);
-      epoch_tend = GetItemValue(itemstr);
-      if (epoch_name==NULL)
-	epoch_name = "";;
-      if (epoch_tstart==NULL)
-	epoch_tstart = "";
-      if (epoch_tend==NULL)
-	epoch_tend="";
+    	sprintf(itemstr,"/epochmenu/epoch/%d",i);
+    	epoch_name = GetItemValue(itemstr);
+    	sprintf(itemstr,"/epochmenu/epochstart/%d",i);
+    	epoch_tstart = GetItemValue(itemstr);
+    	sprintf(itemstr,"/epochmenu/epochend/%d",i);
+    	epoch_tend = GetItemValue(itemstr);
+    	if (epoch_name==NULL)
+    		epoch_name = "";;
+    	if (epoch_tstart==NULL)
+    		epoch_tstart = "";
+    	if (epoch_tend==NULL)
+    		epoch_tend="";
 
-      if (strlen(epoch_name)>0 || strlen(epoch_tstart)>0 || strlen(epoch_tend)>0)
-	fprintf(fp, "%s\t%s\t%s\n", epoch_name, epoch_tstart, epoch_tend);
+    	if (strlen(epoch_name)>0 || strlen(epoch_tstart)>0 || strlen(epoch_tend)>0)
+    		fprintf(fp, "%s\t%s\t%s\n", epoch_name, epoch_tstart, epoch_tend);
       else /* empty epoch definition */
-	continue;
+    	continue;
     }
 
     fclose(fp);
