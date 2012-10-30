@@ -5,12 +5,13 @@
 #define INVALID	0
 #define CHAR	1
 #define SHORT	2
-#define INT	3
+#define INT		3
 #define FLOAT	4
 #define DOUBLE	5
 #define FUNC	6
 #define FFUNC	7
 #define ULONG	8
+#define UNKNOWN -1
 
 #ifndef TRUE
 #define TRUE	1

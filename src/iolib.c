@@ -245,6 +245,7 @@ int32_t	type;
 	return("char");
 	break;
     case INVALID:
+    case UNKNOWN:
 	return("invalid");
 	break;
     }
