@@ -7,8 +7,8 @@
 #include	<glob.h>
 #include	<sys/wait.h>
 
-#include 	<stdbool.h>
 #include 	<string.h>
+#include 	<stdbool.h>
 #include 	<stdint.h>
 #include 	<inttypes.h>
 
