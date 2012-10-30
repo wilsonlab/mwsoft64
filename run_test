@@ -77,7 +77,7 @@ def testSpikeParms():
 	print 'SPIKEPARMS TET...',
 
 	outFile = tmpDir + 'test.pxyabw'
-	cmd = './build/bin/spikeparms2 ' + ttFiles['tt'] + ' -tetrode -parms t_px,t_py,t_pa,t_pb -o ' + outFile
+	cmd = './build/bin/spikeparms2 ' + ttFiles['tt'] + ' -tetrode -parms t_px,t_py,t_pa,t_pb,time -o ' + outFile
 	executeTest(cmd, ttFiles['parm'], outFile)	
 
 def testSpikeAve():
@@ -85,7 +85,6 @@ def testSpikeAve():
 
 	outFile = tmpDir + 'test.ave'
 	cmd = './build/bin/spikeavg ' + ttFiles['tt'] + ' -if ' + ttFiles['cb'] + ' > ' + outFile
-	
 	executeTest(cmd, ttFiles['ave'], outFile)	
 
 def executeTest(cmd, orig, new):
