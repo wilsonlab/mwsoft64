@@ -140,7 +140,12 @@ def failTest():
 	nFail+=1
 
 def report():
-	print '   \033[92mPASSED:' + str(nPass) + '   \033[91mFAILED:' + str(nFail)  + '\033[0m'
+	if nPass==0:
+		print '        \033[91mALL TESTS FAILED! \033[0m'
+	elif nFail==0:
+		print '        \033[92mALL TESTS PASSED! \033[0m'
+	else:
+		print '     \033[92mPASSED:' + str(nPass) + '   \033[91mFAILED:' + str(nFail)  + '\033[0m'
 
 if __name__ =='__main__':
 	runTests()
