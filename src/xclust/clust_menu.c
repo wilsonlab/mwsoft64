@@ -1,6 +1,3 @@
-  #include <stdbool.h>
-  #include <string.h>
-
   #include "xclust_ext.h"
 
   /* We need these to redraw the button bitmaps when clusters change color */
@@ -246,7 +243,7 @@ void RunFindspike(char *args, char *out, int buflen)
       out[i] = tstring[i];
   }
 
-  fprintf(stderr,"findspike answer: %s\n",out);
+  //fprintf(stderr,"findspike answer: %s\n",out);
 
 }
 
@@ -384,7 +381,9 @@ int32_t LookupSpikeTime(DataSource *source, char *index){
        fprintf(stderr,"ERROR: epochs not supported for this parmfile (see warnings in stderr)\n");   
        return(-1);
   }
+  
   resVal = Atoi(result);
+  fprintf(stderr, "LookupSpikeTime() index:%s result:%s with val:%"PRId32"\n",index, result, resVal);
   return resVal;
 }
 
@@ -1900,7 +1899,9 @@ char *itemname;
 
   val = GetItemValue(itemname);
   if (val!=NULL && val[0]!='\0') {
+    
     sprintf(tmpstr, "%.4f", (double) (ParseTimestamp(LookupSpikeTime(NULL, val))/1e4));
+    // sprintf(tmpstr, "%.4f", (double) (LookupSpikeTime(NULL, val)/1e4));
     PutItemValue(itemname, tmpstr);
     RefreshItem(itemname);
   }
@@ -2037,6 +2038,7 @@ char *epoch;
     MenuLoadPoints(item)
     MenuItem	*item;
     {
+
   /* char	*tstringstart; */
   /* char	*tstringend; */
   /* char	*epochname; */
@@ -2070,6 +2072,7 @@ char *epoch;
         return;
 
     } else {  /* time */
+
 
       /* convert to points first */
         pointstart = LookupSpikeIndex(NULL, start);

@@ -2022,7 +2022,7 @@ char	*name;
 {
 ProjectionInfo	*pinfo;
 char	*ptr;
-char	*strchr();
+// char	*strchr();
 
     if(graph == NULL) return(NULL);
     /*

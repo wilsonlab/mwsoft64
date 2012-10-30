@@ -754,7 +754,7 @@ float	scale,scalex,scaley;
 int32_t	clock;
 char	headerstr[200];
 char	*namestr;
-char	*getenv(),*strchr();
+char	*getenv();//,*strchr();
 char	*ptr;
 char	clockstr[100];
 int32_t    tx,ty;

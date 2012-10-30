@@ -228,7 +228,7 @@ int32_t	ndatafields;
 	int32_t	nitems;
 	int32_t	have_error;
 	char	*ptr;
-	char	*strchr();
+	// char	*strchr();
 	double	vector[100];
 	int32_t	i;
 	int32_t	shift;
@@ -1266,13 +1266,15 @@ if (source->timelookupfile != INVALIDFILE) {
 	else
 		startline_temp = source->startline;
 
+	char idStr[100];
+	int32_t spikeTs;
 
-	tmpstr = (char*)LookupSpikeTime(source, "0");
+	sprintf(idStr, "%"PRId32, startline_temp);
+	spikeTs = LookupSpikeTime(source, idStr);
 
-
-	if (tmpstr!=NULL){
+	if (spikeTs>=0){
 		
-		source->starttimestamp = Atoi(tmpstr);
+		source->starttimestamp = spikeTs;
 	}	
 
 	if(source->plot)
@@ -1281,13 +1283,13 @@ if (source->timelookupfile != INVALIDFILE) {
 		sprintf(str,"%d",-1);
 
 	// Convert lastid (retrieved above) to a string to lookup its timestamp
-	char lastidStr[100];
-	sprintf(lastidStr, "%"PRId32, lastid);
+	
+	sprintf(idStr, "%"PRId32, lastid);
+	spikeTs = LookupSpikeTime(source, idStr);
 
-	tmpstr = (char*)LookupSpikeTime( source, lastidStr );
-	if (tmpstr!=NULL)
+	if (spikeTs>=0)
 	{
-		source->endtimestamp = 10000;//Atoi(tmpstr);
+		source->endtimestamp = spikeTs;//Atoi(tmpstr);
 	}
 
     /* determine timestamp of first last spike in file */
@@ -2158,7 +2160,7 @@ Graph	*graph;
 Plot	**plot;
 char 	*lineptr;
 {
-	char *strchr();
+	// char *strchr();
 	Plot	*p;
 	int32_t	status;
 

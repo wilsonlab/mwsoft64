@@ -7,6 +7,8 @@
 #include	<glob.h>
 #include	<sys/wait.h>
 
+#include 	<stdbool.h>
+#include 	<string.h>
 #include 	<stdint.h>
 #include 	<inttypes.h>
 
@@ -56,7 +58,7 @@ extern Label		*AddLabelString();
 extern char		*Setenv();
 extern ClusterList	*GetClusterInfo();
 extern char		*GetItemValue();
-extern char		*strchr();
+// extern char		*strchr();
 extern Pixmap GetPixmapByName();
 extern double GetDoubleFromRawData();
 extern int32_t	WhitePixelIdx();

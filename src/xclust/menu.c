@@ -369,7 +369,7 @@ MenuItem	*item;
 MenuWindow	*menu;
 char	menuname[100];
 char	*ptr;
-char	*strchr();
+// char	*strchr();
 
     if(itemname == NULL) return(NULL);
     /*
