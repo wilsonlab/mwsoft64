@@ -321,8 +321,7 @@ SetFont(basic,name)
 BasicWindow *basic;
 char *name;
 {
-    fprintf(stderr, "Setting font to:%s\n", name);
-
+    //fprintf(stderr, "Setting font to:%s\n", name);
     if (theFontStruct == NULL)
     {
         fprintf(stderr, "Font is NULL! Loading it now... ");
