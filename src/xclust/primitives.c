@@ -3,7 +3,8 @@ extern ColorTable idx[];
 
 #define MAXBITMAPS	100
 
-static XFontStruct *theFont = NULL;
+static Font *theFont = NULL;
+static XFontStruct *theFontStruct = NULL;
 
 struct bitmaplist_type {
     char	*name;
@@ -321,28 +322,36 @@ BasicWindow *basic;
 char *name;
 {
     //fprintf(stderr, "Setting font to:%s\n", name);
-    if (theFont == NULL)
+    name = "-adobe-helvetica-medium-r-normal-*-10-*-75-75-p-*-iso8859-1";
+    if (theFontStruct == NULL)
     {
-        fprintf(stderr, "Font not loaded, loading now:");
-        basic->font = XLoadFont(basic->display,name);
-        if (basic->font == BadName){
+        fprintf(stderr, "Font is NULL! Loading it now... ");
+        
+        //theFont = XLoadFont(basic->display,name);
+        //basic->font = XLoadFont(basic->display,name);
+        
+        if (theFont == BadName){
     	   fprintf(stderr,"unable to open text font:BadName\n");
     	   return(0);
         }
-        if (basic->font == BadAlloc){
+        if (theFont == BadAlloc){
            fprintf(stderr,"unable to open text font:BadAlloc\n");
            return(0);
         }
-        if (basic->font == BadFont){
+        if (theFont == BadFont){
             fprintf(stderr,"unable to open text font:BadFont\n");
             return (0);
         }
 
-        theFont = XQueryFont(basic->display,basic->font);
+        //theFontStruct = XQueryFont(basic->display,theFont);
+        //XQueryFont(basic->display,basic->font);
+        theFontStruct = XLoadQueryFont(basic->display, name);
+
         fprintf(stderr," DONE!\n");
     }
     
-    basic->fontinfo = theFont;//XQueryFont(basic->display,basic->font);
+    basic->font = theFontStruct->fid;
+    basic->fontinfo = theFontStruct;
     
     basic->fontheight = basic->fontinfo->ascent + basic->fontinfo->descent;
     basic->fontwidth = basic->fontinfo->max_bounds.rbearing -
