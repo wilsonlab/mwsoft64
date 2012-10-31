@@ -1,4 +1,4 @@
-#define VERSION		"3.3"
+#define VERSION		"3.3.1"
 /*
 ** 2.15c added projection attributes to the saved views
 **
@@ -7,6 +7,7 @@
 **
 ** 2.2 major overhaul of color code allowing support of greater than 8-bit
 ** servers
+**
 ** 3.0 major overhaul of parmameter data.  Variable data type support 
 ** added allowing Fields: to have mixed data type.  All data stored
 ** internally the specified type.  Timestamps can now have better that 
@@ -14,6 +15,8 @@
 ** servers
 ** 3.1 added in proper handling of files with special extraction types specified in the header
 ** 3.2 bug-fixes from Fabian and Tom D. See release notes.
+**
+** 3.3 xclust is now cross platform. It compiles and runs under Linux 32/64bit, Mac OS (10.8 tested), and Cygwin in Windows 7
 */
 #define XCLUST
 #define MENU_WIDTH	320
