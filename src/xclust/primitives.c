@@ -321,14 +321,15 @@ SetFont(basic,name)
 BasicWindow *basic;
 char *name;
 {
-    //fprintf(stderr, "Setting font to:%s\n", name);
-    name = "-adobe-helvetica-medium-r-normal-*-10-*-75-75-p-*-iso8859-1";
+    fprintf(stderr, "Setting font to:%s\n", name);
+
     if (theFontStruct == NULL)
     {
         fprintf(stderr, "Font is NULL! Loading it now... ");
-        
-        //theFont = XLoadFont(basic->display,name);
-        //basic->font = XLoadFont(basic->display,name);
+
+        theFontStruct = XLoadQueryFont(basic->display, name);
+
+        theFont = theFontStruct->fid;
         
         if (theFont == BadName){
     	   fprintf(stderr,"unable to open text font:BadName\n");
@@ -343,14 +344,10 @@ char *name;
             return (0);
         }
 
-        //theFontStruct = XQueryFont(basic->display,theFont);
-        //XQueryFont(basic->display,basic->font);
-        theFontStruct = XLoadQueryFont(basic->display, name);
-
         fprintf(stderr," DONE!\n");
     }
     
-    basic->font = theFontStruct->fid;
+    basic->font = theFont;
     basic->fontinfo = theFontStruct;
     
     basic->fontheight = basic->fontinfo->ascent + basic->fontinfo->descent;

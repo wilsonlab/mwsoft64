@@ -30,9 +30,9 @@
 /* ?? unused ?? */
 /* #define MAXFLOATBITS 24 */
 
-#define DEFAULTFONT	"-adobe-helvetica-bold-r-normal--10-100-75-75-p-60-iso8859-1"
-#define FIXEDWIDTHFONT  "-adobe-courier-medium-r-normal--10-100-75-75-m-60-iso8859-1"
-#define FIXEDWIDTHFONT2 "-schumacher-clean-bold-r-normal--10-100-75-75-c-60-iso646.1991-irv"
+#define DEFAULTFONT	"-adobe-helvetica-medium-r-normal-*-10-*-75-75-p-*-iso8859-1"//-adobe-helvetica-bold-r-normal--10-100-75-75-p-60-iso8859-1"
+#define FIXEDWIDTHFONT  "-adobe-helvetica-medium-r-normal-*-10-*-75-75-p-*-iso8859-1"//"-adobe-courier-medium-r-normal--10-100-75-75-m-60-iso8859-1"
+#define FIXEDWIDTHFONT2 "-adobe-helvetica-medium-r-normal-*-10-*-75-75-p-*-iso8859-1"//"-schumacher-clean-bold-r-normal--10-100-75-75-c-60-iso646.1991-irv"
 
 #define FULL_LOAD 	0
 #define PARTIAL_LOAD	1
