@@ -328,17 +328,17 @@ char *name;
 
         theFontStruct = XLoadQueryFont(basic->display, name);
 
-        theFont = theFontStruct->fid;
+        //theFont = theFontStruct->fid;
         
-        if (theFont == BadName){
+        if (theFontStruct->fid == BadName){
     	   fprintf(stderr,"unable to open text font:BadName\n");
     	   return(0);
         }
-        if (theFont == BadAlloc){
+        if (theFontStruct->fid == BadAlloc){
            fprintf(stderr,"unable to open text font:BadAlloc\n");
            return(0);
         }
-        if (theFont == BadFont){
+        if (theFontStruct->fid == BadFont){
             fprintf(stderr,"unable to open text font:BadFont\n");
             return (0);
         }
@@ -346,7 +346,7 @@ char *name;
         fprintf(stderr," DONE!\n");
     }
     
-    basic->font = theFont;
+    basic->font = theFontStruct->fid;
     basic->fontinfo = theFontStruct;
     
     basic->fontheight = basic->fontinfo->ascent + basic->fontinfo->descent;
