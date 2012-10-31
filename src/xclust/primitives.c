@@ -3,6 +3,8 @@ extern ColorTable idx[];
 
 #define MAXBITMAPS	100
 
+static XFontStruct *theFont = NULL;
+
 struct bitmaplist_type {
     char	*name;
     Pixmap	bitmap;
@@ -318,17 +320,37 @@ SetFont(basic,name)
 BasicWindow *basic;
 char *name;
 {
-    basic->font = XLoadFont(basic->display,name);
-    if (basic->font == BadName){
-	fprintf(stderr,"unable to open text font");
-	return(0);
+    //fprintf(stderr, "Setting font to:%s\n", name);
+    if (theFont == NULL)
+    {
+        fprintf(stderr, "Font not loaded, loading now:");
+        basic->font = XLoadFont(basic->display,name);
+        if (basic->font == BadName){
+    	   fprintf(stderr,"unable to open text font:BadName\n");
+    	   return(0);
+        }
+        if (basic->font == BadAlloc){
+           fprintf(stderr,"unable to open text font:BadAlloc\n");
+           return(0);
+        }
+        if (basic->font == BadFont){
+            fprintf(stderr,"unable to open text font:BadFont\n");
+            return (0);
+        }
+
+        theFont = XQueryFont(basic->display,basic->font);
+        fprintf(stderr," DONE!\n");
     }
-    basic->fontinfo = XQueryFont(basic->display,basic->font);
+    
+    basic->fontinfo = theFont;//XQueryFont(basic->display,basic->font);
+    
     basic->fontheight = basic->fontinfo->ascent + basic->fontinfo->descent;
     basic->fontwidth = basic->fontinfo->max_bounds.rbearing -
-        basic->fontinfo->min_bounds.lbearing;
+    basic->fontinfo->min_bounds.lbearing;
+
     XSetFont(basic->display,basic->context,basic->font);
     ManualSetFontInfo(basic->fontheight,basic->fontwidth,GetPixel(basic->foreground));
+    
     return(1);
 }
 

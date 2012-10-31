@@ -34,5 +34,47 @@ ANALYSIS COMMANDS:
 REMOVING HEADERS FROM FILES
 ===================================================================================================
 sed '/start/,/stop/ s/#.*//'
-
 sed '1,/<START>/ d'
+
+
+CYGWIN INSTALL NOTES
+===================================================================================================
+Install the following packages:
+
+	git
+	
+	gcc
+	gcc-g++
+	gdb
+	make
+	libx11-devl
+
+	python (under interpreters)
+	xorg-server
+	xinit
+	x-start-menu-icons
+
+
+	tcsh
+	openssh
+
+
+Install:
+	font-adobe-dpi100
+	font-adobe-dpi75
+
+Installed but didn't fix the problem:
+	libXft1
+	libXft-devel
+	freetype2
+
+
+Cloning the repository:
+	You will need to install the appropriate certificate authorities connect to github, see this: 
+	http://stackoverflow.com/questions/3777075/https-github-access/4454754#4454754
+
+	Or, just disable cert checks during clone
+	env GIT_SSL_NO_VERIFY=true git clone https://github...
+
+	or disable cert checks for all time
+	git config --global http.sslVerify false
