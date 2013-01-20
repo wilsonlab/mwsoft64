@@ -646,12 +646,13 @@ int32_t     stroffset = 0;
     */
     if(item->state == 0){
       if(item->invert){
-	Invert(item);
+	       Invert(item);
       }
+      
       ItemText(item,line, stroffset);
     } else {
       if(item->invert2){
-	Invert(item);
+	     Invert(item);
       }
       ItemText(item,line, stroffset);
     }
@@ -676,9 +677,9 @@ int32_t     stroffset = 0;
       */
       TextExtent(line,&linesize,&th);
       if(valuesize > 0){
-	_SetColor(item,item->foreground);
-	_DrawLine(item,linesize+1,item->h-4,linesize+3,item->h-6);
-	_DrawLine(item,linesize+3,item->h-6,linesize+5,item->h-4);
+        _SetColor(item,item->foreground);
+	      _DrawLine(item,linesize+1,item->h-4,linesize+3,item->h-6);
+	      _DrawLine(item,linesize+3,item->h-6,linesize+5,item->h-4);
       }
     }
     
