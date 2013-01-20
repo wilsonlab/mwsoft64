@@ -39,5 +39,5 @@ default: all
 all: $(ALL)
 
 clean: 
-	rm -rf *.o $(ALL) 
-	rm -rf *.dSYM
+	@rm -rf *.o $(ALL) 
+	@rm -rf *.dSYM

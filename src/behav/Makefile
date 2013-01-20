@@ -37,10 +37,10 @@ OBJS = \
 all: $(ALL)
 
 .c:
-	$(CC) $(CFLAGS) $< -o $@ $(INCLUDE) 
+	@$(CC) $(CFLAGS) $< -o $@ $(INCLUDE) 
 
 .c.o:
-	$(CC) $(CFLAGS) $< -c $(INCLUDE)
+	@$(CC) $(CFLAGS) $< -c $(INCLUDE)
 
 obehav: obehav.o
 	$(CC) $(CFLAGS) obehav.o -o $@ $(INCLUDE) $(LIBS)
@@ -49,5 +49,5 @@ behav: $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $@ $(INCLUDE) $(LIBS)
 
 clean:
-	rm -f *.o $(ALL) 
-	rm -rf *.dSYM
+	@rm -f *.o $(ALL) 
+	@rm -rf *.dSYM

@@ -8,7 +8,7 @@ TOPDIR = ../
 include $(TOPDIR)definitions.mk
 
 # uncomment next line for debug symbols
-CFLAGS += -g3
+#CFLAGS += -g3
 
 # uncomment next line for max compiler optimization
 CFLAGS += -O3
@@ -21,9 +21,9 @@ iolib.o: iolib.c
 	$(CC) $(CFLAGS) $< -c $(INCLUDE) 
 
 iolib.a: iolib.o
-	ar r iolib.a iolib.o
-	ranlib iolib.a
+	@ar r iolib.a iolib.o
+	@ranlib iolib.a
 
 clean:
-	rm -f *.o iolib.a 
-	rm -rf *.dSYM
+	@rm -f *.o iolib.a 
+	@rm -rf *.dSYM

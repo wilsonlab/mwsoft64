@@ -46,6 +46,6 @@ xplot:		$(OBJ)
 		$(CC) $(CFLAGS) $(INCLUDE) $(OBJ) -o $@ $(LIBS)
 
 clean:
-		rm -f *.o xplot 
-		rm -rf *.dSYM
+	@rm -f *.o xplot 
+	@rm -rf *.dSYM
 

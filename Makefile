@@ -7,79 +7,93 @@ BUILD_DIR=build
 all: lib extract util popanal behav xclust xplot xview test
 
 lib:
-	mkdir -p $(BUILD_DIR)/lib;
-	cd src; \
+	@echo -e "\n\t\tMWSoft Building: Library";
+	@echo "------------------------------------------------------"
+	@echo "Building:LIB";
+	@mkdir -p $(BUILD_DIR)/lib;
+	@cd src; \
 	$(MAKE) iolib.a ; \
 	cd ..;
 	mv -f src/iolib.a $(BUILD_DIR)/lib; \
 	cd ..;
 
 util: lib
-	mkdir -p $(BUILD_DIR)/bin;
-	$(MAKE) -C src/util
+	@echo -e "\n\t\tMWSoft Building: Utilities";
+	@echo "------------------------------------------------------"
+	@echo "Building:LIB";
+	@mkdir -p $(BUILD_DIR)/bin;
+	@$(MAKE) -C src/util
 	mv src/util/{atob,y,csi,carve} $(BUILD_DIR)/bin/
 
 behav: lib
-	mkdir -p $(BUILD_DIR)/bin;
-	$(MAKE) -C src/behav
+	@echo -e "\n\t\tMWSoft Building: behav";
+	@echo "------------------------------------------------------"
+	@echo "Building:LIB";
+	@mkdir -p $(BUILD_DIR)/bin;
+	@$(MAKE) -C src/behav
 	mv src/behav/behav $(BUILD_DIR)/bin/
 
 popanal: popanal
-	mkdir -p $(BUILD_DIR)/bin;
-	$(MAKE) -C src/popanal
+	@echo -e "\n\t\tMWSoft Building: popanal";
+	@echo "------------------------------------------------------"
+	@echo "Building:LIB";
+	@mkdir -p $(BUILD_DIR)/bin;
+	@$(MAKE) -C src/popanal
 	mv src/popanal/popanal $(BUILD_DIR)/bin/
 
 xclust: lib
-	mkdir -p $(BUILD_DIR)/bin;	
-	$(MAKE) -C src/xclust/ xclust
+	@echo -e "\n\t\tMWSoft Building: xclust";
+	@echo "------------------------------------------------------"
+	@mkdir -p $(BUILD_DIR)/bin;	
+	@$(MAKE) -C src/xclust/ xclust
 	mv src/xclust/xclust3 $(BUILD_DIR)/bin/	
 
 xplot: lib
-	mkdir -p $(BUILD_DIR)/bin;	
-	$(MAKE) -C src/xplot xplot
+	@echo -e "\n\t\tMWSoft Building: xplot";
+	@echo "------------------------------------------------------"
+	@mkdir -p $(BUILD_DIR)/bin;	
+	@$(MAKE) -C src/xplot xplot
 	mv src/xplot/xplot $(BUILD_DIR)/bin/
 
 xview: lib
-	mkdir -p $(BUILD_DIR)/bin;	
-	$(MAKE) -C src/xview xview
+	@echo -e "\n\t\tMWSoft Building: xview";
+	@echo "------------------------------------------------------"
+	@mkdir -p $(BUILD_DIR)/bin;	
+	@$(MAKE) -C src/xview xview
 	mv src/xview/xview $(BUILD_DIR)/bin/
 
-# 	$(MAKE) -C X11/xplot/ xplot
-# 	$(MAKE) -C X11/xview/ xview
-# 	$(MAKE) -C src csi
-# 	$(MAKE) -C src/cluster findspike \
-# 	                       spikeanal \
-# 	                       spikeavg 
-# 	$(MAKE) -C src/cluster/popanal popanal
-# 	$(MAKE) -C src/cluster/behav behav
-
 extract: lib
-	mkdir -p $(BUILD_DIR)/bin;
-	$(MAKE) -C src/extract 
+	@mkdir -p $(BUILD_DIR)/bin;
+	@$(MAKE) -C src/extract 
 	mv src/extract/{spikeparms2,adextract,crextract,editheader,esextract,findspike,parmextract,posextract,showcmd,spikeanal,spikeavg,textract} $(BUILD_DIR)/bin/
 
-						   #adextract \
-	                       #crextract \
-	                       #esextract \
-	                       #parmextract \
-	                       #posextract \
-	                       #spikeparms2 
-	                       #textract
 test:
-	./run_test
+	@./run_test
 
 clean: 
  	#$(MAKE) -C src/ clean; 
-	rm -rf $(BUILD_DIR)
-	$(MAKE) -C src/ clean
-	$(MAKE) -C src/behav/ clean
-	$(MAKE) -C src/extract/ clean
-	$(MAKE) -C src/popanal/ clean
-	$(MAKE) -C src/util/ clean
-	$(MAKE) -C src/xclust/ clean
-	$(MAKE) -C src/xplot/ clean
-	$(MAKE) -C src/xview/ clean
+	@rm -rf $(BUILD_DIR)
+	@$(MAKE) -C src/ clean
+	@$(MAKE) -C src/behav/ clean
+	@$(MAKE) -C src/extract/ clean
+	@$(MAKE) -C src/popanal/ clean
+	@$(MAKE) -C src/util/ clean
+	@$(MAKE) -C src/xclust/ clean
+	@$(MAKE) -C src/xplot/ clean
+	@$(MAKE) -C src/xview/ clean
 
+local-install:
+	@mkdir -p ~/bin
+	@cp ./build/bin/* ~/bin/
+
+install:
+	@cp ./build/bin/* /usr/local/bin/
+
+local-uninstall:
+	@rm ~/bin/{adextract,carve,editheader,parmextract,showcmd,spikeparms2,xplot,atob,crextract,esextract,popanal,spikeanal,textract,xview,behav,csi,findspike,posextract,spikeavg,xclust3,y}
+
+uninstall:
+	@rm /usr/local/bin/{adextract,carve,editheader,parmextract,showcmd,spikeparms2,xplot,atob,crextract,esextract,popanal,spikeanal,textract,xview,behav,csi,findspike,posextract,spikeavg,xclust3,y}
 
 
 

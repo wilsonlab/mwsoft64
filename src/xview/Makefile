@@ -65,6 +65,6 @@ xview:		$(OBJ)
 		$(CC) $(CFLAGS) $(OBJ) -o $@ $(LIBS) $(INCLUDE)
 
 clean:
-		rm -f *.o xview
-		rm -rf *.dSYM
+	@rm -f *.o xview
+	@rm -rf *.dSYM
 
