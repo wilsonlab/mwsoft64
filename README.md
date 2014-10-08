@@ -3,3 +3,7 @@ Dependencies:
 
 In arch, those font libraries are called:
  xorg-fonts-75dpi and xorg-fonts-100dpi
+ 
+In RedHat/CentOS, the font libraries are:
+ xorg-x11-fonts-75dpi and xorg-x11-fonts-100dpi
+ However, it segfaults when initially loading fonts, so perhaps something else is missing?
