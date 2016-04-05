@@ -2,8 +2,10 @@ Dependencies:
  libx11-dev xfonts-75dpi xfonts-100dpi csh
  
  Can install in ubuntu using 
-$ sudo apt-get install xfonts-75dpi
-$ sudo apt-get install xfonts-100dpi
+
+>$ sudo apt-get install xfonts-75dpi
+
+>$ sudo apt-get install xfonts-100dpi
 
 
 ---
