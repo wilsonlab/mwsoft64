@@ -1,5 +1,12 @@
 Dependencies:
  libx11-dev xfonts-75dpi xfonts-100dpi csh
+ 
+ Can install in ubuntu using 
+$ sudo apt-get install xfonts-75dpi
+$ sudo apt-get install xfonts-100dpi
+
+
+---
 
 In arch, those font libraries are called:
  xorg-fonts-75dpi and xorg-fonts-100dpi
