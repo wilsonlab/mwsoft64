@@ -2848,11 +2848,11 @@ char	line[100];
 	fprintf(fpout,"%% Burst detection interval: \t%d\n",max_burst_interval);
 	if(binary){
 	    if(showspiketimes){
-		fprintf(fpout,"%% Fields: \t%s,%d,%d,%d\n",
+		fprintf(fpout,"%% Fields: \t%s,%d,%zu,%d\n",
 		"timestamp",ULONG,sizeof(uint32_t),1);
 	    } else
 	    fprintf(fpout,
-"%% Fields: \t%s,%d,%d,%d\t%s,%d,%d,%d\t%s,%d,%d,%d\t%s,%d,%d,%d\t%s,%d,%d,%d\t%s,%d,%d,%d\t%s,%d,%d,%d\n",
+"%% Fields: \t%s,%d,%zu,%d\t%s,%d,%zu,%d\t%s,%d,%zu,%d\t%s,%d,%zu,%d\t%s,%d,%zu,%d\t%s,%d,%zu,%d\t%s,%d,%zu,%d\n",
 	    "id",INT,sizeof(int),1,
 	    "timestamp",ULONG,sizeof(uint32_t),1,
 	    "nevents",INT,sizeof(int),1,
@@ -2862,7 +2862,7 @@ char	line[100];
 	    "delpeak",INT,sizeof(int),1);
 	} else {
 	    fprintf(fpout,
-"%% Fields: \t%s,%d,%d,%d\t%s,%d,%d,%d\t%s,%d,%d,%d\t%s,%d,%d,%d\t%s,%d,%d,%d\t%s,%d,%d,%d\t%s,%d,%d,%d",
+"%% Fields: \t%s,%d,%zu,%d\t%s,%d,%zu,%d\t%s,%d,%zu,%d\t%s,%d,%zu,%d\t%s,%d,%zu,%d\t%s,%d,%zu,%d\t%s,%d,%zu,%d",
 	    "id",INT,sizeof(int),1,
 	    "timestamp",ULONG,sizeof(uint32_t),1,
 	    "nevents",INT,sizeof(int),1,
@@ -2880,22 +2880,22 @@ char	line[100];
 	fprintf(fpout,"%% Single spike detection interval: \t%d\n",max_burst_interval);
 	if(binary){
 	    if(showspiketimes){
-		fprintf(fpout,"%% Fields: \t%s,%d,%d,%d\n",
+		fprintf(fpout,"%% Fields: \t%s,%d,%zu,%d\n",
 		"timestamp",ULONG,sizeof(uint32_t),1);
 	    } else
-	    fprintf(fpout,"%% Fields: \t%s,%d,%d,%d\t%s,%d,%d,%d\t%s,%d,%d,%d\n",
+	    fprintf(fpout,"%% Fields: \t%s,%d,%zu,%d\t%s,%d,%zu,%d\t%s,%d,%zu,%d\n",
 	    "id",INT,sizeof(int),1,
 	    "timestamp",ULONG,sizeof(uint32_t),1,
 	    "delpeak",INT,sizeof(int),1);
 	} else {
-	    fprintf(fpout,"%% Fields: \t%s,%d,%d,%d\t%s,%d,%d,%d\t%s,%d,%d,%d\n",
+	    fprintf(fpout,"%% Fields: \t%s,%d,%zu,%d\t%s,%d,%zu,%d\t%s,%d,%zu,%d\n",
 	    "id",INT,sizeof(int),1,
 	    "timestamp",ULONG,sizeof(uint32_t),1,
 	    "delpeak",INT,sizeof(int),1);
 	}
     } else 
     if(showspiketimes){
-	fprintf(fpout,"%% Fields: \t%s,%d,%d,%d\n",
+	fprintf(fpout,"%% Fields: \t%s,%d,%zu,%d\n",
 	"timestamp",ULONG,sizeof(uint32_t),1);
     }
     EndStandardHeader(fpout);
