@@ -400,6 +400,7 @@ typedef struct result_type {
  FILE  *position_file;
  int32_t xoffset;
  int32_t spkvoffset;
+ double  sampfreq;
  int32_t     spikelen;
  int32_t     backdiode;
 
@@ -2226,8 +2227,8 @@ Index    *idx;
      first = 0;
    }
    etimestamp = timestamp;
-   sparms[TIME].parm = timestamp/10000.;
-   sparms[TIMELO].parm = timestamp%10000;
+   sparms[TIME].parm = (double)timestamp/sampfreq;
+   sparms[TIMELO].parm = timestamp%(int32_t)sampfreq;
    sparms[TIMESTAMP].parm = timestamp;
 
   /*
@@ -2359,8 +2360,8 @@ if(result->electrode == TETRODE){
        first = 0;
      }
      etimestamp = timestamp;
-     sparms[TIME].parm = timestamp/10000.;
-     sparms[TIMELO].parm = timestamp%10000;
+     sparms[TIME].parm = (double)timestamp/sampfreq;
+     sparms[TIMELO].parm = timestamp%(int32_t)sampfreq;
      sparms[TIMESTAMP].parm = timestamp;
 
     /*
@@ -2662,6 +2663,7 @@ void AddRange(Result *result,uint32_t tstart,uint32_t tend)
   nxtarg = 0;
   bw = 0;
   spkvoffset = 0;
+  sampfreq = 10000;
   spikelen = 0;
   showparms = 0;
   index.index = (int32_t *)malloc(MAX_VECTORS*sizeof(int32_t));
@@ -2715,6 +2717,8 @@ void AddRange(Result *result,uint32_t tstart,uint32_t tend)
         "\t[-trange tstart tend][-trangefile file][-velspan sec]\n");
       fprintf(stderr,
         "\t[-pos file][-xoffset x][-voffset v][-backdiode]\n");
+      fprintf(stderr,
+        "\t[-sampfreq hz][-spikelen n]\n");
       exit(-1);
     } 
     else if(strcmp(argv[nxtarg],"-version") == 0){
@@ -2946,6 +2950,9 @@ void AddRange(Result *result,uint32_t tstart,uint32_t tend)
     }
     else if(strcmp(argv[nxtarg],"-voffset") == 0){
       spkvoffset = atoi(argv[++nxtarg]);
+    }
+    else if(strcmp(argv[nxtarg],"-sampfreq") == 0){
+      sampfreq = atof(argv[++nxtarg]);
     }
     else if(strcmp(argv[nxtarg],"-spikelen") == 0){
       spikelen = atoi(argv[++nxtarg]);
