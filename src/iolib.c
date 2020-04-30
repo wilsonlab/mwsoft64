@@ -1164,7 +1164,7 @@ int32_t System(s)
 char	*s;
 {
 int32_t pid;
-union wait status;
+int status;
 char	*argv[200];
 int32_t	cnt;
 
@@ -1205,10 +1205,10 @@ int32_t	cnt;
     if(debug){
 	printf("child process %d done. Status = %d\n",
 	pid,
-	status.w_status);
+	status);
     }
 #endif
-    return(status.w_status);
+    return(status);
 }
 
 
